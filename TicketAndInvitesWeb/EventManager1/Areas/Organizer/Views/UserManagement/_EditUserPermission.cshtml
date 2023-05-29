@@ -1,0 +1,96 @@
+﻿@model  EventManager1.Areas.Organizer.Models.AcccountTypeViewModel
+<div class="modal fade bd-example-modal-lg" id="modeldivpermission" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalTitle">
+                    Edit user for permission
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-body">
+                            @using (Html.BeginForm("UpdateAccountTypePost", "UserManagement", FormMethod.Post))
+                            {
+                                <input type="hidden" name="GpId" id="GpId"  value="@Model.GpId"/>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="mt-4">Update Account type</h4>
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <div class="form-group">
+                                            <label for="">Account Type Name</label>
+                                            @Html.TextBoxFor(x => Model.AccountName, new { @class = "form-control", @required = true })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4 class="mt-4">Set Permission</h4>
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-3 my-auto font-weight-bold">
+                                        Section name
+                                    </div>
+                                    <div class="col-3 font-weight-bold">
+                                        Watch
+                                    </div>
+                                    <div class="col-3 font-weight-bold">
+                                        Edit/Create
+                                    </div>
+                                    <div class="col-3 font-weight-bold">
+                                        Delete
+                                    </div>
+                                </div>
+                                if (Model != null && Model.Objects != null && Model.Objects.Count() > 0)
+                                {
+                                    for (int i = 0; i < Model.Objects.Count; i++)
+                                    {
+                                        <div class="row mt-1">
+                                            <div class="col-3 my-auto">
+                                                @Model.Objects[i].Name.Replace("_", " ")
+                                                @Html.HiddenFor(x => Model.Objects[i].Id)
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-check form-check-inline">
+                                                    @Html.CheckBoxFor(x => Model.Objects[i].Watch, new { @class = "form-check-input" })
+                                                </div>
+
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-check form-check-inline">
+                                                    @Html.CheckBoxFor(x => Model.Objects[i].EC, new { @class = "form-check-input" })
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-check form-check-inline">
+                                                    @Html.CheckBoxFor(x => Model.Objects[i].Delete, new { @class = "form-check-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                }
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-gradient-primary btn-rounded btn-fw">Save</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark btn-fw" onclick="ReloadPage()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,735 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EventmanagerModelStoreContainer" CdmEntityContainer="EventmanagerEntities">
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="EventmanagerModel.Address">
+        <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="AddressArea" ColumnName="AddressArea" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="Landmark" ColumnName="Landmark" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="AddressLine" ColumnName="AddressLine" />
+          <ScalarProperty Name="AddressType" ColumnName="AddressType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminSetups">
+      <EntityTypeMapping TypeName="EventmanagerModel.AdminSetup">
+        <MappingFragment StoreEntitySet="AdminSetup">
+          <ScalarProperty Name="BronzeRow" ColumnName="BronzeRow" />
+          <ScalarProperty Name="SilverRow" ColumnName="SilverRow" />
+          <ScalarProperty Name="GoldRow" ColumnName="GoldRow" />
+          <ScalarProperty Name="PlatinumRow" ColumnName="PlatinumRow" />
+          <ScalarProperty Name="AutoTransferTime" ColumnName="AutoTransferTime" />
+          <ScalarProperty Name="AutoTransferMinAmount" ColumnName="AutoTransferMinAmount" />
+          <ScalarProperty Name="EventApprovalTime" ColumnName="EventApprovalTime" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AWSStreamingPages">
+      <EntityTypeMapping TypeName="EventmanagerModel.AWSStreamingPage">
+        <MappingFragment StoreEntitySet="AWSStreamingPage">
+          <ScalarProperty Name="ChannelForWebSite" ColumnName="ChannelForWebSite" />
+          <ScalarProperty Name="StreamStopDate" ColumnName="StreamStopDate" />
+          <ScalarProperty Name="StreamStartDate" ColumnName="StreamStartDate" />
+          <ScalarProperty Name="IsStreaming" ColumnName="IsStreaming" />
+          <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+          <ScalarProperty Name="StreamKey" ColumnName="StreamKey" />
+          <ScalarProperty Name="ServerUrl" ColumnName="ServerUrl" />
+          <ScalarProperty Name="SiteLogo" ColumnName="SiteLogo" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankDetails">
+      <EntityTypeMapping TypeName="EventmanagerModel.BankDetail">
+        <MappingFragment StoreEntitySet="BankDetails">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankDetalMappings">
+      <EntityTypeMapping TypeName="EventmanagerModel.BankDetalMapping">
+        <MappingFragment StoreEntitySet="BankDetalMapping">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="BankRegNo" ColumnName="BankRegNo" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="AccountHolder" ColumnName="AccountHolder" />
+          <ScalarProperty Name="Mobile_Money_Unique" ColumnName="Mobile_Money_Unique" />
+          <ScalarProperty Name="MobileMoneyDetail_Id" ColumnName="MobileMoneyDetail_Id" />
+          <ScalarProperty Name="BankDetail_Id" ColumnName="BankDetail_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BannerTimers">
+      <EntityTypeMapping TypeName="EventmanagerModel.BannerTimer">
+        <MappingFragment StoreEntitySet="BannerTimer">
+          <ScalarProperty Name="Bannerforwebsite" ColumnName="Bannerforwebsite" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+          <ScalarProperty Name="IsImageEnble" ColumnName="IsImageEnble" />
+          <ScalarProperty Name="IsTimeEnable" ColumnName="IsTimeEnable" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Broadcasts">
+      <EntityTypeMapping TypeName="EventmanagerModel.Broadcast">
+        <MappingFragment StoreEntitySet="Broadcast">
+          <ScalarProperty Name="BroadcastMessageId" ColumnName="BroadcastMessageId" />
+          <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+          <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+          <ScalarProperty Name="IsMailSend" ColumnName="IsMailSend" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BroadcastMessages">
+      <EntityTypeMapping TypeName="EventmanagerModel.BroadcastMessage">
+        <MappingFragment StoreEntitySet="BroadcastMessage">
+          <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BusinessOwners">
+      <EntityTypeMapping TypeName="EventmanagerModel.BusinessOwner">
+        <MappingFragment StoreEntitySet="BusinessOwner">
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="EventmanagerModel.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="website" ColumnName="website" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="Parent_Id" ColumnName="Parent_Id" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
+          <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Address_Id" ColumnName="Address_Id" />
+          <ScalarProperty Name="Business_Email_address" ColumnName="Business_Email_address" />
+          <ScalarProperty Name="Business_contact_number" ColumnName="Business_contact_number" />
+          <ScalarProperty Name="Name_of_business" ColumnName="Name_of_business" />
+          <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="EventmanagerModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="Phonecode" ColumnName="Phonecode" />
+          <ScalarProperty Name="Zone" ColumnName="Zone" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="AccessCode" ColumnName="AccessCode" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CountryNews">
+      <EntityTypeMapping TypeName="EventmanagerModel.CountryNew">
+        <MappingFragment StoreEntitySet="CountryNew">
+          <ScalarProperty Name="phonecode" ColumnName="phonecode" />
+          <ScalarProperty Name="numcode" ColumnName="numcode" />
+          <ScalarProperty Name="iso3" ColumnName="iso3" />
+          <ScalarProperty Name="nicename" ColumnName="nicename" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="iso" ColumnName="iso" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Coupons">
+      <EntityTypeMapping TypeName="EventmanagerModel.Coupon">
+        <MappingFragment StoreEntitySet="Coupon">
+          <ScalarProperty Name="OfferForwebSite" ColumnName="OfferForwebSite" />
+          <ScalarProperty Name="Isused" ColumnName="Isused" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="CoupanCode" ColumnName="CoupanCode" />
+          <ScalarProperty Name="OfferId" ColumnName="OfferId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Currencies">
+      <EntityTypeMapping TypeName="EventmanagerModel.Currency">
+        <MappingFragment StoreEntitySet="Currency">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ErrorLogs">
+      <EntityTypeMapping TypeName="EventmanagerModel.ErrorLog">
+        <MappingFragment StoreEntitySet="ErrorLog">
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="ResponseString" ColumnName="ResponseString" />
+          <ScalarProperty Name="RequestString" ColumnName="RequestString" />
+          <ScalarProperty Name="ParentFilePath" ColumnName="ParentFilePath" />
+          <ScalarProperty Name="ParentMethod" ColumnName="ParentMethod" />
+          <ScalarProperty Name="Method" ColumnName="Method" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="ErrTime" ColumnName="ErrTime" />
+          <ScalarProperty Name="ErrText" ColumnName="ErrText" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="EventmanagerModel.Event">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="IsStreamimg" ColumnName="IsStreamimg" />
+          <ScalarProperty Name="CreatedOnWebsite" ColumnName="CreatedOnWebsite" />
+          <ScalarProperty Name="webrtcURL" ColumnName="webrtcURL" />
+          <ScalarProperty Name="streamType" ColumnName="streamType" />
+          <ScalarProperty Name="eventCatg" ColumnName="eventCatg" />
+          <ScalarProperty Name="LiveURL" ColumnName="LiveURL" />
+          <ScalarProperty Name="Eventtype" ColumnName="Eventtype" />
+          <ScalarProperty Name="PaymetIdSubscription" ColumnName="PaymetIdSubscription" />
+          <ScalarProperty Name="IsPopularEvent" ColumnName="IsPopularEvent" />
+          <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SubscriptionType" ColumnName="SubscriptionType" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Venue" ColumnName="Venue" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
+          <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Address_Id" ColumnName="Address_Id" />
+          <ScalarProperty Name="GPS_Location" ColumnName="GPS Location" />
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Event_name" ColumnName="Event_name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventTickets">
+      <EntityTypeMapping TypeName="EventmanagerModel.EventTicket">
+        <MappingFragment StoreEntitySet="EventTicket">
+          <ScalarProperty Name="PaymentCurrency" ColumnName="PaymentCurrency" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+          <ScalarProperty Name="ValidDays" ColumnName="ValidDays" />
+          <ScalarProperty Name="TicketStatus" ColumnName="TicketStatus" />
+          <ScalarProperty Name="Inviation_Id" ColumnName="Inviation_Id" />
+          <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
+          <ScalarProperty Name="ColorArea" ColumnName="ColorArea" />
+          <ScalarProperty Name="GateNo" ColumnName="GateNo" />
+          <ScalarProperty Name="tableNo" ColumnName="tableNo" />
+          <ScalarProperty Name="Seat" ColumnName="Seat" />
+          <ScalarProperty Name="TicketName" ColumnName="TicketName" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
+          <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+          <ScalarProperty Name="AvailableQuantity" ColumnName="AvailableQuantity" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Section_Details" ColumnName="Section_Details" />
+          <ScalarProperty Name="Ticket_Type" ColumnName="Ticket_Type" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupObjectMaps">
+      <EntityTypeMapping TypeName="EventmanagerModel.GroupObjectMap">
+        <MappingFragment StoreEntitySet="GroupObjectMap">
+          <ScalarProperty Name="Rights" ColumnName="Rights" />
+          <ScalarProperty Name="ObjectMasterId" ColumnName="ObjectMasterId" />
+          <ScalarProperty Name="GroupMasterId" ColumnName="GroupMasterId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Invitations">
+      <EntityTypeMapping TypeName="EventmanagerModel.Invitation">
+        <MappingFragment StoreEntitySet="Invitation">
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="SendType" ColumnName="SendType" />
+          <ScalarProperty Name="IsSmsSend" ColumnName="IsSmsSend" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
+          <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+          <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+          <ScalarProperty Name="IsMailSend" ColumnName="IsMailSend" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Likedislikes">
+      <EntityTypeMapping TypeName="EventmanagerModel.Likedislike">
+        <MappingFragment StoreEntitySet="Likedislike">
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="Likes" ColumnName="Likes" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="eventID" ColumnName="eventID" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LiveStreamChats">
+      <EntityTypeMapping TypeName="EventmanagerModel.LiveStreamChat">
+        <MappingFragment StoreEntitySet="LiveStreamChat">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="eventID" ColumnName="eventID" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LiveStreamUsers">
+      <EntityTypeMapping TypeName="EventmanagerModel.LiveStreamUser">
+        <MappingFragment StoreEntitySet="LiveStreamUser">
+          <ScalarProperty Name="LastActive" ColumnName="LastActive" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="eventID" ColumnName="eventID" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MultimediaContents">
+      <EntityTypeMapping TypeName="EventmanagerModel.MultimediaContent">
+        <MappingFragment StoreEntitySet="MultimediaContent">
+          <ScalarProperty Name="validdays" ColumnName="validdays" />
+          <ScalarProperty Name="videoId" ColumnName="videoId" />
+          <ScalarProperty Name="videotype" ColumnName="videotype" />
+          <ScalarProperty Name="Mul_MainPic" ColumnName="Mul_MainPic" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
+          <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+          <ScalarProperty Name="Mul_Type" ColumnName="Mul_Type" />
+          <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="EventmanagerModel.Notification">
+        <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="MsgTitle" ColumnName="MsgTitle" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="MsgType" ColumnName="MsgType" />
+          <ScalarProperty Name="Isseen" ColumnName="Isseen" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="GeneratedFor" ColumnName="GeneratedFor" />
+          <ScalarProperty Name="GeneratedBy" ColumnName="GeneratedBy" />
+          <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotificationMessages">
+      <EntityTypeMapping TypeName="EventmanagerModel.NotificationMessage">
+        <MappingFragment StoreEntitySet="NotificationMessage">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ReplyedBy" ColumnName="ReplyedBy" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="MsgId" ColumnName="MsgId" />
+          <ScalarProperty Name="MsgText" ColumnName="MsgText" />
+          <ScalarProperty Name="MsgTitle" ColumnName="MsgTitle" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectGroups">
+      <EntityTypeMapping TypeName="EventmanagerModel.ObjectGroup">
+        <MappingFragment StoreEntitySet="ObjectGroup">
+          <ScalarProperty Name="LastChanged" ColumnName="LastChanged" />
+          <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Groupname" ColumnName="Groupname" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectMasters">
+      <EntityTypeMapping TypeName="EventmanagerModel.ObjectMaster">
+        <MappingFragment StoreEntitySet="ObjectMaster">
+          <ScalarProperty Name="ModuleType" ColumnName="ModuleType" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ObjectName" ColumnName="ObjectName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Offers">
+      <EntityTypeMapping TypeName="EventmanagerModel.Offer">
+        <MappingFragment StoreEntitySet="Offers">
+          <ScalarProperty Name="OfferForwebSite" ColumnName="OfferForwebSite" />
+          <ScalarProperty Name="TicketType" ColumnName="TicketType" />
+          <ScalarProperty Name="OfferPageCategory" ColumnName="OfferPageCategory" />
+          <ScalarProperty Name="Noofcoupons" ColumnName="Noofcoupons" />
+          <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CoupenCode" ColumnName="CoupenCode" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="OfferName" ColumnName="OfferName" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="OfferType" ColumnName="OfferType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OTPVerifications">
+      <EntityTypeMapping TypeName="EventmanagerModel.OTPVerification">
+        <MappingFragment StoreEntitySet="OTPVerification">
+          <ScalarProperty Name="created" ColumnName="created" />
+          <ScalarProperty Name="OTP" ColumnName="OTP" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="EventmanagerModel.Payment">
+        <MappingFragment StoreEntitySet="Payments">
+          <ScalarProperty Name="PaymentCurrencyType" ColumnName="PaymentCurrencyType" />
+          <ScalarProperty Name="Session_id_Stripe" ColumnName="Session_id_Stripe" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="MinimumFee" ColumnName="MinimumFee" />
+          <ScalarProperty Name="ResponseTransactionId" ColumnName="ResponseTransactionId" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="PaymentFor" ColumnName="PaymentFor" />
+          <ScalarProperty Name="adminfee" ColumnName="adminfee" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="RefundDate" ColumnName="RefundDate" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="PaymentRSURI" ColumnName="PaymentRSURI" />
+          <ScalarProperty Name="PaymentRQURI" ColumnName="PaymentRQURI" />
+          <ScalarProperty Name="GatewayRemark" ColumnName="GatewayRemark" />
+          <ScalarProperty Name="GatewayName" ColumnName="GatewayName" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="RefundAmount" ColumnName="RefundAmount" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+          <ScalarProperty Name="BaseCurrencyId" ColumnName="BaseCurrencyId" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentSetups">
+      <EntityTypeMapping TypeName="EventmanagerModel.PaymentSetup">
+        <MappingFragment StoreEntitySet="PaymentSetup">
+          <ScalarProperty Name="CoupanFee" ColumnName="CoupanFee" />
+          <ScalarProperty Name="MinimumFee" ColumnName="MinimumFee" />
+          <ScalarProperty Name="InvitationOrgSms" ColumnName="InvitationOrgSms" />
+          <ScalarProperty Name="InvitationUserSms" ColumnName="InvitationUserSms" />
+          <ScalarProperty Name="Adminfee" ColumnName="Adminfee" />
+          <ScalarProperty Name="Bronze" ColumnName="Bronze" />
+          <ScalarProperty Name="Silver" ColumnName="Silver" />
+          <ScalarProperty Name="Gold" ColumnName="Gold" />
+          <ScalarProperty Name="Platinum" ColumnName="Platinum" />
+          <ScalarProperty Name="Broadcast" ColumnName="Broadcast" />
+          <ScalarProperty Name="InvitationUser" ColumnName="InvitationUser" />
+          <ScalarProperty Name="InvitationOrg" ColumnName="InvitationOrg" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentSupportts">
+      <EntityTypeMapping TypeName="EventmanagerModel.PaymentSupportt">
+        <MappingFragment StoreEntitySet="PaymentSupportt">
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RSVPs">
+      <EntityTypeMapping TypeName="EventmanagerModel.RSVP">
+        <MappingFragment StoreEntitySet="RSVP">
+          <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Namer" ColumnName="Namer" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScanCompanyUsers">
+      <EntityTypeMapping TypeName="EventmanagerModel.ScanCompanyUser">
+        <MappingFragment StoreEntitySet="ScanCompanyUser">
+          <ScalarProperty Name="Updateat" ColumnName="Updateat" />
+          <ScalarProperty Name="Createdat" ColumnName="Createdat" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScannerEventRels">
+      <EntityTypeMapping TypeName="EventmanagerModel.ScannerEventRel">
+        <MappingFragment StoreEntitySet="ScannerEventRel">
+          <ScalarProperty Name="Updateat" ColumnName="Updateat" />
+          <ScalarProperty Name="Createdat" ColumnName="Createdat" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="ScanerId" ColumnName="ScanerId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketTypes">
+      <EntityTypeMapping TypeName="EventmanagerModel.TicketType">
+        <MappingFragment StoreEntitySet="TicketType">
+          <ScalarProperty Name="TicketTypes" ColumnName="TicketTypes" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TickeUserMaps">
+      <EntityTypeMapping TypeName="EventmanagerModel.TickeUserMap">
+        <MappingFragment StoreEntitySet="TickeUserMap">
+          <ScalarProperty Name="PaymentCurrencyType" ColumnName="PaymentCurrencyType" />
+          <ScalarProperty Name="Ticketforwebsite" ColumnName="Ticketforwebsite" />
+          <ScalarProperty Name="IsTicketSendToUser" ColumnName="IsTicketSendToUser" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="IsCheckIn" ColumnName="IsCheckIn" />
+          <ScalarProperty Name="BarCodeNumber" ColumnName="BarCodeNumber" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="PaymemtId" ColumnName="PaymemtId" />
+          <ScalarProperty Name="ExpectedDeliveryDate" ColumnName="ExpectedDeliveryDate" />
+          <ScalarProperty Name="ActualAmount" ColumnName="ActualAmount" />
+          <ScalarProperty Name="OfferRemark" ColumnName="OfferRemark" />
+          <ScalarProperty Name="OfferCode" ColumnName="OfferCode" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="InvitationId" ColumnName="InvitationId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Heave">
+      <EntityTypeMapping TypeName="EventmanagerModel.User_Heave">
+        <MappingFragment StoreEntitySet="User_Heave">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="Social_Media" ColumnName="Social_Media" />
+          <ScalarProperty Name="Release_of_Liability" ColumnName="Release_of_Liability" />
+          <ScalarProperty Name="REFUND_POLICY" ColumnName="REFUND_POLICY" />
+          <ScalarProperty Name="Above_condition" ColumnName="Above_condition" />
+          <ScalarProperty Name="Medical_condition" ColumnName="Medical_condition" />
+          <ScalarProperty Name="Emergency_Contact" ColumnName="Emergency_Contact" />
+          <ScalarProperty Name="HearSource" ColumnName="HearSource" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+          <ScalarProperty Name="Firsttimejoin" ColumnName="Firsttimejoin" />
+          <ScalarProperty Name="Package" ColumnName="Package" />
+          <ScalarProperty Name="WhichEvent" ColumnName="WhichEvent" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLoggedTables">
+      <EntityTypeMapping TypeName="EventmanagerModel.UserLoggedTable">
+        <MappingFragment StoreEntitySet="UserLoggedTable">
+          <ScalarProperty Name="VideoSession" ColumnName="VideoSession" />
+          <ScalarProperty Name="IsSessionStop" ColumnName="IsSessionStop" />
+          <ScalarProperty Name="LastActiveDate" ColumnName="LastActiveDate" />
+          <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="EventmanagerModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="Phone_CountryCode" ColumnName="Phone_CountryCode" />
+          <ScalarProperty Name="Parent_Id" ColumnName="Parent_Id" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IsMessageEnable" ColumnName="IsMessageEnable" />
+          <ScalarProperty Name="IsNotiEnable" ColumnName="IsNotiEnable" />
+          <ScalarProperty Name="IsEmailEnable" ColumnName="IsEmailEnable" />
+          <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+          <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+          <ScalarProperty Name="NativeCurrencyId" ColumnName="NativeCurrencyId" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="CreditBalanceMonthly" ColumnName="CreditBalanceMonthly" />
+          <ScalarProperty Name="CreditBalanceDaily" ColumnName="CreditBalanceDaily" />
+          <ScalarProperty Name="CreditBalanceTotal" ColumnName="CreditBalanceTotal" />
+          <ScalarProperty Name="UserStatus" ColumnName="UserStatus" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wallets">
+      <EntityTypeMapping TypeName="EventmanagerModel.Wallet">
+        <MappingFragment StoreEntitySet="Wallet">
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="withdrawTransactionId" ColumnName="withdrawTransactionId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="WithdrawAmount" ColumnName="WithdrawAmount" />
+          <ScalarProperty Name="EarnedAmount" ColumnName="EarnedAmount" />
+          <ScalarProperty Name="AdminFee" ColumnName="AdminFee" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Withdraws">
+      <EntityTypeMapping TypeName="EventmanagerModel.Withdraw">
+        <MappingFragment StoreEntitySet="Withdraw">
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PaymentRSURI" ColumnName="PaymentRSURI" />
+          <ScalarProperty Name="PaymentRQURI" ColumnName="PaymentRQURI" />
+          <ScalarProperty Name="GatewayRemark" ColumnName="GatewayRemark" />
+          <ScalarProperty Name="GatewayName" ColumnName="GatewayName" />
+          <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+          <ScalarProperty Name="BaseCurrencyId" ColumnName="BaseCurrencyId" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="WithdrawAmount" ColumnName="WithdrawAmount" />
+          <ScalarProperty Name="AdminFee" ColumnName="AdminFee" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WithdrawReqs">
+      <EntityTypeMapping TypeName="EventmanagerModel.WithdrawReq">
+        <MappingFragment StoreEntitySet="WithdrawReq">
+          <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+          <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+          <ScalarProperty Name="withdrawDate" ColumnName="withdrawDate" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="walletId" ColumnName="walletId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="RequestAmount" ColumnName="RequestAmount" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users1">
+      <EntityTypeMapping TypeName="EventmanagerModel.Users1">
+        <MappingFragment StoreEntitySet="Users1">
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="Phone_CountryCode" ColumnName="Phone_CountryCode" />
+          <ScalarProperty Name="Parent_Id" ColumnName="Parent_Id" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IsMessageEnable" ColumnName="IsMessageEnable" />
+          <ScalarProperty Name="IsNotiEnable" ColumnName="IsNotiEnable" />
+          <ScalarProperty Name="IsEmailEnable" ColumnName="IsEmailEnable" />
+          <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+          <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+          <ScalarProperty Name="NativeCurrencyId" ColumnName="NativeCurrencyId" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="CreditBalanceMonthly" ColumnName="CreditBalanceMonthly" />
+          <ScalarProperty Name="CreditBalanceDaily" ColumnName="CreditBalanceDaily" />
+          <ScalarProperty Name="CreditBalanceTotal" ColumnName="CreditBalanceTotal" />
+          <ScalarProperty Name="UserStatus" ColumnName="UserStatus" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

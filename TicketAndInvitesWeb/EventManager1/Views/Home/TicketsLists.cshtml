@@ -1,0 +1,340 @@
+﻿@model  IEnumerable<EventManager1.Models.Event_>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="~/images/fav1.png" type="image/gif">
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+    <title>MyTickets</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .event-header {
+            background-image: url('../../images/bg.jpg');
+            min-height: 350px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+            .event-header a {
+                color: #FFF;
+                text-transform: uppercase;
+                font-weight: 600;
+                letter-spacing: 0.3px;
+                font-size: 13px;
+                margin-top: 70px;
+                display: inline-block;
+                border-bottom: 1px dashed #fff;
+                padding-bottom: 3px;
+                opacity: 0.5;
+                text-decoration: none;
+            }
+
+                .event-header a:hover {
+                    opacity: 1
+                }
+
+        .white-bg {
+            min-height: 250px;
+            background: #FFF;
+            box-shadow: 0px 0px 21px 0px rgb(0 0 0 / 17%);
+            /*width: 450px;*/
+            margin: -100px auto 10px;
+            max-width: 100%;
+            border-radius: 50px;
+            padding: 25px 50px;
+            margin-bottom: 35px;
+        }
+
+        .header-box {
+            padding: 0 25px;
+            margin-bottom: 25px;
+        }
+
+        .white-bg h1 {
+            margin-bottom: 5px;
+            color: #3a3c63;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .white-bg p {
+            color: #3a3c63;
+            text-align: center;
+            margin: 0px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0;
+        }
+
+        .white-bg hr {
+            height: 1px;
+            border: 0;
+            background: rgb(255,255,255);
+            background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(189,36,127,1) 10%, rgba(189,36,127,1) 90%, rgba(255,255,255,1) 100%);
+        }
+
+
+        .checkbox-ui {
+            text-align: left;
+            color: #37365e;
+            font-family: 'Montserrat', sans-serif;
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+            .checkbox-ui input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 23px;
+            width: 23px;
+            background-color: #f9f9f9;
+            border: 3px solid #2e2951;
+            border-radius: 4px;
+        }
+
+        .checkbox-ui:hover input ~ .checkmark {
+            background-color: #e2deff;
+        }
+
+        .checkbox-ui input:checked ~ .checkmark {
+            background-color: #312c54;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .checkbox-ui input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .checkbox-ui .checkmark:after {
+            left: 6.5px;
+            top: 2px;
+            width: 6px;
+            height: 11px;
+            /* background: #ffffff; */
+            border-bottom: 2px solid #FFF;
+            border-right: 2px solid #FFF;
+            transform: rotate(40deg);
+        }
+
+        .form-check {
+            border-bottom: 2px solid #bb257c;
+            margin-top: 20px;
+            padding-bottom: 5px;
+            padding-left: 0;
+        }
+
+        .btn-pink {
+            font-family: 'Montserrat', sans-serif;
+            background: #bd247f;
+            color: #FFF;
+            text-decoration: none;
+            padding: 10px 35px;
+            display: inline-block;
+            border-radius: 50px;
+            box-shadow: 0px 10px 11px 0px rgb(189 36 127 / 33%);
+            margin-top: 20px;
+            font-weight: 800;
+        }
+
+            .btn-pink:hover {
+                color: #ffa7db;
+            }
+
+        .body-box, .footer-box {
+            text-align: center;
+        }
+
+        p.bootom-text {
+            margin-top: 30px;
+            font-size: 13px;
+            letter-spacing: 0.3px;
+            line-height: 20px;
+        }
+
+        .bootom-text a {
+            color: #bd247f;
+            font-weight: 800;
+        }
+
+        .footer-box img {
+            height: 50px;
+            margin-bottom: 20px;
+        }
+
+        @@media (max-width: 470px) {
+            .white-bg {
+                padding: 25px;
+            }
+        }
+
+        @@media (max-width: 380px) {
+            .white-bg h1 {
+                font-size: 25px;
+            }
+        }
+
+        .error-box p {
+            color: #F00;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="event-header">
+        <div class="container">
+            <a href="@ViewBag.URL">Back to home</a>
+            <input type="hidden" id="EmailAddress" value="@ViewBag.EmailID" />
+        </div>
+    </div>
+    <div class="container">
+       
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-sm-12">
+                <div class="white-bg">
+                    <div class="error-box">
+                        <p>
+                        </p>
+                    </div>
+                    <div class="header-box">
+                        <h1>MY TICKETS</h1>
+                        <p>To access your ticket, select your active list below and click send to my email.</p>
+                        <hr>
+                    </div>
+                    <div class="body-box">
+                        @{
+                            if (Model != null)
+                            {
+                                foreach (var e in Model)
+                                {
+                                    foreach (var item in e.Tickets)
+                                    {
+
+                                        if (Convert.ToDateTime(e.EndDate) >= DateTime.Now)
+                                        {
+                                            <input type="hidden" id="userid" value="@item.UserId" />
+                                            <input type="hidden" id="ticketdate" value="@e.TicketDate" />
+                                            <div class="form-check">
+                                                <label class="checkbox-ui">
+                                                    @e.EventName - @item.TicketName
+                                                    <input type="checkbox" class="checkbox" value="@item.TicketmapId,@e.TicketDate">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        }
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                <label class="checkbox-ui">
+
+                                    <span class="nodatafound">No data Found</span>
+                                </label>
+                            }
+                        }
+                        <button type="button" id="btnSubmit" class="btn btn-pink" onclick="EmailSend();"> Send to my mail</button>
+
+                        <p class="bootom-text">If funds have been taken from your account but unable to find your ticket in the list above, <a href="@Url.Action("ReIssueTicketsLists", "Home", new {EmailId =@ViewBag.Email, Url =@ViewBag.URL, Logo =@ViewBag.Logo})">click here</a> and we will attempt to re-issue your ticket.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-box">
+            <a href="@ViewBag.URL">
+                <img src="@ViewBag.Logo" />
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+    function EmailSend() {
+        var userid = $("#userid").val();
+        var ticketlist = [];
+        $(".checkbox:checked").each(function () {
+            ticketlist.push($(this).val());
+        });
+        debugger;
+
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            url: "/Home/SendEmail/",
+            data: JSON.stringify({ ticketlist: ticketlist, userid: userid }),
+            success: function (message) {
+                if (message == 2) {
+                    swal({
+                        title: "Your ticket has been successfully sent to your email..",
+                        icon: "success"
+                    })
+                }
+                else if (message == 0) {
+                    swal({
+                        title: "Failed to send ticket to your email..",
+                        icon: "error"
+                    })
+                }
+                else {
+                    $('.error-box p').text("Please Select Ticket!!");
+                }
+
+            }
+        });
+    }
+</script>

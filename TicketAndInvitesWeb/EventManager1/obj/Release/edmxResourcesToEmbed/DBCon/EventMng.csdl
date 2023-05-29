@@ -1,0 +1,1107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EventmanagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="EventmanagerEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Addresses" EntityType="EventmanagerModel.Address" />
+    <EntitySet Name="AdminSetups" EntityType="EventmanagerModel.AdminSetup" />
+    <EntitySet Name="BankDetails" EntityType="EventmanagerModel.BankDetail" />
+    <EntitySet Name="BankDetalMappings" EntityType="EventmanagerModel.BankDetalMapping" />
+    <EntitySet Name="Broadcasts" EntityType="EventmanagerModel.Broadcast" />
+    <EntitySet Name="BusinessOwners" EntityType="EventmanagerModel.BusinessOwner" />
+    <EntitySet Name="Companies" EntityType="EventmanagerModel.Company" />
+    <EntitySet Name="Countries" EntityType="EventmanagerModel.Country" />
+    <EntitySet Name="Currencies" EntityType="EventmanagerModel.Currency" />
+    <EntitySet Name="Events" EntityType="EventmanagerModel.Event" />
+    <EntitySet Name="EventTickets" EntityType="EventmanagerModel.EventTicket" />
+    <EntitySet Name="GroupObjectMaps" EntityType="EventmanagerModel.GroupObjectMap" />
+    <EntitySet Name="Invitations" EntityType="EventmanagerModel.Invitation" />
+    <EntitySet Name="InvitePaymentMaps" EntityType="EventmanagerModel.InvitePaymentMap" />
+    <EntitySet Name="MultimediaContents" EntityType="EventmanagerModel.MultimediaContent" />
+    <EntitySet Name="Notifications" EntityType="EventmanagerModel.Notification" />
+    <EntitySet Name="NotificationMessages" EntityType="EventmanagerModel.NotificationMessage" />
+    <EntitySet Name="ObjectGroups" EntityType="EventmanagerModel.ObjectGroup" />
+    <EntitySet Name="ObjectMasters" EntityType="EventmanagerModel.ObjectMaster" />
+    <EntitySet Name="Offers" EntityType="EventmanagerModel.Offer" />
+    <EntitySet Name="Payments" EntityType="EventmanagerModel.Payment" />
+    <EntitySet Name="PaymentSetups" EntityType="EventmanagerModel.PaymentSetup" />
+    <EntitySet Name="RSVPs" EntityType="EventmanagerModel.RSVP" />
+    <EntitySet Name="ScanCompanyUsers" EntityType="EventmanagerModel.ScanCompanyUser" />
+    <EntitySet Name="ScannerEventRels" EntityType="EventmanagerModel.ScannerEventRel" />
+    <EntitySet Name="TicketTypes" EntityType="EventmanagerModel.TicketType" />
+    <EntitySet Name="TickeUserMaps" EntityType="EventmanagerModel.TickeUserMap" />
+    <EntitySet Name="Users" EntityType="EventmanagerModel.User" />
+    <EntitySet Name="Wallets" EntityType="EventmanagerModel.Wallet" />
+    <EntitySet Name="Withdraws" EntityType="EventmanagerModel.Withdraw" />
+    <EntitySet Name="WithdrawReqs" EntityType="EventmanagerModel.WithdrawReq" />
+    <AssociationSet Name="FK_Address_Country" Association="EventmanagerModel.FK_Address_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_Address" Association="EventmanagerModel.FK_Company_Address">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Events_Address" Association="EventmanagerModel.FK_Events_Address">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BankDetalMapping_BankDetails" Association="EventmanagerModel.FK_BankDetalMapping_BankDetails">
+      <End Role="BankDetail" EntitySet="BankDetails" />
+      <End Role="BankDetalMapping" EntitySet="BankDetalMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BankDetalMapping_Company" Association="EventmanagerModel.FK_BankDetalMapping_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="BankDetalMapping" EntitySet="BankDetalMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BankDetalMapping_Users" Association="EventmanagerModel.FK_BankDetalMapping_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="BankDetalMapping" EntitySet="BankDetalMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessOwner_Company" Association="EventmanagerModel.FK_BusinessOwner_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="BusinessOwner" EntitySet="BusinessOwners" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ScanCompa__Compa__0C85DE4D" Association="EventmanagerModel.FK__ScanCompa__Compa__0C85DE4D">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="ScanCompanyUser" EntitySet="ScanCompanyUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Wallet__CompanyI__06CD04F7" Association="EventmanagerModel.FK__Wallet__CompanyI__06CD04F7">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Wallet" EntitySet="Wallets" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WithdrawR__Compa__08B54D69" Association="EventmanagerModel.FK__WithdrawR__Compa__08B54D69">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="WithdrawReq" EntitySet="WithdrawReqs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_Country" Association="EventmanagerModel.FK_Company_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_ObjectGroup" Association="EventmanagerModel.FK_Company_ObjectGroup">
+      <End Role="ObjectGroup" EntitySet="ObjectGroups" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Events_Company" Association="EventmanagerModel.FK_Events_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invitation_Company" Association="EventmanagerModel.FK_Invitation_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Invitation" EntitySet="Invitations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Offers_Company" Association="EventmanagerModel.FK_Offers_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Offer" EntitySet="Offers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ScannerEv__Event__10566F31" Association="EventmanagerModel.FK__ScannerEv__Event__10566F31">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="ScannerEventRel" EntitySet="ScannerEventRels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Event" Association="EventmanagerModel.FK_Event">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="MultimediaContent" EntitySet="MultimediaContents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Events_Users" Association="EventmanagerModel.FK_Events_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EventTicket_Events" Association="EventmanagerModel.FK_EventTicket_Events">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="EventTicket" EntitySet="EventTickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Offers_Events" Association="EventmanagerModel.FK_Offers_Events">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Offer" EntitySet="Offers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RSVP_Events" Association="EventmanagerModel.FK_RSVP_Events">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="RSVP" EntitySet="RSVPs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EventTicket_Invitation" Association="EventmanagerModel.FK_EventTicket_Invitation">
+      <End Role="Invitation" EntitySet="Invitations" />
+      <End Role="EventTicket" EntitySet="EventTickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TickeUserMap_EventTicket" Association="EventmanagerModel.FK_TickeUserMap_EventTicket">
+      <End Role="EventTicket" EntitySet="EventTickets" />
+      <End Role="TickeUserMap" EntitySet="TickeUserMaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupObjectMap_ObjectGroup" Association="EventmanagerModel.FK_GroupObjectMap_ObjectGroup">
+      <End Role="ObjectGroup" EntitySet="ObjectGroups" />
+      <End Role="GroupObjectMap" EntitySet="GroupObjectMaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupObjectMap_ObjectMaster" Association="EventmanagerModel.FK_GroupObjectMap_ObjectMaster">
+      <End Role="ObjectMaster" EntitySet="ObjectMasters" />
+      <End Role="GroupObjectMap" EntitySet="GroupObjectMaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invitation_Users" Association="EventmanagerModel.FK_Invitation_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Invitation" EntitySet="Invitations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TickeUserMap_Invitation" Association="EventmanagerModel.FK_TickeUserMap_Invitation">
+      <End Role="Invitation" EntitySet="Invitations" />
+      <End Role="TickeUserMap" EntitySet="TickeUserMaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InvitePay__Payme__7D439ABD" Association="EventmanagerModel.FK__InvitePay__Payme__7D439ABD">
+      <End Role="Payment" EntitySet="Payments" />
+      <End Role="InvitePaymentMap" EntitySet="InvitePaymentMaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_ObjectGroup" Association="EventmanagerModel.FK_Users_ObjectGroup">
+      <End Role="ObjectGroup" EntitySet="ObjectGroups" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Wallet__PaymentI__07C12930" Association="EventmanagerModel.FK__Wallet__PaymentI__07C12930">
+      <End Role="Payment" EntitySet="Payments" />
+      <End Role="Wallet" EntitySet="Wallets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TickeUserMap_Payments" Association="EventmanagerModel.FK_TickeUserMap_Payments">
+      <End Role="Payment" EntitySet="Payments" />
+      <End Role="TickeUserMap" EntitySet="TickeUserMaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ScannerEv__Scane__0F624AF8" Association="EventmanagerModel.FK__ScannerEv__Scane__0F624AF8">
+      <End Role="ScanCompanyUser" EntitySet="ScanCompanyUsers" />
+      <End Role="ScannerEventRel" EntitySet="ScannerEventRels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Users" Association="EventmanagerModel.FK_Users_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User1" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WithdrawR__walle__09A971A2" Association="EventmanagerModel.FK__WithdrawR__walle__09A971A2">
+      <End Role="Wallet" EntitySet="Wallets" />
+      <End Role="WithdrawReq" EntitySet="WithdrawReqs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddressType" Type="Int32" />
+    <Property Name="AddressLine" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Country_Id" Type="Int32" />
+    <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsDefault" Type="Boolean" />
+    <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Landmark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddressArea" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Country" Relationship="EventmanagerModel.FK_Address_Country" FromRole="Address" ToRole="Country" />
+    <NavigationProperty Name="Companies" Relationship="EventmanagerModel.FK_Company_Address" FromRole="Address" ToRole="Company" />
+    <NavigationProperty Name="Events" Relationship="EventmanagerModel.FK_Events_Address" FromRole="Address" ToRole="Event" />
+  </EntityType>
+  <EntityType Name="AdminSetup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventApprovalTime" Type="Int32" />
+    <Property Name="AutoTransferMinAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AutoTransferTime" Type="Int32" />
+    <Property Name="PlatinumRow" Type="Int32" />
+    <Property Name="GoldRow" Type="Int32" />
+    <Property Name="SilverRow" Type="Int32" />
+    <Property Name="BronzeRow" Type="Int32" />
+  </EntityType>
+  <EntityType Name="BankDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BankName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Type" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="BankDetalMappings" Relationship="EventmanagerModel.FK_BankDetalMapping_BankDetails" FromRole="BankDetail" ToRole="BankDetalMapping" />
+  </EntityType>
+  <EntityType Name="BankDetalMapping">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BankDetail_Id" Type="Int32" />
+    <Property Name="MobileMoneyDetail_Id" Type="Int32" />
+    <Property Name="Mobile_Money_Unique" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AccountHolder" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AccountNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BankRegNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Company_Id" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="BankDetail" Relationship="EventmanagerModel.FK_BankDetalMapping_BankDetails" FromRole="BankDetalMapping" ToRole="BankDetail" />
+    <NavigationProperty Name="Company" Relationship="EventmanagerModel.FK_BankDetalMapping_Company" FromRole="BankDetalMapping" ToRole="Company" />
+    <NavigationProperty Name="User" Relationship="EventmanagerModel.FK_BankDetalMapping_Users" FromRole="BankDetalMapping" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Broadcast">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsMailSend" Type="Boolean" />
+    <Property Name="Event_Id" Type="Int32" />
+    <Property Name="Created_at" Type="DateTime" Precision="3" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="PaymentId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="BusinessOwner">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MobileNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Company_Id" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Company" Relationship="EventmanagerModel.FK_BusinessOwner_Company" FromRole="BusinessOwner" ToRole="Company" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Country_Id" Type="Int32" Nullable="false" />
+    <Property Name="Name_of_business" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Business_contact_number" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+    <Property Name="Business_Email_address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address_Id" Type="Int32" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Created_at" Type="DateTime" Precision="3" />
+    <Property Name="Updated_at" Type="DateTime" Precision="3" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Parent_Id" Type="Int32" />
+    <Property Name="GroupId" Type="Int32" />
+    <NavigationProperty Name="Address" Relationship="EventmanagerModel.FK_Company_Address" FromRole="Company" ToRole="Address" />
+    <NavigationProperty Name="BankDetalMappings" Relationship="EventmanagerModel.FK_BankDetalMapping_Company" FromRole="Company" ToRole="BankDetalMapping" />
+    <NavigationProperty Name="BusinessOwners" Relationship="EventmanagerModel.FK_BusinessOwner_Company" FromRole="Company" ToRole="BusinessOwner" />
+    <NavigationProperty Name="ScanCompanyUsers" Relationship="EventmanagerModel.FK__ScanCompa__Compa__0C85DE4D" FromRole="Company" ToRole="ScanCompanyUser" />
+    <NavigationProperty Name="Wallets" Relationship="EventmanagerModel.FK__Wallet__CompanyI__06CD04F7" FromRole="Company" ToRole="Wallet" />
+    <NavigationProperty Name="WithdrawReqs" Relationship="EventmanagerModel.FK__WithdrawR__Compa__08B54D69" FromRole="Company" ToRole="WithdrawReq" />
+    <NavigationProperty Name="Country" Relationship="EventmanagerModel.FK_Company_Country" FromRole="Company" ToRole="Country" />
+    <NavigationProperty Name="ObjectGroup" Relationship="EventmanagerModel.FK_Company_ObjectGroup" FromRole="Company" ToRole="ObjectGroup" />
+    <NavigationProperty Name="Events" Relationship="EventmanagerModel.FK_Events_Company" FromRole="Company" ToRole="Event" />
+    <NavigationProperty Name="Invitations" Relationship="EventmanagerModel.FK_Invitation_Company" FromRole="Company" ToRole="Invitation" />
+    <NavigationProperty Name="Offers" Relationship="EventmanagerModel.FK_Offers_Company" FromRole="Company" ToRole="Offer" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="AccessCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="Zone" Type="Int32" />
+    <NavigationProperty Name="Addresses" Relationship="EventmanagerModel.FK_Address_Country" FromRole="Country" ToRole="Address" />
+    <NavigationProperty Name="Companies" Relationship="EventmanagerModel.FK_Company_Country" FromRole="Country" ToRole="Company" />
+  </EntityType>
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Event_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Direction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GPS_Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address_Id" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="longitude" Type="Decimal" Precision="12" Scale="9" />
+    <Property Name="latitude" Type="Decimal" Precision="12" Scale="9" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="Created_at" Type="DateTime" Precision="3" />
+    <Property Name="Updated_at" Type="DateTime" Precision="3" />
+    <Property Name="Venue" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Company_Id" Type="Int32" />
+    <Property Name="User_Id" Type="Int32" />
+    <Property Name="SubscriptionType" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="PublishDate" Type="DateTime" Precision="3" />
+    <Property Name="IsPopularEvent" Type="Boolean" />
+    <Property Name="PaymetIdSubscription" Type="Int32" />
+    <NavigationProperty Name="Address" Relationship="EventmanagerModel.FK_Events_Address" FromRole="Event" ToRole="Address" />
+    <NavigationProperty Name="Company" Relationship="EventmanagerModel.FK_Events_Company" FromRole="Event" ToRole="Company" />
+    <NavigationProperty Name="ScannerEventRels" Relationship="EventmanagerModel.FK__ScannerEv__Event__10566F31" FromRole="Event" ToRole="ScannerEventRel" />
+    <NavigationProperty Name="MultimediaContents" Relationship="EventmanagerModel.FK_Event" FromRole="Event" ToRole="MultimediaContent" />
+    <NavigationProperty Name="User" Relationship="EventmanagerModel.FK_Events_Users" FromRole="Event" ToRole="User" />
+    <NavigationProperty Name="EventTickets" Relationship="EventmanagerModel.FK_EventTicket_Events" FromRole="Event" ToRole="EventTicket" />
+    <NavigationProperty Name="Offers" Relationship="EventmanagerModel.FK_Offers_Events" FromRole="Event" ToRole="Offer" />
+    <NavigationProperty Name="RSVPs" Relationship="EventmanagerModel.FK_RSVP_Events" FromRole="Event" ToRole="RSVP" />
+  </EntityType>
+  <EntityType Name="EventTicket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ticket_Type" Type="Int32" />
+    <Property Name="Section_Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="AvailableQuantity" Type="Int32" />
+    <Property Name="Event_Id" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Created_at" Type="DateTime" Precision="3" />
+    <Property Name="Updated_at" Type="DateTime" Precision="3" />
+    <Property Name="TicketName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Seat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tableNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GateNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ColorArea" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsEnable" Type="Boolean" />
+    <Property Name="Inviation_Id" Type="Int32" />
+    <Property Name="TicketStatus" Type="Int32" />
+    <NavigationProperty Name="Event" Relationship="EventmanagerModel.FK_EventTicket_Events" FromRole="EventTicket" ToRole="Event" />
+    <NavigationProperty Name="Invitation" Relationship="EventmanagerModel.FK_EventTicket_Invitation" FromRole="EventTicket" ToRole="Invitation" />
+    <NavigationProperty Name="TickeUserMaps" Relationship="EventmanagerModel.FK_TickeUserMap_EventTicket" FromRole="EventTicket" ToRole="TickeUserMap" />
+  </EntityType>
+  <EntityType Name="GroupObjectMap">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupMasterId" Type="Int32" Nullable="false" />
+    <Property Name="ObjectMasterId" Type="Int32" Nullable="false" />
+    <Property Name="Rights" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ObjectGroup" Relationship="EventmanagerModel.FK_GroupObjectMap_ObjectGroup" FromRole="GroupObjectMap" ToRole="ObjectGroup" />
+    <NavigationProperty Name="ObjectMaster" Relationship="EventmanagerModel.FK_GroupObjectMap_ObjectMaster" FromRole="GroupObjectMap" ToRole="ObjectMaster" />
+  </EntityType>
+  <EntityType Name="Invitation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsMailSend" Type="Boolean" />
+    <Property Name="Event_Id" Type="Int32" />
+    <Property Name="Created_at" Type="DateTime" Precision="3" />
+    <Property Name="Updated_at" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="CompanyId" Type="Int32" />
+    <NavigationProperty Name="Company" Relationship="EventmanagerModel.FK_Invitation_Company" FromRole="Invitation" ToRole="Company" />
+    <NavigationProperty Name="EventTickets" Relationship="EventmanagerModel.FK_EventTicket_Invitation" FromRole="Invitation" ToRole="EventTicket" />
+    <NavigationProperty Name="User" Relationship="EventmanagerModel.FK_Invitation_Users" FromRole="Invitation" ToRole="User" />
+    <NavigationProperty Name="TickeUserMaps" Relationship="EventmanagerModel.FK_TickeUserMap_Invitation" FromRole="Invitation" ToRole="TickeUserMap" />
+  </EntityType>
+  <EntityType Name="InvitePaymentMap">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvitationId" Type="Int32" />
+    <Property Name="PaymemtId" Type="Int32" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Payment" Relationship="EventmanagerModel.FK__InvitePay__Payme__7D439ABD" FromRole="InvitePaymentMap" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="MultimediaContent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Event_Id" Type="Int32" />
+    <Property Name="Mul_Type" Type="Int32" />
+    <Property Name="Created_at" Type="DateTime" Precision="3" />
+    <Property Name="Updated_at" Type="DateTime" Precision="3" />
+    <Property Name="Mul_MainPic" Type="Boolean" />
+    <NavigationProperty Name="Event" Relationship="EventmanagerModel.FK_Event" FromRole="MultimediaContent" ToRole="Event" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReceiverId" Type="Int32" />
+    <Property Name="GeneratedBy" Type="Int32" />
+    <Property Name="GeneratedFor" Type="Int32" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Isseen" Type="Boolean" />
+    <Property Name="MsgType" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="MsgTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="NotificationMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MsgTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="MsgText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MsgId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="ReplyedBy" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="ObjectGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Groupname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="InsertDate" Type="DateTime" Precision="3" />
+    <Property Name="LastChanged" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Companies" Relationship="EventmanagerModel.FK_Company_ObjectGroup" FromRole="ObjectGroup" ToRole="Company" />
+    <NavigationProperty Name="GroupObjectMaps" Relationship="EventmanagerModel.FK_GroupObjectMap_ObjectGroup" FromRole="ObjectGroup" ToRole="GroupObjectMap" />
+    <NavigationProperty Name="Users" Relationship="EventmanagerModel.FK_Users_ObjectGroup" FromRole="ObjectGroup" ToRole="User" />
+  </EntityType>
+  <EntityType Name="ObjectMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ObjectName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModuleType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="GroupObjectMaps" Relationship="EventmanagerModel.FK_GroupObjectMap_ObjectMaster" FromRole="ObjectMaster" ToRole="GroupObjectMap" />
+  </EntityType>
+  <EntityType Name="Offer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OfferType" Type="Int32" />
+    <Property Name="Value" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="EventId" Type="Int32" />
+    <Property Name="OfferName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="CoupenCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <NavigationProperty Name="Company" Relationship="EventmanagerModel.FK_Offers_Company" FromRole="Offer" ToRole="Company" />
+    <NavigationProperty Name="Event" Relationship="EventmanagerModel.FK_Offers_Events" FromRole="Offer" ToRole="Event" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="BaseCurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="ExchangeRate" Type="Decimal" Nullable="false" Precision="18" Scale="5" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="RefundAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TransactionId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GatewayName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="GatewayRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentRQURI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentRSURI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RefundDate" Type="DateTime" Precision="3" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="adminfee" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="InvitePaymentMaps" Relationship="EventmanagerModel.FK__InvitePay__Payme__7D439ABD" FromRole="Payment" ToRole="InvitePaymentMap" />
+    <NavigationProperty Name="Wallets" Relationship="EventmanagerModel.FK__Wallet__PaymentI__07C12930" FromRole="Payment" ToRole="Wallet" />
+    <NavigationProperty Name="TickeUserMaps" Relationship="EventmanagerModel.FK_TickeUserMap_Payments" FromRole="Payment" ToRole="TickeUserMap" />
+  </EntityType>
+  <EntityType Name="PaymentSetup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvitationOrg" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="InvitationUser" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Broadcast" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Platinum" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Gold" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Silver" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Bronze" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Adminfee" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="RSVP">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Namer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Event_Id" Type="Int32" />
+    <NavigationProperty Name="Event" Relationship="EventmanagerModel.FK_RSVP_Events" FromRole="RSVP" ToRole="Event" />
+  </EntityType>
+  <EntityType Name="ScanCompanyUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="190" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="280" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="280" FixedLength="false" Unicode="false" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Createdat" Type="DateTime" Precision="3" />
+    <Property Name="Updateat" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Company" Relationship="EventmanagerModel.FK__ScanCompa__Compa__0C85DE4D" FromRole="ScanCompanyUser" ToRole="Company" />
+    <NavigationProperty Name="ScannerEventRels" Relationship="EventmanagerModel.FK__ScannerEv__Scane__0F624AF8" FromRole="ScanCompanyUser" ToRole="ScannerEventRel" />
+  </EntityType>
+  <EntityType Name="ScannerEventRel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ScanerId" Type="Int32" />
+    <Property Name="EventId" Type="Int32" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="Createdat" Type="DateTime" Precision="3" />
+    <Property Name="Updateat" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Event" Relationship="EventmanagerModel.FK__ScannerEv__Event__10566F31" FromRole="ScannerEventRel" ToRole="Event" />
+    <NavigationProperty Name="ScanCompanyUser" Relationship="EventmanagerModel.FK__ScannerEv__Scane__0F624AF8" FromRole="ScannerEventRel" ToRole="ScanCompanyUser" />
+  </EntityType>
+  <EntityType Name="TicketType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TicketTypes" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TickeUserMap">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TicketId" Type="Int32" Nullable="false" />
+    <Property Name="InvitationId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="OfferCode" Type="Int32" />
+    <Property Name="OfferRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ActualAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ExpectedDeliveryDate" Type="DateTime" Precision="3" />
+    <Property Name="PaymemtId" Type="Int32" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="BarCodeNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsCheckIn" Type="Boolean" />
+    <NavigationProperty Name="EventTicket" Relationship="EventmanagerModel.FK_TickeUserMap_EventTicket" FromRole="TickeUserMap" ToRole="EventTicket" />
+    <NavigationProperty Name="Invitation" Relationship="EventmanagerModel.FK_TickeUserMap_Invitation" FromRole="TickeUserMap" ToRole="Invitation" />
+    <NavigationProperty Name="Payment" Relationship="EventmanagerModel.FK_TickeUserMap_Payments" FromRole="TickeUserMap" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNo" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserType" Type="Int32" Nullable="false" />
+    <Property Name="UserStatus" Type="Int32" Nullable="false" />
+    <Property Name="CreditBalanceTotal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CreditBalanceDaily" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CreditBalanceMonthly" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CurrencyId" Type="Int32" />
+    <Property Name="NativeCurrencyId" Type="Int32" />
+    <Property Name="ExchangeRate" Type="Decimal" Precision="18" Scale="5" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProfilePic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastModified" Type="DateTime" Precision="3" />
+    <Property Name="IsEmailEnable" Type="Boolean" />
+    <Property Name="IsNotiEnable" Type="Boolean" />
+    <Property Name="IsMessageEnable" Type="Boolean" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="GroupId" Type="Int32" />
+    <Property Name="Parent_Id" Type="Int32" />
+    <NavigationProperty Name="BankDetalMappings" Relationship="EventmanagerModel.FK_BankDetalMapping_Users" FromRole="User" ToRole="BankDetalMapping" />
+    <NavigationProperty Name="Events" Relationship="EventmanagerModel.FK_Events_Users" FromRole="User" ToRole="Event" />
+    <NavigationProperty Name="Invitations" Relationship="EventmanagerModel.FK_Invitation_Users" FromRole="User" ToRole="Invitation" />
+    <NavigationProperty Name="ObjectGroup" Relationship="EventmanagerModel.FK_Users_ObjectGroup" FromRole="User" ToRole="ObjectGroup" />
+    <NavigationProperty Name="Users1" Relationship="EventmanagerModel.FK_Users_Users" FromRole="User" ToRole="User1" />
+    <NavigationProperty Name="User1" Relationship="EventmanagerModel.FK_Users_Users" FromRole="User1" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Wallet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AdminFee" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="EarnedAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="WithdrawAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PaymentId" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="withdrawTransactionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Company" Relationship="EventmanagerModel.FK__Wallet__CompanyI__06CD04F7" FromRole="Wallet" ToRole="Company" />
+    <NavigationProperty Name="Payment" Relationship="EventmanagerModel.FK__Wallet__PaymentI__07C12930" FromRole="Wallet" ToRole="Payment" />
+    <NavigationProperty Name="WithdrawReqs" Relationship="EventmanagerModel.FK__WithdrawR__walle__09A971A2" FromRole="Wallet" ToRole="WithdrawReq" />
+  </EntityType>
+  <EntityType Name="Withdraw">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventId" Type="Int32" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AdminFee" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="WithdrawAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="TransactionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CurrencyId" Type="Int32" />
+    <Property Name="BaseCurrencyId" Type="Int32" />
+    <Property Name="ExchangeRate" Type="Decimal" Precision="18" Scale="5" />
+    <Property Name="GatewayName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="GatewayRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentRQURI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentRSURI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="WithdrawReq">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="RequestAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="walletId" Type="Int32" />
+    <Property Name="RequestDate" Type="DateTime" Precision="3" />
+    <Property Name="withdrawDate" Type="DateTime" Precision="3" />
+    <Property Name="PaymentMode" Type="Int32" />
+    <NavigationProperty Name="Company" Relationship="EventmanagerModel.FK__WithdrawR__Compa__08B54D69" FromRole="WithdrawReq" ToRole="Company" />
+    <NavigationProperty Name="Wallet" Relationship="EventmanagerModel.FK__WithdrawR__walle__09A971A2" FromRole="WithdrawReq" ToRole="Wallet" />
+  </EntityType>
+  <Association Name="FK_Address_Country">
+    <End Type="EventmanagerModel.Country" Role="Country" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.Address" Role="Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="Country_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_Address">
+    <End Type="EventmanagerModel.Address" Role="Address" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.Company" Role="Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="Address_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Events_Address">
+    <End Type="EventmanagerModel.Address" Role="Address" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.Event" Role="Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="Address_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BankDetalMapping_BankDetails">
+    <End Type="EventmanagerModel.BankDetail" Role="BankDetail" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.BankDetalMapping" Role="BankDetalMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BankDetalMapping">
+        <PropertyRef Name="MobileMoneyDetail_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BankDetalMapping_Company">
+    <End Type="EventmanagerModel.Company" Role="Company" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.BankDetalMapping" Role="BankDetalMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BankDetalMapping">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BankDetalMapping_Users">
+    <End Type="EventmanagerModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.BankDetalMapping" Role="BankDetalMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BankDetalMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessOwner_Company">
+    <End Type="EventmanagerModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="EventmanagerModel.BusinessOwner" Role="BusinessOwner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BusinessOwner">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ScanCompa__Compa__0C85DE4D">
+    <End Type="EventmanagerModel.Company" Role="Company" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.ScanCompanyUser" Role="ScanCompanyUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ScanCompanyUser">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Wallet__CompanyI__06CD04F7">
+    <End Type="EventmanagerModel.Company" Role="Company" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.Wallet" Role="Wallet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Wallet">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WithdrawR__Compa__08B54D69">
+    <End Type="EventmanagerModel.Company" Role="Company" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.WithdrawReq" Role="WithdrawReq" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WithdrawReq">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_Country">
+    <End Type="EventmanagerModel.Country" Role="Country" Multiplicity="1" />
+    <End Type="EventmanagerModel.Company" Role="Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="Country_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_ObjectGroup">
+    <End Type="EventmanagerModel.ObjectGroup" Role="ObjectGroup" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.Company" Role="Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Events_Company">
+    <End Type="EventmanagerModel.Company" Role="Company" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.Event" Role="Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invitation_Company">
+    <End Type="EventmanagerModel.Company" Role="Company" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.Invitation" Role="Invitation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invitation">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Offers_Company">
+    <End Type="EventmanagerModel.Company" Role="Company" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.Offer" Role="Offer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Offer">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ScannerEv__Event__10566F31">
+    <End Type="EventmanagerModel.Event" Role="Event" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.ScannerEventRel" Role="ScannerEventRel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ScannerEventRel">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Event">
+    <End Type="EventmanagerModel.Event" Role="Event" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.MultimediaContent" Role="MultimediaContent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MultimediaContent">
+        <PropertyRef Name="Event_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Events_Users">
+    <End Type="EventmanagerModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.Event" Role="Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EventTicket_Events">
+    <End Type="EventmanagerModel.Event" Role="Event" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.EventTicket" Role="EventTicket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventTicket">
+        <PropertyRef Name="Event_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Offers_Events">
+    <End Type="EventmanagerModel.Event" Role="Event" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.Offer" Role="Offer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Offer">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RSVP_Events">
+    <End Type="EventmanagerModel.Event" Role="Event" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.RSVP" Role="RSVP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RSVP">
+        <PropertyRef Name="Event_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EventTicket_Invitation">
+    <End Type="EventmanagerModel.Invitation" Role="Invitation" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.EventTicket" Role="EventTicket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invitation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventTicket">
+        <PropertyRef Name="Inviation_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TickeUserMap_EventTicket">
+    <End Type="EventmanagerModel.EventTicket" Role="EventTicket" Multiplicity="1" />
+    <End Type="EventmanagerModel.TickeUserMap" Role="TickeUserMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventTicket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TickeUserMap">
+        <PropertyRef Name="TicketId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupObjectMap_ObjectGroup">
+    <End Type="EventmanagerModel.ObjectGroup" Role="ObjectGroup" Multiplicity="1" />
+    <End Type="EventmanagerModel.GroupObjectMap" Role="GroupObjectMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroupObjectMap">
+        <PropertyRef Name="GroupMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupObjectMap_ObjectMaster">
+    <End Type="EventmanagerModel.ObjectMaster" Role="ObjectMaster" Multiplicity="1" />
+    <End Type="EventmanagerModel.GroupObjectMap" Role="GroupObjectMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroupObjectMap">
+        <PropertyRef Name="ObjectMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invitation_Users">
+    <End Type="EventmanagerModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.Invitation" Role="Invitation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invitation">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TickeUserMap_Invitation">
+    <End Type="EventmanagerModel.Invitation" Role="Invitation" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.TickeUserMap" Role="TickeUserMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invitation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TickeUserMap">
+        <PropertyRef Name="InvitationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InvitePay__Payme__7D439ABD">
+    <End Type="EventmanagerModel.Payment" Role="Payment" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.InvitePaymentMap" Role="InvitePaymentMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InvitePaymentMap">
+        <PropertyRef Name="PaymemtId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_ObjectGroup">
+    <End Type="EventmanagerModel.ObjectGroup" Role="ObjectGroup" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Wallet__PaymentI__07C12930">
+    <End Type="EventmanagerModel.Payment" Role="Payment" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.Wallet" Role="Wallet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Wallet">
+        <PropertyRef Name="PaymentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TickeUserMap_Payments">
+    <End Type="EventmanagerModel.Payment" Role="Payment" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.TickeUserMap" Role="TickeUserMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TickeUserMap">
+        <PropertyRef Name="PaymemtId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ScannerEv__Scane__0F624AF8">
+    <End Type="EventmanagerModel.ScanCompanyUser" Role="ScanCompanyUser" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.ScannerEventRel" Role="ScannerEventRel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ScanCompanyUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ScannerEventRel">
+        <PropertyRef Name="ScanerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Users">
+    <End Type="EventmanagerModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.User" Role="User1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User1">
+        <PropertyRef Name="Parent_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WithdrawR__walle__09A971A2">
+    <End Type="EventmanagerModel.Wallet" Role="Wallet" Multiplicity="0..1" />
+    <End Type="EventmanagerModel.WithdrawReq" Role="WithdrawReq" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Wallet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WithdrawReq">
+        <PropertyRef Name="walletId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

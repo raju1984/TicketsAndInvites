@@ -1,0 +1,557 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/images/fav1.png" type="image/gif">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>SuccessPaymentViewPage</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style type="text/css">
+        @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;700;800;900&display=swap');
+
+        body {
+            background: #f4f4f4;
+            margin: auto;
+            padding: 0px;
+        }
+
+        .sn-error {
+            border-color: #ff0000;
+        }
+
+        .event-header {
+            /*background: url(./bg.jpg);*/
+            background-image: url('../../images/bg.jpg');
+            min-height: 350px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            text-align: center;
+            display: flex;
+            align-items: center;
+        }
+
+            .event-header h1 {
+                margin: 0px;
+                text-align: center;
+                color: #FFF;
+                text-transform: uppercase;
+                font-size: 50px;
+                letter-spacing: 3px;
+            }
+
+            .event-header .text hr {
+                width: 100%;
+            }
+
+            .event-header .text {
+                margin: auto;
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: stretch;
+                align-items: center;
+            }
+
+        h1.title {
+            letter-spacing: 1px;
+            font-weight: 400;
+            background: #FA8731;
+            background: linear-gradient(to right, #FA8731 0%, #FAA903 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-ui {
+            font-family: 'Montserrat', sans-serif !important;
+            background: #FFF;
+            box-shadow: 0px 0px 21px 0px rgb(0 0 0 / 17%);
+            padding: 25px;
+            width: 750px;
+            margin: -50px auto 0;
+            border-radius: 20px;
+            margin-bottom: 50px;
+            max-width: 100%;
+        }
+
+            .form-ui form {
+            }
+
+            .form-ui label {
+                color: #37365d;
+                font-weight: 700;
+                text-transform: uppercase;
+                margin-right: 10px;
+                margin-bottom: 0px;
+            }
+
+        .ml-auto {
+            display: flex;
+            margin-left: auto;
+        }
+
+        .form-box.qty-box {
+            margin: 0 20px 0 10px;
+            display: flex;
+            align-items: center;
+        }
+
+
+
+        .qty-box input {
+            margin: 0 10px;
+            height: 45px;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            width: 50px;
+            border: 0px;
+            font-size: 20px;
+            padding: 0px 5px;
+            border-radius: 30px;
+            font-weight: 800;
+            color: #FFF;
+            background: rgb(250, 137, 46);
+            outline: none !important;
+            box-shadow: 0px 10px 11px 0px rgba(0, 0, 0, 0.12);
+            background: radial-gradient(circle, rgba(250, 137, 46, 1) 0%, rgba(249, 151, 26, 1) 50%, rgba(250, 137, 46, 1) 100%);
+        }
+
+        .form-box select option {
+            color: #37365d;
+            font-weight: 600;
+        }
+
+        .form-box select {
+            position: relative;
+            width: 400px;
+            min-width: 100%;
+            height: 45px;
+            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            border: 0px;
+            font-size: 16px;
+            padding: 0px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #FFF;
+            background: rgb(250, 137, 46);
+            outline: none !important;
+            -moz-appearance: none;
+            /* Firefox */
+            -webkit-appearance: none;
+            /* Safari and Chrome */
+            appearance: none;
+            box-shadow: 0px 10px 11px 0px rgba(0, 0, 0, 0.12);
+            background: radial-gradient(circle, rgba(250, 137, 46, 1) 0%, rgba(249, 151, 26, 1) 50%, rgba(250, 137, 46, 1) 100%);
+        }
+
+        .select-arrow {
+            position: relative;
+        }
+
+            .select-arrow:after {
+                content: '';
+                /*background-image: url(./arrow.png);*/
+                background-image: url('../../images/arrow.png');
+                position: absolute;
+                width: 22px;
+                height: 20px;
+                right: 14px;
+                top: 16px;
+                background-repeat: no-repeat;
+                background-size: contain;
+            }
+
+        .btn-ui {
+            height: 45px;
+            background: #bb247e;
+            font-family: 'Montserrat', sans-serif;
+            color: #FFF;
+            border: 0px;
+            border-radius: 11px;
+            padding: 10px 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .table-ui {
+            width: 100%;
+            margin: 40px 0 30px;
+        }
+
+            .table-ui .remove {
+                font-family: 'Montserrat', sans-serif !important;
+                background: #bd247f;
+                border: 0px;
+                color: #FFF;
+                border-radius: 4px;
+                padding: 3px 10px;
+                font-weight: 600;
+                letter-spacing: 1px;
+            }
+
+        .color-box {
+            font-family: 'Montserrat', sans-serif !important;
+            background: #37365d;
+            color: #FFF;
+            font-size: 25px;
+            font-weight: 800;
+            width: 50px;
+            display: block;
+            text-align: center;
+            padding: 0px 5px;
+            border-radius: 60px;
+            height: 45px;
+            line-height: 45px;
+            box-shadow: 0px 6px 5px 0px rgb(0 0 0 / 5%);
+        }
+
+        .d-flex {
+            display: flex;
+            align-items: center;
+        }
+
+        .option {
+            color: #37365d;
+            font-size: 25px;
+            margin: 0px;
+            text-transform: uppercase;
+        }
+
+        .table-ui .d-flex {
+            margin-bottom: 25px;
+        }
+
+        .option span {
+            width: 25px;
+            height: 20px;
+            /*background: #37365d;*/
+            display: inline-block;
+            border-radius: 5px;
+            margin-left: 20px;
+        }
+
+        .amount {
+            margin-left: 25px;
+            width: 90px;
+            padding: 0px 15px;
+            font-family: 'Montserrat', sans-serif !important;
+        }
+
+        .total {
+            max-width: 80%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+        }
+
+            .total h1 {
+                color: #37365d;
+                text-transform: uppercase;
+                font-weight: 800;
+            }
+
+        .total-amount {
+            font-family: 'Montserrat', sans-serif !important;
+            font-size: 50px;
+            font-weight: 800;
+            color: #bd247f;
+            margin: 0;
+        }
+
+            .total-amount span {
+                font-size: 15px;
+                color: #37365d;
+                font-weight: 600;
+            }
+
+        span.line {
+            display: block;
+            height: 4px;
+            background: #37365d;
+            width: 40%;
+            border-radius: 50px;
+            margin: auto;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .protopay {
+            width: 80%;
+            margin: 10px 10% 0px;
+            background: #bd247f;
+            color: #FFF;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            font-size: 20px;
+            letter-spacing: 1px;
+            font-weight: 800;
+            border: 0px;
+            padding: 5px 10px;
+            border-radius: 50px;
+            position: relative;
+            bottom: -50px;
+            box-shadow: 0px 10px 11px 0px rgba(0, 0, 0, 0.12);
+        }
+
+        .event-footer {
+            margin-top: 5%;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #37365d;
+        }
+
+        .plus,
+        .min {
+            cursor: pointer;
+            font-size: 30px;
+            font-weight: 800;
+            color: #37365d;
+        }
+
+        .bottom-box {
+            width: 80%;
+            margin: 50px auto 0;
+            display: flex;
+            align-items: center;
+            border: 1px solid #35365b;
+            padding: 15px 20px;
+            border-radius: 30px;
+        }
+
+            .bottom-box p {
+                color: #37365d;
+                font-weight: 700;
+                text-transform: uppercase;
+                margin-right: 10px;
+                font-size: 15px;
+                letter-spacing: 0.5px;
+                margin-bottom: 0;
+            }
+
+        .form-ui .form-control {
+            margin-bottom: 20px;
+            margin-top: 5px;
+        }
+
+        .form-check {
+            margin-top: 20px;
+        }
+
+        label.form-check-label {
+            text-transform: inherit;
+            font-size: 13px;
+            letter-spacing: 0.3px;
+        }
+
+        .form-check-input {
+            width: 15px;
+            height: 15px;
+            top: -4px;
+        }
+
+        .selec-label {
+            margin-bottom: 10px
+        }
+
+        .error-box p {
+            color: #f00;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .m10 {
+            margin: 0px 10px;
+        }
+
+        .egift {
+            border: 1px dashed #a1a1a1;
+            padding: 15px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+        }
+
+            .egift .input-group {
+                margin-top: 15px;
+            }
+
+            .egift .form-control {
+                margin: 0px;
+            }
+
+            .egift .input-group-text {
+                line-height: normal;
+                padding: 0px;
+            }
+
+                .egift .input-group-text input[type="button"] {
+                    border: 0px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #37365d;
+                    padding: 12px 20px;
+                }
+
+        @@media (max-width: 768px) {
+            .selec-ticket-div .form-box select {
+                width: auto
+            }
+
+            .select-arrow {
+                width: 100%;
+            }
+        }
+
+        @@media (max-width: 600px) {
+            .selec-ticket-div .form-box select {
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            .selec-ticket-div .d-flex {
+                flex-wrap: wrap;
+            }
+
+            .selec-ticket-div .ml-auto {
+                margin-left: 0px !important;
+                margin-top: 30px;
+                width: 100%;
+            }
+
+            .table-ui .d-flex {
+                flex-direction: column;
+                text-align: center;
+                border: 1px dashed #a1a1a1;
+                border-radius: 8px;
+                padding: 15px;
+            }
+
+                .table-ui .d-flex .ml-auto {
+                    margin-left: 0px !important;
+                }
+
+            .option span {
+                display: none
+            }
+
+            .option {
+                font-size: 16px;
+                font-weight: 600;
+                margin: 20px 0;
+            }
+        }
+
+        .success-payment {
+            text-align: center
+        }
+
+            .success-payment img {
+                width: 150px;
+            }
+
+            .success-payment h1 {
+                color: #37365d;
+                font-weight: 800;
+                font-size: 35px;
+            }
+
+            .success-payment p {
+                margin-bottom: 10px;
+                font-size: 14px;
+                font-weight: 600;
+                color: #888;
+            }
+
+                .success-payment p b {
+                    color: #37365d;
+                }
+
+            .success-payment a {
+                padding: 10px 30px;
+                background: #bd247f;
+                display: inline-block;
+                border-radius: 45px;
+                margin-top: 15px;
+                color: #FFF;
+                font-weight: 600;
+                text-transform: uppercase;
+                text-decoration: none;
+                font-size: 13px;
+            }
+    </style>
+</head>
+<body>
+
+
+
+
+    <div class="event-header">
+        <div class="text">
+        </div>
+    </div>
+    <div class="event-body">
+        <div class="form-ui success-payment">
+            @if (ViewBag.Response != null && ViewBag.TransactionId != null)
+            {
+                if (ViewBag.Response == "Okay")
+                {
+                    <img src="~/images/verified.png" />
+                    <h1>Thank you for your purchase!</h1>
+                    <p>You will receive a booking confirmation email with details of your ticket.</p>
+                    <p>Your transaction ID is: <b>@ViewBag.TransactionId</b></p>
+                }
+                else
+                {
+                    <img src="~/images/decline.png" />
+                    <h1>Sorry your transaction has been failed.</h1>
+                    @*<p>You will receive an booking confirmation email with details of your ticket.</p>*@
+                    <p>Your transaction ID is: <b>@ViewBag.TransactionId</b></p>
+                }
+            }
+            <a href="@ViewBag.URL">Back to home</a>
+        </div>
+    </div>
+    <div class="event-footer">
+        <div class="footer-inner">
+            <span>Powered By</span>
+            <img src="~/images/footer-logo.jpg" />
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+

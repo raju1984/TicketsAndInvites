@@ -1,0 +1,1154 @@
+﻿
+@using EventManager1.Models
+@model Users_Heave
+
+@{
+    ViewBag.Title = "User login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/css/animate.css" rel="stylesheet" />
+    <link href="~/css/style-formsteps.css" rel="stylesheet" />
+    <script src="~/js/stepzation.js"></script>
+    <style>
+        .row {
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+        }
+
+        .text-justify {
+            text-align: left !important;
+            /*display: flex;*/
+            /*align-items: center;
+                justify-content: center;*/
+            height: 100%;
+            width: 100%
+        }
+
+        .bgLight {
+            background: #383636;
+            color: #fff;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .bgContainer {
+            background: #000 !important;
+            height: 100vh !important;
+        }
+
+        .card {
+            background: #000;
+            border-color: #313131;
+            border-bottom: 1px solid #313131 !important;
+        }
+
+        input#Phone {
+            position: relative;
+            border-radius: 0px 5px 5px 0;
+            /*padding-right: 0;
+                        width: 100%;*/
+        }
+
+        .col-md-4.cc {
+            padding-left: 0;
+        }
+
+        .card {
+            min-height: 75vh !important;
+        }
+
+        .text-justify {
+            text-align: left !important;
+            /*            display: flex;
+        */ /*align-items: center;
+                                justify-content: center;*/
+            height: 100%;
+        }
+
+        .card {
+            background: #000;
+            border-color: #313131;
+            border-bottom: 1px solid #313131 !important;
+        }
+
+        input#Phone {
+            position: relative;
+            border-radius: 0px 5px 5px 0;
+            /* padding-right: 0; */
+            width: 100%;
+        }
+
+        p.alertify-message {
+            color: #000;
+        }
+
+        .text-center {
+            text-align: center !important;
+            padding: 0 20px;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: .5rem;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .card-header {
+            border-bottom-color: #313131;
+            color: #fff;
+        }
+
+        .btn-payment {
+            margin-left: 40px;
+            margin-top: 10px;
+        }
+
+        .smal-btn {
+            border: #fff solid 1px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .smal-btn2 {
+            border: #fff solid 2px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .card-body h4, h6, p {
+            color: #fff;
+        }
+
+        .bold-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff !important;
+        }
+
+        .login {
+            display: block;
+        }
+
+
+        .card a:hover {
+            color: #f48534 !important;
+        }
+        /*.smal-btn:hover {
+                                background: #fb0000 !important;
+                                color: #fff !important;
+                                border: none;
+                            }*/
+        .minheight {
+            min-height: 300px;
+        }
+
+        .tab-content > .active {
+            display: block;
+            margin-top: 100px;
+            text-align: center;
+            margin-left: 0px;
+        }
+
+        .form-control {
+            height: 35px;
+            padding-left: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px !important;
+        }
+
+        b {
+            font-weight: bolder;
+            font-size: 21px;
+        }
+
+        .list-group {
+            flex-direction: row;
+        }
+
+        .form-check-label {
+            margin-bottom: 0;
+            font-size: 16px;
+        }
+
+
+        .mt-5, .my-5 {
+            margin-top: 7rem !important;
+        }
+
+        .list-group-item-action {
+            width: auto;
+        }
+
+        .text-primary {
+            color: #f6d605 !important;
+        }
+
+        .card-img-top {
+            display: none !important;
+        }
+
+        .caret {
+            display: none !important;
+            width: 0;
+            height: 0;
+            margin-left: 2px;
+            border-top: 4px dashed;
+            border-top: 4px solid\9;
+            border-right: 4px solid transparent;
+            border-left: 4px solid transparent;
+        }
+
+        .container i {
+            cursor: pointer;
+            float: right;
+            position: relative;
+            right: 10px;
+        }
+
+        @@media (min-width: 481px) and (max-width: 767px) {
+            .cc {
+                width: 30%;
+                float: left;
+            }
+
+            .nn {
+                width: 70%;
+                float: left;
+            }
+
+            .input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group {
+                margin-right: -12px !important;
+            }
+        }
+
+        /*
+                      ##Device = Most of the Smartphones Mobiles (Portrait)
+                      ##Screen = B/w 320px to 479px
+                    */
+
+        @@media (min-width: 320px) and (max-width: 480px) {
+
+            .cc {
+                width: 30%;
+                float: left;
+            }
+
+            .nn {
+                width: 70%;
+                float: left;
+            }
+
+            .input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group {
+                margin-right: -12px !important;
+            }
+        }
+
+        .radiocontainer {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 22px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+            /* Hide the browser's default radio button */
+            .radiocontainer input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+        /* Create a custom radio button */
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+            border-radius: 50%;
+        }
+
+        /* On mouse-over, add a grey background color */
+        .radiocontainer:hover input ~ .checkmark {
+            background-color: #ccc;
+        }
+
+        /* When the radio button is checked, add a blue background */
+        .radiocontainer input:checked ~ .checkmark {
+            background-color: #2196F3;
+        }
+
+        /* Create the indicator (the dot/circle - hidden when not checked) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        /* Show the indicator (dot/circle) when checked */
+        .radiocontainer input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        /* Style the indicator (dot/circle) */
+        .radiocontainer .checkmark:after {
+            top: 9px;
+            left: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+}
+@{
+    <link href="~/css/alertify.core.css" rel="stylesheet" />
+    <link href="~/css/alertify.default.css" rel="stylesheet" />
+    <div class="container-fluid bgContainer">
+        <div class="row ">
+            <div class="container">
+                <div class="row mt-5 " style="text-align:center">
+
+                    <div class="col-md-3"></div>
+
+                    <div class="col-md-5 bg-white pt-3">
+                        <div class="card borderonTicket">
+                            <input type="hidden" id="offerid" />
+                            <div class="arc top-12 right-12"></div>
+                            <div class="arc top-12 left-12"></div>
+                            <div class="arc bottom-12 right-12"></div>
+                            <div class="arc bottom-12 left-12"></div>
+                            <img src="aa"
+                                 class="card-img-top" alt="...">
+                            <div class="card-body text-justify">
+                                <div class="login">
+
+                                    @*@using (Html.BeginForm("userlogin", "Account", FormMethod.Post, new { defaultbutton = "Login" }))
+                                        {
+                                            @Html.AntiForgeryToken()*@
+
+                                    <div id="divMobile" class="form-group">
+                                        <div class='paste-styled'>
+                                            <div class='step-by-step' id='setup'>
+
+                                                <!-- 0 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <h3>ADVENTOUR GROUPE</h3>
+                                                        <p>
+                                                            Welcome, Please fill the form to continue!
+                                                        </p>
+                                                    </div>
+                                                    <div class='default-content'>
+                                                        <div class='form'>
+                                                            <label for='admin_username'>
+                                                                Name*
+                                                                <input type='text' name='Name' id='Name' placeholder='Name' />
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+
+                                                <!-- 1 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <div class='default-content push-down centered-content maximize-height'>
+                                                            <h3>Which Event are you signing up for?*</h3>
+
+                                                        </div>
+                                                        <div class='form'>
+                                                            <label for='Aburi_Gardens'>
+
+                                                                <input type='checkbox' name='WhichEvent' value="July Tent Camp in Aburi Gardens" class="checkbox WhichEvent" /><span>July Tent Camp in Aburi Gardens</span>
+                                                            </label>
+                                                            <label for='Aburi_Gardens'>
+
+                                                                <input type='checkbox' name='WhichEvent' value="Western Region Tour in December" class="checkbox WhichEvent" /><span>Western Region Tour in December</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+                                                .
+                                                <!-- 2 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <div class='form'>
+                                                            <label for='admin_username'>
+                                                                For the option selected above, kindly state the package you’re going in for.*
+                                                                <input type='text' name='Pakage' id='Package' placeholder='Package' />
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+                                                <!-- 3 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <div class='default-content push-down centered-content maximize-height'>
+                                                            <h3>  First time joining us?*</h3>
+
+                                                        </div>
+                                                        <div class='form'>
+                                                            <label for='Friend'>
+                                                                <input type='checkbox' name='FirstTimeJoining' id='Yes' value="Yes" class="checkbox  FirstTimeJoining" /><span>Yes</span>
+                                                            </label>
+                                                            <label for='Aburi_Gardens'>
+                                                                <input type='checkbox' name='FirstTimeJoining' id='No' value="No" class="checkbox FirstTimeJoining" /><span>No</span>
+                                                            </label>
+                                                            <label for='Aburi_Gardens'>
+                                                                <input type='checkbox' name='FirstTimeJoining' id='Adventure' value="I'm an Adventure" class="checkbox FirstTimeJoining" /><span>I'm an Adventure</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+                                                <!-- 4 -->
+                                                <div class='step-by-step-step split-h bg-white' data-name='admin_form'>
+
+                                                    <div class='default-content'>
+                                                        <div class='form'>
+                                                            <label for='admin_phone'>
+                                                                Phone number*
+                                                                <input type='text' name='Phone' id='Phone' placeholder='Phone Number' />
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button type="button" class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button type="button" class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+
+                                                <!-- 5 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <div class='form'>
+                                                            <label for='admin_username'>
+                                                                House Address
+                                                                <input type='text' name='HouseAddress' id='HouseAddress' placeholder='House Address' />
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+                                                <!-- 6 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <div class='form'>
+                                                            <label for='admin_username'>
+                                                                Email Address
+                                                                <input type='text' name='Email' id='Email' placeholder='Email' />
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+                                                <!-- 7 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <div class='default-content push-down centered-content maximize-height'>
+                                                            <h3> How did you hear about us?*</h3>
+
+                                                        </div>
+                                                        <div class='form'>
+                                                            <label for='Friend'>
+                                                                <input type='checkbox' name='hear_about' id='Friend' value="Friend" class="checkbox HearAbout" /><span>A Friend</span>
+                                                            </label>
+                                                            <label for='Aburi_Gardens'>
+                                                                <input type='checkbox' name='hear_about' id='Social_Media' value="Social_Media" class="checkbox HearAbout" /><span>Social Media</span>
+                                                            </label>
+                                                            <label for='Aburi_Gardens'>
+                                                                <input type='checkbox' name='hear_about' id='Others' value="Others" class="checkbox HearAbout" /><span>Others</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+                                                <!-- 8 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <div class='form'>
+                                                            <label for='admin_username'>
+                                                                Emergency Contact Person
+                                                                <input type='text' name='admin_username' id='EmergencyContactPerson' placeholder='Emergency Contact Person' />
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+                                                <!-- 9 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <div class='default-content push-down centered-content maximize-height'>
+                                                            <h3>  Do you have any allergies, chronic illness or medical condition that we should know about?*</h3>
+
+                                                        </div>
+                                                        <div class='form'>
+                                                            <label for='Friend'>
+                                                                <input type='checkbox' name='MedicalCondition' value="Yes" class="checkbox MedicalCondition" /><span>Yes</span>
+                                                            </label>
+                                                            <label for='Aburi_Gardens'>
+                                                                <input type='checkbox' name='MedicalCondition' value="No" class="checkbox MedicalCondition" /><span>No</span>
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+
+                                                <!-- 10 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <div class='form'>
+                                                            <label for='admin_username'>
+
+                                                                If you selected YES for the above question, kindly list them.
+                                                                <input type='text' name='admin_username' id='AboveQuestion' placeholder='kindly list them' />
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+                                                <!-- 11 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <div class='default-content push-down centered-content maximize-height'>
+                                                            <h3>REFUND POLICY*</h3>
+                                                            <p class="colorBlack">
+                                                                Refunds must be requested at least 14 days prior to the date of the trip. Payments will be refunded within 72 hours after request has been made.
+                                                            </p>
+                                                        </div>
+                                                        <div class='form'>
+                                                            <label for='Aburi_Gardens'>
+                                                                <input type='checkbox' name='REFUND_POLICY' id='REFUND_POLICY' class="checkbox" /><span>I have read and agree to the above conditions</span>
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+                                                <!-- 12 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <div class='default-content push-down centered-content maximize-height'>
+                                                            <h3>Release of Liability*</h3>
+                                                            <p class="colorBlack">
+                                                                Although the safety of all activities is of primary concern, outdoor activities may cause injuries. Do you expressly assume the risk of injury, and/or illness arising from any cause and agree to waive the right to pursue any claim against Adventour Groupe and persons in charge.
+                                                            </p>
+                                                        </div>
+                                                        <div class='form'>
+                                                            <label for='Release_of_Liability'>
+                                                                <input type='checkbox' name='ReleaseOfLiability' id='ReleaseOfLiability' class="checkbox" /><span>I have read and agree to the above conditions</span>
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+
+
+                                                <!-- 13 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <div class='form'>
+                                                            <div class='default-content push-down centered-content maximize-height'>
+                                                                <h3>Social Media*</h3>
+                                                                <p class="colorBlack">
+                                                                    We shall post photos from our event on all our social media platforms. Photos that may include you may be used as part of our promotional material. Submitting this forms means you have given us consent to use any material that may contain images of yourself.
+                                                                </p>
+                                                            </div>
+                                                            <label for='admin_username'>
+                                                                <label for='Social_Media'>
+                                                                    <input type='checkbox' name='Social_Media' id='Social_Media' class="checkbox" /><span>I have read and agree to the above conditions</span>
+                                                                </label>
+
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+                                                <!-- 14 -->
+                                                <div class='step-by-step-step split-h bg-white'>
+                                                    <div class='default-content push-down centered-content maximize-height'>
+                                                        <div class='form'>
+                                                            <div class='default-content push-down centered-content maximize-height'>
+                                                                <h3>Payment*</h3>
+                                                                <p class="colorBlack">
+
+                                                                    Kindly make payment to our mobile number number 024 774 2165 (THE CITY ESCAPE HANGOUT) to confirm your reservation. You can reach us on the same number for more information about our installment plan.
+                                                                </p>
+                                                            </div>
+                                                            <label for='admin_username'>
+                                                                <label for='Social_Media'>
+                                                                    <input type='checkbox' name='Payment' id='Payment' class="checkbox" /><span>I have read and agree to the above conditions</span>
+                                                                </label>
+
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class='step-by-step-stepper'>
+                                                        <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                        <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                    </div>
+                                                </div>
+                                                <!-- 12 -->
+                                                @*<div class='step-by-step-step split-h bg-white'>
+                                                        <div class='default-content push-down centered-content maximize-height'>
+                                                            <div class='form'>
+                                                                <label for='admin_username'>
+                                                                    Name
+                                                                    <input type='text' name='admin_username' id='admin_username' placeholder='john.doe12' />
+                                                                </label>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class='step-by-step-stepper'>
+                                                            <button class='button button-small button-small material-icons' data-type='prev'>keyboard_arrow_left</button>
+                                                            <button class='button button-small button-small-primary material-icons animated pulse infinite' data-type='next'>keyboard_arrow_right</button>
+                                                        </div>
+                                                    </div>*@
+                                            </div>
+                                        </div>
+                                        <script type='text/javascript'>
+                                        document.addEventListener('DOMContentLoaded', function (e) {
+                                            window.stepzation = new Stepzation(document.getElementById('setup'));
+
+                                            stepzation.next_step_action = function (step) {
+                                                if (step.getAttribute('data-name') == 'admin_form') {
+                                                    stepzation.db['admin'] = {};
+
+                                                    //var username = step.querySelector('#admin_username');
+                                                    //var password = step.querySelector('#admin_password');
+                                                    //var password_confirm = step.querySelector('#admin_password_confirm');
+
+                                                    //stepzation.db['admin']['username'] = username.value;
+                                                    //stepzation.db['admin']['password'] = password.value;
+                                                    //stepzation.db['admin']['password_confirm'] = password_confirm.value;
+
+                                                    /* You could send a request here for example */
+                                                    /*(wpost('/api/install', JSON.stringify(stepzation.db), function(data) {
+                                                        data = JSON.parse(data);
+
+                                                        if ('error' in data) {
+                                                            stepzation.previous_step();
+                                                            stepzation.handle_error(data['error']);
+                                                        }
+                                                    })*/
+                                                }
+
+                                                return []; // ugly hack
+                                            };
+
+                                            stepzation.handle_error = function (error) {
+                                                backdrop_error(error);
+                                            };
+
+                                            stepzation.handle_finish = function (step) {
+                                                //alert('all steps done');
+                                              /*  publish();*/
+                                                UserRegister();
+                                                window.location.href = '/';
+                                            };
+
+                                            stepzation.start();
+                                        });
+
+
+                                            function UserRegister() {
+                                                debugger
+                                            var Name = $('#Name').val();
+                                        /* var WhichEvent = $('.WhichEvent').val();*/
+                                            var WhichEvent = $('input[name="WhichEvent"]:checked').map(function () {
+                                                return $(this).val();
+                                            });
+                                            var Package = $('#Package').val();
+                                        /*   var FirstTimeJoin = $('.FirstTimeJoining').val();*/
+                                            var FirstTimeJoin = $('input[name="FirstTimeJoining"]:checked').map(function () {
+                                                return $(this).val();
+                                            });
+
+                                            var Phone = $('#Phone').val();
+                                            var HouseAddress = $('#HouseAddress').val();
+                                            var Email = $('#Email').val();
+
+                                            var HearAboutUs = $('input[name="hear_about"]:checked').map(function () {
+                                                return $(this).val();
+                                            });
+
+                                            var EmergencyPerson = $('#EmergencyContactPerson').val();
+
+
+
+                                                var MedicalCondition = $('input[name="MedicalCondition"]:checked').map(function () {
+                                                    return $(this).val();
+                                                });
+
+                                            var AboveQuestion = $('#AboveQuestion').val();
+
+
+                                                var RefundPolicy;
+                                                if ($("#REFUND_POLICY").prop('checked') == true) {
+                                                    RefundPolicy = true;
+                                                }
+                                                else {
+                                                    RefundPolicy = false;
+                                                }
+
+
+                                                var ReleaseOfLiability;
+                                                if ($("#ReleaseOfLiability").prop('checked') == true) {
+                                                    ReleaseOfLiability = true;
+                                                }
+                                                else {
+                                                    ReleaseOfLiability = false;
+                                                }
+
+
+                                                var SocialMedia;
+                                                if ($("#Social_Media").prop('checked') == true) {
+                                                    SocialMedia = true;
+                                                }
+                                                else {
+                                                    SocialMedia = false;
+                                                }
+
+                                                var Payment;
+                                                if ($("#Payment").prop('checked') == true) {
+                                                    Payment = true;
+                                                }
+                                                else {
+                                                    Payment = false;
+                                                }
+
+                                            var Register =
+                                            {
+                                                Name: $('#Name').val(),
+                                                WhichEvent: WhichEvent[0],
+                                                Package: $('#Package').val(),
+                                                Firsttimejoin: FirstTimeJoin[0],
+                                                PhoneNo: $('#Phone').val(),
+                                                Address: $('#HouseAddress').val(),
+                                                Email: $('#Email').val(),
+                                                HearSource: HearAboutUs[0],
+                                                Emergency_Contact: $('#EmergencyContactPerson').val(),
+                                                MedicalCondition: MedicalCondition[0],
+                                                Above_condition: $('#AboveQuestion').val(),
+                                                REFUND_POLICY: RefundPolicy,
+                                                Release_of_Liability: ReleaseOfLiability,
+                                                Social_Media: SocialMedia,
+                                                Payment: Payment,
+                                            };
+                                            if (Name != "" && WhichEvent != "" && Package != "" && FirstTimeJoin != "" && Phone != "" && HouseAddress != "" && Email != "" && HearAboutUs != "" && EmergencyPerson != "" && MedicalCondition != "" && AboveQuestion != "") {
+                                                $.ajax({
+                                                    //beforeSend: function () {
+
+                                                    //},
+                                                    type: "POST",
+                                                    url: '@Url.Action("UserRegister", "Account", new { area = "" })',
+                                                    data: '{obj: ' + JSON.stringify(Register) + '}',
+                                                    contentType: "application/json; charset=utf-8",
+                                                    dataType: "json",
+                                                    success: function (response) {
+                                                        if (response.Status == true) {
+                                                           
+                                                            window.location.href = "/ev/Summary?Id=" + response;
+                                                        }
+                                                        else {
+                                                            alertify("form has not been Updated");
+                                                        }
+                                                    },
+                                                    failure: function (response) {
+                                                        alertify(response.responseText);
+                                                    },
+                                                    error: function (response) {
+                                                        alertify(response.responseText);
+                                                    }
+                                                });
+                                            }
+                                            else {
+
+                                                if (Name == "") {
+                                                    alertify("Enter Name");
+                                                    return false;
+                                                }
+                                                else if (WhichEvent == "") {
+                                                    alertify("Select Event");
+                                                    return false;
+                                                }
+                                                else if (Package == "") {
+                                                    alertify("Enter Package");
+                                                    return false;
+                                                }
+                                                else if (FirstTimeJoin == "") {
+                                                    alertify("select  First Time Join");
+                                                    return false;
+                                                }
+                                                else if (Phone == "") {
+                                                    alertify("Enter Phone Number");
+                                                    return false;
+                                                }
+                                                else if (HouseAddress == "") {
+                                                    alertify("Enter House Address");
+                                                    return false;
+                                                }
+                                                else if (HearAboutUs == "") {
+                                                    alertify("select Hear About Us ");
+                                                    return false;
+                                                }
+                                                else if (EmergencyPerson == "") {
+                                                    alertify("Enter Emergency Person ");
+                                                    return false;
+                                                }
+                                                else if (MedicalCondition == "") {
+                                                    alertify("allergies ");
+                                                    return false;
+                                                }
+                                                else if (AboveQuestion == "") {
+                                                    alertify("AboveQuestion ");
+                                                    return false;
+                                                }
+                                                else if (RefundPolicy == "") {
+                                                    alertify("RefundPolicy ");
+                                                    return false;
+                                                }
+                                                else if (ReleaseOfLiability == "") {
+                                                    alertify("ReleaseOfLiability ");
+                                                    return false;
+                                                }
+                                                else if (SocialMedia == "") {
+                                                    alertify("SocialMedia ");
+                                                    return false;
+                                                }
+                                                else if (Payment == "") {
+                                                    alertify("Payment ");
+                                                    return false;
+                                                }
+                                                else {
+                                                    alertify("Please check and fill all the mandatory fields marked with * ");
+                                                    return false;
+                                                }
+
+                                            }
+
+                                        };
+
+
+
+
+             function publish() {
+                    var isAllValid = true;//validateform();
+                    if (isAllValid) {
+                var radioValue = $("input[name='mainpic']:checked").val();
+                var list = [];
+                var img = "../../images/placeholder-image.jpg";
+                var img11 = $('#img1').attr('src');
+                var img1checked = false;
+                if (radioValue == 'img1') { img1checked = true }
+                var img21 = $('#img2').attr('src');
+                var img2checked = false;
+                if (radioValue == 'img2') { img2checked = true }
+                var img31 = $('#img3').attr('src');
+                var img3checked = false;
+                if (radioValue == 'img3') { img3checked = true }
+                var img41 = $('#Streamimg').attr('src');
+                var img4checked = false;
+                if (radioValue == 'Streamimg') { img4checked = true }
+                var img1 = {
+                    URL: $('#img1').attr('src'),
+                    Mul_Type: 1,
+                    Mul_MainPic: img1checked
+                }
+                if (img11 != img)
+                    list.push(img1);
+
+                var img2 = {
+                    URL: $('#img2').attr('src'),
+                    Mul_Type: 1,
+                    Mul_MainPic: img2checked
+                }
+                if (img21 != img)
+                    list.push(img2);
+
+                var img3 = {
+                    URL: $('#img3').attr('src'),
+                    Mul_Type: 1,
+                    Mul_MainPic: img3checked
+                }
+                if (img31 != img)
+                    list.push(img3);
+
+                var Streamimg = {
+                    URL: $('#Streamimg').attr('src'),
+                    Mul_Type: 3,
+                    Mul_MainPic: img4checked
+                }
+                if (img41 != img)
+                    list.push(Streamimg);
+
+                var vid1 = {
+                    URL: $('video').find('Source:first').attr('src'),
+                    Mul_Type: 2
+                }
+                list.push(vid1);
+                var Address = [];
+                var addr = {
+                    longitude: $('#lat').val(),
+                    latitude: $('#lng').val(),
+                    Country: $('#CountryId').val(),
+                    City: $('#CityName').val(),
+                    AddressLine: $('#AddressLine').val(),
+                    ZipCode: $('#ZipCode').val()
+                }
+                Address.push(addr);
+                var rsvp = [];
+                var Rsvp = {
+                    Namer: $('#NamerRSVP').val(),
+                    Phone: $('#PhoneRSVP').val(),
+                }
+                if (Rsvp) {
+                    rsvp.push(Rsvp);
+                }
+                $('#orderdetailsItems tbody tr').each(function (index, ele) {
+                    var Rsvp1 = {
+                        Namer: $('.name', this).val(),
+                        Phone: $('.phone', this).val(),
+                    }
+                    rsvp.push(Rsvp1);
+                })
+                //validate order items
+                debugger;
+                Loader(true);
+                var Register = {
+                    Id: $('#eventid').val(),
+                    BusinessOwner_Id: $('#companyId').val(),
+                    EventName: $('#EventName').val(),
+                    PublishDate: $('#PublishDate').val(),
+                    StartDate: $('#StartDate').val(),
+                    StartTime: $('#StartTime').val(),
+                    EndDate: $('#EndDate').val(),
+                    EndTime: $('#EndTime').val(),
+                    Venue: $('#Venue').val(),
+                    Description: $('#Description').val(),
+                    address_: Address,
+                    Multimedia: list,
+                    Rsvp: rsvp
+                }
+                //$(this).val('Please wait...');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("CreateEvent", "Organizer", new { area = "Organizer" })',
+                    data: '{Register: ' + JSON.stringify(Register) + '}',/* JSON.stringify(Register),*/
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (resp) {
+                        if (resp.result.Code == 200) {
+                            debugger;
+                            //alert('Successfully saved');
+                            //here we will clear the form
+                            list = [];
+                            $('#UserName,#ContactNo,#Email,#Password,#BusinessName,#CountryId,#Address,#ZipCode,#LastName,#FirstName,#PhoneNo,#confPassword').val('');
+                            $('#orderdetailsItems').empty();
+                            alertify.alert("Event Created Successfully.");
+                            Loader(false);
+                            window.location.replace("CreateTicket");
+                        }
+                        else {
+                            Loader(false);
+                            alertify.alert(resp.result.Msg);
+                        }
+                    },
+                    error: function (error) {
+                        Loader(false);
+                        alertify.alert(error);
+                    }
+                });
+            }
+                    else { alertify.alert("@EventManager1.Resource.ResourceStrings.allfieldrequired"); }
+             }
+             function validateform() {
+                                            var allvalid = true;
+                                            if (!($('#EventName').val().trim() != '')) {
+                                                allvalid = false;
+                                                $('#Nameerr').css('visibility', 'visible');
+                                            }
+                                            else {
+                                                $('#Nameerr').css('visibility', 'hidden');
+                                            }
+                                            debugger;
+                                            //if (!($('#CountryId').val() < 1)) {
+                                            //    allvalid = false;
+                                            //    $('#CountryIderr').css('visibility', 'visible');
+                                            //}
+                                            //else {
+                                            //    $('#CountryIderr').css('visibility', 'hidden');
+                                            //}
+                                            if (!($('#AddressLine').val().trim() != '')) {
+                                                allvalid = false;
+                                                $('#addresserr').css('visibility', 'visible');
+                                            }
+                                            else {
+                                                $('#addresserr').css('visibility', 'hidden');
+                                            }
+                                            if (!($('#Venue').val().trim() != '')) {
+                                                allvalid = false;
+                                                $('#Venueerr').css('visibility', 'visible');
+                                            }
+                                            else {
+                                                $('#Venueerr').css('visibility', 'hidden');
+                                            }
+                                            if (!($('#CityName').val().trim() != '')) {
+                                                allvalid = false;
+                                                $('#Cityerr').css('visibility', 'visible');
+                                            }
+                                            else {
+                                                $('#Cityerr').css('visibility', 'hidden');
+                                            }
+                                            if (!($('#Description').val().trim() != '')) {
+                                                allvalid = false;
+                                                $('#Descriptionerr').css('visibility', 'visible');
+                                            }
+                                            else {
+                                                $('#Descriptionerr').css('visibility', 'hidden');
+                                            }
+
+
+                                            if (allvalid) {
+                                                return true;
+                                            }
+                                            else { return false; };
+                                            // CountryIderr CountryIderr address_  Venueerr Cityerr
+                                        }
+                                        </script>
+                                    </div>
+
+
+                                    @*  }*@
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        @*
+            <script src="~/js/bootstrap.min.js"></script>*@
+        <script src="~/js/intlInputPhone.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#btnSignIn').click(function () {
+                    debugger
+                    var phone = $('#Phone').val();
+                    var email = $('#EmailId').val();
+                    var CountryCode = $('#Phone_CountryCode').val()
+                    if (phone != "" || email != "") {
+                        if (phone != "") {
+                            if (CountryCode == 233 && phone.length < 10) {
+                                alertify.alert('Your country code is 233, Please enter 10 digit mobile number');
+                                return false;
+                            }
+                            else if (phone.length < 9) {
+                                alertify.alert('Mobile number should not be less than 9 digit');
+                                return false;
+                            }
+                        }
+                    }
+                    else {
+                        alertify.alert('Please enter mobile number or email id.');
+                        return false;
+                    }
+                })
+
+
+
+                //function disablePrev() { window.history.forward() }
+                //window.onload = disablePrev();
+            });
+
+        </script>
+    }
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/alertify.js"></script>
+
+    if (ViewBag.message != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                alertify.alert("@ViewBag.message");
+
+            })
+
+        </script>
+    }
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}
+

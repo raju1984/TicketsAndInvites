@@ -1,0 +1,722 @@
+﻿@using EventManager1.Models
+@model  IEnumerable<EventManager1.Models.IndexView>
+@{
+    ViewBag.Title = "LiveStream";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+	.bg {
+    background: #000;
+    height: 150vh !important;
+}
+.events-box img {
+    width: 100%;
+    object-fit: contain;
+    height: 200px;
+}
+.small-btn {
+    background: #f48534;
+    color: #fff;
+    margin: 30px auto 0 !important;
+    padding: 6px 40px;
+}
+.bottom-sec {
+    padding: 0px 0 10px 0;
+}
+.down-sec {
+    padding: 0 15px 0px 15px !important;
+}
+figure {
+    margin: 5px 0px !important;
+}
+        .carousel-item img {
+            object-fit: unset;
+            max-height: 360px;
+            width: 100%;
+        }
+                .navbar {
+            position: absolute;
+        }
+                .bgLight {
+    background: #383636;
+    color: #fff;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+        /* USER PROFILE PAGE */
+ .nav-tabs .nav-link.active {
+    font-weight:bold;
+    background-color: transparent;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+.btn-pref .btn {
+    -webkit-border-radius:0 !important;
+}
+
+
+        .folded-corner:hover .text {
+            visibility: visible;
+            color: #000000;
+            
+        }
+
+        .Services-tab {
+            margin-top: 20px;
+        }
+        h2.main-heading:after {
+            position: absolute;
+            content: "";
+            height: 5px;
+            bottom: 0;
+            width: 100px;
+            
+            left: 475px;
+        }
+        /*
+          nav link items
+        */
+        .folded-corner {
+            padding: 25px 25px;
+            position: relative;
+            font-size: 90%;
+            text-decoration: none;
+            color: #999;
+            background: transparent;
+            transition: all ease .5s;
+            border: 1px solid rgba(31,181,172,.9);
+        }
+
+            .folded-corner:hover {
+                background-color: rgba(31,181,172,.9);
+            }
+
+        /**/
+        .fa-5x {
+            font-size: 2em !important;
+        }
+
+        paper fold corner .folded-corner:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-style: solid;
+            border-width: 0 0px 0px 0;
+            border-color: #ddd #000;
+            transition: all ease .3s;
+        }
+
+        /*
+          on li hover make paper fold larger
+        */
+        .folded-corner:hover:before {
+            background-color: #D00003;
+            border-width: 0 50px 50px 0;
+            border-color: #eee #000;
+        }
+
+        .service_tab_1 {
+            /*background-color: #000;*/
+            border: 1px solid #999;
+            padding: 5px 25px;
+            text-align: center;
+            border-radius: 5px;
+            background: #efeeee;
+        }
+
+            .service_tab_1:hover .fa-icon-image {
+                color: #000;
+                transform: rotate(360deg) scale(1.5);
+            }
+
+
+        .fa-icon-image {
+            color: rgba(31,181,172,.9);
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: normal;
+            line-height: 1;
+            font-size-adjust: none;
+            font-stretch: normal;
+            -moz-font-feature-settings: normal;
+            -moz-font-language-override: normal;
+            text-rendering: auto;
+            transition: all .65s linear 0s;
+            text-align: center;
+            transition: all 1s cubic-bezier(.99,.82,.11,1.41);
+        }
+
+        p {
+            margin-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-family: 'Roboto Slab', serif;
+            font-weight: bold;
+            font-size: 38px;
+            line-height: 60px;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            right: 10%;
+            top: 42%;
+            left: 15%;
+            z-index: 10;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            color: #fff;
+            text-align: right;
+        }
+
+        .popular-events {
+            margin: 0 !important;
+        }
+
+        .small-btn {
+            background: #f48534;
+            color: #fff;
+            margin: auto;
+            padding: 6px 40px;
+        }
+            .small-btn:hover {
+                background: #f48534;
+                color: #fff !important;
+                border: none;
+            }
+
+        .user {
+            padding: 100px 0;
+            text-align: center;
+            border-right: 1px solid #ccc;
+        }
+
+            .user a {
+                font-size: 36px;
+            }
+
+        .organiser {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+            .organiser a {
+                font-size: 36px;
+            }
+
+        .open-nav,
+        .close-nav {
+            display: none;
+        }
+
+        .nav-tabs {
+            border-bottom: none;
+        }
+
+        a:hover {
+            color: #333 !important;
+        }
+
+        @@media (min-width: 576px) {
+
+            .modal-sm {
+                max-width: 65%;
+            }
+        }
+
+        .ultab ul li {
+            min-width: 200px;
+        }
+
+        .fa-icon-image {
+            color: #28a745;
+        }
+
+        .pnum {
+            background: #ccc;
+            border-radius: 50%;
+            padding: 5px;
+            width: 50px;
+            margin: auto;
+        }
+
+        @@media (min-width: 481px) and (max-width: 767px) {
+            .sorry {
+                width: 100% !important;
+                margin: auto;
+            }
+
+            .carousel-item img {
+                max-height: 210px !important;
+            }
+
+            .service_tab_1 {
+                /* background-color: #000; */
+                border: 1px solid #999;
+                padding: 5px 0px !important;
+                text-align: center;
+                border-radius: 5px;
+                background: #efeeee;
+            }
+
+            h4 {
+                font-size: 15px !important;
+                text-align: center !important;
+            }
+
+            .ultab ul li {
+                min-width: 100% !important;
+                width: 100% !important;
+            }
+
+            .row {
+                margin: 0;
+            }
+
+            .col-md-4 {
+                width: 29% !important;
+                float: left;
+                padding: 0;
+                margin: 0 5px;
+            }
+
+            .col-md-12 {
+                padding: 0 !important;
+            }
+        }
+        .navv {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+            background: #fff;
+            box-shadow: #555 2px 2px 6px;
+        }
+
+        @@media (min-width: 320px) and (max-width: 480px) {
+
+            .carousel-item img{max-height:170px !important}
+            #secbanner{margin-top: 70px!important;}
+
+            .sorry {
+                FONT-WEIGHT: 100;
+                width: 100% !important;
+                margin: auto;
+            }
+
+            .service_tab_1 {
+                /* background-color: #000; */
+                border: 1px solid #999;
+                padding: 5px 0px !important;
+                text-align: center;
+                border-radius: 5px;
+                background: #efeeee;
+            }
+
+            h4 {
+                font-size: 15px !important;
+                text-align: center !important;
+            }
+
+            .ultab ul li {
+                min-width: 100% !important;
+                width: 100% !important;
+            }
+
+            .row {
+                margin: 0;
+            }
+            figure {
+                margin: 0 0 0rem !important;
+            }
+
+            .col-md-4 {
+                width: 29% !important;
+                float: left;
+                padding: 0;
+                margin: 0 5px;
+            }
+
+            .col-md-12 {
+                padding: 0 !important;
+            }
+        }
+    </style>
+    <link href="~/css/tabstyle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+}
+<div>
+    @{
+        Html.RenderPartial("_slider");
+    }
+</div>
+<div class="bg">
+    <div class="row" style="padding-top:12px ; min-height:400px; width:100%">
+        
+        <div class="col-md-12">
+            <section class="home-content-top">
+                <div class="container">
+
+                    <!--our-quality-shadow-->
+                    <div class="clearfix"></div>
+                    
+                    <div class="tabbable-panel margin-tops4">
+                        <div class="tabbable-line ultab">
+                           
+                            <section class=" ">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center ">
+                                            <nav class="nav-justified ">
+                                                <div class="nav nav-tabs " id="nav-tab" role="tablist" style="display:none">
+                                                    <a class="nav-item nav-link active" id="pop1-tab" data-toggle="tab" href="#pop1" role="tab" aria-controls="pop1" aria-selected="true">
+                                                        <div class=" service_tab_1">
+                                                            <div class="text">
+                                                                <i class="fa fa-music fa-5x fa-icon-image"></i>
+                                                                <p class="item-title">
+                                                                    <h4> Concerts</h4>
+                                                                </p><!-- /.item-title -->
+                                                                <p class="pnum">
+                                                                    @if (Model != null && Model.Count() > 0 && Model.Where(x => x.EventCatg == 7).Count() > 0)
+                                                                    {
+                                                                        <span>@Model.Where(x => x.EventCatg == 7).Count()</span>
+                                                                    }
+                                                                    else
+                                                                    {<span>0</span>}
+                                                                </p>
+                                                            </div>
+                                                        </div></a>
+                                                    <a class="nav-item nav-link" id="pop2-tab" data-toggle="tab" href="#pop2" role="tab" aria-controls="pop2" aria-selected="false"><div class=" service_tab_1">
+    <div class="text">
+        <i class="fa fa-ticket fa-5x fa-icon-image"></i>
+        <p class="item-title">
+            <h4> Shows</h4>
+        </p><!-- /.item-title -->
+        <p class="pnum">
+            @if (Model != null && Model.Count() > 0 && Model.Where(x => x.EventCatg == 8).Count() > 0)
+            {
+                <span>@Model.Where(x => x.EventCatg == 8).Count()</span>
+            }
+            else
+            {<span>0</span>}
+        </p>
+    </div>
+</div></a>
+                                                    <a class="nav-item nav-link" id="pop3-tab" data-toggle="tab" href="#pop3" role="tab" aria-controls="pop3" aria-selected="false"><div class=" service_tab_1">
+    <div class="text">
+        <i class="fa fa-video-camera fa-5x fa-icon-image"></i>
+        <p class="item-title">
+            <h4>Plays</h4>
+        </p><!-- /.item-title -->
+        <p class="pnum">
+            @if (Model != null && Model.Count() > 0 && Model.Where(x => x.EventCatg == 9).Count() > 0)
+            {
+                <span>@Model.Where(x => x.EventCatg == 9).Count()</span>
+            }
+            else
+            {<span>0</span>}
+        </p>
+    </div>
+</div></a>
+
+                                                </div>
+                                            </nav>
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="tab-pane fade show active" id="pop1" role="tabpanel" aria-labelledby="pop1-tab">
+                                                    <div class="pt-3"></div>
+                                                    @{
+                                                        if (Model != null && Model.Count() > 0 && Model.Where(x => x.EventCatg > 6).Count() > 0)
+                                                        {
+                                                            <div class="container">
+                                                                <h2 class="main-heading"><span>Live Events</span> </h2> @*Concerts*@
+                                                                <div class="row">
+                                                                    @foreach (var item in Model.Where(x => x.EventCatg > 6))
+                                                                    {
+                                                                        if (item.Price != null && item.Price.Count > 0)
+                                                                        {
+                                                                            decimal? price = item.Price.OrderByDescending(a => a.Price).Select(a => a.Price).FirstOrDefault();
+                                                                            string imageurl = "";// item.Images != null && item.Images.Where(a => a.mainpic == true).FirstOrDefault() !=null? item.Images.FirstOrDefault().Url : "/images/img3.jpg";
+                                                                            if (item.Images.FirstOrDefault(x => x.MulType == 1) != null)
+                                                                            {
+                                                                                if (item.Images.FirstOrDefault(s => s.mainpic == true) != null)
+                                                                                {
+                                                                                    imageurl = item.Images.FirstOrDefault(s => s.mainpic == true).Url.ToString();
+                                                                                    if (imageurl == null) { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+                                                                                }
+                                                                                else { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+                                                                            }
+                                                                            else { imageurl = "/images/img3.jpg"; }
+                                                                            string alt = Path.GetFileName(imageurl);
+
+                                                                            <div class="col-lg-4 col-sm-6 events-box">
+                                                                                <a href="@Url.Action("EventDetail", "Home", new { area = "", Id = item.Id })">
+                                                                                    <div class="">
+                                                                                        <figure style="height:180px;margin-bottom:0!important"><img src="@imageurl" class="imgheight" alt="@alt"></figure>
+                                                                                        <div class="down-sec">
+                                                                                            @*<h4 style="height: 80px;">@item.EventName</h4>*@
+
+                                                                                            <div class="bottom-sec">
+                                                                                                <a href="@Url.Action("Summary","ev", new { area = "", Id = item.Id })" class="small-btn">Watch</a>
+                                                                                                @*<strong><span>@item.Currency</span>@price</strong>*@
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                        }
+                                                                    }
+                                                                </div>
+                                                                <div class="bottom-btn text-center"><a href="@Url.Action("EventsSearchResult", "Home", new { eventtype = 6 })" style="margin-bottom:20px" class="benn-btn" value="">See All</a></div>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="row" style="min-height:400px;margin-top:100px;margin:auto;">
+                                                                <div class="col-md-12">
+                                                                    <div class="sorry">
+                                                                        <h1><img src="~/images/sorry.jpg" class="img-responsive" style="display:inline-block" /></h1>
+                                                                        <h2>We Are Sorry !</h2>
+                                                                        <p>
+                                                                            We did Not find Any Event for Your search<br />
+                                                                            Choose a different filter to view Event results relevant to you
+
+                                                                        </p>
+                                                                        <a href="\" class="btn-success btn">Search Again</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
+                                                <div class="tab-pane fade" id="pop2" role="tabpanel" aria-labelledby="pop2-tab">
+                                                    <div class="pt-3"></div>
+                                                    @{
+                                                        if (Model != null && Model.Count() > 0 && Model.Where(x => x.EventCatg == 8).Count() > 0)
+                                                        {
+                                                            <div class="container">
+                                                                <h2 class="main-heading"><span>Shows</span> </h2>
+                                                                <div class="row">
+                                                                    @foreach (var item in Model.Where(x => x.EventCatg == 8))
+                                                                    {
+                                                                        if (item.Price != null && item.Price.Count > 0)
+                                                                        {
+                                                                            decimal? price = item.Price.OrderByDescending(a => a.Price).Select(a => a.Price).FirstOrDefault();
+                                                                            string imageurl = "";// item.Images != null && item.Images.Where(a => a.mainpic == true).FirstOrDefault() !=null? item.Images.FirstOrDefault().Url : "/images/img3.jpg";
+                                                                            if (item.Images.FirstOrDefault(x => x.MulType == 1) != null)
+                                                                            {
+                                                                                if (item.Images.FirstOrDefault(s => s.mainpic == true) != null)
+                                                                                {
+                                                                                    imageurl = item.Images.FirstOrDefault(s => s.mainpic == true).Url.ToString();
+                                                                                    if (imageurl == null) { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+                                                                                }
+                                                                                else { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+                                                                            }
+                                                                            else { imageurl = "/images/img3.jpg"; }
+                                                                            string alt = Path.GetFileName(imageurl);
+
+                                                                            <div class="col-lg-4 col-sm-6 events-box">
+                                                                                <a href="@Url.Action("EventDetail", "Home", new { area = "", Id = item.Id })">
+                                                                                    <div class="">
+                                                                                        <figure style="height:180px"><img src="@imageurl" class="imgheight" alt="@alt"></figure>
+                                                                                        <div class="down-sec">
+                                                                                          
+                                                                                            <div class="bottom-sec">
+                                                                                                <a href="@Url.Action("Summary","ev", new { area = "", Id = item.Id })" class="small-btn">Watch</a>
+                                                                                                @*<strong><span>@item.Currency</span>@price</strong>*@
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                        }
+                                                                    }
+                                                                </div>
+                                                                <div class="bottom-btn text-center"><a href="@Url.Action("EventsSearchResult", "Home", new { eventtype = 6 })" style="margin-bottom:20px" class="benn-btn" value="">See All</a></div>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="row" style="min-height:400px;margin-top:100px;margin:auto;">
+                                                                <div class="col-md-12">
+                                                                    <div class="sorry">
+                                                                        <h1><img src="~/images/sorry.jpg" class="img-responsive" style="display: inline-block;" /></h1>
+                                                                        <h2>We Are Sorry !</h2>
+                                                                        <p>
+                                                                            We did Not find Any Event for Your search<br />
+                                                                            Choose a different filter to view Event results relevant to you
+
+                                                                        </p>
+                                                                        <a href="\" class="btn-success btn">Search Again</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
+                                                <div class="tab-pane fade" id="pop3" role="tabpanel" aria-labelledby="pop3-tab">
+                                                    <div class="pt-3"></div>
+                                                    @{if (Model != null && Model.Count() > 0 && Model.Where(x => x.EventCatg == 9).Count() > 0)
+                                                        {
+                                                            <div class="container">
+                                                                <h2 class="main-heading"><span>Plays</span> </h2>
+                                                                <div class="row">
+                                                                    @foreach (var item in Model.Where(x => x.EventCatg == 9))
+                                                                    {
+                                                                        if (item.Price != null && item.Price.Count > 0)
+                                                                        {
+                                                                            decimal? price = item.Price.OrderByDescending(a => a.Price).Select(a => a.Price).FirstOrDefault();
+                                                                            string imageurl = "";// item.Images != null && item.Images.Where(a => a.mainpic == true).FirstOrDefault() !=null? item.Images.FirstOrDefault().Url : "/images/img3.jpg";
+                                                                            if (item.Images.FirstOrDefault(x => x.MulType == 1) != null)
+                                                                            {
+                                                                                if (item.Images.FirstOrDefault(s => s.mainpic == true) != null)
+                                                                                {
+                                                                                    imageurl = item.Images.FirstOrDefault(s => s.mainpic == true).Url.ToString();
+                                                                                    if (imageurl == null) { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+                                                                                }
+                                                                                else { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+                                                                            }
+                                                                            else { imageurl = "/images/img3.jpg"; }
+                                                                            string alt = Path.GetFileName(imageurl);
+
+                                                                            <div class="col-lg-4 col-sm-6 events-box">
+                                                                                <a href="@Url.Action("EventDetail", "Home", new { area = "", Id = item.Id })">
+                                                                                    <div class="">
+                                                                                        <figure style="height:180px"><img src="@imageurl" class="imgheight" alt="@alt"></figure>
+                                                                                        <div class="down-sec">
+                                                                                            
+                                                                                            
+                                                                                            <div class="bottom-sec">
+                                                                                                <a href="@Url.Action("EventDetail", "Home", new { area = "", Id = item.Id })" class="small-btn">Grab your ticket</a>
+                                                                                                @*<strong><span>@item.Currency</span>@price</strong>*@
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                        }
+                                                                    }
+                                                                </div>
+                                                                <div class="bottom-btn text-center"><a href="@Url.Action("EventsSearchResult", "Home", new { eventtype = 6 })" style="margin-bottom:20px" class="benn-btn" value="">See All</a></div>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="row" style="min-height:400px;margin-top:100px; margin:auto; ">
+                                                                <div class="col-md-12">
+                                                                    <div class="sorry">
+                                                                        <h1><img src="~/images/sorry.jpg" class="img-responsive" style="display:inline-block" /></h1>
+                                                                        <h2>We Are Sorry !</h2>
+                                                                        <p>
+                                                                            We did Not find Any Event for Your search<br />
+                                                                            Choose a different filter to view Event results relevant to you
+
+                                                                        </p>
+                                                                        <a href="\" class="btn-success btn">Search Again</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+
+            <section class="popular-events" id="sectionallevents" style="background: #fff;"></section>
+            @section scripts {
+                @*<script src="~/fontawesome/js/fontawesome.js"></script>
+                    <script src="~/js/jquery.js"></script>
+                    <script src="~/js/bootstrap.min.js"></script>*@
+                <!-- <script src="js/flickity.pkgd.js"></script> -->
+                @*<script src="~/js/custom.js"></script>*@
+                @*<script src="http://zamazing.co.za/assets/frontend/js/parallax.js"></script>
+                    <script src="http://zamazing.co.za/assets/frontend/js/parallax.min.js"></script>*@
+                <script src="~/Areas/js/owl.carousel.js"></script>
+                <script type="text/javascript">
+        $("#crtaevent").click(function () {
+            debugger;
+            var comp = '@ManageSession.CompanySession';
+            var user = '@ManageSession.UserSession';
+            if (comp !="") {
+                window.location.replace("/Organizer/Organizer/CreateEvent");
+            }
+            else if (user != "") {
+                window.location.replace("/User/User/CreateEvent");
+            }
+        });
+                    $(document).ready(function () {                        
+                        @*$("#eevents").load('@Url.Action("LiveEvents", "Home", new { skip = 0, take=0, catg=7})'.replace("&amp;", "&"));
+            $("#eevents1").load('@Url.Action("LiveEvents", "Home", new { skip = 0, take=0, catg=8 })'.replace("&amp;", "&"));
+            $("#eevents2").load('@Url.Action("LiveEvents", "Home", new { skip = 0, take=10, catg=9 })'.replace("&amp;", "&"));*@
+                        $("#menu li").removeClass("active");
+                        $("#mStreams").addClass("active");
+        })
+
+
+                </script>
+                <script>
+                   
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            responsive: {
+
+                0: {
+
+                    items: 1
+                },
+                600: {
+
+                    items: 2
+                },
+                1000: {
+
+                    items: 3
+                }
+            }
+        })
+                </script>
+
+                <script src="~/js/Parallax.js"></script>
+                <script>
+        window.fbAsyncInit = function () {
+                xfbml: true,
+                version: 'v5.0'
+            });
+            FB.AppEvents.logPageView();
+            FB.init({
+                appId: '656707228147010',
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+                </script>
+
+            }
+        </div>
+    </div>
+</div>

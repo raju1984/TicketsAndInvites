@@ -1,0 +1,271 @@
+﻿@using EventManager1.Models
+@{
+    ViewBag.Title = "Summery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <style>
+        .card {
+            background: #000;
+            border-color: #313131;
+            border-bottom: 1px solid #313131 !important;
+        }
+
+        p.alertify-message {
+            color: #000;
+        }
+
+        .text-center {
+            text-align: center !important;
+            padding: 0 20px;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: .5rem;
+            color: #f00;
+            font-size: 16px;
+        }
+
+        .card-header {
+            border-bottom-color: #313131;
+            color: #fff;
+        }
+
+        .btn-payment {
+            margin-left: 40px;
+            margin-top: 10px;
+        }
+
+        .smal-btn {
+            border: #fff solid 1px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .smal-btn2 {
+            border: #fff solid 2px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .card-body h4, h6, p {
+            color: #fff;
+        }
+
+        .bold-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff !important;
+        }
+
+        .card a:hover {
+            color: #fb0000 !important;
+        }
+        /*.smal-btn:hover {
+            background: #fb0000 !important;
+            color: #fff !important;
+            border: none;
+        }*/
+        .minheight {
+            min-height: 300px;
+        }
+
+        .tab-content > .active {
+            display: block;
+            margin-top: 100px;
+            text-align: center;
+            margin-left: 0px;
+        }
+
+        .form-control {
+            height: 35px;
+            padding-left: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px !important;
+        }
+
+        b {
+            font-weight: bolder;
+            font-size: 21px;
+        }
+
+        .list-group {
+            flex-direction: row;
+        }
+
+        .form-check-label {
+            margin-bottom: 0;
+            font-size: 16px;
+        }
+
+
+        .mt-5, .my-5 {
+            margin-top: 7rem !important;
+        }
+
+        .list-group-item-action {
+            width: auto;
+        }
+    </style>
+}
+@{
+    <div class="container-fluid bgContainer">
+        <div class="row ">
+            <div class="container">
+                <div class="row mt-5 " style="text-align:center">
+
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 bg-white pt-3">
+                        <div class="card borderonTicket">
+                            <input type="hidden" id="offerid" />
+                            <div class="arc top-12 right-12"></div>
+                            <div class="arc top-12 left-12"></div>
+                            <div class="arc bottom-12 right-12"></div>
+                            <div class="arc bottom-12 left-12"></div>
+                            <img src="aa"
+                                 class="card-img-top" alt="...">
+                            <div class="card-body text-center">
+                               
+                                <div class="pc" style="display:none">
+                                    <div class="borderOnLight" style="padding: 10px 0;">
+                                        <h4>Payment Confirmation</h4>
+
+                                    </div>
+
+                                    <p style="background: #333; color: #fff;  padding: 15px 20px;  min-height: 200px; margin: 20px 0; font-size: 16px;border-radius:10px;} ">
+                                        <span style="color:#f00;font-weight:600;display:block;margin-bottom: 20px;">We have been advised that your payment wasn't successful.</span>
+                                        You may click on the confirm button again if you have been debited, We will check again.
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <button type="button" class="btn btn-danger" style="background: #fb0000 !important;padding: 5px 30px; color: #fff !important;">Confirm</button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button type="button" class="btn btn-warning" style="padding: 5px 30px;">Cancel</button>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts
+{
+        <script>
+
+        $(document).ready(function () {
+            LoadAllTicket(Id, type);
+        });
+
+        $('#applycoupan').click(function () {
+            debugger;
+                var coupan = $('#Coupancode').val();
+                var total = $('#lbltotal').text();
+                var offeri = $("#offerid").val();
+                if (offeri == '' || offeri == null) {
+        $.ajax({
+                type: 'POST',
+                url: '@Url.Action("checkOffers", "Payment")',
+                data: '{coupan: ' + JSON.stringify(coupan) +'}', //{ model: logindata, returnUrl: returnUrl },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resp) {
+                    debugger;
+                    var discount;
+                    var totalamount;
+                    if (resp != null) {
+                        if (resp[0].Offertype == 1) {
+                            discount = total * resp[0].discount / 100;
+                            totalamount = total - discount;
+                        }
+                        else if (resp[0].Offertype == 2) { discount = resp[0].discount; totalamount = total - resp[0].discount; }
+                        $("#lbltotal").text(totalamount.toFixed(2));
+                        $("#discount").text(discount.toFixed(2));
+                        $("#offerid").val(resp[0].Id);
+                    if (totalamount == 0) {
+                        $("#fpay").css("display", "none");
+                        $("#fdiscount").css("display", "block");
+                        }
+                    }
+                    else { alertify.alert("Invalid Coupan");}
+
+                },
+                error: function (error) {
+
+                    alertify.alert("Invalid Coupan");
+                }
+                    });
+                }
+            });
+        $('input:radio[name=sex]:checked').val();
+        function isValidEmailAddress(emailAddress) {
+        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        return pattern.test(emailAddress);
+            };
+
+        $('#walletPayy').click(function () {
+        debugger;
+            var EventId = "@(Request.QueryString["EventId"])";
+            var walletno = $("#walletnumber").val();
+           // var uuid = $("#UUID").val();
+            //var logindata = JSON.stringify(loginmodel)
+        $.ajax({
+                type: 'POST',
+            url: '@Url.Action("summeryPay", "Payment")',
+            data: '{eventId: ' + JSON.stringify(EventId) + ', Mob: ' + JSON.stringify(walletno) +'}', //{ model: logindata, returnUrl: returnUrl },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resp) {
+                    debugger;
+                    if (resp.result.Code == 200) {
+
+                        location.reload();
+                    }
+                    else { alert(resp.result.Msg);}
+
+                },
+                error: function (error) {
+
+                    alert(error);
+                }
+            });
+            });
+            function LoadAllTicket(Id, type) {
+
+                debugger;
+                if (user == '') {
+                    //window.location.replace("/Account/Login?returnUrl=" + Id);
+                    $('#InfoModal').modal('show');
+                    //$('#LoginPopups').modal('show');
+                }
+                else {
+                    $.ajax({
+                        url: '/Home/GetTickett?EventId=' + Id ,
+                        contentType: 'application/html; charset=utf-8',
+                        type: 'GET',
+                        dataType: 'html',
+                        success: function (result) {
+
+                            $('#ticketdiv').html(result);
+                            $('#bookTickets').modal('show');
+                        },
+                        error: function (xhr, status) {
+                            alert(status);
+                        }
+                    })
+                }
+            }
+
+        </script>}
+}
+

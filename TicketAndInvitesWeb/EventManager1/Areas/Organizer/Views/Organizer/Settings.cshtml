@@ -1,0 +1,109 @@
+﻿@using EventManager1.Models;
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+    <style>
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            .content-wrapper {
+                background: #f2edf3;
+                padding: 1.75rem 1.25rem !important;
+            }
+
+            .card .card-body {
+                padding: 20px;
+            }
+
+            .col-md-3.borderOnPadding0 {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-home"></i>
+            </span>
+            My Account
+        </h3>
+        <!-- <nav aria-label="breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <span></span>Overview
+              <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+            </li>
+          </ul>
+        </nav> -->
+    </div>
+    <div class="row">
+        <div class="col-md-3 borderOnPadding0">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-Settings-list" data-toggle="list"
+                   href="#list-Settings" role="tab" aria-controls="Settings">
+                    Personal
+                    Settings
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-Security-list" data-toggle="list"
+                   href="#list-Security" role="tab" aria-controls="Security">Security</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-Settings" role="tabpanel"
+                     aria-labelledby="list-Settings-list">
+                    <h3>Personal settings</h3>
+                    @using (Html.BeginForm("Settings", "Organizer", FormMethod.Post))
+                    {
+
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Email address</label>
+                            <input type="email" class="form-control" required value="@ManageSession.CompanySession.EmailId" id="txtemail" name="txtemail"
+                                   placeholder="@ManageSession.CompanySession.EmailId">
+                        </div>
+                        <div class="form-group">
+                            <label for="">CompanyName</label>
+                            <input type="text" class="form-control" id="txtname" required name="txtname" value="@ManageSession.CompanySession.CompName" placeholder="@ManageSession.CompanySession.CompName">
+                        </div>
+                        <button type="submit" class="btn btn-gradient-primary btn-rounded btn-fw">Update settings</button>
+                    }
+                </div>
+                <div class="tab-pane fade" id="list-Security" role="tabpanel" aria-labelledby="list-Security-list">
+                    <h3>Security</h3>
+                    @using (Html.BeginForm("Security", "Organizer", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            <label for="">Current password</label>
+                            <input type="password" class="form-control" required name="txtcurretpassword" id="txtcurretpassword" placeholder="*******">
+                        </div>
+                        <div class="form-group">
+                            <label for="">New password</label>
+                            <input type="password" class="form-control" required name="txtnewpassword" id="txtnewpassword" placeholder="*******">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Confirm password</label>
+                            <input type="password" class="form-control" required name="txtconffirmpassword" id="txtconffirmpassword" placeholder="*******">
+                        </div>
+                        <button type="submit" class="btn btn-gradient-primary btn-rounded btn-fw">Change password</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+
+    if (ViewData["Error"] != null)
+    {
+        var error = ViewData["Error"] as ApiResponse;
+        if (error != null && error.Code != (int)ApiResponseCode.ok)
+        {
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    alertify.alert("@error.Msg");
+                })
+            </script>
+        }
+    }
+}

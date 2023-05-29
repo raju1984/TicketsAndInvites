@@ -1,0 +1,41 @@
+﻿
+@model EventManager1.Models.ModelInviation
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello @Model.NameTosend,</p>
+        <p>
+            We are excited you are attending @Model.EventName scheduled for @Convert.ToDateTime(@Model.EventDate).ToString("dd/MM/yyyy hh:mmtt") @if (Model.eventType == 0) { <span>at @Model.Address</span> }
+        </p>
+        <br>
+        @if(Model.eventType !=2 || Model.eventType != 1) {
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=@Model.Address" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your <b>@Model.TicketName ticket</b>event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="@Model.TickeUrl" alt="image" style="width:150px;padding-left:30%">  </p><br /><br /> }
+        <img src="@Model.Image" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            @Model.RsvpName <br>
+            <span>@Model.Contact</span>
+        </p>
+        @*@if (Model.qty != null)
+        {<p>
+                Total Seats :  @Model.qty
+            </p>}
+        @if (Model.Gate != null)
+        {
+            <p>
+                Gate No :  @Model.Gate
+            </p>}*@
+        
+        @*<a href="@Model.downloadUrl" type="button" style="background-color:darkgreen;padding:5px; color:#fff; text-decoration: none">Download Ticket</a>*@
+        
+    </div>
+</body>
+</html>

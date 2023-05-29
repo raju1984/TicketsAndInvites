@@ -1,0 +1,109 @@
+﻿@model  IEnumerable<EventManager1.Areas.Organizer.Models.CouponModel>
+<div class="modal fade bd-example-modal-lg" id="Offers" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalTitle">
+                    Coupon List
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Coupon Code</th>
+                                                        <th>Mobile/Email</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (Model != null && Model.Count() > 0)
+                                                    {
+                                                        foreach (var item in Model)
+                                                        {
+                                                            <tr>
+                                                                <td style="max-width:200px">@item.CoupanCode</td>
+                                                                @if (@item.Mobile != null)
+                                                                {
+                                                                    <td> @item.Mobile</td>}
+                                                                else
+                                                                {
+                                                                    <td>
+                                                                        <input type="text" id="@item.CoupanCode"  placeholder="Country Code" value="233" style="width:60px;" />
+                                                                        <input type="text" id="@item.Id"  placeholder="Email/Mobile" />
+                                                                    </td>
+                                                                }
+
+                                                                <td>
+                                                                    <a href="#" onclick="SendCoupantouser('@item.CoupanCode','@item.Id')">
+                                                                        <i class="mdi mdi mdi-floppy icon-md"></i>
+                                                                    </a> &nbsp;
+                                                                    @*<a href="#" onclick="DeleteOffers('@item.Id')">
+                                                                            <i class="mdi mdi-delete icon-md"></i>
+                                                                        </a>*@
+                                                                </td>
+                                                            </tr>
+                                                        }
+
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark btn-fw" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function SendCoupantouser(CoupanCode, Id) {
+        Loader(true);
+        var td = "#" + Id;
+        var mobile = $(td).val();
+        var countycodeid = "#" + CoupanCode;
+        var countycode = $(countycodeid).val();
+        $.ajax({
+            url: '/Organizer/EventPromation/SendCoupantouser',
+            type: "Post",
+            data: { CoupanCode: CoupanCode, mobile: mobile, Phone_CountryCode: countycode },
+            success: function (response) {
+                if (response.Code == 200) {
+                    //var td = "#" + Id;
+                    //$(td).remove();
+                    alertify.alert(response.Msg);
+                    Loader(false);
+                }
+                else {
+                    alertify.alert(response.Msg);
+                    Loader(false);
+                }
+
+            },
+            async: true,
+            error: function (response) {
+                alert(response);
+                Loader(false);
+            }
+        });
+    }
+
+</script>

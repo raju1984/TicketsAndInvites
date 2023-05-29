@@ -1,0 +1,35 @@
+﻿@model EventManager1.Models.ModelInviation
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div style="padding: 1% 5%; width:400px">
+        <p>Hello @Model.NameTosend,</p>
+        <p>
+            This is to invite you to my private event @Model.EventName  scheduled for @Convert.ToDateTime(@Model.EventDate).ToString("dd/MM/yyyy hh:mmtt") at @Model.Address.
+            </p><p>
+            Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=@Model.Address" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+    </p><br />
+   
+        <p>Kindly use the links below to confirm your attendance and an event pass will be delivered to you via your mobile number and email.</p>
+        <a target="_blank" href="@Model.BaseUrl/Promotion/SendTicket?EventTickeId=@Model.EventTickeId&Status=1" style="background-color:darkgreen;padding:5px; color:#fff; text-decoration: none">Confirm  </a> &nbsp; &nbsp;
+        <a target="_blank" href="@Model.BaseUrl/Promotion/SendTicket?EventTickeId=@Model.EventTickeId&Status=2" style="background-color:#b79e0f;padding:5px; color:#fff;text-decoration: none">Tentative  </a> &nbsp; &nbsp;
+        <a target="_blank" href="@Model.BaseUrl/Promotion/SendTicket?EventTickeId=@Model.EventTickeId&Status=3" style=" background-color:#ba1a1a;padding:5px; color:#fff;text-decoration: none">Sorry Cant make it</a>
+        <br />    <br />
+        <a href="#" class="mt-3">
+            <img src="@Model.Image" class="card-img-top" width="100%">
+        </a>
+        <h4 >
+            @Model.EventName
+        </h4>
+        @*<p ></p>
+        <p >Venue : @Model.Venuename
+        <p>Address : <br /><a href="https://www.google.com/maps?saddr=My+Location&daddr=@Model.Address" target="_blank" style="font-weight:bold">@Model.Address</a></p>*@
+        
+        <p >
+            <span >For more information contact on</span> <br>
+            @Model.RsvpName <br>
+            <span>@Model.Contact</span>
+        </p>
+    </div>
+</body>
+</html>

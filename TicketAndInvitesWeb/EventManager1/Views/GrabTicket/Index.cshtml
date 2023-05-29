@@ -1,0 +1,612 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@using EventManager1.Models
+@model TicketModelPopup
+@{
+
+    <style>
+        .bg-responsive {
+            background-color: #fff !important;
+        }
+
+        @@media (min-width: 320px) and (max-width: 480px) {
+            .card {
+                min-height: auto !important;
+                padding: 0 10px;
+            }
+
+            .bg-responsive {
+                background-color: transparent !important;
+            }
+
+            .col-md-8.nn {
+                margin: 5px 0 !important;
+            }
+
+            .cover-image {
+                max-height: 250px !important;
+            }
+
+            .cover-image-reponsive {
+                max-height: 200px !important;
+            }
+
+            .arc {
+                display: none !important;
+            }
+
+            .bgLight {
+                background: #383636;
+                color: #fff;
+                position: absolute !important;
+                bottom: 0;
+                width: 100%;
+            }
+
+            div#divMobile {
+                margin-top: 0px !important;
+            }
+        }
+
+        .bgLight {
+            background: #383636;
+            color: #fff;
+            position: relative !important;
+            bottom: 0;
+            width: 100%;
+        }
+
+        html {
+            height: 100%;
+            background: #000;
+        }
+
+        .card {
+            background: #000;
+            border-color: #313131;
+            border-bottom: 1px solid #313131 !important;
+        }
+
+        p.alertify-message {
+            color: #000;
+        }
+
+        .text-center {
+            text-align: center !important;
+            padding: 0 20px;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: .5rem;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .card-header {
+            border-bottom-color: #313131;
+            color: #fff;
+        }
+
+        .btn-payment {
+            margin-left: 40px;
+            margin-top: 10px;
+        }
+
+        .smal-btn {
+            border: #fff solid 1px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .smal-btn2 {
+            border: #fff solid 2px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .card-body h4, h6, p {
+            color: #fff;
+        }
+
+        .bold-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff !important;
+        }
+
+        .card a:hover {
+            color: #f48534 !important;
+        }
+        /*.smal-btn:hover {
+            background: #fb0000 !important;
+            color: #fff !important;
+            border: none;
+        }*/
+        .minheight {
+            min-height: 300px;
+        }
+
+        .tab-content > .active {
+            display: block;
+            margin-top: 100px;
+            text-align: center;
+            margin-left: 0px;
+        }
+
+        .form-control {
+            height: 35px;
+            padding-left: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px !important;
+        }
+
+        b {
+            font-weight: bolder;
+            font-size: 21px;
+        }
+
+        .list-group {
+            flex-direction: row;
+        }
+
+        .form-check-label {
+            margin-bottom: 0;
+            font-size: 16px;
+        }
+
+
+        .mt-5, .my-5 {
+            margin-top: 7rem !important;
+        }
+
+        .list-group-item-action {
+            width: auto;
+        }
+    </style>
+    <link rel="stylesheet" href="~/css/intlInputPhone.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+}
+@{
+    //LoginphoneModel lm = new LoginphoneModel();
+    <div class="container-fluid bgContainer">
+        <div class="row ">
+            <div id="Logindiv" style="display:block;width: 100%;">
+                <div class="row mt-5 " style="text-align:center;">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 bg-responsive pt-3">
+                        <div class="card borderonTicket">
+                            <input type="hidden" id="offerid" />
+                            <div class="arc top-12 right-12"></div>
+                            <div class="arc top-12 left-12"></div>
+                            <div class="arc bottom-12 right-12"></div>
+                            <div class="arc bottom-12 left-12"></div>
+                            @if (ViewBag.Live != null)
+                            {
+                                <img src="@Model.CoverImage" style="max-height:200px" class="cover-image" alt="...">
+                            }
+                            else
+                            {
+                                <img src="@Model.CoverImage" style="max-height:190px" class="cover-image-reponsive" alt="...">
+                            }
+
+                            <div class="card-body text-justify" style="background-color: #000;">
+                                @if (ViewBag.Live != null)
+                                {
+                                    <div class="login">
+                                        <h4 style="text-align:center; font-weight:bold;margin-top:10px">
+                                            We need to verify your email address since your streaming access will be sent via email. Please enter your email address below and click next.<br />
+                                        </h4>
+                                        <br />
+                                        @Html.HiddenFor(x => x.loginpopup.Phone_CountryCode, new { Value = "233" })
+                                        <div id="divMobile" class="form-group" style="margin-top:15px">
+
+                                            <div class="col-md-12" style="padding:0">
+                                                <span class="flag gh btn-flag"> <label for="email">Email Address:</label> </span> @Html.TextBoxFor(m => m.loginpopup.EmailId, new { @class = "form-control form-control-lg", placeholder = "Email Address", type = "Email" })
+                                            </div>
+                                            <div class="col-md-12" style="text-align:center">
+                                                <button type="button" id="btnSignIn" class="btn btn-danger" style="background: #f48534 !important;text-align:center;padding:5px 25px;  margin:10px auto; color: #fff !important;">Next</button>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="login">
+                                        <h4 style="text-align:center; font-weight:bold;margin-top:10px">
+                                            <br /><br />
+                                        </h4>
+                                        <br />
+                                        @Html.HiddenFor(x => x.loginpopup.Phone_CountryCode, new { Value = "233" })
+                                        <div id="divMobile" class="form-group" style="margin-top:20px">
+                                            <label for="email">Mobile Number:</label>
+
+                                            <div id="divMobile" class="row">
+                                                <div class="col-md-4 cc ">
+                                                    <div class="input-phone"></div>
+                                                </div>
+                                                <div class="col-md-8 nn">
+                                                    @Html.TextBoxFor(m => m.loginpopup.Phone, new { @class = "form-control form-control-lg", placeholder = "Mobile No", maxlength = 10 })
+                                                    <br />
+                                                    <label for="email">OR </label> <br />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding:0">
+                                                <span class="flag gh btn-flag"> <label for="email">Email Address:</label> </span> @Html.TextBoxFor(m => m.loginpopup.EmailId, new { @class = "form-control form-control-lg", placeholder = "Email Address", type = "Email" })
+                                            </div>
+                                            <div class="col-md-12" style="text-align:center">
+                                                <button type="button" id="btnSignIn" class="btn btn-danger" style="background: #f48534 !important;text-align:center;padding:5px 25px;  margin:10px auto; color: #fff !important;">Next</button>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="OTPdiv" style="display:none ;width: 100%;">
+
+                <div class="row mt-5 " style="text-align:center">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 bg-white pt-3">
+                        <div class="card borderonTicket">
+                            <input type="hidden" id="offerid" />
+                            <div class="arc top-12 right-12"></div>
+                            <div class="arc top-12 left-12"></div>
+                            <div class="arc bottom-12 right-12"></div>
+                            <div class="arc bottom-12 left-12"></div>
+                            <img src="@Model.CoverImage" style="max-height:150px" class="" alt="...">
+                            <div class="card-body text-justify" style="background-color: #000;">
+                                <div class="card-body " style="background-color: #000;">
+
+                                    <input type="hidden" value="@ViewBag.returnUrl" name="returnUrl" />
+                                    <div class="otp">
+                                        <h4 class="text-center">Verify OTP </h4>
+                                        <br />
+                                        @if (ViewBag.Phone != null)
+                                        {
+                                            <span style="color:white">Enter Confirmation code sent to your contact below :</span> <br /><span style="color:white">+</span><span style="color:white">@ViewBag.Code</span> <span style="color:white">@ViewBag.Phone</span>
+
+                                        }
+                                        else if (ViewBag.Email != null)
+                                        {
+                                            <span style="color:white">Enter Confirmation code sent to your contact below :</span> <br /><span style="color:white">@ViewBag.Email</span>
+                                        }
+                                        <br />
+                                        <br />
+                                        <div class="form-group">
+                                            @*<label for="exampleInput">Enter Confirmation code sent to your phone</label>*@
+                                            <input type="text" class="form-control" id="OTP" name="OTP" placeholder="Confirmation Code" required>
+                                        </div>
+
+                                        <button type="button" id="confirmbtn" style="width: 100%;" class="btn btn-danger rbutton">Confirm</button>
+
+                                    </div>
+
+
+                                    @if (ViewBag.Live != null)
+                                    {
+                                        var query = ViewBag.Ticket != null ? ViewBag.Ticket : 0;
+                                        <a href="@Url.Action("Index","GrabTicket",new {tid=Convert.ToInt32(query) })" style="position:relative;top:10px;width: 100%;" id="btnAnotherNumber" class="btn btn-warning rbutton">Use Another Email ID</a>
+
+                                        <br />
+
+                                    }
+                                    else
+                                    {
+                                        var query = ViewBag.Ticket != null ? ViewBag.Ticket : 0;
+                                        <a href="@Url.Action("Index","GrabTicket",new {tid=Convert.ToInt32(query) })" style="position:relative;top:10px;width: 100%;" id="btnAnotherNumber" class="btn btn-warning rbutton">Use Another Mobile Number or Email ID</a>
+
+                                        <br />
+
+                                    }
+
+                                </div>
+
+                                <p style="word-wrap:break-word;font-size:12px;padding:20px;">Your verification code has been delivered to <strong id="Vemail"></strong>. Check your inbox or spam incase it’s not delivered to inbox.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ticketdiv" style="display:none;width: 100%;">
+
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="~/js/intlInputPhone.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+    <link href="~/css/alertify.core.css" rel="stylesheet" />
+    <link href="~/css/alertify.default.css" rel="stylesheet" />
+    <script>
+        $('.input-phone').intlInputPhone();
+        $('#phoneNumber').val('0509336844');
+        $('#phoneNumber').css("display", "none");
+        $("#phoneNumber").remove();
+        var session = '@ViewBag.usersession';
+            var redirectURL = '@Request.QueryString["p"]';
+            var tid = '@Request.QueryString["tid"]';
+            var page= ''
+        if (session != '') {
+
+            $.ajax({
+                type: 'POST',
+                url: '/GrabTicket/GetticketURL',
+                data: '{tid: ' + JSON.stringify(tid) + '}',// JSON.stringify(model),// { model: model },//   //
+                contentType: "application/json; charset=utf-8", dataType: "json",
+                success: function (resp) {
+                    debugger;
+                    if (resp != '' && resp != '/user/user/dashboard') {
+                        window.location.href = resp;
+                    }
+                    else {
+
+                    }
+                },
+                error: function (error) {
+                    debugger
+                    // alertify.alert(error);
+                },
+            });
+            loadSummary();
+            }
+            else {
+                $('#ticketdiv').css("display", "none");
+                $('#OTPdiv').css("display", "none");
+                $('#Logindiv').css("display", "block");
+        }
+        function loadSummary() {
+                debugger
+                var Id = '@Request.QueryString["tid"]';
+                $.ajax({
+                    url: '/GrabTicket/GetSummary?tid=' + parseInt(Id),//+ '&Name=' + type,
+                    contentType: 'application/html; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html',
+                    success: function (result) {
+                        $('#ticketdiv').html(result);
+                        $('#ticketdiv').css("display", "block");
+                        $('#OTPdiv').css("display", "none");
+                        $('#Logindiv').css("display", "none");
+                    },
+                    error: function (xhr, status) {
+                       // alert(status);
+                    }
+                })
+            }
+        $(document).ready(function () {
+            debugger
+
+            $('#btnSignIn').click(function () {
+                debugger
+                // btn-cc
+                var phone = $('#loginpopup_Phone').length > 0 ? $('#loginpopup_Phone').val() : "";
+                var email = $('#loginpopup_EmailId').val();
+                var CountryCode = $('#loginpopup_Phone_CountryCode').val()
+                var pCountryCode = jQuery.trim($('.btn-cc').text());
+                if (phone != "" || email != "") {
+                    if (phone != "") {
+                        if (CountryCode == 233 && phone.length < 10) {
+                            alertify.alert('Your country code is 233, Please enter 10 digit mobile number');
+                            return false;
+                        }
+                        else if (phone.length < 9) {
+                            alertify.alert('Mobile number should not be less than 9 digit');
+                            return false;
+                        }
+                        else {
+                            debugger;
+                            if (email != "") {
+                                $('#Vemail').html(email);
+                            }
+                            var model = {};
+                            model.CountryId = CountryCode;
+                            model.Phone = phone; model.EmailId = email;
+
+                            $.ajax({
+                                type: 'POST',
+                                url: '/Account/Userloginpop',
+                                data: '{models: ' + JSON.stringify(model) + '}',// JSON.stringify(model),// { model: model },//   //
+                                contentType: "application/json; charset=utf-8", dataType: "json",
+                                success: function (resp) {
+                                    debugger;
+                                    if (resp) {
+                                        $('#ticketdiv').css("display", "none");
+                                        $('#OTPdiv').css("display", "Block");
+                                        $('#Logindiv').css("display", "none");
+                                    }
+                                    else {
+                                        alertify.alert('Your are already registered with us..');
+                                    }
+                                },
+                                error: function (error) {
+                                    debugger
+                                    alertify.alert(error);
+                                },
+                            })
+                        }
+                    }
+                    else {
+                        if (email != "") {
+                            $('#Vemail').html(email);
+                        }
+                        var model = {};
+                        model.CountryId = CountryCode;
+                        model.Phone = phone; model.EmailId = email;
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '/Account/Userloginpop',
+                            data: '{models: ' + JSON.stringify(model) + '}',// JSON.stringify(model),// { model: model },//   //
+                            contentType: "application/json; charset=utf-8", dataType: "json",
+                            success: function (resp) {
+                                debugger;
+                                if (resp) {
+                                    $('#ticketdiv').css("display", "none");
+                                    $('#OTPdiv').css("display", "Block");
+                                    $('#Logindiv').css("display", "none");
+                                }
+                                else {
+                                    alertify.alert('Please user another email..');
+                                }
+                            },
+                            error: function (error) {
+                                debugger
+                                alertify.alert(error);
+                            },
+                        })
+                    }
+                }
+                else {
+
+                    alertify.alert('Please enter mobile number or email id.');
+                    return false;
+                }
+            })
+            $('#confirmbtn').click(function () {
+                var redirectURL = '@Request.QueryString["p"]';
+                var tid = '@Request.QueryString["tid"]';
+                debugger
+                // btn-cc
+                var OTP = $('#OTP').val();
+
+                if (OTP != "") {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Account/VerifyOTPpop',
+                        data: '{OTP: ' + JSON.stringify(OTP) + '}',// JSON.stringify(model),// { model: model },//   //
+                        contentType: "application/json; charset=utf-8", dataType: "json",
+                        success: function (resp) {
+                            debugger;
+                            if (resp) {
+                                if (resp.Code == 200) {
+                                    if (tid != '') {
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: '/GrabTicket/GetticketURL',
+                                            data: '{tid: ' + JSON.stringify(tid) + '}',// JSON.stringify(model),// { model: model },//   //
+                                            contentType: "application/json; charset=utf-8", dataType: "json",
+                                            success: function (resp) {
+                                                debugger;
+                                                if (resp != '' && resp != '/user/user/dashboard') {
+                                                    window.location.href = resp;
+                                                }
+                                                else {
+
+                                                }
+                                            },
+                                            error: function (error) {
+                                                debugger
+                                                // alertify.alert(error);
+                                            },
+                                        })
+                                        loadSummary();
+                                        $('#ticketdiv').css("display", "block");
+                                        $('#OTPdiv').css("display", "none");
+                                        $('#Logindiv').css("display", "none");
+                                    }
+                                    else {
+                                        window.location.href = "/";
+                                    }
+                                }
+                                else {
+                                    $('#ticketdiv').css("display", "none");
+                                    $('#OTPdiv').css("display", "block");
+                                    $('#Logindiv').css("display", "none");
+                                    alert(resp.Msg);
+                                }
+
+                            }
+                        },
+                        error: function (error) {
+                            debugger
+                            //alertify.alert(error);
+                        },
+                    })
+
+                }
+
+                else {
+
+                    alertify.alert('Please enter mobile number or email id.');
+                    return false;
+                }
+            })
+            $('#btnAnotherNumber').click(function () {
+
+                $('#ticketdiv').css("display", "none");
+                $('#OTPdiv').css("display", "none");
+                $('#loginpopup_EmailId').val("");
+                $('#Logindiv').css("display", "block");
+            })
+
+            //$('.input-phone').intlInputPhone();
+            $('.country').click(function () {
+                debugger
+                var cobt = $(this).text();
+                var res = cobt.split("+");
+                var country = res[0];
+                var v;
+                $("#CountryId option").each(function () {
+                    $(this).removeAttr("selected");
+                });
+                $("#CountryId option:contains(" + country + ")").each(function () {
+                    if ($(this).text() == country) {
+                        v = $(this).val();
+                        $(this).attr("selected", "selected");
+                    }
+                });
+                $('#Phone_CountryCode').val(res[1]);
+                //var cval = $("#CountryId option:contains(" + country + ")").val();
+                $('#CountryId').val(v);
+            });
+
+            // function disablePrev() { window.history.forward() }
+            // window.onload = disablePrev();
+            function loadSummary() {
+                debugger
+                var Id = '@Request.QueryString["tid"]';
+                $.ajax({
+                    url: '/GrabTicket/GetSummary?tid=' + parseInt(Id),//+ '&Name=' + type,
+                    contentType: 'application/html; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html',
+                    success: function (result) {
+                        $('#ticketdiv').html(result);
+                        $('#ticketdiv').css("display", "block");
+                        $('#OTPdiv').css("display", "none");
+                        $('#Logindiv').css("display", "none");
+                    },
+                    error: function (xhr, status) {
+                       // alert(status);
+                    }
+                })
+            }
+
+        });
+
+
+    </script>
+}
+
+
+
+
+

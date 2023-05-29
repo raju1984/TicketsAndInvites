@@ -1,0 +1,602 @@
+﻿@model EventManager1.DBCon.BannerTimer
+@{
+    ViewBag.Title = "BannerTimer";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+}
+<link href="~/DatePicker/jquery-timepicker-24-hour-format/dist/wickedpicker.min.css" rel="stylesheet" />
+<link href="~/DatePicker/css/ui-lightness/jquery-ui-1.8.19.custom.css" rel="stylesheet" />
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css" />
+<style type="text/css">
+    @@media all and (min-width: 320px) and (max-width: 480px) {
+        .content-wrapper {
+            background: #f2edf3;
+            padding: 2.75rem 1.25rem;
+        }
+
+        input#add {
+            width: 100% !important;
+        }
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+
+    .tag {
+        top: 0px !important;
+        right: 20px !important;
+        opacity: 0.7;
+        cursor: pointer;
+    }
+
+    .sidebar-offcanvas {
+        height: auto !important;
+    }
+
+    #map {
+        width: 100%;
+        height: 450px;
+    }
+
+    .card .card-body {
+        padding-bottom: 0.5rem;
+    }
+
+    .form-control {
+        padding: 0.275rem 1.175rem !important;
+    }
+
+    .btn {
+        padding: 0.585rem 1.0rem;
+        /*background-color: transparent;*/
+    }
+
+    .error {
+        color: red;
+        visibility: hidden;
+    }
+
+    .imgbox {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 10px;
+    }
+</style>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #f1f1f1;
+    }
+
+    #regForm {
+        background-color: #ffffff;
+        margin: 0px auto;
+        font-family: Raleway;
+        padding: 40px;
+        width: 100%;
+        min-width: 300px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    input {
+        padding: 10px;
+        width: 100%;
+        font-size: 17px;
+        font-family: Raleway;
+        border: 1px solid #aaaaaa;
+    }
+
+        /* Mark input boxes that gets an error on validation: */
+        input.invalid {
+            border: 1px solid #e14949;
+            /*background-color: #fbb2b2;*/
+        }
+
+        input#add {
+            width: 15%;
+        }
+
+    /* Hide all steps by default: */
+    .tab {
+        display: none;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 17px;
+        font-family: Raleway;
+        cursor: pointer;
+    }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+    #prevBtn {
+        background-color: #bbbbbb;
+    }
+
+    /* Make circles that indicate the steps of the form: */
+    .step {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbbbbb;
+        border: none;
+        border-radius: 50%;
+        display: inline-block;
+        opacity: 0.5;
+    }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        /* Mark the steps that are finished and valid: */
+        .step.finish {
+            background-color: #4CAF50;
+        }
+
+    @@media screen and (min-width: 320px) and (max-width: 480px) {
+        input#StartDate {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input#EndDate {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input#NamerRSVP {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input.form-control.name {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input#FileUpload1 {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input#FileUpload2 {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        select#CountryId {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input#lat {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input#lng {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input#CityName {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input#AddressLine {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input#Venue {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+</style>
+
+<div class="content-wrapper">
+    <input type="hidden" id="hfzipcode" />
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-calendar-plus menu-icon"></i>
+            </span>
+            Create banner
+        </h3>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Upload Image</label>
+                                @if (Model.Id > 0)
+                                {
+                                    <input type="file" id="uploadImage" value="@Model.ImagePath" />
+                                }
+                                else
+                                {
+                                    <input type="file" id="uploadImage" />
+                                }
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Start Date</label>
+                                <input type="text" id="txtStartDate" value="@Model.StartDate" class="form-control" placeholder="Start Date" />
+                                <input type="hidden" id="dhnId" value="@Model.Id" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">End Date</label>
+                                <input type="text" id="txtEndDate" value="@Model.EndDate" class="form-control" placeholder="End Date" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Start Time</label>
+                                <input type="text" id="txtStartTime" value="@Model.StartTime" class="form-control" placeholder="Start Time" />
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">End Time</label>
+                                <input type="text" id="txtEndTime" value="@Model.EndTime" class="form-control" placeholder="End Time" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Enable Timer</label>
+                                @if (Model.Id > 0)
+                                {
+                                    <input type="checkbox" id="chkTimer" checked class="checkbox" />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" id="chkTimer" checked class="checkbox" />
+                                }
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Enable Image</label>
+                                @if (Model.Id > 0)
+                                {
+                                    <input type="checkbox" id="chkimg" checked class="checkbox" />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" id="chkimg" checked class="checkbox" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        @if (Model.Id > 0)
+                        {
+                            <input type="button" id="btnSave" class="btn btn-success" value="Update" />
+                        }
+                        else
+                        {
+                            <input type="button" id="btnSave" class="btn btn-success" value="Save" />
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <table class="table table-striped" id="tblEnterPrisesList">
+                        <thead style=" background #c598ff;">
+                            <tr>
+                                @*<th>Id</th>*@
+                                <th>Image</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Manage Timer</th>
+                                <th>Manage Image</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (ViewBag.BannerList != null)
+                            {
+                                foreach (var item in ViewBag.BannerList)
+                                {
+                                    <tr>
+                                        @*<td>@item.Id</td>*@
+                                        <td>
+                                            <a href="@item.ImagePath" target="_blank">
+                                                <img src="@item.ImagePath" class="img-fluid" style="width:40px;height:40px;" />
+                                            </a>
+                                        </td>
+                                        <td>@item.StartDate</td>
+                                        <td>@item.EndDate</td>
+                                        <td>@item.StartTime</td>
+                                        <td>@item.EndTime</td>
+                                        <td>
+                                            @if (item.IsTimeEnable == 0)
+                                            {
+                                                <input type="checkbox" id="tblchkTimer" chkTimerId="@item.Id" checked class="checkbox chktime" />
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" id="tblchkTimer" chkTimerId="@item.Id" class="checkbox chktime" />
+                                            }
+
+                                        </td>
+                                        <td>
+                                            @if (item.IsImageEnble == 0)
+                                            {
+                                                <input type="checkbox" id="tblchkimg" chkImgId="@item.Id" checked class="checkbox" />
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" id="tblchkimg" chkImgId="@item.Id" class="checkbox" />
+                                            }
+                                        </td>
+                                        <td>
+                                            <a href="/Organizer/Organizer/BannerTimer?Id=@item.Id" style="background: #f00;  color: #fff; padding: 10px;
+        border-radius: 10px;"><i class="far fa-edit"></i></a>
+                                        </td>
+                                        <td>
+                                            <a href="#" id="dlt" class="dlt" deleteId="@item.Id" style="background: #f00;  color: #fff; padding: 10px;
+        border-radius: 10px;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/DatePicker/js/jquery-1.7.2.min.js"></script>
+<script src="~/DatePicker/js/jquery-ui-1.8.19.custom.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@*<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>*@
+<script src="~/DatePicker/jquery-timepicker-24-hour-format/dist/wickedpicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $("#txtStartDate").datepicker();
+            $("#txtEndDate").datepicker();
+        });
+        var twelveHour = $('.timepicker-12-hr').wickedpicker();
+        $('.time').text('//JS Console: ' + twelveHour.wickedpicker('time'));
+        $('#txtStartTime').wickedpicker({ twentyFour: true });
+        $('#txtEndTime').wickedpicker({ twentyFour: true });
+        //$('.timepicker-12-hr-clearable').wickedpicker({ clearable: true });
+
+        $('#btnSave').click(function () {
+            debugger
+            var id = $('#dhnId').val();
+            var logo = $('#uploadImage').get(0).files;
+            var startDate = $('#txtStartDate').val();
+            var endDate = $('#txtEndDate').val();
+            var startTime = $('#txtStartTime').val();
+            var endTime = $('#txtEndTime').val();
+            var EnableTimer;
+            var EnableImg;
+            if ($('#chkTimer').prop("checked") == true) {
+                EnableTimer = 0;
+            }
+            else if ($('#chkTimer').prop("checked") == false) {
+                EnableTimer = 1;
+            }
+            if ($('#chkimg').prop("checked") == true) {
+                EnableImg = 0;
+            }
+            else if ($('#chkimg').prop("checked") == false) {
+                EnableImg = 1;
+            }
+            if (logo.length > 0 && startTime != "" && endTime != null) {
+                var fileData = new FormData();
+                fileData.append("Id", id);
+                fileData.append("Image", logo[0]);
+                fileData.append("StartDate", startDate);
+                fileData.append("EndDate", endDate);
+                fileData.append("StartTime", startTime);
+                fileData.append("EndTime", endTime);
+                fileData.append("IsTimeEnable", EnableTimer);
+                fileData.append("IsImageEnble", EnableImg);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveBannerbt", "Organizer", new { area = "Organizer" })',
+                    contentType: false,
+                    processData: false,
+                    data: fileData,
+                    dataType: "json",
+                    success: function (Message) {
+                        Loader(false);
+                        if (Message != null) {
+                            if (Message == "Update") {
+                                swal({
+                                    title: "Good job!",
+                                    text: "Update!",
+                                    icon: "Update",
+                                });
+                                window.location.href = '/Organizer/Organizer/BannerTimer';
+
+                            }
+                            if (Message == "Success") {
+                                swal({
+                                    title: "Good job!",
+                                    text: "Success!",
+                                    icon: "Success",
+                                });
+                                window.location.reload();
+                            }
+                            if (Message == "Image Formate") {
+                                swal({
+                                    title: "Good job!",
+                                    text: "Upload .jpg, .png , .gif, .jpeg Format Image!",
+                                    icon: "Success",
+                                });
+                                window.location.reload();
+                            }
+                        } else {
+                            swal({
+                                title: "Something went wrong!",
+                                text: "Something went wrong!",
+                                icon: "warning",
+                            });
+                        }
+                    },
+                    //failure: function(response) {
+                    //    alert(response.responseText);
+                    //},
+                    //error: function(response) {
+                    //    alert(response.responseText);
+                    //}
+                });
+            }
+            else {
+
+                swal({
+                    title: "Field Require!",
+                    text: "Field Require!",
+                    icon: "warning",
+                });
+                Loader(false);
+            }
+
+        })
+
+
+        $('.chktime').change(function () {
+            debugger
+            var EnableTmer;
+            if ($(this).prop("checked") == true) {
+                EnableTmer = 0;
+            }
+            else if ($(this).prop("checked") == false) {
+                EnableTmer = 1;
+            }
+            var id = $(this).attr('chkTimerId');
+            var Banner = {
+                Id: id,
+                EnableTimer: EnableTmer
+            };
+            if (id != null) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("EnableDisableBannerTimer", "Organizer", new { area = "Organizer" })',
+                    data: JSON.stringify(Banner),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    dataType: "json",
+                    success: function (Message) {
+                        Loader(false);
+                        if (Message != null) {
+                            if (Message == "Delete") {
+                                Loader(false);
+                                window.location.reload();
+                            }
+                        }
+
+
+                    },
+
+                });
+            }
+        })
+
+
+
+        $('.dlt').click(function () {
+            debugger
+            Loader(true);
+            var id = $('#dlt').attr('deleteId');
+            var Banner = {
+                Id: id,
+            };
+            if (id != null) {
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this banner !",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+ .then((willDelete) => {
+     if (willDelete) {
+         Loader(false);
+         $.ajax({
+             type: "POST",
+             url: '@Url.Action("DeleteBanner", "Organizer", new { area = "Organizer" })',
+             data: JSON.stringify(Banner),
+             contentType: "application/json; charset=utf-8",
+             dataType: "json",
+             dataType: "json",
+             success: function (Message) {
+                 Loader(false);
+                 if (Message != null) {
+                     if (Message == "Delete") {
+                         Loader(false);
+                         swal({
+                             title: "Deleted!",
+                             text: "Deleted",
+                             icon: "success",
+                         });
+                         window.location.reload();
+                     }
+                 }
+             },
+         });
+     } else {
+         Loader(false);
+         swal("Your banner  is safe!");
+     }
+ });
+
+            }
+        })
+
+    })
+</script>
+

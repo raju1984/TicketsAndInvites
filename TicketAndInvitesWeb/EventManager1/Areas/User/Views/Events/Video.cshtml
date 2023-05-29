@@ -1,0 +1,300 @@
+﻿@model EventManager1.Areas.User.Models.EVideo
+@{
+    /**/
+
+    ViewBag.Title = "Video";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"><!-- https://getbootstrap.com -->
+    @*<link href="https://vjs.zencdn.net/5.19.2/video-js.css" rel="stylesheet">*@
+    <style type="text/css">
+
+        .video-js {
+            font-size: 1rem;
+        }
+        .content-wrapper {
+            padding: 1rem 1.0rem !important;
+        }
+    </style>
+}
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+
+        <h3 class="page-title" style="padding:0 10px">
+
+            @Model.EventName
+        </h3>
+        <div><button type="button" id="BtnReloadVideo" class="btn btn-success">Refresh</button></div>
+    </div>
+    <div class="container">
+        <div class="row" style="margin-top:-40px">
+
+
+            <div class="col-md-12" style="padding:0 10px">
+                @if (Model != null && Model.videoUrl != null)
+                {
+                    <div class="">
+                        <div class="my-5 embed-responsive embed-responsive-16by9">
+                            @*<video id="video" class="embed-responsive-item video-js vjs-default-skin" width="640" height="360" autoplay controls></video>*@
+                            <iframe src="@ViewBag.KeySecret" width="100%" height="100%" frameborder="0" scrolling="no" allow="autoplay" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+                        </div>
+
+                    </div>
+                    @*<script src="https://vjs.zencdn.net/5.19.2/video.js"></script>
+                    <script src="~/js/HlsJs/hls.min.js?v=v0.9.1"></script>
+                    <script src="~/js/HlsJs/videojs5-hlsjs-source-handler.min.js?v=0.3.1"></script>
+                    <script src="~/js/HlsJs/vjs-quality-picker.js?v=v0.0.2"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>*@
+
+                    @*<script>
+                        $(document).ready(function () {
+                            $('#BtnReloadVideo').click(function () { window.location.reload(); })
+                            debugger
+
+                            const getDeviceType = () => {
+                                const ua = navigator.userAgent;
+                                if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+                                    return "tablet";
+                                }
+                                if (
+                                  /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
+                                    ua
+                                  )
+                                ) {
+                                    return "mobile";
+                                }
+                                return "desktop";
+                            };
+
+                            if (navigator.userAgent.match(/SAMSUNG|Samsung|SGH-[I|N|T]|GT-[I|N]|SM-[A|N|P|T|Z]|SHV-E|SCH-[I|J|R|S]|SPH-L/i)) {
+
+                                var player = videojs('video');
+
+                                player.qualityPickerPlugin();
+
+                                player.src({
+                                    src: '@ViewBag.KeySecret',
+                                    type: 'application/x-mpegURL',
+                                    withCredentials: true
+                                });
+
+                                player.play();
+
+                                var player = document.getElementById('video');
+                                if (Hls.isSupported()) {
+
+                                    var config = {
+                                        "autoStartLoad": true,
+                                        "startPosition": -1,
+                                        "capLevelToPlayerSize": false,
+                                        "debug": false,
+                                        "defaultAudioCodec": undefined,
+                                        "initialLiveManifestSize": 1,
+                                        "maxBufferLength": 0,
+                                        "maxMaxBufferLength": 3600,
+                                        "backBufferLength": Infinity,
+                                        "maxBufferSize": 60 * 1000 * 1000,
+                                        "maxBufferHole": 0.5,
+                                        "lowBufferWatchdogPeriod": 0.5,
+                                        "highBufferWatchdogPeriod": 3,
+                                        "nudgeOffset": 0.1,
+                                        "nudgeMaxRetry": 3,
+                                        "maxFragLookUpTolerance": 0.2,
+                                        "liveSyncDurationCount": 3,
+                                        "liveMaxLatencyDurationCount": 10,
+                                        "liveMaxLatencyDurationCount": Infinity,
+                                        "enableWorker": true,
+                                        "enableSoftwareAES": true,
+                                        "manifestLoadingTimeOut": 60000,
+                                        "manifestLoadingMaxRetry": 200,
+                                        "manifestLoadingRetryDelay": 500,
+                                        "manifestLoadingMaxRetryTimeout": 64000,
+                                        "startLevel": undefined,
+                                        "levelLoadingTimeOut": 60000,
+                                        "levelLoadingMaxRetry": 4,
+                                        "levelLoadingRetryDelay": 500,
+                                        "levelLoadingMaxRetryTimeout": 64000,
+                                        "fragLoadingTimeOut": 20000,
+                                        "fragLoadingMaxRetry": 6,
+                                        "fragLoadingRetryDelay": 500,
+                                        "fragLoadingMaxRetryTimeout": 64000,
+                                        "startFragPrefetch": false,
+                                        "appendErrorMaxRetry": 3,
+                                        "enableWebVTT": true,
+                                        "enableCEA708Captions": true,
+                                        "stretchShortVideoTrack": false,
+                                        "maxAudioFramesDrift": 1,
+                                        "forceKeyFrameOnDiscontinuity": true,
+                                        "abrEwmaFastLive": 5.0,
+                                        "abrEwmaSlowLive": 9.0,
+                                        "abrEwmaFastVoD": 4.0,
+                                        "abrEwmaSlowVoD": 15.0,
+                                        "abrEwmaDefaultEstimate": 500000,
+                                        "abrBandWidthFactor": 0.95,
+                                        "abrBandWidthUpFactor": 0.7,
+                                        "minAutoBitrate": 0
+                                    };
+
+
+                                    var hls = new Hls(config);
+
+
+                                    hls.attachMedia(player);
+                                    hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                                        console.log("video and hls.js are now bound together !");
+                                        hls.loadSource("@ViewBag.KeySecret");
+                                        hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                                            console.log("manifest loaded, found " + data.levels.length + " quality level");
+                                            player.play();
+                                        });
+                                        hls.on(Hls.Events.ERROR, function (event, data) {
+                                            if (data.fatal) {
+                                                switch (data.type) {
+                                                    case Hls.ErrorTypes.NETWORK_ERROR:
+
+                                                        console.log("fatal network error encountered, try to recover");
+                                                        hls.startLoad();
+                                                        break;
+                                                    case Hls.ErrorTypes.MEDIA_ERROR:
+                                                        console.log("fatal media error encountered, try to recover");
+                                                        hls.recoverMediaError();
+                                                        break;
+                                                    default:
+
+                                                        hls.destroy();
+                                                        break;
+                                                }
+                                            }
+                                        });
+                                    });
+                                }
+
+                            }
+                            else if (navigator.userAgent.search("Firefox") >= 0) {
+                                var player = videojs('video');
+
+                                player.qualityPickerPlugin();
+
+                                player.src({
+                                    src: '@ViewBag.KeySecret',
+                                    type: 'application/x-mpegURL',
+                                    withCredentials: true
+                                });
+
+                                player.play();
+
+                            }
+                            else if (navigator.userAgent.search(/TV/i) >= 0) {
+                                var player = videojs('video');
+
+                                player.qualityPickerPlugin();
+
+                                player.src({
+                                    src: '@ViewBag.KeySecret',
+                                    type: 'application/x-mpegURL',
+                                    withCredentials: true
+                                });
+
+                                player.play();
+
+                            }
+                            else if (getDeviceType() == "tablet") {
+                                var player = videojs('video');
+
+                                player.qualityPickerPlugin();
+
+                                player.src({
+                                    src: '@ViewBag.KeySecret',
+                                    type: 'application/x-mpegURL',
+                                    withCredentials: true
+                                });
+
+                                player.play();
+                            }
+                            else if (getDeviceType() == "mobile") {
+                                var player = videojs('video');
+
+                                player.qualityPickerPlugin();
+
+                                player.src({
+                                    src: '@ViewBag.KeySecret',
+                                    type: 'application/x-mpegURL',
+                                    withCredentials: true
+                                });
+
+                                player.play();
+                            }
+                            else {
+                                var player = videojs('video');
+                                player.qualityPickerPlugin();
+                                player.src({
+                                    src: '@ViewBag.KeySecret',
+                                    type: 'application/x-mpegURL',
+                                    withCredentials: true
+                                });
+                                player.play();
+
+                                var player = videojs('video');
+                                player.qualityPickerPlugin();
+
+                                player.src({
+                                    src: '@ViewBag.KeySecret',
+                                    type: 'application/x-mpegURL'
+                                });
+                                useEffect(() => {
+                                    const config = {
+                                        manifestLoadingTimeOut: 20000,
+                                        manifestLoadingMaxRetry: 200,
+                                        manifestLoadingRetryDelay: 100,
+                                        manifestLoadingMaxRetryTimeout: 5000,
+                                    };
+                                    if (Hls.isSupported()) {
+                                        debugger
+                                        var hls = new Hls();
+                                        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                                            player.play();
+
+                                        });
+                                        hls.on(Hls.Events.ERROR, function (event, data) {
+                                            if (data.fatal) {
+                                                switch (data.type) {
+                                                    case Hls.ErrorTypes.NETWORK_ERROR:
+                                                        console.log("fatal network error encountered, try to recover");
+                                                        hls.startLoad();
+                                                        break;
+                                                    case Hls.ErrorTypes.MEDIA_ERROR:
+                                                        console.log("fatal media error encountered, try to recover");
+                                                        hls.recoverMediaError();
+                                                        break;
+                                                    default:
+
+                                                        hls.destroy();
+                                                        break;
+                                                }
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        player.play();
+                                    }
+                                });
+                            }
+
+                        });
+                    </script>*@
+                }
+                else
+                {
+                    <h3 class="text-danger text-center">@Model.msg</h3>
+                }
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+

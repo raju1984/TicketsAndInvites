@@ -1,0 +1,1865 @@
+﻿@model EventManager1.Models.Event_
+@{
+    ViewBag.Title = "CreateEvent";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+    <style type="text/css">
+
+                @@media all and (min-width: 320px) and (max-width: 480px) {
+                    .content-wrapper {
+                        background: #f2edf3;
+                        padding: 2.75rem 1.25rem;
+                    }
+                    input#add {
+            width: 100% !important;
+        }
+                }
+                input[type=number]::-webkit-inner-spin-button,
+                input[type=number]::-webkit-outer-spin-button {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0;
+                }
+                .tag {
+                    top: 0px !important;
+                    right: 20px !important;
+                    opacity: 0.7;
+                    cursor:pointer;
+                }
+                .sidebar-offcanvas {
+                    height: auto !important;
+
+                }
+                #map {
+                    width: 100%;
+                    height: 450px;
+
+                }
+
+                .card .card-body {
+                    padding-bottom: 0.5rem;
+                }
+                .form-control {
+                    padding: 0.275rem 1.175rem !important;
+                }
+
+                .btn {
+                    padding: 0.585rem 1.0rem;
+                    /*background-color: transparent;*/
+                }
+
+                .error {
+                    color: red;
+                    visibility: hidden
+                }
+
+                .imgbox {
+                    width: 100%;
+                    height: 100%;
+                    margin-bottom: 10px
+                }
+    </style>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f1f1f1;
+        }
+
+        #regForm {
+            background-color: #ffffff;
+            margin: 0px auto;
+            font-family: Raleway;
+            padding: 40px;
+            width: 100%;
+            min-width: 300px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            width: 100%;
+            font-size: 17px;
+            font-family: Raleway;
+            border: 1px solid #aaaaaa;
+        }
+
+            /* Mark input boxes that gets an error on validation: */
+            input.invalid {
+                border: 1px solid #e14949;
+                /*background-color: #fbb2b2;*/
+            }
+
+            input#add {
+                width: 15%;
+            }
+
+        /* Hide all steps by default: */
+        .tab {
+            display: none;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 17px;
+            font-family: Raleway;
+            cursor: pointer;
+        }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+        #prevBtn {
+            background-color: #bbbbbb;
+        }
+
+        /* Make circles that indicate the steps of the form: */
+        .step {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbbbbb;
+            border: none;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+            .step.active {
+                opacity: 1;
+            }
+
+            /* Mark the steps that are finished and valid: */
+            .step.finish {
+                background-color: #4CAF50;
+            }
+
+        @@media screen and (min-width: 320px) and (max-width: 480px) {
+            input#StartDate {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            input#EndDate {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            input#NamerRSVP {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            input.form-control.name {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            input#FileUpload1 {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            input#FileUpload2 {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            select#CountryId {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            input#lat {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            input#lng {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            input#CityName {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            input#AddressLine {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            input#Venue {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css" />
+
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+        async defer></script>*@
+}
+<div class="content-wrapper">
+    <input type="hidden" id="hfzipcode" />
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-calendar-plus menu-icon"></i>
+            </span>
+            Create Event
+        </h3>
+    </div>
+    <form enctype="multipart/form-data" name="registration">
+        <div class="tab">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-description">
+                                Name your event and tell event-goers why they should come. Add details that
+                                highlight what makes it unique.
+                            </p>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Event name</label>
+                                        @Html.TextBoxFor(p => p.EventName, new { @class = "form-control", @placeholder = "Event Name" })
+                                        @*<span class="error col-md-12" id="Nameerr">Event Name is required</span>*@
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Event Type</label>
+                                        @Html.DropDownList("Id", new SelectList(ViewBag.eventType, "Id", "Text"), new { @id = "Eventtype", @name = "Eventtype", @class = "form-control" })
+                                        @*@Html.TextBoxFor(p => p.EventName, new { @class = "form-control", @placeholder = "Event Name" })*@
+                                        @*<span class="error col-md-12" id="Nameerr">Event Name is required</span>*@
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Event category</label>
+                                        <div class="input-group">
+                                            <select id="Physical" name="Physical" class="form-control">
+                                                <option value="1">Concerts</option>
+                                                <option value="2">Night Life</option>
+                                                <option value="3">Business</option>
+                                            </select>
+                                            <select id="Videos" name="Videos" class="form-control" style="display:none">
+                                                <option value="4">Movies</option>
+                                                <option value="5">Shows</option>
+                                                <option value="6">Documentries</option>
+
+                                            </select>
+                                            <select id="Live" name="Live" class="form-control" style="display:none">
+                                                <option value="7">Concerts</option>
+                                                <option value="8">Shows</option>
+                                                <option value="9">Plays</option>
+
+                                            </select>
+                                            @* @Html.TextBoxFor(model => model.PublishDate, new { @type = "date", @class = "form-control" })*@
+                                            @*@Html.TextBoxFor(model => model.PublishDate, new { type = "time", @class = "form-control" })*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Date to publish event</label>
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(model => model.PublishDate, new { @type = "date", @class = "form-control" })
+                                            @*@Html.TextBoxFor(model => model.PublishDate, new { type = "time", @class = "form-control" })*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Event starts at</label>
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(model => model.StartDate, new { @type = "date", @class = "form-control" })
+                                            @Html.TextBoxFor(model => model.StartTime, new { type = "time", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Ends at</label>
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(model => model.EndDate, new { @type = "date", @class = "form-control" })
+                                            @Html.TextBoxFor(model => model.EndTime, new { type = "time", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-12">
+                                    <div id="orderItems">
+                                        <table class="table table-responsive" id="orderdetailsItems"></table>
+                                        <span id="orderItemError" style="color:red"></span>
+                                    </div>
+                                    <table class="mycontainer col-md-12" id="mainrow">
+                                        <tr>
+                                            <td>
+                                                <div class="form-group ">
+                                                    <label for="">RSVP</label>
+                                                    <div class="input-group">
+                                                        <input type="text" aria-label="" id="NamerRSVP"
+                                                               placeholder="Contact Person Name or Email"
+                                                               class="form-control name">
+                                                        <input type="number" aria-label="" id="PhoneRSVP"
+                                                               placeholder="Contact person Phone number"
+                                                               class="form-control phone">
+
+                                                    </div>
+                                                    <div class="input-group"><div class="error col-md-6" id="NamerRSVPerr">Contact Person Name or Email required</div><div class="error col-md-6" id="PhoneRSVPerr">Contact person Phone number required</div></div>
+                                                </div>
+                                                <div class="col-md-12 text-right" style="padding:0">
+                                                    <input type="button" id="add" value="Add more RSVP" class="btn btn-primary btn-sm" />
+                                                    @*<a href="#" class="btn btn-primary btn-sm">Add more RSVP</a>*@
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div class="row mb-5" style="margin-bottom: 0rem !important">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Description</label>
+                                        <textarea class="form-control" id="Description" rows="10"></textarea>
+
+                                    </div>
+                                    <div class="form-group error" id="Descriptionerr">Description required</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">Venue</label>
+                        <div class="input-group">
+                            @*<select name="CountryId" id="CountryId" class="selectpicker form-control" data-show-subtext="false" data-live-search="true" onchange="OnEventChange(this)">
+
+                                    @{
+
+                                        foreach (var item in ViewBag.country)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+                                    }
+                                </select>*@
+                            @Html.DropDownList("Id", new SelectList(ViewBag.country, "Id", "Name"), "Please select a country", new { @id = "CountryId", @class = "form-control" })
+                            @Html.TextBoxFor(model => model.CityName, new { @class = "form-control", @placeholder = "City", Value = "accra" })
+                            @Html.TextBoxFor(model => model.address_.FirstOrDefault().AddressLine, new { @class = "form-control", @placeholder = "Address", Value = "Address" })
+                            @Html.TextBoxFor(model => model.Venue, new { @class = "form-control", @placeholder = "Venue Name", Value = "Venue Name" })
+                        </div>
+                        <div class="input-group">
+                            <div class="error col-md-3" id="CountryIderr">Please select a country</div><div class="error col-md-3" id="Cityerr">City Name required</div>
+                            <div class="error col-md-3" id="addresserr">Address required</div><div class="error col-md-3" id="Venueerr">Venue Name required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-12">
+                    <label for="">Enter Geo Location</label>
+                    <div class="input-group">
+                        <input type="text" aria-label="" placeholder="longitude" id="lat" value="0"
+                               class="form-control">
+                        <input type="number" aria-label="" placeholder="latitude" id="lng" value="0"
+                               address""="" class="form-control">
+
+                    </div>
+                    <p><small>Or Drang and drop the location on the map</small> </p>
+                </div>
+                <div class="col-md-12">
+                    <span id="spnaddress"></span>
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab">
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <h3>StreamScreen Image</h3>
+                    @*<p>
+                            A great image speaks louder than words, as long as it's a PNG, JPG or
+                            GIF file. For best
+                            results, use a high-resolution image. Images with as little text as
+                            possible work best.
+                        </p>*@
+                    <div class="input-group col-xs-12">
+                        <input type="file" id="UploadStreamScreenImage" class="form-control file-upload-info" name="files0[]" multiple />
+                        <span class="input-group-append">
+                            <input type="button" id="btnUploadStreamScreenImage" value="Upload StreamScreen Image" class="file-upload-browse btn btn-gradient-primary" />
+                        </span>
+                    </div>
+
+                    <h5 class="mt-4"> Uploaded Stream Images </h5>
+                </div>
+                <div class="col-md-4">
+                    <div class="tag" id="StreamImgRemove">
+                        <h6 class="noMargin text-success">
+                            <span>X</span>
+                        </h6>
+                    </div>
+                    <div style="height:200px; margin-bottom:10px">
+                        <img src="../../images/placeholder-image.jpg" id="Streamimg"
+                             class="imgbox" alt="">
+                    </div>
+                    @*<div><input type="radio" name="mainpic" value="Streamimg" id="Streamimgc" style="width:20px" checked> Select as main picture</div>*@
+                </div>
+                <div class="col-md-12">
+                    <h3>Image</h3>
+                    <p>
+                        A great image speaks louder than words, as long as it's a PNG, JPG or
+                        GIF file. For best
+                        results, use a high-resolution image. Images with as little text as
+                        possible work best.
+                    </p>
+                    <div class="input-group col-xs-12">
+                        <input type="file" id="FileUpload1" class="form-control file-upload-info" name="files0[]" multiple />
+                        <span class="input-group-append">
+                            <input type="button" id="btnUpload" value="Upload Images" class="file-upload-browse btn btn-gradient-primary" />
+                        </span>
+                    </div>
+
+                    <h5 class="mt-4"> Uploaded Images </h5>
+                </div>
+                <div class="col-md-4">
+                    <div class="tag" id="ImgRemove1">
+                        <h6 class="noMargin text-success">
+                            <span>X</span>
+                        </h6>
+                    </div>
+                    <div style="height:200px; margin-bottom:10px">
+                        <img src="../../images/placeholder-image.jpg" id="img1"
+                             class="imgbox" alt="">
+                    </div>
+                    <div><input type="radio" name="mainpic" value="img1" id="img1c" style="width:20px" checked> Select as main picture</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tag" id="ImgRemove2">
+                        <h6 class="noMargin text-success">
+                            <span>X</span>
+                        </h6>
+                    </div>
+                    <div style="height:200px; margin-bottom:10px">
+                        <img src="../../images/placeholder-image.jpg" id="img2"
+                             class="imgbox" alt="">
+                    </div>
+
+                    <div>
+                        <input type="radio" name="mainpic" value="img2" id="img2c" style="width:20px"> Select as main picture
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tag" id="ImgRemove3">
+                        <h6 class="noMargin text-success">
+                            <span>X</span>
+                        </h6>
+                    </div>
+                    <div style="height:200px;margin-bottom:10px">
+                        <img src="../../images/placeholder-image.jpg" id="img3"
+                             class="imgbox" alt="">
+                    </div>
+                    <div>
+                        <input type="radio" name="mainpic" value="img3" id="img3c" style="width:20px"> Select as main picture
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <h3>Promo Video</h3>
+
+                    <div class="input-group col-xs-12">
+                        <input type="file" id="FileUpload2" class="form-control file-upload-info" name="files1[]" />
+                        <span class="input-group-append">
+                            <input type="button" id="btnUploadvid" accept="video/*" value="Upload Video" class="file-upload-browse btn btn-gradient-primary" />
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-4 text-center">
+                    <video width="80%" height="300" id="video1" controls>
+                        <source src="" type="video/mp4" id="videopath">
+                        <source src="" type="video/ogg" id="videogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div id="fullvid" style="display:none" class="col-md-12">
+                    <div class="col-md-12">
+                        <h3>Full Video Url</h3>
+                        @*<p>When your video is uploading .... Please wait ... Depending on your video size and internet connection this may take a few minutes. When your upload is complete, it will display in the playback screen. Once it appears you are ready to publish the video by hitting the publish button.</p>*@
+
+                        <div class="input-group col-xs-12">
+                            @*@Html.TextBoxFor(model => model.Multimedia.FirstOrDefault().URL, new { @class = "form-control", @placeholder = "Enter Video Path", Value = Model.Multimedia.FirstOrDefault().URL })*@
+                            <input type="text" id="fullVideoPath" placeholder="Enter Video Path" class="form-control" value="" />
+                            <input type="hidden" id="hdnVideoPath" value="" />
+                            @*<input type="file" id="FileUpload3" class="form-control file-upload-info" name="files3[]" />
+                                <span class="input-group-append">
+                                    <input type="button" id="btnUploadvid1" accept="video/*" value="Upload Video" class="file-upload-browse btn btn-gradient-primary" />
+                                </span>*@
+                        </div>
+                        <div style="text-align:center; display:none; margin-top:10px " id="divupload">
+                            <img src="~/images/ajax-loader.gif" />
+                        </div>
+                    </div>
+                    @*<div class="col-md-12 mt-4 text-center">
+                            <video width="80%" height="300" id="video3" controls>
+                                <source src="" type="video/mp4" id="videopath1">
+                                <source src="" type="video/ogg" id="videogg1">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>*@
+                </div>
+                <div id="LiveStream" style="display:none" class="col-md-12">
+                    <div class="col-md-12">
+                        <h3>Live Streaming Url</h3>
+                        <div class="input-group col-xs-12">
+                            @*<input type="text" id="LiveStreamURL" placeholder="Enter Live Streaming URL" class="form-control" value="https://d3tka3dvp72x0k.cloudfront.net/out/v1/0772d3ebe91d4f38bbdf5e70b7f3bc91/streamindex.m3u8" readonly/>
+                            <input type="hidden" id="hdnVideoPath" value="https://d3tka3dvp72x0k.cloudfront.net/out/v1/0772d3ebe91d4f38bbdf5e70b7f3bc91/streamindex.m3u8" />*@
+                            <input type="text" id="LiveStreamURL" placeholder="Enter Live Streaming URL" class="form-control" value="https://iframe.dacast.com/live/53ca73a3-582a-38de-53f7-e57050181bee/7c2d4493-1c3a-8b7d-45bd-5729c864e846"  />
+                            <input type="hidden" id="hdnVideoPath" value="https://iframe.dacast.com/live/53ca73a3-582a-38de-53f7-e57050181bee/7c2d4493-1c3a-8b7d-45bd-5729c864e846" />
+                        </div>
+                        <div style="text-align:center; display:none; margin-top:10px " id="divupload">
+                            <img src="~/images/ajax-loader.gif" />
+                        </div>
+                    </div>
+                    @*<div class="col-md-12 mt-4 text-center">
+                            <video width="80%" height="300" id="video3" controls>
+                                <source src="" type="video/mp4" id="videopath1">
+                                <source src="" type="video/ogg" id="videogg1">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>*@
+                </div>
+            </div>
+
+        </div>
+
+        <div style="overflow:auto;">
+            <div style="float:right;">
+                <button type="button" style=" background linear-gradient(to right, #ffbf96, #fe7096);"
+                        id="prevBtn" onclick="nextPrev(-1)">
+                    Previous
+                </button>
+                <button type="button" style=" background linear-gradient(to right, #ffbf96, #fe7096);"
+                        id="nextBtn" onclick="nextPrev(1)">
+                    Next
+                </button>
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+
+        </div>
+
+
+        <input type="hidden" id="eventid" value="0" />
+        <input type="hidden" id="companyId" value="0" />
+
+        @*<div class="row mt-5">
+                <div class="col-md-12 text-center">
+                    <input id="submit" type="button" value="Publish" class="btn btn-gradient-danger btn-rounded btn-fw" />
+
+                </div>
+            </div>*@
+    </form>
+
+</div>
+<div id="dialog" style="display: none"></div>
+@*</div>
+            </div>
+        </div>
+    </div>*@
+@section Scripts
+{
+
+    <script>
+
+        var currentTab = 0; // Current tab is set to be the first tab (0)
+        showTab(currentTab); // Display the current tab
+
+        function showTab(n) {
+            // This function will display the specified tab of the form...
+            var x = document.getElementsByClassName("tab");
+            x[n].style.display = "block";
+            //... and fix the Previous/Next buttons:
+
+
+
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                if (!$("#map .gm-style").length) {
+                    $("#map").css("height", "0px");
+                }
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+
+            if (n == (x.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Publish";
+            }
+            else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+            //... and run a function that will display the correct step indicator:
+            fixStepIndicator(n)
+        }
+
+        function nextPrev(n) {
+            debugger;
+            var btn = document.getElementById("nextBtn").innerHTML;
+            if (currentTab == 2 && btn == "Publish" && n != -1) { Publishevent(); }
+            // This function will figure out which tab to display
+            var x = document.getElementsByClassName("tab");
+            // Exit the function if any field in the current tab is invalid:
+            if (n == 1 && !validateForm()) { return false; };
+            // Hide the current tab:
+            x[currentTab].style.display = "none";
+            // Increase or decrease the current tab by 1:
+            debugger
+            var Eventtype = $('#Eventtype').val();
+            if (Eventtype == "1" || Eventtype == "2") {
+                if (currentTab == "0") {
+                    currentTab = 1;
+                }
+                if (n == "-1") { n = -2; }
+            }
+            currentTab = currentTab + n;
+            // if you have reached the end of the form...
+            if (currentTab >= x.length) {
+                // ... the form gets Publishted:
+                document.getElementById("regForm").Publish();
+                return false;
+            }
+
+            // Otherwise, display the correct tab:
+            showTab(currentTab);
+        }
+        $(function () {
+            var dtToday = new Date();
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var maxDate = year + '-' + month + '-' + day;
+            //alert(maxDate);
+            $('#PublishDate').attr('min', maxDate);
+            $('#StartDate').attr('min', maxDate);
+            $('#EndDate').attr('min', maxDate);
+        });
+        function validateForm() {
+            debugger;
+
+            // This function deals with validation of the form fields
+            var x, y, i, valid = true;
+            x = document.getElementsByClassName("tab");
+            y = x[currentTab].getElementsByTagName("input");
+            // A loop that checks every input field in the current tab:
+            debugger;
+            var Id = $('#eventid').val();
+            if (Id = 0) {
+                var pdate = $("#PublishDate").val();
+                var sdate = $("#StartDate").val();
+                var edate = $("#EndDate").val();
+                var d = new Date();
+                var strDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+                if (new Date(edate) < new Date(sdate)) {//compare end <=, not >=
+                    //your code here
+                    alertify.alert("End date can't less than strat date");
+                    valid = false;
+                }
+                else if (new Date(pdate) >= new Date(strDate)) {//compare end <=, not >=
+                    //your code here
+                    alertify.alert("Publish date can't less than today");
+                    valid = false;
+                }
+                else if (new Date(sdate) >= new Date(strDate)) {//compare end <=, not >=
+                    //your code here
+                    alertify.alert("Start date can't less than today");
+                    valid = false;
+                }
+            }
+            for (i = 0; i < y.length; i++) {
+                // If a field is empty...
+
+                if (y[i].value == "") {
+                    // add an "invalid" class to the field:
+                    y[i].className += " invalid";
+                    // and set the current valid status to false
+                    valid = false;
+                }
+
+            }
+
+            // If the valid status is true, mark the step as finished and valid:
+            if (valid) {
+                document.getElementsByClassName("step")[currentTab].className += " finish";
+            }
+            return valid; // return the valid status
+        }
+
+        function fixStepIndicator(n) {
+            // This function removes the "active" class of all steps...
+            var i, x = document.getElementsByClassName("step");
+            for (i = 0; i < x.length; i++) {
+                x[i].className = x[i].className.replace(" active", "");
+            }
+            //... and adds the "active" class on the current step:
+            x[n].className += " active";
+        }
+        function Publishevent() {
+            debugger;
+            var isAllValid = validateform();
+            if (isAllValid) {
+                var img = $('#img1').attr('src');
+                if (img == "../../images/placeholder-image.jpg" || img == "unknown") {
+                    alertify.alert("please upload a Image.");
+                    return false;
+                }
+                var Eventtype = $('#Eventtype').val();
+                var eventcatg;
+                if (Eventtype == '1') {
+                    eventcatg = $('#Videos').val();
+                    var URL = $('#video1').find('Source:first').attr('src');
+                    if (URL == "" || URL == "unknown") {
+                        alertify.alert("please upload a promo video Video.");
+                        return false;
+                    }
+                    //var URL2 = $('#video3').find('Source:first').attr('src');
+                    var URL2 = $('#fullVideoPath').val();
+                    if (URL2 == "" || URL2 == "unknown") {
+                        alertify.alert("please upload a Full Video.");
+                        return false;
+                    }
+                }
+                else if (Eventtype == '2') { eventcatg = $('#Live').val(); }
+                else { eventcatg = $('#Physical').val(); }
+
+                var radioValue = $("input[name='mainpic']:checked").val();
+                var list = [];
+                var img = "../../images/placeholder-image.jpg";
+                var img11 = $('#img1').attr('src');
+                var img1checked = false;
+                if (radioValue == 'img1') { img1checked = true }
+                var img21 = $('#img2').attr('src');
+                var img2checked = false;
+                if (radioValue == 'img2') { img2checked = true }
+                var img31 = $('#img3').attr('src');
+                var img3checked = false;
+                if (radioValue == 'img3') { img3checked = true }
+                var img41 = $('#Streamimg').attr('src');
+                var img4checked = false;
+                //if (radioValue == 'Streamimg') { img4checked = true }
+                var img1 = {
+                    URL: $('#img1').attr('src'),
+                    Mul_Type: 1,
+                    Mul_MainPic: img1checked
+                }
+                if (img11 != img)
+                    list.push(img1);
+                var img2 = {
+                    URL: $('#img2').attr('src'),
+                    Mul_Type: 1,
+                    Mul_MainPic: img2checked
+                }
+                if (img21 != img)
+                    list.push(img2);
+                var img3 = {
+                    URL: $('#img3').attr('src'),
+                    Mul_Type: 1,
+                    Mul_MainPic: img3checked
+                }
+                if (img41 != img)
+                    list.push(img3);
+                var Streamimg = {
+                    URL: $('#Streamimg').attr('src'),
+                    Mul_Type: 3,
+                    Mul_MainPic: img4checked
+                }
+                if (img41 != img)
+                    list.push(Streamimg);
+                var vid1 = {
+                    URL: $('video').find('Source:first').attr('src'),
+                    Mul_Type: 2
+                }
+                list.push(vid1);
+                var vid2 = {
+                    //URL: $('#video3').find('Source:first').attr('src'),
+                    URL: $('#fullVideoPath').val(),
+                    Mul_Type: 2,
+                    videotype: 1
+                }
+                list.push(vid2);
+                var Address = [];
+                var addr = {
+                    longitude: $('#lat').val(),
+                    latitude: $('#lng').val(),
+                    Country: $('#CountryId').val(),
+                    City: $('#CityName').val(),
+                    AddressLine: $('#AddressLine').val(),
+                    ZipCode: $('#ZipCode').val()
+                }
+                Address.push(addr);
+                var rsvp = [];
+                var Rsvp = {
+                    Namer: $('#NamerRSVP').val(),
+                    Phone: $('#PhoneRSVP').val(),
+                }
+                if (Rsvp) {
+                    rsvp.push(Rsvp);
+                }
+                $('#orderdetailsItems tbody tr').each(function (index, ele) {
+                    var Rsvp1 = {
+                        Namer: $('.name', this).val(),
+                        Phone: $('.phone', this).val(),
+                    }
+                    rsvp.push(Rsvp1);
+                })
+                //validate order items
+                debugger;
+                Loader(true);
+                var Register = {
+                    Id: $('#eventid').val(),
+                    BusinessOwner_Id: $('#companyId').val(),
+                    Eventtype: $('#Eventtype').val(),
+                    EventCategory: eventcatg,
+                    EventName: $('#EventName').val(),
+                    PublishDate: $('#PublishDate').val(),
+                    StartDate: $('#StartDate').val(),
+                    StartTime: $('#StartTime').val(),
+                    EndDate: $('#EndDate').val(),
+                    EndTime: $('#EndTime').val(),
+                    Venue: $('#Venue').val(),
+                    Description: $('#Description').val(),
+                    LiveURL: $('#LiveStreamURL').val(),
+                    address_: Address,
+                    Multimedia: list,
+                    Rsvp: rsvp
+                }
+                //$(this).val('Please wait...');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("CreateEvent", "Organizer", new { area = "Organizer" })',
+                    data: '{Register: ' + JSON.stringify(Register) + '}',/* JSON.stringify(Register),*/
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (resp) {
+                        if (resp.result.Code == 200) {
+                            debugger;
+                            //alert('Successfully saved');
+                            //here we will clear the form
+                            list = [];
+                            $('#UserName,#ContactNo,#Email,#Password,#BusinessName,#CountryId,#Address,#ZipCode,#LastName,#FirstName,#PhoneNo,#confPassword').val('');
+                            $('#orderdetailsItems').empty();
+                            alertify.alert("Event Created Successfully.");
+                            Loader(false);
+                            setTimeout(function () {
+                                window.location.replace("CreateTicket");
+                            }, 2000);
+
+
+                        }
+                        else {
+                            Loader(false);
+                            alertify.alert(resp.result.Msg);
+                        }
+                    },
+                    error: function (error) {
+                        Loader(false);
+                        alertify.alert(error);
+                    }
+                });
+            }
+            else { alertify.alert("@EventManager1.Resource.ResourceStrings.allfieldrequired"); }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+    <script src="~/Areas/js/map.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            var id = '@ViewBag.id'
+            var clone = '@ViewBag.cl'
+            if (id != '') {
+                debugger;
+                var id = '@ViewBag.id';
+                $.ajax({
+                    url: '@Url.Action("geteventbyid", "Organizer", new { area = "Organizer" })',
+                    type: "POST",
+                    dataType: 'json',
+                    data: { id: id },
+                    success: function (result, i) {
+                        debugger;
+                        if (result != null) {
+                            if (clone != 1) {
+                                $('#eventid').val(result.Id);
+                            }
+                            if (result.Eventtype == 1) {
+                                $("#fullvid").css("display", "block");
+                            }
+                            else if (result.Eventtype == 2) {
+                                $("#LiveStream").css("display", "block");
+                                $("#fullvid").css("display", "none");
+                            }
+                            else {
+                                $("#fullvid").css("display", "none");
+                                $("#LiveStream").css("display", "none");
+                            }
+                            $('#companyId').val(result.BusinessOwner_Id);
+                            $('#EventName').val(result.EventName);
+                            $('#Eventtype').val(result.Eventtype);
+                            $('#StartDate').val(result.StartDate);
+                            $('#PublishDate').val(result.PublishDate);
+                            $('#StartTime').val(result.StartTime);
+                            $('#EndDate').val(result.EndDate);
+                            $('#EndTime').val(result.EndTime);
+                            $('#LiveStreamURL').val(result.LiveURL),
+                            $('#Venue').val(result.Venue);
+                            $('#CityName').val(result.CityName);
+                            $("#Physical").css("display", "none");
+                            $("#Videos").css("display", "none");
+                            $("#Live").css("display", "none");
+
+                            if (parseInt(result.Eventtype) == 0) {
+                                $("#Physical").css("display", "block");
+                                $("#Physical").val(result.EventCategory);
+
+                            }
+                            else if (parseInt(result.Eventtype) == 1) {
+                                $("#Videos").css("display", "block");
+                                $("#Videos").val(result.EventCategory);
+                            }
+                            else {
+                                $("#Live").css("display", "block");
+                                $("#Live").val(result.EventCategory);
+                            }
+                            var rsvplength = result.Rsvp.length;
+                            if (rsvplength > 0) {
+                                $('#NamerRSVP').val(result.Rsvp[0].Namer); $('#PhoneRSVP').val(result.Rsvp[0].Phone);
+                                if (rsvplength > 1) {
+                                    for (var i = 0; i < rsvplength; i++) {
+                                        if (i > 0) {
+                                            var $newRow = $('#mainrow').clone().removeAttr('id');
+                                            //Replace add button with remove button
+                                            $('#add', $newRow).addClass('remove').val('Remove').removeClass('btn-success').addClass('btn-danger');
+
+                                            //remove id attribute from new clone row
+                                            $('#NamerRSVP,#PhoneRSVP', $newRow).removeAttr('id');
+                                            $('.error', $newRow).remove();
+                                            //append clone row
+                                            $('#orderdetailsItems').append($newRow);                //clear select data
+                                            $('#NamerRSVP,#PhoneRSVP').val('');
+                                            $('#NamerRSVP').val(result.Rsvp[i].Namer); $('#PhoneRSVP').val(result.Rsvp[i].Phone);
+                                        }
+                                    }
+                                }
+                            }
+                            if (result.address_[0].Country > 0) {
+                                $("#CountryId").find('option[value=' + result.address_[0].Country + ']').attr('selected', 'selected')
+                                /*$("#CountryId").val(result.address_[0].Country);*/
+                            }
+                            $('#Description').val(result.Description);
+                            $("#AddressLine").val(result.address_[0].AddressLine);
+                            GetLocations();
+                            for (var i = 0; i <= result.Multimedia.length; i++)
+                            {
+                                debugger
+                               
+                                    if (result.Multimedia[i].URL != null && result.Multimedia[i].Mul_Type == 1 && i==0) {
+
+                                        $("#img1").attr("src", result.Multimedia[i].URL);
+                                    }
+                                   else if (result.Multimedia[i].URL != null && result.Multimedia[i].Mul_Type == 1 && i == 1) {
+
+                                        $("#img2").attr("src", result.Multimedia[i].URL);
+                                    }
+                                    else if (result.Multimedia[i].URL != null && result.Multimedia[i].Mul_Type == 1 && i == 2) {
+
+                                        $("#img3").attr("src", result.Multimedia[i].URL);
+                                    }
+                              
+                              
+                                    else if (result.Multimedia[i].URL != null && result.Multimedia[i].Mul_Type == 2) {
+                                        if (result.Multimedia[i].videotype == 0)
+                                        {
+                                            $("#videopath").attr("src", result.Multimedia[i].URL);
+                                            var vido = result.Multimedia[i].URL;
+                                            var arr = vido.split('.');
+                                            const newString = vido.replace(arr[arr.length - 1], "ogg");
+                                            $("#videogg").attr("src", newString);
+                                            var video = document.getElementById("video1");
+                                            video.autoplay = true;
+                                            video.load();
+                                        }
+                                        else if (result.Multimedia[i].videotype == 1)
+                                        {
+                                            $('#fullVideoPath').val(result.Multimedia[i].URL);
+                                            
+                                        }
+                                 
+                                }
+                                    else if (result.Multimedia[i].URL != null && result.Multimedia[i].Mul_Type == 3) {
+                                    $("#Streamimg").attr("src", result.Multimedia[i].URL);
+                                }
+                            }
+                            //var rlength = result.Multimedia.length;
+                            //if (rlength == 2) {
+                            //    $("#img1").attr("src", result.Multimedia[0].URL);
+                            //    $("#img1c").prop("checked", "true");
+
+                            //    if (result.Multimedia[1].URL != null && result.Multimedia[1].Mul_Type == 2) {
+                            //        $("#videopath").attr("src", result.Multimedia[1].URL);
+                            //        $('#fullVideoPath').val(result.Multimedia[1].URL);
+                            //        var vido = result.Multimedia[1].URL;
+                            //        var arr = vido.split('.');
+                            //        const newString = vido.replace(arr[arr.length - 1], "ogg");
+                            //        $("#videogg").attr("src", newString);
+                            //        var video = document.getElementById("video1");
+                            //        //video.autoplay = true;
+                            //        video.load();
+                            //    }
+                            //}
+                            //else if (rlength == 3) {
+                            //    $("#img1").attr("src", result.Multimedia[0].URL);
+                            //    $("#img1c").prop("checked", result.Multimedia[0].Mul_MainPic);
+
+                            //    if (result.Multimedia[1].Mul_Type != 2) {
+                            //        $("#img2").attr("src", result.Multimedia[1].URL);
+                            //        $("#img2c").prop("checked", result.Multimedia[1].Mul_MainPic);
+                            //        $("#videopath").attr("src", result.Multimedia[2].URL);
+                            //        //$('#fullVideoPath').val(result.Multimedia[2].URL);
+                            //        var vido = result.Multimedia[2].URL;
+                            //        var arr = vido.split('.');
+                            //        const newString = vido.replace(arr[arr.length - 1], "ogg");
+                            //        $("#videogg").attr("src", newString);
+                            //        var video = document.getElementById("video1");
+                            //        video.autoplay = true;
+                            //        video.load();
+                            //    } else {
+                            //        debugger
+                            //        $("#videopath").attr("src", result.Multimedia[1].URL);
+                            //        $('#fullVideoPath').val(result.Multimedia[2].URL);
+                            //        var vido = result.Multimedia[1].URL;
+                            //        var arr = vido.split('.');
+                            //        const newString = vido.replace(arr[arr.length - 1], "ogg");
+                            //        $("#videogg").attr("src", newString);
+                            //        var video = document.getElementById("video1");
+                            //        //video.autoplay = true;
+                            //        video.load();
+                            //        $("#videopath1").attr("src", result.Multimedia[2].URL);
+                            //        var vido1 = result.Multimedia[2].URL;
+                            //        var arr1 = vido1.split('.');
+                            //        const newStrings = vido1.replace(arr1[arr1.length - 1], "ogg");
+                            //        //$("#videogg1").attr("src", newStrings);
+                            //        //var video1 = document.getElementById("video3");
+                            //        ////video1.autoplay = true;
+                            //        //video1.load();
+
+                            //    }
+
+                            //}
+                            //else if (rlength == 4) {
+                            //    $("#img1").attr("src", result.Multimedia[0].URL);
+                            //    $("#img1c").prop("checked", result.Multimedia[0].Mul_MainPic);
+                            //    $("#img2").attr("src", result.Multimedia[1].URL);
+                            //    $("#img2c").prop("checked", result.Multimedia[1].Mul_MainPic);
+
+                            //    if (result.Multimedia[2].Mul_Type != 2) {
+                            //        $("#img3").attr("src", result.Multimedia[2].URL);
+                            //        $("#img3c").prop("checked", result.Multimedia[2].Mul_MainPic);
+                            //        $("#videopath").attr("src", result.Multimedia[3].URL);
+                            //        //$('#fullVideoPath').val(result.Multimedia[3].URL);
+                            //        var vido = result.Multimedia[3].URL;
+                            //        var arr = vido.split('.');
+                            //        const newString = vido.replace(arr[arr.length - 1], "ogg");
+                            //        $("#videogg").attr("src", newString);
+                            //        var video = document.getElementById("video1");
+                            //        //video.autoplay = true;
+                            //        video.load();
+                            //    }
+                            //    else {
+                            //        $("#videopath").attr("src", result.Multimedia[2].URL);
+                            //        $('#fullVideoPath').val(result.Multimedia[3].URL);
+                            //        var vido = result.Multimedia[2].URL;
+                            //        var arr = vido.split('.');
+                            //        const newString = vido.replace(arr[arr.length - 1], "ogg");
+                            //        $("#videogg").attr("src", newString);
+                            //        var video = document.getElementById("video1");
+                            //        //video.autoplay = true;
+                            //        video.load();
+                            //        if (result.Multimedia[3].URL != null && result.Multimedia[3].Mul_Type == 2) {
+                            //            //$("#videopath1").attr("src", result.Multimedia[3].URL);
+                            //            //var vido = result.Multimedia[3].URL;
+                            //            //var arr = vido.split('.');
+                            //            //const newString = vido.replace(arr[arr.length - 1], "ogg");
+                            //            //$("#videogg1").attr("src", newString);
+                            //            //var video = document.getElementById("video3");
+                            //            ////video.autoplay = true;
+                            //            //video.load();
+                            //        }
+                            //    }
+
+                            //}
+                            //else {
+                            //    $("#img1").attr("src", result.Multimedia[0].URL);
+                            //    $("#img1c").prop("checked", result.Multimedia[0].Mul_MainPic);
+                            //    $("#img2").attr("src", result.Multimedia[1].URL);
+                            //    $("#img2c").prop("checked", result.Multimedia[1].Mul_MainPic);
+                            //    $("#img3").attr("src", result.Multimedia[2].URL);
+                            //    $("#img3c").prop("checked", result.Multimedia[3].Mul_MainPic);
+                            //    $("#videopath").attr("src", result.Multimedia[3].URL);
+                            //    $('#fullVideoPath').val(result.Multimedia[4].URL);
+                            //    if (result.Multimedia[3].URL != null && result.Multimedia[3].Mul_Type == 2) {
+                            //        var vido = result.Multimedia[3].URL;
+                            //        var arr = vido.split('.');
+                            //        const newString = vido.replace(arr[arr.length - 1], "ogg");
+                            //        $("#videogg").attr("src", newString);
+                            //        var video = document.getElementById("video1");
+                            //        //video.autoplay = true;
+                            //        video.load();
+                            //    }
+                            //    //$("#videopath1").attr("src", result.Multimedia[4].URL);
+                            //    //if (result.Multimedia[4].URL != null && result.Multimedia[4].Mul_Type == 2) {
+                            //    //    var vido = result.Multimedia[4].URL;
+                            //    //    var arr = vido.split('.');
+                            //    //    const newString = vido.replace(arr[arr.length - 1], "ogg");
+                            //    //    $("#videogg1").attr("src", newString);
+                            //    //    var video = document.getElementById("video3");
+                            //    //    //video.autoplay = true;
+                            //    //    video.load();
+                            //    //}
+                            //}
+
+
+
+                        }
+
+                        $("#FileUpload1").val('');
+                        //alert(result);
+                    },
+                    error: function (err) {
+                        alert(err.statusText);
+                    }
+                });
+
+            }
+
+            $('#CountryId').on("change", function () {
+                if (this.value) {
+                    $("#map").css("height", "450px");
+                    GetLocations();
+                }
+            });
+            $('#Eventtype').on("change", function () {
+                $("#Physical").css("display", "none");
+                $("#Videos").css("display", "none");
+                $("#Live").css("display", "none");
+                $("#fullvid").css("display", "none");
+                $("#LiveStream").css("display", "none");
+                debugger;
+                if (this.value == 1) {
+                    $("#fullvid").css("display", "block");
+                    $("#Videos").css("display", "block");
+                }
+                else if (this.value == 2) {
+                    $("#Live").css("display", "block");
+                    $("#LiveStream").css("display", "block");
+                }
+                else { $("#Physical").css("display", "block"); }
+
+            });
+            $('#CityName').on("change", function () {
+                if (this.value) {
+                    $("#map").css("height", "450px");
+                    GetLocations();
+                }
+                $('#AddressLine').val('');
+            });
+            $('#AddressLine').on("change", function () {
+                if (this.value) {
+                    $("#map").css("height", "450px");
+                    GetLocations();
+                }
+            });
+            $('#lng').on("change", function () {
+                var lat = $('#lat').val();
+                if (this.value && lat) {
+                    $("#map").css("height", "450px");
+                    GetLocations();
+                }
+            });
+            var img = "../../images/placeholder-image.jpg";
+            $('#ImgRemove1').click(function () {
+                $('#img1').attr('src', "").fadeOut();
+                $('#img1').attr('src', img).fadeIn();
+
+            });
+            $('#ImgRemove2').click(function () {
+                $('#img2').attr('src', "").fadeOut();
+                $('#img2').attr('src', img).fadeIn();
+            });
+            $('#ImgRemove3').click(function () {
+                $('#img3').attr('src', "").fadeOut();
+                $('#img3').attr('src', img).fadeIn();
+            });
+            $('#StreamImgRemove').click(function () {
+                $('#Streamimg').attr('src', "").fadeOut();
+                $('#Streamimg').attr('src', img).fadeIn();
+            });
+            $('#btnUploadStreamScreenImage').click(function () {
+                Loader(true);
+                debugger
+                //$('.datepicker').datepicker();
+                // var $fileUpload = $("input[type='file']");
+                var img = "../../images/placeholder-image.jpg";
+                var Streamimg = $('#Streamimg').attr('src');
+                //var img2 = $('#img2').attr('src');
+                //var img3 = $('#img3').attr('src');
+
+                var $fileUpload = $('#UploadStreamScreenImage');
+                if (parseInt($fileUpload.get(0).files.length) < 1) {
+                    alertify.alert("@EventManager1.Resource.ResourceStrings.selectimage");
+                    return false;
+                }
+                if (parseInt($fileUpload.get(0).files.length) > 3) {
+                    debugger;
+                    alertify.alert("@EventManager1.Resource.ResourceStrings.maximgupload");
+                    return false;
+                }
+                if (Streamimg != img)
+                { alertify.alert("@EventManager1.Resource.ResourceStrings.maximgupload"); return false }
+                debugger;
+                // Checking whether FormData is available in browser
+                if (window.FormData !== undefined) {
+
+                    var fileUpload = $("#UploadStreamScreenImage").get(0);
+                    var files = fileUpload.files;
+
+                    // Create FormData object
+                    var fileData = new FormData();
+
+                    // Looping over all files and add it to FormData object
+                    for (var i = 0; i < files.length; i++) {
+                        fileData.append(files[i].name, files[i]);
+                    };
+
+                    // Adding one more key to FormData object
+                    //fileData.append('username','Session["name"]' );
+
+                    $.ajax({
+                        url: '@Url.Action("UploadFiles", "Organizer", new { area = "Organizer" })',
+                        type: "POST",
+                        contentType: false, // Not to set any content header
+                        processData: false, // Not to process data
+                        data: fileData,
+                        success: function (result) {
+                            debugger;
+                            for (var i = 0; i < result.length; i++) {
+                                if (result[i] != null)
+                                    if ($('#Streamimg').attr('src') == img) {
+                                        $("#Streamimg").attr("src", result[i]);
+                                    }
+                                @*else if ($('#img2').attr('src') == img) {
+                                        $("#img2").attr("src", result[i]);
+                                    }
+                                    else if ($('#img3').attr('src') == img)
+                                    { $("#img3").attr("src", result[i]); }
+                                    else
+                                    { alertify.alert("@EventManager1.Resource.ResourceStrings.maximgupload"); }*@
+
+                            }
+                            $("#UploadStreamScreenImage").val('');
+                            Loader(false);
+                            //alert(result);
+                        },
+                        error: function (err) {
+                            alert(err.statusText);
+                        }
+                    });
+                } else {
+                    Loader(false);
+                    alert("FormData is not supported.");
+                }
+            });
+            $('#btnUpload').click(function () {
+                Loader(true);
+                //$('.datepicker').datepicker();
+                // var $fileUpload = $("input[type='file']");
+                var img = "../../images/placeholder-image.jpg";
+                var img1 = $('#img1').attr('src');
+                var img2 = $('#img2').attr('src');
+                var img3 = $('#img3').attr('src');
+
+                var $fileUpload = $('#FileUpload1');
+                if (parseInt($fileUpload.get(0).files.length) < 1) {
+                    alertify.alert("@EventManager1.Resource.ResourceStrings.selectimage");
+                    return false;
+                }
+                if (parseInt($fileUpload.get(0).files.length) > 3) {
+                    debugger;
+                    alertify.alert("@EventManager1.Resource.ResourceStrings.maximgupload");
+                    return false;
+                }
+                if (img1 != img && img2 != img && img3 != img) { alertify.alert("@EventManager1.Resource.ResourceStrings.maximgupload"); return false }
+                debugger;
+                // Checking whether FormData is available in browser
+                if (window.FormData !== undefined) {
+
+                    var fileUpload = $("#FileUpload1").get(0);
+                    var files = fileUpload.files;
+
+                    // Create FormData object
+                    var fileData = new FormData();
+
+                    // Looping over all files and add it to FormData object
+                    for (var i = 0; i < files.length; i++) {
+                        fileData.append(files[i].name, files[i]);
+                    };
+
+                    // Adding one more key to FormData object
+                    //fileData.append('username','Session["name"]' );
+
+                    $.ajax({
+                        url: '@Url.Action("UploadFiles", "Organizer", new { area = "Organizer" })',
+                        type: "POST",
+                        contentType: false, // Not to set any content header
+                        processData: false, // Not to process data
+                        data: fileData,
+                        success: function (result) {
+                            debugger;
+                            for (var i = 0; i < result.length; i++) {
+                                if (result[i] != null)
+                                    if ($('#img1').attr('src') == img) {
+                                        $("#img1").attr("src", result[i]);
+                                    }
+                                    else if ($('#img2').attr('src') == img) {
+                                        $("#img2").attr("src", result[i]);
+                                    }
+                                    else if ($('#img3').attr('src') == img) { $("#img3").attr("src", result[i]); }
+                                    else { alertify.alert("@EventManager1.Resource.ResourceStrings.maximgupload"); }
+
+                            }
+                            $("#FileUpload1").val('');
+                            Loader(false);
+                            //alert(result);
+                        },
+                        error: function (err) {
+                            alert(err.statusText);
+                        }
+                    });
+                } else {
+                    Loader(false);
+                    alert("FormData is not supported.");
+                }
+            });
+
+        });
+
+        $('#btnUploadvid').click(function () {
+            debugger;
+
+            //var $fileUpload = $("input[type='file']");
+            var files = $("#FileUpload2").get(0).files;
+            if (parseInt(files.length) < 1) {
+                alertify.alert("@EventManager1.Resource.ResourceStrings.selectvideo");
+                return false;
+            }
+            var isvideo = isVideo(files[0].name);
+            // Checking whether FormData is available in browser
+            if (window.FormData !== undefined && isvideo) {
+
+                var fileUpload = $("#FileUpload2").get(0);
+                var files = fileUpload.files;
+
+                // Create FormData object
+                var fileData = new FormData();
+
+                // Looping over all files and add it to FormData object
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                };
+
+                // Adding one more key to FormData object
+                fileData.append('username', 'Session["name"]');
+                var vid = document.getElementById("videopath");
+                var vogg = document.getElementById("videogg");
+                Loader(true);
+                $.ajax({
+                    url: '@Url.Action("UploadFiles", "Organizer", new { area = "Organizer" })',
+                    type: "POST",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: fileData,
+                    success: function (result) {
+                        debugger;
+                        for (var i = 0; i < result.length; i++) {
+                            if (result[i] != null)
+                                var vido = result[i]
+                            vid.src = vido;
+                            var arr = vido.split('.');
+                            const newString = vido.replace(arr[arr.length - 1], "ogg");
+                            vogg.src = newString;
+                            var video = document.getElementById("video1");
+                            video.autoplay = true;
+                            video.load();
+                            // $("#videopath").attr("src", result[i]);
+                            Loader(false);
+                        }
+                    },
+                    error: function (err) {
+                        Loader(false);
+                        alertify.alert(err.statusText);
+                    }
+                });
+            } else {
+                Loader(false);
+                alert("FormData is not supported. Upload only .MP4 video");
+            };
+        });
+        function HideUploadProgress() {
+
+            $("#divupload").css("display", "none");
+        }
+        function ShowUploadProgress() {
+
+            $("#divupload").css("display", "block");
+        }
+        @*$('#btnUploadvid1').click(function () {
+            debugger;
+
+            //var $fileUpload = $("input[type='file']");
+            var files = $("#FileUpload3").get(0).files;
+            if (parseInt(files.length) < 1) {
+                alertify.alert("@EventManager1.Resource.ResourceStrings.selectvideo");
+                return false;
+            }
+            var isvideo = isVideo(files[0].name);
+            // Checking whether FormData is available in browser
+            if (window.FormData !== undefined && isvideo) {
+                ShowUploadProgress();
+                var fileUpload = $("#FileUpload3").get(0);
+                var files = fileUpload.files;
+
+                // Create FormData object
+                var fileData = new FormData();
+
+                // Looping over all files and add it to FormData object
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                };
+
+                // Adding one more key to FormData object
+                fileData.append('username', 'Session["name"]');
+                var vid = document.getElementById("videopath1");
+                var vogg = document.getElementById("videogg1");
+               // Loader(true);
+                $.ajax({
+                    url: '@Url.Action("UploadVideo", "Organizer", new { area = "Organizer" })',
+                    type: "POST",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: fileData,
+                    success: function (result) {
+                        debugger
+                        for (var i = 0; i < result.length; i++) {
+                            if (result[i] != null)
+                                var vido = result[i]
+                            vid.src = vido;
+                            var arr = vido.split('.');
+                            const newString = vido.replace(arr[arr.length - 1], "ogg");
+                            vogg.src = newString;
+                            var video = document.getElementById("video3");
+                            //video.autoplay = true;
+                            video.load();
+                            //$("#videopath1").attr("src", result[i]);
+                           // Loader(false);
+                            HideUploadProgress();
+                        }
+                    },
+
+                    //error: function (err) {
+                    //    debugger
+                    //    // Loader(false);
+                    //    HideUploadProgress();
+                    //    alertify.alert(err.statusText);
+                    //}
+                    error: function OnError(xhr, errorType, exception) {
+                        var responseText;
+                        $("#dialog").html("");
+                        try {
+                            responseText = jQuery.parseJSON(xhr.responseText);
+                            $("#dialog").append("<div><b>" + errorType + " " + exception + "</b></div>");
+                $("#dialog").append("<div><u>Exception</u>:<br /><br />" + responseText.ExceptionType + "</div>");
+                $("#dialog").append("<div><u>StackTrace</u>:<br /><br />" + responseText.StackTrace + "</div>");
+                $("#dialog").append("<div><u>Message</u>:<br /><br />" + responseText.Message + "</div>");
+            } catch (e) {
+                responseText = xhr.responseText;
+                $("#dialog").html(responseText);
+            }
+            $("#dialog").dialog({
+                title: "jQuery Exception Details",
+                width: 700,
+                buttons: {
+                    Close: function () {
+                        $(this).dialog('close');
+                    }
+                }
+            });
+        }
+                });
+            } else {
+                //Loader(false);
+                alert("FormData is not supported. Upload only .MP4 video. ");
+            };
+        });*@
+        $('#btnUploadvid1').click(function () {
+            debugger;
+            var path = $("#fullVideoPath").val();
+            if (path == "") {
+                alertify.alert("@EventManager1.Resource.ResourceStrings.selectvideo");
+                return false;
+            }
+
+            if (path != "") {
+                ShowUploadProgress();
+                var VideoPth = {
+                    VideoPath: path
+                };
+                //var vid = document.getElementById("videopath1");
+                //var vogg = document.getElementById("videogg1");
+                $('#hdnVideoPath').val(path);
+                // Loader(true);
+                @*$.ajax({
+                    url: '@Url.Action("UploadVideo", "Organizer", new { area = "Organizer" })',
+                    type: "POST",
+                    contentType: false,
+                    processData: false,
+                    data: VideoPth,
+                    success: function (result) {
+                        debugger
+                        for (var i = 0; i < result.length; i++) {
+                            if (result[i] != null)
+                                var vido = result[i]
+                            vid.src = vido;
+                            var arr = vido.split('.');
+                            const newString = vido.replace(arr[arr.length - 1], "ogg");
+                            vogg.src = newString;
+                            var video = document.getElementById("video3");
+                            //video.autoplay = true;
+                            video.load();
+                            //$("#videopath1").attr("src", result[i]);
+                            // Loader(false);
+                            HideUploadProgress();
+                        }
+                    },
+
+
+                    error: function OnError(xhr, errorType, exception) {
+                        var responseText;
+                        $("#dialog").html("");
+                        try {
+                            responseText = jQuery.parseJSON(xhr.responseText);
+                            $("#dialog").append("<div><b>" + errorType + " " + exception + "</b></div>");
+                            $("#dialog").append("<div><u>Exception</u>:<br /><br />" + responseText.ExceptionType + "</div>");
+                            $("#dialog").append("<div><u>StackTrace</u>:<br /><br />" + responseText.StackTrace + "</div>");
+                            $("#dialog").append("<div><u>Message</u>:<br /><br />" + responseText.Message + "</div>");
+                        } catch (e) {
+                            responseText = xhr.responseText;
+                            $("#dialog").html(responseText);
+                        }
+                        $("#dialog").dialog({
+                            title: "jQuery Exception Details",
+                            width: 700,
+                            buttons: {
+                                Close: function () {
+                                    $(this).dialog('close');
+                                }
+                            }
+                        });
+                    }
+                });*@
+            } else {
+                //Loader(false);
+                alert("FormData is not supported. Upload only .MP4 video. ");
+            };
+        });
+        function getExtension(filename) {
+            debugger
+            var parts = filename.split('.');
+            return parts[parts.length - 1];
+        }
+        function isVideo(filename) {
+            debugger
+            var ext = getExtension(filename);
+            switch (ext.toLowerCase()) {
+                case 'mp4':
+                    return true;
+            }
+            return false;
+        }
+        $('#add').click(function () {
+            debugger;
+            //validation and add order items
+            var isAllValid = true;
+            if (!($('#NamerRSVP').val().trim() != '')) {
+                isAllValid = false;
+                $('#NamerRSVPerr').css('visibility', 'visible');
+            }
+            else {
+                $('#NamerRSVPerr').css('visibility', 'hidden');
+            }
+            if (!($('#PhoneRSVP').val().trim() != '')) {
+                isAllValid = false;
+                $('#PhoneRSVPerr').css('visibility', 'visible');
+            }
+            else {
+                $('#PhoneRSVPerr').css('visibility', 'hidden');
+            }
+
+            if (isAllValid) {
+                var $newRow = $('#mainrow').clone().removeAttr('id');
+                $('.name', $newRow).val($('#NamerRSVP').val());
+                $('.phone', $newRow).val($('#PhoneRSVP').val());
+                //Replace add button with remove button
+                $('#add', $newRow).addClass('remove').val('Remove').removeClass('btn-success').addClass('btn-danger');
+
+                //remove id attribute from new clone row
+                $('#NamerRSVP,#PhoneRSVP', $newRow).removeAttr('id');
+                $('.error', $newRow).remove();
+                //append clone row
+                $('#orderdetailsItems').append($newRow);                //clear select data
+                $('#NamerRSVP,#PhoneRSVP').val('');
+            }
+        })
+        $('#orderdetailsItems').on('click', '.remove', function () {
+            $(this).parents('tr').remove();
+        });
+        $('.Publish').on('click', function () {
+            //function Publishevent() {
+            debugger;
+            var isAllValid = validateform();
+            if (isAllValid) {
+                var radioValue = $("input[name='mainpic']:checked").val();
+                var list = [];
+                var img = "../../images/placeholder-image.jpg";
+                var img11 = $('#img1').attr('src');
+                var img1checked = false;
+                if (radioValue == 'img1') { img1checked = true }
+                var img21 = $('#img2').attr('src');
+                var img2checked = false;
+                if (radioValue == 'img2') { img2checked = true }
+                var img31 = $('#img3').attr('src');
+                var img3checked = false;
+                if (radioValue == 'img3') { img3checked = true }
+                var img41 = $('#Streamimg').attr('src');
+                var img4checked = false;
+                if (radioValue == 'Streamimg') { img4checked = true }
+                var img1 = {
+                    URL: $('#img1').attr('src'),
+                    Mul_Type: 1,
+                    Mul_MainPic: img1checked
+                }
+                if (img11 != img)
+                    list.push(img1);
+
+                var img2 = {
+                    URL: $('#img2').attr('src'),
+                    Mul_Type: 1,
+                    Mul_MainPic: img2checked
+                }
+                if (img21 != img)
+                    list.push(img2);
+
+                var img3 = {
+                    URL: $('#img3').attr('src'),
+                    Mul_Type: 1,
+                    Mul_MainPic: img3checked
+                }
+                if (img31 != img)
+                    list.push(img3);
+
+                var Streamimg = {
+                    URL: $('#Streamimg').attr('src'),
+                    Mul_Type: 3,
+                    Mul_MainPic: img4checked
+                }
+                if (img41 != img)
+                    list.push(Streamimg);
+
+                var vid1 = {
+                    URL: $('video').find('Source:first').attr('src'),
+                    Mul_Type: 2
+                }
+                list.push(vid1);
+                var Address = [];
+                var addr = {
+                    longitude: $('#lat').val(),
+                    latitude: $('#lng').val(),
+                    Country: $('#CountryId').val(),
+                    City: $('#CityName').val(),
+                    AddressLine: $('#AddressLine').val(),
+                    ZipCode: $('#ZipCode').val()
+                }
+                Address.push(addr);
+                var rsvp = [];
+                var Rsvp = {
+                    Namer: $('#NamerRSVP').val(),
+                    Phone: $('#PhoneRSVP').val(),
+                }
+                if (Rsvp) {
+                    rsvp.push(Rsvp);
+                }
+                $('#orderdetailsItems tbody tr').each(function (index, ele) {
+                    var Rsvp1 = {
+                        Namer: $('.name', this).val(),
+                        Phone: $('.phone', this).val(),
+                    }
+                    rsvp.push(Rsvp1);
+                })
+                //validate order items
+                debugger;
+                Loader(true);
+                var Register = {
+                    Id: $('#eventid').val(),
+                    BusinessOwner_Id: $('#companyId').val(),
+                    EventName: $('#EventName').val(),
+                    PublishDate: $('#PublishDate').val(),
+                    StartDate: $('#StartDate').val(),
+                    StartTime: $('#StartTime').val(),
+                    EndDate: $('#EndDate').val(),
+                    EndTime: $('#EndTime').val(),
+                    Venue: $('#Venue').val(),
+                    Description: $('#Description').val(),
+                    address_: Address,
+                    Multimedia: list,
+                    Rsvp: rsvp
+                }
+                //$(this).val('Please wait...');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("CreateEvent", "Organizer", new { area = "Organizer" })',
+                    data: '{Register: ' + JSON.stringify(Register) + '}',/* JSON.stringify(Register),*/
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (resp) {
+                        if (resp.result.Code == 200) {
+                            debugger;
+                            //alert('Successfully saved');
+                            //here we will clear the form
+                            list = [];
+                            $('#UserName,#ContactNo,#Email,#Password,#BusinessName,#CountryId,#Address,#ZipCode,#LastName,#FirstName,#PhoneNo,#confPassword').val('');
+                            $('#orderdetailsItems').empty();
+                            alertify.alert("Event Created Successfully.");
+                            Loader(false);
+                            window.location.replace("CreateTicket");
+                        }
+                        else {
+                            Loader(false);
+                            alertify.alert(resp.result.Msg);
+                        }
+                    },
+                    error: function (error) {
+                        Loader(false);
+                        alertify.alert(error);
+                    }
+                });
+            }
+            else { alertify.alert("@EventManager1.Resource.ResourceStrings.allfieldrequired"); }
+
+        });
+        function OnEventChange(element) {
+            // window.location = '/Organizer/ManageEvent/Overview?EventId=' + element.value;
+        }
+        function validateform() {
+            var allvalid = true;
+            if (!($('#EventName').val().trim() != '')) {
+                allvalid = false;
+                $('#Nameerr').css('visibility', 'visible');
+            }
+            else {
+                $('#Nameerr').css('visibility', 'hidden');
+            }
+            debugger;
+            //if (!($('#CountryId').val() < 1)) {
+            //    allvalid = false;
+            //    $('#CountryIderr').css('visibility', 'visible');
+            //}
+            //else {
+            //    $('#CountryIderr').css('visibility', 'hidden');
+            //}
+            if (!($('#AddressLine').val().trim() != '')) {
+                allvalid = false;
+                $('#addresserr').css('visibility', 'visible');
+            }
+            else {
+                $('#addresserr').css('visibility', 'hidden');
+            }
+            if (!($('#Venue').val().trim() != '')) {
+                allvalid = false;
+                $('#Venueerr').css('visibility', 'visible');
+            }
+            else {
+                $('#Venueerr').css('visibility', 'hidden');
+            }
+            if (!($('#CityName').val().trim() != '')) {
+                allvalid = false;
+                $('#Cityerr').css('visibility', 'visible');
+            }
+            else {
+                $('#Cityerr').css('visibility', 'hidden');
+            }
+            if (!($('#Description').val().trim() != '')) {
+                allvalid = false;
+                $('#Descriptionerr').css('visibility', 'visible');
+            }
+            else {
+                $('#Descriptionerr').css('visibility', 'hidden');
+            }
+
+
+            if (allvalid) {
+                return true;
+            }
+            else { return false; };
+            // CountryIderr CountryIderr address_  Venueerr Cityerr
+        }
+    </script>
+
+
+}
+

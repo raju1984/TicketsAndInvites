@@ -1,0 +1,77 @@
+﻿@model  EventManager1.Areas.Organizer.Models.ExceldataModelView
+@using EventManager1.Models
+<div class="modal fade bd-example-modal-lg" id="invitation" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                @{
+                    if (Model != null)
+                    {
+                        <h4 class="modal-title" id="exampleModalTitle">
+                            @Model.EventName<br>
+                            <small class="text-muted">
+                                @Convert.ToDateTime(Model.Datetime).ToString("dd/MM/yyy hh:mm tt"), @Model.Venue
+                            </small>
+                        </h4>
+                    }
+                }
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table id="dtBasicExample" class="table table-striped table-bordered"
+                                       cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Mobile No</th>
+                                            <th>Seat no</th>
+                                            <th>Table no</th>
+                                            <th>Color Code</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            if (Model != null && Model.InvitationDetail != null && Model.InvitationDetail.Count() > 0)
+                                            {
+                                                foreach (var item in Model.InvitationDetail)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @item.Title
+                                                        </td>
+                                                        <td>@item.FirstName @item.LastName</td>
+                                                        <td>@item.EmailAddress</td>
+                                                        <td>@item.MobileNumber</td>
+                                                        <td>@item.SeatNumber</td>
+                                                        <td>@item.TableNumber</td>
+                                                        <td>@item.ColorCode</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark btn-fw" data-dismiss="modal">Close</button>
+                @if (ViewBag.foot == null)
+                {
+                    <button type="button" class="btn btn-outline-primary btn-fw" onclick="SendInvitation()">Send Invitation</button>
+                }
+                </div>
+        </div>
+    </div>
+</div>

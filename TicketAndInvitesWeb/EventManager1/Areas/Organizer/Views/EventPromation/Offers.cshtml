@@ -1,0 +1,344 @@
+﻿@model  EventManager1.Areas.Organizer.Models.OffersModel
+@{
+    ViewBag.Title = "Offer";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+    <style>
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            .content-wrapper {
+                background: #f2edf3;
+                padding: 1.75rem 1.25rem !important;
+            }
+
+            .table-bordered {
+                border: 1px solid #ebedf2 !important;
+            }
+
+            .col-md-4.text-center.borderDottedOnLight {
+                margin: 0 20px;
+            }
+        }
+
+        .form-control {
+            padding: 0.275rem 1.175rem !important;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+    </style>
+}
+
+<div class="content-wrapper">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-bullhorn menu-icon"></i>
+            </span>
+            Offers
+        </h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Select your Discount in % below and generate the coupon code.</p>
+            @using (Html.BeginForm("PostOffers", "EventPromation", FormMethod.Post))
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select class="form-control" id="EventId" name="EventId">
+                                <option value="0">Event</option>
+                                @if (Model != null && Model.Events != null)
+                                {
+                                    foreach (var item in Model.Events)
+                                    {
+                                        <option value="@item.Id">@item.Text</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select class="form-control" name="TicketType" id="TicketType">
+                                <option value="0">Ticket Type</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="hidden" name="OfferPageCategory" id="OfferPageCategory" value="1" />
+                        <div class="form-group">
+                            <input type="date" class="form-control d-inline-block" name="startdate" required id="startdate" onchange="OndateChange()"
+                                   aria-describedby="emailHelp" placeholder="Start Date">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input type="date" class="form-control d-inline-block" name="Enddate" required id="Enddate" onchange="OndateChange()"
+                                   aria-describedby="emailHelp" placeholder="End Date">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="CoupenCode" name="CoupenCode" placeholder="Coupon Code" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select class="form-control" name="OfferType" id="OfferType">
+                                <option value="1">Percentage</option>
+                                <option value="2">Fixed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <input type="number" id="valus" required name="valus" aria-label="" placeholder="ex. 10" value=""
+                                       class="form-control">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group">
+                                    <input type="number" id="NoofCoupans" required name="NoofCoupans" aria-label="" placeholder="No of Coupans"
+                                           class="form-control">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                </div>
+
+                <div>
+                    <button type="submit" onclick="return validate()"
+                            class="btn btn-gradient-danger btn-rounded btn-fw">
+                        Generate
+                    </button>
+                </div>
+            }
+            <div class="mt-4 collapse" id="collapseExample">
+                <div class="card card-body">
+                    <p>
+                        The genrated coupon code for 10% discount is <b>SIRNBXC</b> &nbsp;
+                        <i class="mdi mdi-content-copy icon-md"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-5" style=" margin-top 30px;">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Event Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Discount</th>
+                                    <th>Coupon Code</th>
+                                    <th>No. of used Coupon</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.ExistingOffers != null && Model.ExistingOffers.Count() > 0)
+                                {
+                                    foreach (var item in Model.ExistingOffers)
+                                    {
+                                        if (item.OfferPageCategory == 1)
+                                        {
+                                            <tr id="@item.Id">
+                                                <td style="max-width:200px">@item.EventName</td>
+                                                <td>@{var startdate = Convert.ToDateTime(item.startdate).ToString("dd-MM-yyyy"); @startdate}</td>
+                                                <td>@{var enddate = Convert.ToDateTime(item.enddate).ToString("dd-MM-yyyy"); @enddate}  </td>
+                                                <td>
+                                                    @item.discount @if (item.Offertype == 1)
+                                                    {<span>%</span>}
+                                                    else
+                                                    { <span>Gh₵</span>}
+                                                </td>
+                                                <td><input type="text" value="@item.coupencode" id="@item.coupencode" style="background-color: transparent;border: 0;" disabled></td>
+                                                <td>@item.NoOfUsedCoupon</td>
+                                                <td>
+                                                    @*<span onclick="CopyCode('@item.coupencode')">
+                                                            <i class="mdi mdi-content-copy icon-md"></i>
+
+                                                        </span> &nbsp;*@ @*<span onclick="CopyCode('@item.coupencode')">
+                                                            <i class="mdi mdi-content-copy icon-md"></i>
+
+                                                        </span>*@
+                                                        @*<a href="#" onclick="LoadCoupons('@item.Id')">
+                                                                <i class="mdi mdi mdi-arrange-bring-forward icon-md"></i>
+
+                                                            </a>*@@*<a href="#" onclick="LoadCoupons('@item.Id')">
+                                                                <i class="mdi mdi mdi-arrange-bring-forward icon-md"></i>
+
+                                                            </a>*@
+                                                            <a href="#" onclick="LoadOffers('@item.Id')">
+                                                                <i class="mdi mdi mdi-lead-pencil icon-md"></i>
+
+                                                            </a>&nbsp;
+                                                            <a href="#" onclick="DeleteOffers('@item.Id')">
+                                                                <i class="mdi mdi-delete icon-md"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                            }
+
+                                                        }
+
+                                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+<div id="divoffersedit">
+
+</div>
+<div id="divCoupons">
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#EventId').change(function () {
+            debugger
+            var EvntId = $('#EventId').val();
+            var E = {
+                EventId: EvntId,
+            };
+            $.ajax({
+                type: "POST",
+                url: '/Organizer/EventPromation/bindEventTicket',
+                data: JSON.stringify(E),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response != null) {
+                        debugger
+                        $('#TicketType').empty();
+                        $(response).each(function (index, item) {
+                            $('#TicketType').append($("<option>").val(item.Id).text(item.Text));
+                        });
+                    }
+                },
+
+            });
+
+        })
+    })
+    function validate()
+    {
+        var offertype = $("#OfferType").text;
+        var NoofCoupans = $("#NoofCoupans").text;
+        //var EventId = $("#EventId").val();
+        if(offertype==0)
+        {
+            alertify.alert("Please select offer type ");
+            return false;
+        }
+        //if (parseInt(NoofCoupans) < 1) {
+        //    alertify.alert("Please enter a valid number of coupans.");
+        //    return false;
+        //}
+        if (parseInt(EventId) < 1) {
+            alertify.alert("Please Select an Event.");
+            return false;
+        }
+    }
+    function DeleteOffers(Id)
+    {
+        $.ajax({
+            url: '/Organizer/EventPromation/DeleteOffers',
+            type: "Post",
+            data: { OfferId: Id},
+            success: function (response) {
+                if (response.Code==200)
+                {
+                    var td = "#" + Id;
+                    $(td).remove();
+                }
+                else
+                {
+                    alertify.alert(response.Msg);
+                }
+
+            },
+            async: true,
+            error: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+    function LoadOffers(Id) {
+        Loader(true);
+        $.ajax({
+            url: '/Organizer/EventPromation/EditOffers?OfferId=' + Id,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                $('#divoffersedit').html(result);
+                $('#Offers').modal('show');
+                Loader(false);
+            },
+            error: function (xhr, status) {
+                alert(status);
+                Loader(false);
+            }
+        })
+    }
+    function LoadCoupons(Id) {
+        Loader(true);
+        $.ajax({
+            url: '/Organizer/EventPromation/GetCoupons?OfferId=' + Id,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                $('#divCoupons').html(result);
+                $('#Offers').modal('show');
+                Loader(false);
+            },
+            error: function (xhr, status) {
+                alert(status);
+                Loader(false);
+            }
+        })
+    }
+    function CopyCode(code) {
+        debugger;
+        /* Get the text field */
+        var tdid = "#" + code;
+        var copyText = document.getElementById(code);// $(tdid).val();
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+    }
+</script>

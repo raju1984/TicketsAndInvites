@@ -1,0 +1,347 @@
+﻿
+@{
+    ViewBag.Title = "Status";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+}
+<style>
+
+    button.btn.btn-success.text-white.borderR50.btn-lg {
+        padding: 20px;
+        border-radius: 50% !important;
+        width: 90px !important;
+        height: 90px !important;
+    }
+    button.btn.btn-danger.text-white.borderR50.btn-lg {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+    }
+    .btn i {
+        font-size: 2rem;
+    }
+    .message {
+        background: #e8dc82;
+        padding: 10px 20px;
+        border: 1px solid #bbab33;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+        .message ul {
+            margin: 0px;
+        }
+
+            .message ul li {
+                color: #343a40;
+            }
+
+    .card {
+        border: 0;
+        margin: 0 0px;
+        padding: 60px 0 20px 0;
+    }
+
+    .main-panel {
+        background: #f2edf3;
+    }
+
+    .lds-spinner {
+        color: official;
+        display: inline-block;
+        position: relative;
+        width: 64px;
+        height: 64px;
+    }
+
+        .lds-spinner div {
+            transform-origin: 32px 32px;
+            animation: lds-spinner 1.2s linear infinite;
+        }
+
+            .lds-spinner div:after {
+                content: " ";
+                display: block;
+                position: absolute;
+                top: 3px;
+                left: 29px;
+                width: 5px;
+                height: 14px;
+                border-radius: 20%;
+                background: #21ab64;
+            }
+
+            .lds-spinner div:nth-child(1) {
+                transform: rotate(0deg);
+                animation-delay: -1.1s;
+            }
+
+            .lds-spinner div:nth-child(2) {
+                transform: rotate(30deg);
+                animation-delay: -1s;
+            }
+
+            .lds-spinner div:nth-child(3) {
+                transform: rotate(60deg);
+                animation-delay: -0.9s;
+            }
+
+            .lds-spinner div:nth-child(4) {
+                transform: rotate(90deg);
+                animation-delay: -0.8s;
+            }
+
+            .lds-spinner div:nth-child(5) {
+                transform: rotate(120deg);
+                animation-delay: -0.7s;
+            }
+
+            .lds-spinner div:nth-child(6) {
+                transform: rotate(150deg);
+                animation-delay: -0.6s;
+            }
+
+            .lds-spinner div:nth-child(7) {
+                transform: rotate(180deg);
+                animation-delay: -0.5s;
+            }
+
+            .lds-spinner div:nth-child(8) {
+                transform: rotate(210deg);
+                animation-delay: -0.4s;
+            }
+
+            .lds-spinner div:nth-child(9) {
+                transform: rotate(240deg);
+                animation-delay: -0.3s;
+            }
+
+            .lds-spinner div:nth-child(10) {
+                transform: rotate(270deg);
+                animation-delay: -0.2s;
+            }
+
+            .lds-spinner div:nth-child(11) {
+                transform: rotate(300deg);
+                animation-delay: -0.1s;
+            }
+
+            .lds-spinner div:nth-child(12) {
+                transform: rotate(330deg);
+                animation-delay: 0s;
+            }
+
+    @@keyframes lds-spinner {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+</style>
+<div class="container-fluid bgContainer" id="paywaiting">
+    <div class="row">
+        <div class="container">
+            <div class="row  mt-5 mb-5" style="margin-bottom:11rem !important;">
+                <div class="col-md-12 my-auto">
+                    <div class="card d-flex">                        
+                        <div class="card-body">
+                            <div class="mb-3 text-center">                                
+                                <div style="margin-bottom:30px; text-align:center ">
+                                    <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                                </div>
+                                <h4 class="pt-2">
+                                    <div class="message">
+                                        Your payment is pending for approval. You have to approve  the payment from your mobile money.
+                                    </div>
+                                 </h4>
+                                <h5>Here's how to approve a payment request:</h5>
+                                <ul>
+                                    <li>
+                                        Dial *170# and select Option 10, My Wallet.
+                                    </li>
+                                    <li>Select Option 2 for My Approvals.</li>
+                                    <li>Enter PIN to get your Pending Approval List.</li>
+                                    <li>Select pending transaction to approve.</li>
+                                    <li>Select Option 1 YES to approve the transaction OR Option 2 NO to reject the transaction</li>
+                                    
+                                </ul>  
+                                <p>Customer receives an SMS as confirmation for a successful transaction.</p>
+                                <p>All services which require debits on a customer's wallet will have to go through the approval process before it can be completed.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bgContainer" id="paystatus">
+    <div class="row">
+        <div class="container">
+            <div class="row  mt-5 mb-5" style="margin-bottom:11rem !important;">
+                <div class="col-md-12 my-auto">
+                    <div class="card d-flex">
+                        <div class="row" style="margin:0 auto">
+                            <div class="col-md-12">
+                                <div class="message">
+                                    <p id="pending">Thanks for your Payment. Your Payment status of Gh₵@ViewData["total"] is Pending . </p>
+                                    <p id="Success">Thanks for your Payment. Your Payment of Gh₵@ViewData["total"] has been received.</p>
+                                    <p id="fail">Your Payment of Gh₵@ViewData["total"] is Failed. Please try again.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3 text-center">
+                                <div id="divSuccess" style="display:none">
+                                    <div>
+                                        <button class="btn btn-success text-white borderR50 btn-lg">
+                                            <i class="fa fa-check" style="margin-left: -10px !important;"></i>
+                                        </button>
+                                        <br />
+                                    </div>
+                                    <h4 class="pt-2"> Payment Status : Success </h4>
+                                    <h5>Transaction Id : <label id="transaction"></label> </h5>
+                                    <h4>Total Amount : <label id="total"></label></h4>
+                                    <h4>
+                                        <a href="@Url.Action("InvitationOverView","InvitationUser",new { area="User"})">View Invitation</a>
+                                    </h4>
+                                    <p class="text-muted">
+                                        <label id="messagesuccess"></label>
+                                    </p>
+
+                                </div>
+                                <div id="divPending" style="display:none">
+                                    <div>
+                                        <button class="btn btn-success text-white borderR50 btn-lg">
+                                            <i class="fa fa-check" style="margin-left:-10px !important;"></i>
+                                        </button>
+                                    </div>
+                                    <h4 class="pt-2"> Payment Status : Pending </h4>
+                                    <h5>Transaction Id : <label id="transactionp"></label> </h5>
+                                    <h4>Total Amount : <label id="totalp"></label></h4>
+                                    <p class="text-muted">
+                                        <label id="messagePending"></label>
+                                    </p>
+                                    <h4><a href="@Url.Action("InvitationOverView","InvitationUser",new {area="user",EventId=Request.QueryString["eventId"] })" class="btn btn-primary" style="width: 190px; margin: auto;">Check Status</a></h4>
+
+                                </div>
+
+                                <div id="divFail" style="display:none">
+                                    <div>
+                                        <button class="btn btn-danger text-white borderR50 btn-lg">
+                                            <i class="fa fa-times" aria-hidden="true" style="margin-left:-10px !important;"></i>
+                                        </button>
+                                    </div>
+                                    <h4 class="pt-2"> Transaction Failed </h4>
+                                    <h5>Transaction Id : <label id="transactionf"></label> </h5>
+                                    <h4>Total Amount : <label id="totalf">@ViewData["total"]</label></h4>
+                                    <h4 id="tryagan"><a href="@Url.Action("Index","InvitationUser",new {area="user" })" class="btn-default"  style="color:aliceblue!important">Try Again</a></h4>
+                                    <p class="text-muted">
+                                        <label id="messageFail"></label>
+                                    </p>
+                                    <p class="text-muted" style="text-align:left" id="failreason">
+                                        The transaction has failed due to one of the following reasons:
+                                        <ul id="failreason1">
+                                            <li>
+                                                Your phone was unreachable due to lack of signal or temporary problems with your mobile phone network.
+                                            </li>
+                                            <li>
+                                                Your mobile phone network has put a premium messaging or carrier billing block on your mobile number.
+                                            </li>
+                                            <li>
+                                                Your pre-paid/pay as you go phone is low on credits.  Some mobile phone companies require a minimum amount of funds additional to the amount you request for the transaction to complete.
+                                            </li>
+                                        </ul>
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var status = '@ViewData["Status"]';  
+        var trx = '@ViewBag.trxId';
+        debugger;
+        if (trx != '')
+        {
+            if (status == "SUCCESSFUL") {
+                $('#Success').css("display", "block"); $('#pending').css("display", "none"); $('#fail').css("display", "none");
+                $('#divFail').css("display", "none"); $('#divSuccess').css("display", "block"); $('#divPending').css("display", "none");
+                $('#messagesuccess').text('@ViewBag.msg'); $('#total').text('@ViewBag.total'); $('#transaction').text('@ViewBag.trxId');
+            }
+            else {
+                $('#fail').css("display", "block"); $('#pending').css("display", "none"); $('#Success').css("display", "none");
+                $('#divFail').css("display", "block"); $('#divSuccess').css("display", "none"); $('#divPending').css("display", "none");
+                $('#failreason').css("display", "none"); $('#failreason1').css("display", "none"); $('#tryagan').css("display", "none");
+                $('#messageFail').text('@ViewBag.msg'); 
+                //$('#totalf').text(result.total);
+                $('#transactionf').text('@ViewBag.trxId');
+            }
+            $('#paystatus').css("display", "block");
+            $('#paywaiting').css("display", "none");
+        }
+        else if (status == 'fail') {
+            $('#paystatus').css("display", "block");
+            $('#divFail').css("display", "block");
+            $('#fail').css("display", "block");            
+            $('#paywaiting').css("display", "none");            
+        }
+        else {
+            $('#paystatus').css("display", "none");
+            $('#paywaiting').css("display", "block");
+            setTimeout(function () { checkStatus(); }, 5000);
+            
+        }
+
+    })
+    var num = 0;
+    function checkStatus() {
+        $.ajax({
+                        url: '@Url.Action("CheckPayStatus", "Transaction", new { area = "User" })',
+                        type: "POST",
+                        contentType: false, // Not to set any content header
+                        processData: false, // Not to process data
+                        data: {},
+                        success: function (result) {
+                            if (result.status == "PENDING") {
+                                if (num == 1) { }
+                                else {
+                                    checkStatus();
+                                    num = num + 1;
+                                }
+                                $('#pending').css("display", "block");
+                                $('#Success').css("display", "none"); $('#fail').css("display", "none");
+                                $('#divFail').css("display", "none"); $('#divSuccess').css("display", "none"); $('#divPending').css("display", "block");
+                                $('#messagePending').text(result.message); $('#totalp').text(result.total); $('#transactionp').text(result.TransId);
+                            }
+                            else if (result.status == "SUCCESSFUL") {
+                                $('#Success').css("display", "block"); $('#pending').css("display", "none"); $('#fail').css("display", "none");
+                                $('#divFail').css("display", "none"); $('#divSuccess').css("display", "block"); $('#divPending').css("display", "none");
+                                $('#messagesuccess').text(result.message); $('#total').text(result.total); $('#transaction').text(result.TransId);
+                            }
+                            else {
+                                $('#fail').css("display", "block"); $('#pending').css("display", "none"); $('#Success').css("display", "none");
+                                $('#divFail').css("display", "block"); $('#divSuccess').css("display", "none"); $('#divPending').css("display", "none");
+                                $('#messageFail').text(result.message); $('#totalf').text(result.total); $('#transactionf').text(result.TransId);
+                            }
+                            $('#paystatus').css("display", "block");
+                            $('#paywaiting').css("display", "none");
+                        },
+                        error: function (err) {
+                            alert(err.statusText);
+                        }
+                    });
+    }
+</script>

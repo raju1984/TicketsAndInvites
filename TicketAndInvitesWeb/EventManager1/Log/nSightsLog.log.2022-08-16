@@ -1,0 +1,443 @@
+2022-08-16 14:47:03,586 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/sw3v9nnz7m48s8o","access_code":"sw3v9nnz7m48s8o","reference":"c2ba008a_d051_4c9e_abc7_7a26d4ba6aee"}}
+2022-08-16 14:47:24,351 ERROR MonitoringLogger - PayStack response in Callback reference:  c2ba008a-d051-4c9e-abc7-7a26d4ba6aee
+2022-08-16 14:47:40,429 ERROR MonitoringLogger - Api response in Callback response :  {"status":true,"message":"Verification successful","data":{"id":2027238971,"domain":"test","status":"success","reference":"c2ba008a_d051_4c9e_abc7_7a26d4ba6aee","amount":10000,"message":null,"gateway_response":"Successful","paid_at":"2022_08_16T09:17:23.000Z","created_at":"2022_08_16T09:17:04.000Z","channel":"card","currency":"GHS","ip_address":"122.176.47.222","metadata":{"custom_fields":{"display_name":"Cancel","variable_name":"cancel_action","value":"http://localhost:62110/Payment/PayStpaystackCancleCallback"}},"log":{"start_time":1660641427,"time_spent":16,"attempts":1,"errors":0,"success":true,"mobile":false,"input":[],"history":[{"type":"action","message":"Attempted to pay with card","time":13},{"type":"success","message":"Successfully paid with card","time":16}]},"fees":195,"fees_split":null,"authorization":{"authorization_code":"AUTH_qdthenlavr","bin":"408408","last4":"4081","exp_month":"12","exp_year":"2030","channel":"card","card_type":"visa ","bank":"TEST BANK","country_code":"GH","brand":"visa","reusable":true,"signature":"SIG_mFkgYdLPHWaecI0s7bPG","account_name":null,"receiver_bank_account_number":null,"receiver_bank":null},"customer":{"id":89904194,"first_name":null,"last_name":null,"email":"retanshgautam@gmail.com","customer_code":"CUS_aq3h1a0bl72kq5i","phone":null,"metadata":null,"risk_action":"default","international_format_phone":null},"plan":null,"split":{},"order_id":null,"paidAt":"2022_08_16T09:17:23.000Z","createdAt":"2022_08_16T09:17:04.000Z","requested_amount":10000,"pos_transaction_data":null,"source":null,"fees_breakdown":null,"transaction_date":"2022_08_16T09:17:04.000Z","plan_object":{},"subaccount":{}}}
+2022-08-16 14:47:58,780 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-08-16 14:47:58,792 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 14:48:02,947 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ) in E:\Projects\Work\vsProcessor\EventManager1\Models\CommonSMSCallF.cs:line 34
+2022-08-16 16:25:45,864 ERROR MonitoringLogger - payStack catch exception :  System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at EventManager1.Controllers.PaymentController.PayStackPayment(Int32 hfeventid) in E:\Projects\Work\vsProcessor\EventManager1\Controllers\PaymentController.cs:line 388
+2022-08-16 16:41:07,172 ERROR MonitoringLogger - payStack catch exception :  System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at EventManager1.Controllers.PaymentController.PayStackPayment(Int32 hfeventid) in E:\Projects\Work\vsProcessor\EventManager1\Controllers\PaymentController.cs:line 388
+2022-08-16 16:44:53,275 ERROR MonitoringLogger - payStack catch exception :  System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at EventManager1.Controllers.PaymentController.PayStackPayment(Int32 hfeventid) in E:\Projects\Work\vsProcessor\EventManager1\Controllers\PaymentController.cs:line 388
+2022-08-16 17:12:33,258 ERROR MonitoringLogger - PostTicket page  called3439name Gautam
+2022-08-16 17:12:33,294 ERROR MonitoringLogger - PostTicket page  called
+2022-08-16 17:20:08,631 ERROR MonitoringLogger - PostTicket page  called3439name Gautam
+2022-08-16 17:20:08,643 ERROR MonitoringLogger - PostTicket page  called
+2022-08-16 17:25:07,841 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -GautamEmailId :-gautamretansh@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22090TicketId :4256
+2022-08-16 17:25:26,248 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-16 17:25:26,645 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 17:25:28,890 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :gautamretansh@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Gautam,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/8206614256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-16 17:27:19,019 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -GautamEmailId :-gautamretansh@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22090TicketId :4256
+2022-08-16 17:27:41,826 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-16 17:27:47,152 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 17:27:48,063 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :gautamretansh@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Gautam,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/6208014256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-16 17:27:59,831 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-16 17:28:14,767 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 17:30:54,356 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :gautamretansh@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Gautam,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/6208014256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-16 17:35:28,053 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -GautamEmailId :-gautamretansh@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22089TicketId :4256
+2022-08-16 17:35:30,078 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-16 17:35:31,861 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 17:35:34,604 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :gautamretansh@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Gautam,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/6429374256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-16 17:35:36,624 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -GautamEmailId :-gautamretansh@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22088TicketId :4256
+2022-08-16 17:35:38,741 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-16 17:35:39,981 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 17:35:41,967 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :gautamretansh@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Gautam,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/1152624256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-16 17:35:44,034 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -GautamEmailId :-gautamretansh@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22087TicketId :4256
+2022-08-16 17:35:45,029 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-16 17:35:45,969 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 17:35:47,924 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :gautamretansh@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Gautam,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/4686604256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-16 17:35:49,237 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -GautamEmailId :-gautamretansh@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22084TicketId :4256
+2022-08-16 17:35:50,173 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-16 17:35:50,814 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 17:35:52,306 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :gautamretansh@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Gautam,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/8983954256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-16 17:49:53,288 ERROR MonitoringLogger - PostTicket page  called3439name qwerty
+2022-08-16 17:49:53,316 ERROR MonitoringLogger - PostTicket page  called
+2022-08-16 17:54:52,869 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -qwertyEmailId :-qwerty@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22091TicketId :4256
+2022-08-16 17:55:27,757 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-16 17:55:31,735 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 17:56:22,384 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :qwerty@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello qwerty,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/0686564256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-16 18:13:29,395 ERROR MonitoringLogger - PostTicket page  called3439name Retansh
+2022-08-16 18:13:29,415 ERROR MonitoringLogger - PostTicket page  called
+2022-08-16 18:13:35,081 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -RetanshEmailId :-retanshgautam@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22092TicketId :4256
+2022-08-16 18:13:36,012 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-16 18:13:36,725 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 18:13:39,997 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/2176404256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-16 18:13:42,760 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -RetanshEmailId :-retanshgautam@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22085TicketId :4256
+2022-08-16 18:13:44,006 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-16 18:13:44,736 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 18:13:46,863 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/0105234256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-16 18:13:47,888 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -RetanshEmailId :-retanshgautam@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22083TicketId :4256
+2022-08-16 18:13:48,623 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-16 18:13:49,952 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 18:13:52,319 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/7815904256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-16 18:13:53,736 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -RetanshEmailId :-retanshgautam@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22082TicketId :4256
+2022-08-16 18:13:54,385 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-16 18:13:54,687 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 18:13:56,862 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/0859524256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-16 18:13:58,423 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- 6036782240firstname: -RetanshEmailId :-retanshgautam@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22078TicketId :2240
+2022-08-16 18:13:59,069 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-08-16 18:14:00,033 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-16 18:14:02,694 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending Shining stars scheduled for 06/08/2022 07:19PM  <span>at Volta Palace, Accera</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=Volta Palace, Accera" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/6036782240.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/logomail.png" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Mr Deep <br>
+            <span>94651125699</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>

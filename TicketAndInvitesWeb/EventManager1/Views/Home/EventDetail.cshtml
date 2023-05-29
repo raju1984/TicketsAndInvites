@@ -1,0 +1,1142 @@
+﻿@model EventManager1.Models.IndexView
+@using EventManager1.Models
+@{
+    ViewBag.Title = "EventDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+
+    <style>
+        .Info-bg {
+            padding: 20px;
+        }
+        .Viewbtn {
+            color: #f00606 !important;
+            text-decoration:underline !important;
+        }
+        .small-btn {
+            background: #fb0000;
+            color: #fff;
+            margin: auto;
+            padding: 10px 20px;
+        }
+        #btnacnhr {
+            background: #fb0000;
+            color: #fff;
+            border:none;
+        }
+        .btnacnhr {
+            background: #fb0000;
+            color: #fff;
+            border: none;
+        }
+        .btnacnhr:hover {
+            background: #fb0000;
+            color: #fff;
+            border: none;
+        }
+        div#Logindiv {
+            background: #000;
+        }
+        div#Infodiv {
+            background: #000;
+        }
+        div#Registerdiv {
+            background: #000;
+        }
+        .text-success {
+            color: #fb0000 !important;
+        }
+            .small-btn:hover {
+                background: #fb0000;
+                color: #fff !important;
+                border: none;
+            }
+        @@media only screen and (min-width:320px) and (max-width:480px){
+            .flex2 {
+                display: contents !important;
+                flex-direction: column;
+            }
+            .borderOnLight {
+                border: 1px solid #cecdcd;
+                margin: 0 4px;
+            }
+            .largeText {
+                font-size: 1.7em;
+            }
+            .mb-1 {
+                margin-bottom: 0rem !important;
+            }
+            .mt-1 {
+                margin-top: 0rem !important;
+            }
+            p{margin-bottom:0 !important}
+        }
+        a#details {
+            font-family: poppins;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .mb-4 {
+            margin-bottom: 1.5rem !important;
+            font-family: poppins;
+        }
+        h4, h4 {
+            font-size: 1rem !important;
+        }
+        .mb-2 {
+            margin-bottom: .5rem !important;
+            font-family: poppins;
+            font-weight: 300;
+            line-height: 23px;
+            color: #fff;
+            text-align: justify;
+        }
+        .bgContainer i {
+            color: #fff;
+        }
+        .bgContainer {
+            background-color: #d8d7d7;
+            padding-bottom: 40px;
+            font-family: poppins;
+            color: #fff;
+        }
+
+        .img-responsive {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .about-container p {
+            line-height: 26px;
+            font-size: 14px;
+        }
+
+        .title.classic {
+            line-height: 40px;
+            height: auto;
+            font-family: 'Raleway';
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #323232;
+            font-size: 26px;
+        }
+
+        .heading {
+            padding-bottom: 16px;
+            margin-top: 10px;
+        }
+
+        #about {
+            background: #fff;
+            padding: 60px 0;
+        }
+
+        .section-header h3 {
+            font-size: 36px;
+            color: #283d50;
+            text-align: center;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .content {
+            background: #fff;
+        }
+
+        .about-container p {
+            line-height: 26px;
+        }
+
+        .icon-box {
+            background: #fff;
+            background-size: cover;
+            padding: 0 0 30px 0;
+        }
+
+            .icon-box .icon {
+                float: left;
+                background: #fff;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -webkit-flex-direction: column;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                text-align: center;
+                border-radius: 50%;
+                border: 2px solid #007bff;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .icon-box .title {
+                margin-left: 80px;
+                font-weight: 600;
+                margin-bottom: 5px;
+                font-size: 18px;
+                color: #333;
+            }
+
+        .description {
+            margin-left: 80px;
+            line-height: 24px;
+            font-size: 14px;
+        }
+
+        .icon-box .title a {
+            color: #283d50;
+        }
+
+        .section-header p {
+            text-align: center;
+            margin: auto;
+            font-size: 15px;
+            padding-bottom: 60px;
+            color: #556877;
+            width: 50%;
+        }
+
+        address {
+            margin-bottom: 4px;
+        }
+
+        #banner-area {
+            position: relative;
+        }
+
+        .icon-box .icon {
+            background: #007bff;
+        }
+
+            .icon-box .icon i {
+                color: #fff !important;
+                font-size: 18px;
+            }
+
+        .parallax-overlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: url(images/overaly.png);
+        }
+
+        .banner-title-content {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: 100%;
+        }
+
+        .breadcrumb > li {
+            display: inline-block;
+        }
+
+            .breadcrumb > li + li:before {
+                padding: 0 5px;
+                color: #ccc;
+                content: "/\00a0";
+            }
+
+        .banner-title-content .breadcrumb {
+            background: none;
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 8px 15px;
+            margin-bottom: 20px;
+            list-style: none;
+            display: block;
+        }
+
+        .banner-title-content h2 {
+            color: #fff;
+            font-size: 36px;
+            line-height: 40px;
+            font-weight: 400;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        #contact .card:hover i,
+        #contact .card:hover h4 {
+            color: #87d37c;
+        }
+
+        #about .about-container .icon-box .icon {
+            background: #007bff;
+        }
+
+            #about .about-container .icon-box .icon i {
+                color: #fff !important;
+                font-size: 24px;
+            }
+
+        .career p {
+            text-align: justify;
+        }
+
+        .detail p {
+            text-align: justify;
+        }
+
+        @@media screen and (min-width: 768px) {
+            .carousel-cell img {
+                height: 300px;
+            }
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            background: #0000004d;
+        }
+        .navbar a {
+            color: #fff !important;
+        }
+        .btn-gradient-primary {
+            background: #fb0000 !important;
+            color: #fff !important;
+        }
+        .bgWhite {
+            background: #fff;
+        }
+
+        .navBookingTicket a.nav-link.active {
+            border: none;
+            color: #fff;
+            background-color: #003e80;
+            font-weight: 600;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .show > .nav-link {
+            background: transparent;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+
+        .text-success {
+            color: #21ab64;
+        }
+
+        .boxShow {
+            border: 1px solid #ccc;
+            padding: 20px;
+            color:#fff;
+        }
+
+        .right-form {
+            display: none;
+            position: absolute !important;
+            float: none !important;
+            width: 350px;
+            top: 65px;
+            right: 7%;
+            border: 1px solid #999;
+            background: #FFFFFE;
+            padding: 30px;
+            border-radius: 5px;
+            z-index: 111;
+        }
+
+        .carousel-item img {
+            object-fit: unset;
+        }
+    </style>}
+    <div class="container-fluid bgContainer pb-5">
+        <div class="right-form" id="showBox">
+            <div class="form-group">
+                <input type="text" id="txtname" name="looking for" class="form-control" placeholder="Event">
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtplace" name="looking for" class="form-control" placeholder="Place Name">
+            </div>
+            <a href="javascript:" onclick="SearchEvent()" class="btn btn-default">Search</a>
+        </div>
+        @{
+            if (Model != null && !string.IsNullOrEmpty(Model.EventName))
+            {
+                <div class="row  bg-normal">
+                    <div class="container">
+                        <div class="row" style="margin-top:65px">
+                            <div class="col-md-12 noPadding z-index1">
+                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel"
+                                     style="height: 400px;overflow: hidden;">
+                                    <div class="carousel-inner">
+                                        @{
+                                            var images = Model.Images != null ? Model.Images.Where(a => a.MulType == 1).ToList() : null;
+                                            if (images != null)
+                                            {
+
+                                                int z = images.FindIndex(y => y.mainpic == true);
+                                                if (z == 0)
+                                                {
+                                                    <div class="carousel-item active">
+                                                        <img src="@images[0].Url" class="d-block w-100" alt="@Path.GetFileName(images[0].Url)">
+                                                    </div>
+                                                    if (1 < images.Count())
+                                                    {
+                                                        <div class="carousel-item">
+                                                            <img src="@images[1].Url" class="d-block w-100" alt="@Path.GetFileName(images[1].Url)">
+                                                        </div>
+                                                    }
+                                                    if (2 < images.Count())
+                                                    {
+                                                        <div class="carousel-item">
+                                                            <img src="@images[2].Url" class="d-block w-100" alt="@Path.GetFileName(images[2].Url)">
+                                                        </div>
+                                                    }
+                                                }
+                                                else if (z == 1)
+                                                {
+                                                    <div class="carousel-item active">
+                                                        <img src="@images[1].Url" class="d-block w-100" alt="@Path.GetFileName(images[1].Url)">
+                                                    </div>
+                                                    if (2 < images.Count())
+                                                    {
+                                                        <div class="carousel-item">
+                                                            <img src="@images[2].Url" class="d-block w-100" alt="@Path.GetFileName(images[2].Url)">
+                                                        </div>
+                                                    }
+                                                    if (images[0] != null)
+                                                    {
+                                                        <div class="carousel-item">
+                                                            <img src="@images[0].Url" class="d-block w-100" alt="@Path.GetFileName(images[0].Url)">
+                                                        </div>
+                                                    }
+                                                }
+                                                else if (z == 2)
+                                                {
+                                                    <div class="carousel-item active">
+                                                        <img src="@images[2].Url" class="d-block w-100" alt="@Path.GetFileName(images[2].Url)">
+                                                    </div>
+                                                    if (images[0] != null)
+                                                    {
+                                                        <div class="carousel-item">
+                                                            <img src="@images[0].Url" class="d-block w-100" alt="@Path.GetFileName(images[0].Url)">
+                                                        </div>
+                                                    }
+                                                    if (images[1] != null)
+                                                    {
+                                                        <div class="carousel-item">
+                                                            <img src="@images[1].Url" class="d-block w-100" alt="@Path.GetFileName(images[1].Url)">
+                                                        </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    int x = 0;
+                                                    foreach (var imgitem in images)
+                                                    {
+                                                        if (x == 0)
+                                                        {
+
+                                                            <div class="carousel-item active">
+                                                                <img src="@imgitem.Url" class="d-block w-100" alt="@Path.GetFileName(imgitem.Url)">
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="carousel-item">
+                                                                <img src="@imgitem.Url" class="d-block w-100" alt="@Path.GetFileName(imgitem.Url)">
+                                                            </div>
+                                                        }
+                                                        x = x + 1;
+                                                    }
+                                                }
+
+
+
+                                            }
+                                            else
+                                            {
+                                                <div class="carousel-item active">
+                                                    <img src="/images/banner3.png" class="d-block w-100" alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="/images/banner2.jpg" class="d-block w-100" alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="/images/banner1.jpg" class="d-block w-100" alt="...">
+                                                </div>
+                                            }
+                                        }
+
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                                       data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                                       data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container pt-2 pb-2">
+                    <div class="row" data-spy="scroll" data-target="#navbar-example2" data-offset="500">
+
+                        <div class="col-md-12 marginUpPaddingDown">
+                            <div class="row noMargin">
+                                <div class="col-md-8">
+                                    <nav id="navbar-example2" class="navbar navbar-light">
+                                        <ul class="nav nav-pills">
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("Summary","ev", new { area = "", Id = ViewBag.tic })" class="btn btn-success small-btn">Watch</a>
+                                                @*<button class="btn btn-success small-btn " type="button" onclick="LoadAllTicket('@Model.Id')" style="padding: .375rem 3rem">
+                                                    Grab your ticket
+                                                </button>*@
+                                                @*<a class="nav-link active" href="#overview">Overview</a>*@
+                                            </li>
+                                            <li class="nav-item">
+                                               @* <a class="nav-link" href="#price">Price & Offers</a>*@
+                                            </li>
+                                            @if (Model.EventType == 0) { 
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#location">Location</a>
+                                            </li>}
+                                        </ul>
+                                    </nav>
+                                    <hr class="noMargin">
+                                    <div class="col-md-12" id="overview">
+                                        
+                                        <h2 class="text-success">@Model.EventName</h2>
+                                        <hr class="noMargin">
+                                        <h5 class="mb-2 mt-2" style=" margin-left: -14px;">
+                                            <i class="fa fa-building" aria-hidden="true"></i>     <a href="" data-toggle="modal" data-target="#invitation" id="details" class="btn  btn-rounded btn-fw flex-fill bd-highlight editticket">
+                                                @Model.CompanyName
+                                            </a>
+                                        </h5>
+                                        <input type="hidden" value="@Model.EventType" id="eventType" />
+                                        @*<h5 class="mb-2 mt-2">
+                                                <a href="" data-toggle="modal" data-target="#invitation" id="details"
+                                                   class="btn btn-gradient-primary btn-rounded btn-fw flex-fill bd-highlight editticket">
+                                                    @Model.CompanyName
+                                                </a>
+                                            </h5>*@
+                                    </div>
+                                    <h5 class="mb-4 mt-4">
+                                        <i class="far fa-calendar-alt"> </i> &nbsp; @Model.EventStartDate
+                                    </h5>
+                                    @if(Model.EventType==0){
+                                    <h5 class="mb-4">
+                                        <i class="fas fa-map-marker-alt"> </i> &nbsp; @Model.address
+                                    </h5>}
+                                    <h6 class="mb-2">
+                                        @Model.Description
+                                    </h6>
+                                </div>
+                                <div class="col-md-4 mb-auto mx-auto text-center">
+                                    @{
+                                        var videourl = Model.Images != null && Model.Images.Where(a => a.MulType == 2).FirstOrDefault() != null ? Model.Images.Where(a => a.MulType == 2).FirstOrDefault() : null;
+                                        if (videourl != null)
+                                        {
+                                            <div>
+                                                <video width="100%" height="200" controls>
+                                                    <source src="@videourl.Url" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+
+                                            </div>
+                                        }
+                                    }
+                                            <div class="boxShow mt-4">
+                                                <input type="hidden" id="eventid" value="@Model.Id" />
+                                                @if (Model.VenuName != "Venue Name")
+                                                {
+                                                    <h5><b>@Model.VenuName</b> </h5>}
+                                                <h6>@Model.EventStartDate</h6>
+                                                @if (Model.Location != "City")
+                                                {
+                                                    <h6>@Model.Location</h6>}
+                                                    <p class="pt-3">
+                                                        @if (Model.CompanyName != null)
+                                                        {
+                                                            <a href="@Url.Action("Summary","ev", new { area = "", Id = ViewBag.tic })" class="btn btn-success small-btn">Watch</a>
+                                                            @*<button class="btn btn-success btn-block small-btn" type="button" onclick="LoadAllTicket('@Model.Id')">
+                        Grab your ticket
+                    </button>*@}
+                                                    </p>
+                                                    @{
+                                                        if (Model.RsvpDetails != null && Model.RsvpDetails.Count() > 0)
+                                                        {
+                                                            <hr>
+                                                            <h5><b>RSVP</b></h5>
+                                                            foreach (var item in Model.RsvpDetails)
+                                                            {
+                                                                <h6>
+                                                                    @item.Name <br>
+                                                                    <span>@item.Contact</span>
+                                                                </h6>
+                                                            }
+
+                                                        }
+
+                                                    }
+                                                    <div class="bgContainer">
+                                                        <hr>
+                                                        <h6>
+                                                            Share &nbsp;
+                                                            <a href=""><i class="fab fa-facebook-square"></i></a> &nbsp;
+                                                            <a href=""><i class="fab fa-twitter-square"></i></a> &nbsp;
+                                                            <a href=""><i class="fab fa-instagram"></i></a> &nbsp;
+                                                        </h6>
+
+                                                        <h6>
+                                                            Organizer
+                                                        </h6>
+                                                        <p>
+                                                            @Model.CompanyName
+                                                        </p>
+                                                        <hr style="margin-bottom: 0;">
+                                                    </div>
+                                                </div>
+                                </div>
+                                <div class="col-md-12" id="price" style="display:none">
+                                    <h4 class="mt-4 mb-4">Price & Offer</h4>
+                                    <div class="borderOn">
+                                        <div class="row noMargin">
+                                            @{
+                                                if (Model.CompanyId > 0)
+                                                {
+                                                    if (Model.Price != null)
+                                                    {
+                                                        foreach (var ticket in Model.Price)
+                                                        {
+                                                            if (ticket.AvailableQnty != null && ticket.AvailableQnty > 0)
+                                                            {
+                                                                <div class="col-md-12 pt-2 pb-2">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            @ticket.TicketName
+                                                                        </div>
+                                                                        <div class="col-md-6">
+
+                                                                            @if (ticket.Price == null || ticket.Price <= 0)
+                                                                            {
+                                                                                <button class="btn btn-outline-success float-right" onclick="LoadAllTicket('@Model.Id')">
+                                                                                    Get a free Ticket
+                                                                                </button>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                @ticket.Price @Model.Currency
+                                                                                @*<button class="btn btn-outline-success float-right">
+                                                                                        Buy Ticket
+                                                                                    </button>*@
+                                                                                <span class="float-right"> --</span>
+                                                                                @*<button class="btn btn-outline-success float-right" type="button" onclick="LoadAllTicket('@Model.Id')">
+                                                                                        Buy Tickets
+                                                                                    </button>*@
+                                                                            }
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+
+
+                                                            <div class="col-md-12">
+                                                                <hr class="noMargin">
+                                                            </div>
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (Model.EventType == 0) { 
+                                <div class="col-md-12" id="location">
+                                    <h4 class="mt-4 mb-4">Location</h4>
+                                    <div>
+                                        <div class="row pt-2 pb-2" id="divmapdetail" style="height:400px;">
+                                            @*<iframe src=""
+                                                width="100%" height="390" frameborder="0" style="border:0"
+                                                allowfullscreen></iframe>*@
+                                        </div>
+                                       
+                                    </div>
+                                </div>}
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            }
+        }
+
+    </div>
+    <div id="ticketdiv">
+
+    </div>
+<div id="Logindiv">
+    @Html.Partial("_Loginpopup");
+</div>
+<div id="Infodiv">
+    <div id="InfoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="LoginInfo"
+             aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title w100" style="color: #f00606;" id="exampleModalLabel">
+                        Stream233
+
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                    <div class="Info-bg text-center">
+                        <h2 style="color: #f00606;">Welcome!</h2>
+                        <h4>NEW  to the Stream233 Website? </h4>
+                        <h4>Please click <a href="#" onclick="showRegister()" class="Viewbtn">REGISTER</a>  NOW to create your account.</h4>
+                        <br />
+                        <h4>Already registered? </h4>
+                        <h4>Great! </h4>
+                        <h4>Continue to <a href="#" class="Viewbtn" onclick="showLogin()">LOG IN</a> </h4>
+                    </div>
+                    
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="Registerdiv">
+    @Html.Partial("_Registerpop");
+</div>
+    <div class="modal fade bd-example-modal-lg" id="invitation" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalTitle" aria-hidden="true">
+        <form enctype="multipart/form-data">
+            <input id="event_id" type="hidden" />
+            <div class="modal-dialog modal-dialog-scrollable " role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                    </div>
+
+                    <div class="modal-body mycontainer">
+                        <div class="card" style="min-height: 240px;">
+
+                            <table class="mycontainer" id="mainrow">
+
+                                <tr>
+                                    <td>
+                                        <div class="card-body">
+                                            <div class="row">
+
+                                                <div class="col-md-12">
+                                                    <br />
+                                                    @*<h3> Company :  @Model.CompanyName </h3>
+                                                        @if (Model.company != null)
+                                                        {
+
+                                                            <h5> Address : @Model.company.Address , @Model.company.City, @Model.company.Country</h5>
+                                                            <h5> Contact Number : @Model.company.Contact</h5>
+                                                            <h5> Email : @Model.company.EmailId</h5>
+                                                        }*@
+                                                    <div class="row about-container">
+                                                        <div class="col-md-12 heading">
+                                                            <h2 class="title classic">@Model.CompanyName</h2>
+
+                                                        </div>
+                                                        <div class="col-lg-12 content order-lg-1 order-2">
+                                                            @*<div class="icon-box wow fadeInUp" data-wow-delay="0.4s"
+                                                                     style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                                                                    <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                                                                    <h4 class="title"><a href="">Zip Code </a></h4>
+                                                                    <p class="description">110096</p>
+                                                                </div>*@
+                                                            <div class="icon-box wow fadeInUp" data-wow-delay="0.4s"
+                                                                 style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                                                                <div class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                                                                <h4 class="title"><a href="">Email </a></h4>
+                                                                @if (Model.company != null)
+                                                                {
+                                                                    <p class="description">@Model.company.EmailId</p>}
+                                                            </div>
+                                                            @*<div class="icon-box wow fadeInUp" data-wow-delay="0.4s"
+                                                                     style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                                                                    <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                                                                    <h4 class="title"><a href="">Business Name </a></h4>
+                                                                    <p class="description">Lorem Ipsum</p>
+                                                                </div>
+                                                                <div class="icon-box wow fadeInUp" data-wow-delay="0.4s"
+                                                                     style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                                                                    <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                                                                    <h4 class="title"><a href="">Contact Number </a></h4>
+                                                                    <p class="description">23654987410</p>
+                                                                </div>*@
+                                                        </div>
+                                                        <div class="col-lg-6 content order-lg-1 order-2">
+
+
+                                                            <div class="icon-box wow fadeInUp" data-wow-delay="0.4s"
+                                                                 style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                                                                <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                                                                <h4 class="title"><a href="">Address</a></h4>
+                                                                @if (Model.company != null)
+                                                                {
+                                                                    <p class="description">@Model.company.Address</p>}
+                                                            </div>
+
+                                                            <div class="icon-box wow fadeInUp" data-wow-delay="0.4s"
+                                                                 style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                                                                <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                                                                <h4 class="title"><a href="">Country</a></h4>
+                                                                @if (Model.company != null)
+                                                                {
+                                                                    <p class="description">@Model.company.Country</p>}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 content order-lg-1 order-2">
+
+                                                            @if (Model.company != null)
+                                                            {
+
+                                                                <div class="icon-box wow fadeInUp" data-wow-delay="0.4s"
+                                                                     style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                                                                    <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                                                                    <h4 class="title"><a href="">Country</a></h4>
+                                                                    <p class="description">@Model.company.Country</p>
+                                                                </div>
+                                                                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s"
+                                                                     style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                                                    <div class="icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                                                                    <h4 class="title"><a href="">Mobile Number</a></h4>
+                                                                    <p class="description">@Model.company.Contact</p>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark btn-fw" id="closebtn" data-dismiss="modal">Close</button>
+                        @*<input id="submit" type="button" value="Save" class="btn btn-gradient-danger btn-rounded btn-fw" />*@
+                        @*<button type="button" class="btn btn-outline-primary btn-fw">Save</button>*@
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    @section scripts {
+
+    <script>
+        // external js: flickity.pkgd.js
+        var long = '@Model.longt';
+        var lati = '@Model.lati'
+        var totalitem = 0;
+        var totalamount = 0;
+        var user = '@ManageSession.UserSession';
+        $(document).ready(function () {
+            LoadMapIframe(long, lati);
+        })
+
+        function showLogin() {
+            $('#InfoModal').modal('hide');
+            $('#LoginPopups').modal('show');
+
+        }
+        function showRegister() {
+            $('#InfoModal').modal('hide');
+            $('#LoginPopups').modal('hide');
+            $('#RegisterPopups').modal('show');
+        }
+            function LoadAllTicket(Id, type) {
+
+                debugger;
+            if (user == '') {
+                //window.location.replace("/Account/Login?returnUrl=" + Id);
+                $('#InfoModal').modal('show');
+                //$('#LoginPopups').modal('show');
+            }
+            else {
+            $.ajax({
+                url: '/Home/GetTicket?EventId=' + Id + '&Name=' + type,
+                contentType: 'application/html; charset=utf-8',
+                type: 'GET',
+                dataType: 'html',
+                success: function (result) {
+
+                    $('#ticketdiv').html(result);
+                    $('#bookTickets').modal('show');
+                },
+                error: function (xhr, status) {
+                    alert(status);
+                }
+                })
+            }
+        }
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('divmapdetail'), {
+                zoom: 8,
+                panControl: true,
+                zoomControl: true,
+                mapTypeControl: true,
+                scaleControl: true,
+                streetViewControl: true,
+                overviewMapControl: true,
+                rotateControl: true,
+                center: { lat: -34.397, lng: 150.644 }
+            });
+            var geocoder = new google.maps.Geocoder();
+
+            //document.getElementById('submit').addEventListener('click', function () {
+            //    geocodeAddress(geocoder, map);
+            //});
+            geocodeAddress(geocoder, map);
+        }
+        function geocodeAddress(geocoder, resultsMap) {
+            var address = "New Delhi mayur vihar phase 1" //document.getElementById('address').value;
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+        function LoadMapIframe(lng, lat) {
+
+            var myvar = '<iframe width="100%" height="390" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=' + long + ',' + lat + '&key=AIzaSyAswaBO51g0zfMm_0jOVrJtCl0hjzpcGZE"></iframe>';
+            $("#divmapdetail").append(myvar)
+        }
+
+        //*******TicketPopup Logic
+        function OpentNextTab() {
+            var totalitem = $("#spnTotalItem").text();
+            if (totalitem && totalitem > 0) {
+                $("#Tickets").removeClass("active");
+                $("#Tickets-tab").removeClass("active");
+                $("#Attendee").addClass("active");
+                $("#Attendee-tab").addClass("active");
+                $("#btnprevious").css("display", "block");
+                $("#btnacnhr").css("display", "none");
+                $("#btnsubmit").css("display", "block");
+            }
+            else {
+                alertify.alert("Please add an item!");
+            }
+        }
+        function Previous() {
+            if (totalitem && totalitem > 0) {
+                $("#Tickets").addClass("active")
+                $("#Attendee").removeClass("active")
+                $("#btnprevious").css("display", "none");
+                $("#btnacnhr").css("display", "block");
+                $("#btnsubmit").css("display", "none");
+            }
+        }
+        function AddMinusTicket(type, ticketId, AvQty, Price) {
+
+            var AddedQty = $("#spnsingle" + ticketId).text();
+            var AvQty = parseInt(AvQty);
+            if (type == "add") {
+                AddedQty = parseInt(AddedQty) + 1;
+                var etype= $('#eventType').val();
+                if (AddedQty > AvQty) {
+                    if (etype == "1" || etype =="2") {
+                        alertify.alert('You can only purchase a maximum of one(1) for each ticket type.');
+                    } else {
+                        alertify.alert('Only ' + AvQty + ' Ticktes Available!');
+                    }
+
+                }
+                else {
+                    if (Price && parseFloat(Price) > 0) {
+                        totalamount = totalamount + parseFloat(Price);
+                    }
+                    totalitem = totalitem + 1;
+                    AddTickeToCart(ticketId, 1);
+                    $("#spnsingle" + ticketId).text(AddedQty);
+                }
+            }
+            else {
+                if (parseInt(AddedQty) > 0)
+                {
+                    AddedQty = AddedQty - 1;
+                    totalitem = totalitem - 1;
+                    if (Price && parseFloat(Price) > 0) {
+                        totalamount = totalamount - parseFloat(Price);
+                        AddTickeToCart(ticketId, -1);
+                    }
+                    $("#spnsingle" + ticketId).text(AddedQty);
+                }
+            }
+            $("#spnTotalItem").text(totalitem);
+            $("#spntotakamountheder").text(totalamount);
+            $("#pfootertotal").text(totalamount);
+        }
+        function AddTickeToCart(TicketId, Qty) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AddTicketToSession", "Home", new { area = "" })',
+                data: {TicketId: TicketId, Qty: Qty },
+                dataType: "json",
+                success: function (resp) {
+                    debugger;
+                    //if (resp.result.Code == 200) {
+
+                    //}
+                },
+                error: function (error) {
+
+                    alertify.alert(error);
+                }
+            });
+        }
+        var Id = $('#eventid').val();
+            function userlogin() {
+                debugger;
+                var email = $('#emaill').val();
+                var Password = $('#passwordl').val();
+            var Loginmodel = new Object();
+                Loginmodel.Email = email;
+                Loginmodel.Password = Password;
+                if (email == '' || !isValdcEmail(email)) {
+                    alertify.alert("Please Enter a valid Email."); return false;
+                }
+                if (Password == '') { alertify.alert("Password is required."); return false;}
+            Loginmodel.RememberMe = false;
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("login1", "Account", new { area = "" })',
+                    data: JSON.stringify(Loginmodel) ,/* JSON.stringify(Register),*/
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (resp) {
+                        debugger;
+                        if (resp.result.Code == 200) {                            
+                            $('#username').text(resp.result.Msg);
+                            $('#userlogin').css('display', 'none');
+                            $('#userprofile').css('display', 'block');    
+                            $('#LoginPopups').modal('toggle');
+                            user = 'y';
+                            LoadAllTicket(Id);
+                            // $('#ticketdiv').html(result);
+                            // $('#bookTickets').modal('show');}
+                        }
+                    },
+                    error: function (xhr, status) {
+                        alert(status);
+                    }
+            })
+        }
+        function userRegister() {
+                debugger;
+                var FirstName = $('#FirstName').val();
+            var LastName = $('#LastName').val();
+            var Email = $('#Email').val().trim();
+            var PhoneNo = $('#PhoneNo').val();
+                var CountryId = $('#CountryId').val();
+                var Password = $('#Password').val();
+                var ConfPassword = $('#ConfPassword').val();
+               
+
+            var model = new Object();
+            model.FirstName = FirstName;
+            model.LastName = LastName;
+            model.Email = Email;
+            model.PhoneNo = PhoneNo;
+            model.Password = Password;
+            model.CountryId = CountryId;
+
+            if (FirstName == '') { alertify.alert("First Name is required."); return false; }
+            if (LastName == '') { alertify.alert("Last Name is required."); return false; }
+            if (Email == '' || !isValdcEmail(Email)) {
+                    alertify.alert("Please Enter a valid Email."); return false;
+                }
+            if (Password == '') { alertify.alert("Password is required."); return false; }
+            if (CountryId == '') { alertify.alert("Password is required."); return false; }
+            if (ConfPassword != Password) { alertify.alert("Password and Confirmation Password must match."); return false; }
+
+                    
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Register1", "Account", new { area = "" })',
+                    data: JSON.stringify(model) ,/* JSON.stringify(Register),*/
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (resp) {
+                        debugger;
+                        if (resp.result.Code == 200) {
+                            $('#username').text(resp.result.Msg);
+                            $('#userlogin').css('display', 'none');
+                            $('#userprofile').css('display', 'block');    
+                            $('#RegisterPopups').modal('toggle');
+                            user = 'y';
+                            LoadAllTicket(Id);
+                            // $('#ticketdiv').html(result);
+                            // $('#bookTickets').modal('show');}
+                        }
+                        else { alertify.alert("Something went wrong.") }
+                    },
+                    error: function (xhr, status) {
+                        alert(status);
+                    }
+            })
+        }
+        function isValdcEmail(email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
+        return regex.test(email);
+        }
+        function btnregister() {
+            debugger;
+            $('#LoginPopups').modal('toggle');
+            $('#RegisterPopups').modal('show');
+
+        }
+        function btnLogin() {
+            $('#RegisterPopups').modal('toggle');
+            $('#LoginPopups').modal('show');
+
+        }
+        
+    </script>
+    }

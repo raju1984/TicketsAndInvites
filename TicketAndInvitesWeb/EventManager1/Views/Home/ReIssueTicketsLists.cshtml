@@ -1,0 +1,545 @@
+﻿@model  IEnumerable<EventManager1.Models.ReissueFailedpaymentmodel>
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="~/images/fav1.png" type="image/gif">
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+    <title>Reissue Ticket List</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+            min-height: 100vh;
+        }
+
+        .event-header {
+            background-image: url('../../images/bg.jpg');
+            min-height: 350px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            position: relative
+        }
+
+        .white-bg {
+            min-height: 250px;
+            background: #FFF;
+            box-shadow: 0px 0px 21px 0px rgb(0 0 0 / 17%);
+            /*width: 450px;*/
+            margin: -100px auto 10px;
+            max-width: 100%;
+            border-radius: 50px;
+            padding: 25px 50px;
+            margin-bottom: 35px;
+        }
+
+        .header-box {
+            padding: 0 25px;
+            margin-bottom: 25px;
+        }
+
+        .white-bg h1 {
+            margin-bottom: 5px;
+            color: #3a3c63;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .white-bg p {
+            color: #3a3c63;
+            text-align: center;
+            margin: 0px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0;
+        }
+
+        .white-bg hr {
+            height: 1px;
+            border: 0;
+            background: rgb(255,255,255);
+            background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(189,36,127,1) 10%, rgba(189,36,127,1) 90%, rgba(255,255,255,1) 100%);
+        }
+
+
+        .btn-pink {
+            font-family: 'Montserrat', sans-serif;
+            background: #bd247f;
+            color: #FFF;
+            text-decoration: none;
+            padding: 10px 35px;
+            display: inline-block;
+            border-radius: 50px;
+            box-shadow: 0px 10px 11px 0px rgb(189 36 127 / 33%);
+            margin-top: 20px;
+            font-weight: 800;
+        }
+
+            .btn-pink:hover {
+                color: #ffa7db;
+            }
+
+        .body-box, .footer-box {
+            text-align: center;
+        }
+
+        p.bootom-text {
+            margin-top: 30px;
+            font-size: 13px;
+            letter-spacing: 0.3px;
+            line-height: 20px;
+        }
+
+        .bootom-text a {
+            color: #bd247f;
+            font-weight: 800;
+        }
+
+        .footer-box img {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        .body-box .form-group label {
+            color: #373857;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .body-box .form-group .input-ui {
+            border: 0;
+            background: #302f51;
+            box-shadow: 0px 10px 11px 0px rgb(48 47 81 / 38%);
+            border-radius: 10px;
+            height: 50px;
+            text-align: center;
+            color: #FFF;
+            letter-spacing: 0.3px;
+            font-weight: 600;
+        }
+
+        .body-box {
+            padding: 20px 40px;
+        }
+
+        @@media (max-width: 470px) {
+            .white-bg {
+                padding: 25px;
+            }
+
+            .body-box {
+                padding: 20px 10px;
+            }
+        }
+
+        .error-box p {
+            color: #F00;
+            margin-bottom: 10px;
+        }
+
+        @@media (max-width: 380px) {
+            .white-bg h1 {
+                font-size: 25px;
+            }
+        }
+
+        .loader {
+            position: fixed;
+            top: 0px;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            background: #FFF;
+            align-items: center;
+            opacity: 0.8
+        }
+
+            .loader img {
+                width: 70px;
+                height: 70px;
+            }
+    </style>
+
+
+
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .event-header {
+            background-image: url('../../images/bg.jpg');
+            min-height: 350px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative
+        }
+
+            .event-header a {
+                color: #FFF;
+                text-transform: uppercase;
+                font-weight: 600;
+                letter-spacing: 0.3px;
+                font-size: 13px;
+                display: inline-block;
+                border-bottom: 1px dashed #fff;
+                padding-bottom: 3px;
+                opacity: 0.5;
+                text-decoration: none;
+                position: absolute;
+                left: 40px;
+                top: 30px;
+            }
+
+                .event-header a:hover {
+                    opacity: 1
+                }
+
+        .white-bg {
+            min-height: 250px;
+            background: #FFF;
+            box-shadow: 0px 0px 21px 0px rgb(0 0 0 / 17%);
+            /*width: 450px;*/
+            margin: -100px auto 10px;
+            max-width: 100%;
+            border-radius: 50px;
+            padding: 25px 50px;
+            margin-bottom: 35px;
+        }
+
+        .header-box {
+            padding: 0 25px;
+            margin-bottom: 25px;
+        }
+
+        .white-bg h1 {
+            margin-bottom: 5px;
+            color: #3a3c63;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .white-bg p {
+            color: #3a3c63;
+            text-align: center;
+            margin: 0px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0;
+        }
+
+        .white-bg hr {
+            height: 1px;
+            border: 0;
+            background: rgb(255,255,255);
+            background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(189,36,127,1) 10%, rgba(189,36,127,1) 90%, rgba(255,255,255,1) 100%);
+        }
+
+
+        .checkbox-ui {
+            text-align: left;
+            color: #37365e;
+            font-family: 'Montserrat', sans-serif;
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+            .checkbox-ui input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 23px;
+            width: 23px;
+            background-color: #f9f9f9;
+            border: 3px solid #2e2951;
+            border-radius: 4px;
+        }
+
+        .checkbox-ui:hover input ~ .checkmark {
+            background-color: #e2deff;
+        }
+
+        .checkbox-ui input:checked ~ .checkmark {
+            background-color: #312c54;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .checkbox-ui input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .checkbox-ui .checkmark:after {
+            left: 6.5px;
+            top: 2px;
+            width: 6px;
+            height: 11px;
+            /* background: #ffffff; */
+            border-bottom: 2px solid #FFF;
+            border-right: 2px solid #FFF;
+            transform: rotate(40deg);
+        }
+
+        .form-check {
+            border-bottom: 2px solid #bb257c;
+            margin-top: 20px;
+            padding-bottom: 5px;
+            padding-left: 0;
+        }
+
+        .btn-pink {
+            font-family: 'Montserrat', sans-serif;
+            background: #bd247f;
+            color: #FFF;
+            text-decoration: none;
+            padding: 10px 35px;
+            display: inline-block;
+            border-radius: 50px;
+            box-shadow: 0px 10px 11px 0px rgb(189 36 127 / 33%);
+            margin-top: 20px;
+            font-weight: 800;
+        }
+
+            .btn-pink:hover {
+                color: #ffa7db;
+            }
+
+        .body-box, .footer-box {
+            text-align: center;
+        }
+
+        p.bootom-text {
+            margin-top: 30px;
+            font-size: 13px;
+            letter-spacing: 0.3px;
+            line-height: 20px;
+        }
+
+        .bootom-text a {
+            color: #bd247f;
+            font-weight: 800;
+        }
+
+        .footer-box img {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        @@media (max-width: 470px) {
+            .white-bg {
+                padding: 25px;
+            }
+        }
+
+        @@media (max-width: 380px) {
+            .white-bg h1 {
+                font-size: 25px;
+            }
+        }
+
+        .error-box p {
+            color: #F00;
+            margin-bottom: 10px;
+        }
+
+        .body-box {
+            padding: 20px 0;
+        }
+
+        .table-ui {
+            width: 100%;
+            text-align: left;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+            .table-ui th {
+                text-transform: uppercase;
+                font-size: 12px;
+                font-weight: 800;
+                letter-spacing: 0.3px;
+                color: #3a3c63;
+                border: 1px solid #3a3c63;
+                padding: 10px;
+            }
+
+            .table-ui td {
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: 0.3px;
+                color: #3a3c63;
+                border: 1px solid #bd247f;
+                padding: 10px;
+            }
+
+            .table-ui .btn {
+                margin-top: 0px;
+                font-size: 13px;
+                padding: 5px 13px;
+                font-weight: 600;
+            }
+    </style>
+</head>
+<body>
+
+    <input type="hidden" id="EmailAddress" value="@ViewBag.EmailID" />
+    <input type="hidden" id="Url" value="@ViewBag.Url" />
+    <input type="hidden" id="Logo" value="@ViewBag.Logo" />
+
+    <div class="event-header">
+
+        <a href="@ViewBag.URL">Back to home</a>
+    </div>
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-sm-12">
+                <div id="divload">
+
+                </div>
+            </div>
+        </div>
+        <div id="divticketcontent">
+
+        </div>
+
+        <button type="button" style="display:none" id="btnticketpopup" data-toggle="modal" data-target="#tickets" class="card-link flex-fill bd-highlight">Tickets</button>
+
+        <div class="footer-box">
+            <a href="@ViewBag.Url"><img src="@ViewBag.Logo" /></a>
+        </div>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+    function Loader(_value) {
+        if (_value) {
+            document.getElementById("divloader1").style.display = "flex";
+        }
+        else {
+            document.getElementById("divloader1").style.display = "none";
+        }
+        setTimeout(function () { document.getElementById("divloader1").style.display = "none"; }, 360000);
+    }
+</script>
+<div class="overlay loader" id="divloader1" style="display:none">
+    <img src="~/images/Spinner-3.gif" id="img1" />
+
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        var EmailId = $("#EmailAddress").val();
+        var Url = $("#Url").val();
+        debugger;
+        Loader(true);
+        $.ajax({
+            url: "/Home/ListReIssueTicket?EmailId=" + EmailId + "&Url=" + Url,
+            type: "POST",
+            contentType: 'application/html; charset=utf-8',
+            dataType: 'html',
+            success: function (result) {
+                debugger;
+                Loader(false);
+                $('#divload').html(result);
+                $("#divLoader1").hide();
+                swal({
+                    title: "No, Pending and failed payment",
+                    icon: "success"
+                })
+            },
+            //error: function (err) {
+            //    console.log(err);
+            //    alert(err);
+
+            //}
+        });
+
+    });
+
+
+    function LoadTicket(Id, paymId, pfor, gateway, EventId) {
+        debugger;
+        Loader(true);
+        $.ajax({
+            url: '/Home/ChecktrxStatusUser?PaymentId=' + Id + '&TrxNo=' + paymId + '&paymentfor=' + pfor + '&PayGateway=' + gateway + '&EventId=' + EventId,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                Loader(false);
+                $('#divticketcontent').html(result);
+                $("#btnticketpopup").trigger("click");
+                //$('#tickets').modal('show');
+            },
+            error: function (xhr, status) {
+                Loader(false);
+                alert(status);
+            }
+        })
+
+    }
+
+</script>
+
+@if (ViewBag.Error != null)
+{
+    <script>
+    //var text =@ViewBag.Error;
+    $('.error-box p').text("@ViewBag.Error");
+    </script>
+}

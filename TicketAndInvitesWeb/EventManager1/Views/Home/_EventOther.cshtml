@@ -1,0 +1,75 @@
+﻿@model  IEnumerable<EventManager1.Models.IndexView>
+
+@{
+    if (Model != null && Model.Count() > 0)
+    {
+        <div class="container">
+            <h2 class="main-heading"><span>ALL</span> events</h2>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    if (item.Price != null && item.Price.Count > 0)
+                    {
+                        decimal? price = item.Price.OrderByDescending(a => a.Price).Select(a => a.Price).FirstOrDefault();
+                        string imageurl = "";// item.Images != null && item.Images.Where(a => a.mainpic == true).FirstOrDefault() !=null? item.Images.FirstOrDefault().Url : "/images/img3.jpg";
+                        if (item.Images.FirstOrDefault(x => x.MulType == 1) != null)
+                        {
+                            if (item.Images.FirstOrDefault(s => s.mainpic == true) != null)
+                            {
+                                imageurl = item.Images.FirstOrDefault(s => s.mainpic == true).Url.ToString();
+                                if (imageurl == null) { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+                            }
+                            else { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+                        }
+                        else { imageurl = "/images/img3.jpg"; }
+                        string alt = Path.GetFileName(imageurl);
+
+                        <div class="col-lg-4 col-sm-6 events-box">
+                            <a href="@Url.Action("EventDetail","Home",new {area="",Id= item.Id})">
+                                <div class="">
+                                    <figure style="height:180px"><img src="@imageurl" class="imgheight" alt="@alt"></figure>
+                                    <div class="down-sec">
+                                        <h4 style="height: 45px;">@item.EventName</h4>
+                                        <p class="location-time">
+                                            <span style="display:none;">
+                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                @item.Location
+                                            </span> <span>
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                @Convert.ToDateTime(item.EventStartDate).ToString("dd/MM/yyyy hh:mmtt") - @Convert.ToDateTime(item.EventEndDate).ToString("dd/MM/yyyy hh:mmtt")
+                                            </span>
+                                        </p>
+                                        <div class="bottom-sec">
+                                            <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})" class="small-btn">Grab your ticket</a>
+                                            @*<strong><span>@item.Currency</span>@price</strong>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="bottom-btn text-center"><a href="@Url.Action("EventsSearchResult", "Home",new { eventtype=6})" style="margin-bottom:20px" class="benn-btn" value="">See All</a></div>
+        </div>
+    }
+    else
+    {
+        <div class="row" style="min-height:400px;margin-top:100px">
+            <div class="col-md-12">
+                <div class="sorry">
+                    <h1><img src="~/images/sorry.jpg" class="img-responsive" /></h1>
+                    <h2>We Are Sorry !</h2>
+                    <p>
+                        We did Not find Any Event for Your search<br />
+                        Choose a different filter to view Event results relevant to you
+
+                    </p>
+                    <a href="\" class="btn-success">Search Again</a>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+

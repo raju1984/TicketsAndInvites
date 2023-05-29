@@ -1,0 +1,271 @@
+﻿@model IEnumerable<EventManager1.Models.liveevent>
+@using EventManager1.Models;
+@{
+    ViewBag.Title = "LiveEvents";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+    <style>
+        a.card-link {
+ 
+        border: #9a55ff solid 1px;
+    display: block;
+    text-align: center;
+    line-height: 15px;
+    margin-left: 17px;
+    color: #9a55ff;
+    padding: 10px 8px !important;
+    border-radius: 30px;
+
+}
+        .card-link + .card-link {
+    margin-left: 0.5rem;
+}
+    </style>
+}
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="fa fa-television" aria-hidden="true"></i>
+            </span>
+            Live Stream
+
+            <p style="margin-left: 50px; margin-top: -5px; line-height: 1.0;text-transform: none;">
+                Here you can see your Tickets for Live steam Events. Click on "Watch Live stream" Enjoy the Events with high quality Video Quality. To see the events details, click on “Events details”.
+            </p>
+        </h3>
+        <!-- <nav aria-label="breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <span></span>Overview
+              <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+            </li>
+          </ul>
+        </nav> -->
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+            <div class="col-md-6">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="Tickets-tab" data-toggle="tab" href="#Tickets"
+                           role="tab" aria-controls="Tickets" aria-selected="true">Current Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="Past-tab" data-toggle="tab" href="#Past" role="tab"
+                           aria-controls="Past" aria-selected="false">Past Events</a>
+                    </li>
+
+
+
+                </ul>
+            </div>
+                <div class="col-md-6" style="text-align:right">
+                    <button class="btn btn-danger" onclick="timedRefresh(1)"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</button>
+                    </div>
+                </div>
+
+            <div class="tab-content pt-4">
+                <div class="tab-pane active" id="Tickets" role="tabpanel" aria-labelledby="Tickets-tab">
+                    @*<h3>Live Stream</h3>*@
+                    
+                    @*<button class="btn btn-danger" onclick="timedRefresh(1)"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</button>*@
+                    <hr>
+
+                    <div class="row">
+                        @{
+                            if (Model != null && Model.Count() >= 0)
+                            {
+
+                                var enddate = Model.Where(x => Convert.ToDateTime(x.date) >= DateTime.UtcNow);
+                                if (enddate != null)
+                                {
+
+                                    foreach (var e in Model)
+                                    {
+                                        if (Convert.ToDateTime(e.date) >= DateTime.Now)
+                                        {
+                                            <div class="col-md-4" style="min-height:310px; margin-top:10px">
+                                                <div class="card" >
+
+                                                    <img src="@e.image" class="card-img-top imgbox" alt="..." style="height:180px" />
+                                                    <div class="tag">
+                                                        <h6 class="noMargin text-success">
+                                                            
+                                                                @if (Convert.ToDateTime(e.date) < DateTime.Now)
+                                                                {<span>Past</span> }
+                                                                else if (Convert.ToDateTime(e.sdate) <= DateTime.Now && Convert.ToDateTime(e.date) > DateTime.Now)
+                                                                {<span>Live</span> }
+                                                                else
+                                                                { <span>Upcoming</span>}
+                                                                                                               
+                                                        </h6>
+                                                    </div>
+                                                    <div class="card-body padding15">
+                                                        <div class="row">
+                                                            <div class="col-sm-3 padding5 text-center text-danger">
+                                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                                <p class="text-danger noMargin">
+                                                                    @Convert.ToDateTime(e.sdate).ToString("MMM dd")
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-sm-9 padding5 minheight">
+
+                                                                <h6 class="colorBlack noMargin">
+                                                                    @e.eventName
+                                                                </h6>
+                                                                <p class="text-muted noMargin"><i class="fa fa-calendar" aria-hidden="true"></i> @Convert.ToDateTime(e.sdate).ToString("dddd, dd MMM yyyy HH:mm")</p>
+                                                                
+                                                                </div>
+                                                            
+                                                                <div class="col-md-12 d-flex bd-highlight" style="padding:35px 0">
+                                                                    @if (e.status == 2)
+                                                                    {
+                                                                        <a href="Dashboard" class="card-link"> Payment Status :<b style="color:#FF9800">Pending</b> </a>
+                                                                        <a href="@Url.Action("EventDetail", "Home", new { area = "",Id= e.id })" target="_blank" class="ml-auto card-link" style="padding:10px;width:40%">Event Detail</a>
+                                                                    }
+                                                                    else if (e.status == (int)PaymentStatus.PaymentSuccess)
+                                                                    {
+
+                                                                        if (e.streamType == 2)
+                                                                        {
+                                                                            if (e.EventKey != null)
+                                                                            {
+                                                                                @*<a href="http://rtmpclient.rovermanproductions.com/?ev=@e.evid" target="_blank" class="card-link" style="padding:10px 0">*@
+                                                                                    <a href="http://localhost.com/?ev=@e.evid" target="_blank" class="card-link" style="padding:10px 0">
+                                                                                        Watch Live Stream
+                                                                                    </a>}
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                    if (e.EventURLWebrtc != null)
+                                                                                    {
+                                                                                    <a href="http://rtmpclient.rovermanproductions.com/Home/Livestream/@e.evid#@e.EventURLWebrtc" target="_blank" class="card-link" style="padding:10px 0">
+                                                                                        Watch Live Stream
+                                                                                    </a>
+                                                                                    @*<a href="~/Stream/Index/@e.id#@e.EventURLWebrtc" class="card-link" style="padding: 10px 10px; margin-left: 12px;">
+                                                                                            Watch Live Stream
+                                                                                        </a>*@
+                                                                                    }
+                                                                                    }
+                                                                                    <a href="@Url.Action("EventDetail", "Home", new { area = "", Id=e.id })" target="_blank" class=" card-link" style="padding:10px 0;width:40%">Event Detail</a>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                    <a href="@Url.Action("FailedPayment", "Transaction", new { area = "User" })" class="card-link" style="padding:10px 0;"> Payment Status :<b style="color:red">Failed</b> </a>
+                                                                                    <a href="@Url.Action("EventDetail", "Home", new { area = "",Id= e.id })" target="_blank" class=" card-link" style="padding:10px 0;width:40%">Event Detail</a>
+                                                                                    }
+</div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @*<div class="col-md-4">
+                                                <div class="card">
+                                                    <img src="@e.image" class="card-img-top imgbox" alt="..." />
+                                                    
+                                                    <br />
+                                                    <h4> &nbsp; @e.eventName</h4>
+                                                            <h4>
+                                                                &nbsp; @e.date</h4>
+                                                    @if (e.streamType == 2)
+                                                    {
+                                                                    if (e.EventKey != null)
+                                                                    {
+                                                                        <a href="http://rtmpclient.ticketsandinvites.com/?ev=@e.evid" target="_blank" class="card-link" style="padding:10px">
+                                                                            Watch Live Stream
+                                                                        </a>}
+                                                    }
+                                                    else
+                                                    {
+                                                        if (e.EventURLWebrtc != null)
+                                                        {
+                                                            <a href="~/Stream/Index/@e.id#@e.EventURLWebrtc" class="card-link" style="padding:10px">
+                                                                Watch Live Stream
+                                                            </a>}
+                                                    }
+
+
+                                                </div>
+                                            </div>*@
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="col-12 mx-auto my-auto">
+                                        <div class="text-center">
+                                            <h2 class="ticketIcon">
+                                                <i class="fa fa-ticket"></i>
+                                            </h2>
+                                            <h4>No Live Events</h4>
+                                            <a href="/" class="btn btn-primary">Search for events</a>
+                                        </div>
+                                    </div>
+                                }
+
+
+                            }
+                        }
+
+                    </div>
+                </div>
+                <div class="tab-pane" id="Past" role="tabpanel" aria-labelledby="Past-tab">
+                    @*<h3>Past tickets</h3>
+                    <p>Events shown in this last are the past events you have had tickets for.</p>*@
+                    <hr>
+                    <div class="row">
+                        @{
+                            if (Model != null && Model.Count() > 0)
+                            {
+                                var enddate = Model.FirstOrDefault(x => Convert.ToDateTime(x.date) < DateTime.UtcNow);
+                                if (enddate != null)
+                                {
+                                    foreach (var e in Model)
+                                    {
+                                        if (Convert.ToDateTime(e.date) < DateTime.Now)
+                                        {
+                                            <div class="col-md-4" style="min-height:310px; margin-top:10px">
+                                                <div class="card">
+                                                    <a href="#" >
+                                                        <img src="@e.image" class="card-img-top imgbox" alt="..." style="height:180px" />
+                                                    </a>
+                                                    <br />
+                                                    <h4> &nbsp; @e.eventName</h4>
+                                                    <h4>
+                                                        &nbsp; @e.date
+                                                    </h4>
+                                                    
+
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="col-12 mx-auto my-auto">
+                                        <div class="text-center">
+                                            <h2 class="ticketIcon">
+                                                <i class="fa fa-ticket"></i>
+                                            </h2>
+                                            <h4>No Tickets</h4>
+                                            <a href="/" class="btn btn-primary">Search for events</a>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

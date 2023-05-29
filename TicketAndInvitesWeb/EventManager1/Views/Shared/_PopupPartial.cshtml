@@ -1,0 +1,33 @@
+﻿@using EventManager1.Models
+<div id="Logindiv">
+    @Html.Partial("_Loginpopup");
+</div>
+@section scripts {
+    <script>
+        function Loadpopup(Id, type) {
+        var user = '@ManageSession.UserSession';
+            debugger;
+            if (user == '') {
+                //window.location.replace("/Account/Login?returnUrl=" + Id);
+               // $('#InfoModal').modal('show');
+                $('#LoginPopups').modal('show');
+            }
+            else {
+                $.ajax({
+                    url: '/Home/GetTicket?EventId=' + Id + '&Name=' + type,
+                    contentType: 'application/html; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html',
+                    success: function (result) {
+
+                        $('#ticketdiv').html(result);
+                        $('#bookTickets').modal('show');
+                    },
+                    error: function (xhr, status) {
+                        alert(status);
+                    }
+                })
+            }
+        }
+    </script>
+    }

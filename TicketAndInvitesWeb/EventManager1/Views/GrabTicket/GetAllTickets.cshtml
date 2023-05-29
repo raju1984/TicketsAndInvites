@@ -1,0 +1,346 @@
+﻿@model  IEnumerable<EventManager1.Models.Event_>
+@using EventManager1.Models;
+@{
+    ViewBag.Title = "GetAllTickets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <style>
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            .content-wrapper {
+                background: #f2edf3;
+                padding: 2.75rem 1.25rem !important;
+            }
+
+            .minheight {
+                min-height: 180px;
+                padding: 0 18px;
+            }
+
+            .footer {
+                background: #f2edf3;
+                padding: 30px 1rem 50px;
+            }
+
+            .padding5 {
+                padding: 0 20px !important;
+            }
+        }
+
+        @@media all and (min-width: 481px) and (max-width: 767px) {
+            .content-wrapper {
+                background: #f2edf3;
+                padding: 2.75rem 1.25rem !important;
+            }
+
+            .padding5 {
+                padding: 0 20px !important;
+            }
+
+            .minheight {
+                min-height: 180px;
+                padding: 0 18px !important;
+            }
+
+            .footer {
+                background: #f2edf3;
+                padding: 30px 1rem 50px;
+            }
+        }
+
+        .card {
+            height: 400px;
+            margin-bottom: 20px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .minheight {
+            min-height: 180px
+        }
+
+        .imgbox {
+            height: 170px;
+            width: 100%
+        }
+
+        .noMargin {
+            margin: 0 !important;
+            font-family: poppins;
+        }
+
+        p {
+            font-family: poppins;
+            line-height: 1.8;
+            color: #9c9fa6 !important;
+            margin-bottom: 0;
+        }
+
+        a.card-link.flex-fill.bd-highlight {
+            font-family: poppins;
+        }
+    </style>
+}
+
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-home"></i>
+            </span>
+            My Tickets
+            <p style="margin-left:50px;line-height: 1.0;">
+                Here you can see the events you have tickets for and the events you have saved
+                for later. you can Download the PDF to show on your phone or print for the day.
+            </p>
+        </h3>
+        <!-- <nav aria-label="breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <span></span>Overview
+              <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+            </li>
+          </ul>
+        </nav> -->
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="Tickets-tab" data-toggle="tab" href="#Tickets"
+                               role="tab" aria-controls="Tickets" aria-selected="true">Current Tickets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="Past-tab" data-toggle="tab" href="#Past" role="tab"
+                               aria-controls="Past" aria-selected="false">Past Tickets</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6" style="text-align:right">
+                    <button class="btn btn-danger" onclick="timedRefresh(1)"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</button>
+                </div>
+            </div>
+            <div class="tab-content pt-4">
+                <div class="tab-pane active" id="Tickets" role="tabpanel" aria-labelledby="Tickets-tab">
+                    @*<h3>My tickets</h3>*@
+
+
+                    <hr>
+
+                    <div class="row">
+                        @{
+                            if (Model != null && Model.Count() >= 0)
+                            {
+                                var enddate = Model.FirstOrDefault(x => Convert.ToDateTime(x.EndDate) >= DateTime.Now);
+                                if (enddate != null)
+                                {
+
+                                    foreach (var e in Model)
+                                    {
+                                        if (Convert.ToDateTime(e.EndDate) >= DateTime.Now)
+                                        {
+                                            <div class="col-md-4">
+                                                <div class="card">
+
+                                                    <img src="@e.Multimedia.FirstOrDefault().URL" class="card-img-top imgbox" alt="..." />
+                                                    <div class="tag">
+                                                        <h6 class="noMargin text-success">
+                                                            @if (e.status == "2")
+                                                            {
+                                                                if (Convert.ToDateTime(e.EndDate) < DateTime.Now)
+                                                                {<span>Past</span> }
+                                                                else if (Convert.ToDateTime(e.StartDate) <= DateTime.Now && Convert.ToDateTime(e.EndDate) > DateTime.Now)
+                                                                {<span>Live</span> }
+                                                                else
+                                                                { <span>Upcoming</span>}
+                                                            }
+                                                            else if (e.status == "3")
+                                                            {<span>Past</span>}
+                                                        </h6>
+                                                    </div>
+                                                    <div class="card-body padding15">
+                                                        <div class="row">
+                                                            <div class="col-sm-3 padding5 text-center text-danger">
+                                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                                <p class="text-danger noMargin">
+                                                                    @Convert.ToDateTime(e.StartDate).ToString("MMM dd")
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-sm-9 padding5 minheight">
+
+                                                                <h6 class="colorBlack noMargin">
+                                                                    @e.EventName
+                                                                </h6>
+                                                                <p class="text-muted noMargin"><i class="fa fa-calendar" aria-hidden="true"></i> @Convert.ToDateTime(e.StartDate).ToString("dddd, dd MMM yyyy HH:mm")</p>
+                                                                <p class="text-muted">
+                                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                                    @e.address_ @e.Venue
+                                                                    <br />
+                                                                    @if (e.Eventtype != 1)
+                                                                    {
+                                                                    <p class="">Total Tickets: @e.Tickets.FirstOrDefault().Quantity</p>}
+                                                                    <p class="">Ticket Name: @e.Tickets.FirstOrDefault().TicketName</p>
+                                                                </div>
+                                                                <div class="col-md-12 d-flex bd-highlight">
+                                                                    @if (e.paymentStatus == 2)
+                                                                    {
+                                                                        <a href="Dashboard" class="card-link"> Payment Status :<b style="color:#FF9800">Pending</b> </a>
+                                                                        @*<a href="@Url.Action("EventDetail", "Home", new { area = "",Id= e.EventId })" target="_blank" class="ml-auto card-link">Event Detail</a>*@
+                                                                    }
+                                                                    else if (e.paymentStatus == (int)PaymentStatus.PaymentSuccess)
+                                                                    {
+                                                                        if (e.Eventtype != 1)
+                                                                        {
+                                                                            @*<a href="Tickets?id=@e.Id&tmap=@e.BusinessOwner_Id" class="card-link">
+                                                                                    View ticket
+                                                                                </a>*@
+                                                                            <a href="/Ticket/Index?id=@e.Id" class="card-link">
+                                                                                View ticket
+                                                                            </a>
+
+                                                                        }
+                                                                        else
+                                                                        {<a href="/User/Events/Index?v=@e.Multimedia.FirstOrDefault().videoId" class="card-link">
+                                                                                View Video
+                                                                            </a> }
+                                                                        @*<a href="@Url.Action("EventDetail", "Home", new { area = "", Id=e.EventId })" target="_blank" class="ml-auto card-link">Event Detail</a>*@
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <a href="@Url.Action("FailedPayment", "Transaction", new { area = "User" })" class="card-link"> Payment Status :<b style="color:red">Failed</b> </a>
+                                                                        @*<a href="@Url.Action("EventDetail", "Home", new { area = "",Id= e.EventId })" target="_blank" class="ml-auto card-link">Event Detail</a>*@
+                                                                    }
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>}
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="col-12 mx-auto my-auto">
+                                            <div class="text-center">
+                                                <h2 class="ticketIcon">
+                                                    <i class="fa fa-ticket"></i>
+                                                </h2>
+                                                <h4>No Tickets</h4>
+                                                <a href="/" class="btn btn-primary">Search for events</a>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                }
+                        }
+
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="Past" role="tabpanel" aria-labelledby="Past-tab">
+                    <h3>Past tickets</h3>
+                    <p>Events shown in this last are the past events you have had tickets for.</p>
+                    <hr>
+                    <div class="row">
+                        @{
+                            if (Model != null && Model.Count() > 0)
+                            {
+                                var enddate = Model.FirstOrDefault(x => Convert.ToDateTime(x.EndDate) < DateTime.Now);
+                                if (enddate != null)
+                                {
+                                    foreach (var e in Model)
+                                    {
+                                        if (Convert.ToDateTime(e.EndDate) < DateTime.Now)
+                                        {
+                                            <div class="col-md-4">
+                                                <div class="card">
+                                                    <a href="">
+                                                        <img src="@e.Multimedia.FirstOrDefault().URL" class="card-img-top imgbox" alt="..." width="100%" />
+                                                        <div class="tag">
+                                                            <h6 class="noMargin text-success">Past</h6>
+                                                        </div>
+                                                    </a>
+                                                    <div class="card-body padding15">
+                                                        <div class="row">
+                                                            <div class="col-sm-3 padding5 text-center text-danger">
+                                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                                <p class="text-danger noMargin">
+                                                                    @Convert.ToDateTime(e.StartDate).ToString("MMM dd")
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-sm-9 padding5 minheight">
+
+                                                                <h6 class="colorBlack noMargin">
+                                                                    @e.EventName
+                                                                </h6>
+                                                                <p class="text-muted noMargin"><i class="fa fa-calendar" aria-hidden="true"></i> @Convert.ToDateTime(e.StartDate).ToString("dddd, dd MMM yyyy HH:mm")</p>
+                                                                <p class="text-muted">
+                                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                                    @e.address_ @e.Venue
+                                                                    <br />
+                                                                    @if (e.Eventtype != 1)
+                                                                    {
+                                                                    <p class="">Total Tickets: @e.Tickets.FirstOrDefault().Quantity</p>}
+                                                                    <p class="">Ticket Name: @e.Tickets.FirstOrDefault().TicketName</p>
+
+
+                                                                </div>
+                                                                <div class="col-md-12 d-flex bd-highlight">
+                                                                    @if (e.paymentStatus == (int)PaymentStatus.PaymentSuccess)
+                                                                    {
+                                                                        if (e.Eventtype != 1)
+                                                                        {
+                                                                            @*<a href="Tickets?id=@e.Id&tmap=@e.BusinessOwner_Id" class="card-link">
+                                                                                    View ticket
+                                                                                </a>*@
+                                                                            <a href="/Ticket/Index?id=@e.Id" class="card-link">
+                                                                                View ticket
+                                                                            </a>
+
+                                                                        }
+                                                                        else
+                                                                        {<a href="/User/Events/Index?v=@e.Multimedia.FirstOrDefault().videoId" class="card-link">
+                                                                                View Video
+                                                                            </a>}
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <a href="#" class="text-danger">Payment Failed</a>
+                                                                    }
+                                                                    @*<a href="@Url.Action("EventDetail", "Home", new { area = "", Id=e.EventId })" target="_blank" class="ml-auto card-link">Event Detail</a>*@
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="col-12 mx-auto my-auto">
+                                            <div class="text-center">
+                                                <h2 class="ticketIcon">
+                                                    <i class="fa fa-ticket"></i>
+                                                </h2>
+                                                <h4>No Tickets</h4>
+                                                <a href="/" class="btn btn-primary">Search for events</a>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,169 @@
+.noMargin {
+  margin: 0;
+}
+
+.noPadding {
+  padding: 0;
+}
+
+p {
+  font-size: 0.8rem;
+}
+
+input.form-control,
+textarea.form-control {
+  border: 1px solid #e9ecef;
+}
+
+input[type="file"].form-control {
+  border: none;
+}
+
+.removeImage {
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+.removeImage:hover {
+  color: initial;
+}
+
+.thumbnail:hover .hoverShadow {
+  background: #0000007a;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px;
+  right: 15px;
+}
+
+.paddingL15 {
+  padding-left: 15px;
+}
+
+.overflowAuto {
+  overflow: auto;
+}
+
+.toggleButton label {
+  margin: 10px;
+  border-radius: 0;
+}
+
+.toggleButton label.active {
+  background-color: #0056b3 !important;
+  border-color: #0056b3 !important;
+}
+
+.toggleButton label.active:focus,
+.toggleButton label:focus,
+.toggleButton label.active.focus,
+.toggleButton label.focus {
+  outline: none;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 86, 179, 0.5) !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 86, 179, 0.5) !important;
+}
+
+.addTicketType:hover {
+  text-decoration: none;
+}
+
+.addTicketType:before {
+  font-family: "Font Awesome 5 Free";
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 900;
+}
+
+.addTicketType[aria-expanded="false"]:before {
+  content: "\f055";
+}
+
+.addTicketType[aria-expanded="true"]:before {
+  content: "\f056";
+}
+
+.borderOn {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 4px;
+}
+/*# sourceMappingURL=custom.css.map */
+
+.min100vh {
+  min-height: 80vh;
+}
+
+.borderR50 {
+  border-radius: 50%;
+}
+
+.paddinglr25 {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+/* .borderBoxShadow {
+  -webkit-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 10px 3px rgba(101, 100, 100, 0.75);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.marginUpPaddingDown {
+  margin-top: -10em;
+  padding-top: 12em;
+  background: #fff;
+  z-index: 0;
+} */
+
+.z-index1 {
+  z-index: 1;
+}
+
+.borderonTicket {
+  border: 1px solid #ccc;
+}
+
+.arc {
+  background: #fff !important;
+}
+.left-12 {
+  left: -12px;
+  border-right: 3px solid #ccc;
+}
+.right-12 {
+  right: -12px;
+  border-left: 3px solid #ccc;
+}
+
+.bottom-12.left-12,
+.top-12.right-12 {
+  transform: rotate(-45deg);
+  border-width: 1px;
+}
+.bottom-12.right-12,
+.top-12.left-12 {
+  transform: rotate(45deg);
+  border-width: 1px;
+}
+
+.card-header h5[aria-expanded="false"]::before,
+.card-header h5[aria-expanded="true"]::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f078";
+  float: right;
+  transition: all 0.5s;
+  font-weight: 900;
+}
+
+.card-header h5[aria-expanded="false"]::before {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.card a.btn-outline-success:hover {
+  color: #fff !important;
+}

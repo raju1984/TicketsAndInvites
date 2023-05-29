@@ -1,0 +1,117 @@
+﻿@model  EventManager1.Models.StatusResponse
+<style>
+    .borderR50 {
+        border-radius: 50%;
+    }
+
+    .btn-lg, .btn-group-lg > .btn {
+        padding: 2rem 2rem !important;
+    }
+</style>
+<div class="modal fade bd-example-modal-md" id="tickets" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        @if (Model != null && Model.amount != null)
+                        {
+                            <div class="col-md-12 my-auto">
+                                <div class="card d-flex">
+                                    <div class="row" style="margin:0 auto">
+                                        <div class="col-md-12">
+                                            <div class="message">
+                                                @if (Model.status == "SUCCESSFUL")
+                                                {
+                                                    <p id="Success">Thanks for your Payment. Your Payment of Gh₵@Model.amount has been received.</p>
+                                                }
+                                                else
+                                                {
+                                                    <p id="fail">Your Payment of Gh₵@Model.amount is Failed. </p>}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3 text-center">
+                                            @if (Model.status == "SUCCESSFUL")
+                                            {
+                                                <div id="divSuccess">
+                                                    <div>
+                                                        <button class="btn btn-success text-white borderR50 btn-lg" style="padding: 1.5rem 1.7rem !important;">
+                                                            <i class="fas fa-check" style="margin-left:0 !important"></i>
+                                                        </button>
+                                                    </div>
+                                                    <h4 class="pt-2"> Payment Status : Success </h4>
+                                                    <h5>Telco Transaction Id : <label id="transaction">@Model.financialTransactionId</label> </h5>
+                                                    <h4>Total Amount : <label id="total">Gh₵ @Model.amount</label></h4>
+                                                    <p class="text-muted">
+                                                        <label id="messagesuccess">@Model.message</label>
+                                                    </p>
+                                                    <h4>
+                                                        @if (Model.Page == "Invitation")
+                                                        {
+                                                            <a href="@Url.Action("InvitationOverView", "InvitationUser", new { area = "User" })" class="btn btn-primary" style="width: 190px; margin: auto;">View Invitation</a>
+                                                        }
+                                                        else if (Model.Page == "BroadCast")
+                                                        {
+
+                                                        }
+                                                        else if (Model.Page == "Subscription")
+                                                        {
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="@Url.Action("Dashboard", "User", new { area = "User" })" class="btn btn-primary" id="InvLink" style="width: 190px; margin: auto;">Go To Dashboard</a>
+                                                        }
+                                                    </h4>
+
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div id="divFail">
+                                                    <div>
+                                                        <button class="btn btn-danger text-white borderR50 btn-lg" style="padding: 1.5rem 1.7rem !important;">
+                                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                    <h4 class="pt-2"> Transaction Failed </h4>
+                                                    <h5>Transaction Id : <label id="transactionf">@Model.financialTransactionId</label> </h5>
+                                                    <h4>Total Amount : <label id="totalf">@Model.amount</label></h4>
+                                                    <p class="text-muted">
+                                                        <label id="messagesuccess" style="color:red">@Model.message</label>
+                                                    </p>
+                                                    <h4>
+                                                        <a href="@Url.Action("Dashboard", "Organizer", new { area = "Organizer" })" class="btn btn-primary" id="InvLink" style="width: 190px; margin: auto;">Go To Dashboard</a>
+                                                    </h4>
+                                                </div>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        }
+                        else
+                        {
+                            <h2 style="padding:50px; color:brown">Something went wrong! Please try again after 1 minute.</h2>
+                        }
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-dark btn-fw" data-dismiss="modal" id="btn_Close">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

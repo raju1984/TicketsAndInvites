@@ -1,0 +1,94 @@
+﻿@model  EventManager1.Areas.Organizer.Models.SubcriptionViewModel
+@using EventManager1.Models
+@{
+    ViewBag.Title = "PastSubscription";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+}
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-bullhorn menu-icon"></i>
+            </span>
+            <span>Your Subscription</span>
+        </h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <select class="form-control" id="EventId" name="EventId">
+                    <option value="0">Select Event</option>
+                    @if (Model != null && Model.Events != null)
+                    {
+                        foreach (var item in Model.Events)
+                        {
+                            if (item.Id.ToString() == Request.QueryString["EventId"])
+                            {
+                                <option value="@item.Id" selected>@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Id">@item.Text</option>
+                            }
+
+                        }
+                    }
+                </select>
+            </div>
+            <button class="btn btn-danger" onclick="timedRefresh(1)"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</button>
+            <table id="dtBasicExample" class="table table-striped table-bordered"
+                   cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Eventname</th>
+                        <th>Subcriptiontype</th>
+                        <th>status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        if (Model != null && Model.Subcription != null && Model.Subcription.Count() > 0)
+                        {
+                            foreach (var item in Model.Subcription)
+                            {
+                                <tr>
+                                    <td>@item.eventname</td>
+                                    @if(item.subcriptiontype==(int)SubscriptionType.Bronze)
+                                    {
+                                        <td>@SubscriptionType.Bronze.ToString()</td>
+                                    }
+                                    else if (item.subcriptiontype == (int)SubscriptionType.Gold)
+                                    {
+                                        <td>@SubscriptionType.Gold.ToString()</td>
+                                    }
+                                    else if (item.subcriptiontype == (int)SubscriptionType.Silver)
+                                    {
+                                        <td>@SubscriptionType.Silver.ToString()</td>
+                                    }
+                                    else if (item.subcriptiontype == (int)SubscriptionType.Platinum)
+                                    {
+                                        <td>@SubscriptionType.Platinum.ToString()</td>
+                                    }
+                                    <td>@item.status</td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('#EventId').on('change', function () {
+        debugger;
+        var Id = this.value;
+        Loader(true);
+        window.location = "/Organizer/EventPromation/PastSubscription?EventId=" + Id;
+    })
+</script>

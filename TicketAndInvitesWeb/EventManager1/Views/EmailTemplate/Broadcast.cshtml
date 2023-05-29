@@ -1,0 +1,34 @@
+﻿@model EventManager1.Models.ModelInviation
+@{
+    Layout = null;
+}
+<html lang="en">
+
+<body>
+    <div style="width:400px; padding:1% 5%">
+        <p>Hello there,</p>
+        
+        <p style="text-align:justify">
+            @Model.message
+        </p>
+        <p><a target="_blank" href="@Model.BaseUrl/Home/EventDetail/@Model.EventId" style="background-color:darkgreen;padding:5px; color:#fff; text-decoration: none">Buy Now</a></p>
+        <br />
+        <a href="@Model.BaseUrl/Home/EventDetail/@Model.EventId">
+            <img src="@Model.Image" alt="image" width="100%">
+            <h4>
+                @Model.EventName
+            </h4>
+        </a>
+        <p>@Convert.ToDateTime(@Model.EventDate).ToString("dd/MM/yyyy hh:mmtt")</p>
+        <p>
+            @Model.Venuename
+        <p>
+            For more information contact on<br>
+            @Model.RsvpName <br>
+            <span>@Model.Contact</span>
+        </p>
+    </div>
+</body>
+</html>
+
+

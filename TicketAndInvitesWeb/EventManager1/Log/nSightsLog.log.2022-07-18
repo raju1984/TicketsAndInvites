@@ -1,0 +1,201 @@
+2022-07-18 11:24:59,622 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/1icymvhm0awvg2e","access_code":"1icymvhm0awvg2e","reference":"3577a70a_849c_4fc2_a6fd_2cb12869ef5a"}}
+2022-07-18 11:25:07,497 ERROR MonitoringLogger - PayStack response in Callback reference:  3577a70a-849c-4fc2-a6fd-2cb12869ef5a
+2022-07-18 11:25:23,456 ERROR MonitoringLogger - Api response in Callback response :  {"status":true,"message":"Verification successful","data":{"id":1957706474,"domain":"test","status":"success","reference":"3577a70a_849c_4fc2_a6fd_2cb12869ef5a","amount":15000,"message":null,"gateway_response":"Successful","paid_at":"2022_07_18T05:53:59.000Z","created_at":"2022_07_18T05:53:52.000Z","channel":"card","currency":"GHS","ip_address":"122.176.47.222","metadata":{"custom_fields":{"display_name":"Cancel","variable_name":"cancel_action","value":"http://localhost:62110/Payment/PayStpaystackCancleCallback"}},"log":{"start_time":1658123702,"time_spent":4,"attempts":1,"errors":0,"success":true,"mobile":false,"input":[],"history":[{"type":"action","message":"Attempted to pay with card","time":3},{"type":"success","message":"Successfully paid with card","time":4}]},"fees":293,"fees_split":null,"authorization":{"authorization_code":"AUTH_w5r6o0r4da","bin":"408408","last4":"4081","exp_month":"12","exp_year":"2030","channel":"card","card_type":"visa ","bank":"TEST BANK","country_code":"GH","brand":"visa","reusable":true,"signature":"SIG_mFkgYdLPHWaecI0s7bPG","account_name":null,"receiver_bank_account_number":null,"receiver_bank":null},"customer":{"id":86748908,"first_name":null,"last_name":null,"email":"sandeep@gmail.com","customer_code":"CUS_jk951dba19dukgq","phone":null,"metadata":null,"risk_action":"default","international_format_phone":null},"plan":null,"split":{},"order_id":null,"paidAt":"2022_07_18T05:53:59.000Z","createdAt":"2022_07_18T05:53:52.000Z","requested_amount":15000,"pos_transaction_data":null,"source":null,"fees_breakdown":null,"transaction_date":"2022_07_18T05:53:52.000Z","plan_object":{},"subaccount":{}}}
+2022-07-18 11:25:26,176 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-07-18 11:25:26,179 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-07-18 11:25:26,220 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ) in G:\vsProcessor\EventManager1\Models\CommonSMSCallF.cs:line 34
+2022-07-18 11:25:32,891 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :sandeep@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello sandeep,</p>
+        <p>
+            We are excited you are attending Retansh Event scheduled for 11/07/2022 03:32PM  <span>at Best Western, Accera</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=Best Western, Accera" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/8027162235.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62110///localhost:62113/ImageEvent/Kattah/1.png" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Chandan Tiwari <br>
+            <span>944907907797</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-07-18 11:25:35,388 ERROR MonitoringLogger - SendTicketToMail :   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at EventManager1.Models.EmailSending.SendEmail(String email, String body, String MailfromName, String Subject) in G:\vsProcessor\EventManager1\Models\EmailSending.cs:line 36
+2022-07-18 11:34:21,527 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/94ujrx6qpdi4f0m","access_code":"94ujrx6qpdi4f0m","reference":"5144eda2_445d_4b44_a68d_087675aeacb4"}}
+2022-07-18 11:34:28,894 ERROR MonitoringLogger - PayStack response in Callback reference:  5144eda2-445d-4b44-a68d-087675aeacb4
+2022-07-18 11:34:45,076 ERROR MonitoringLogger - Api response in Callback response :  {"status":true,"message":"Verification successful","data":{"id":1957715485,"domain":"test","status":"success","reference":"5144eda2_445d_4b44_a68d_087675aeacb4","amount":50000,"message":null,"gateway_response":"Successful","paid_at":"2022_07_18T06:03:20.000Z","created_at":"2022_07_18T06:03:14.000Z","channel":"card","currency":"GHS","ip_address":"122.176.47.222","metadata":{"custom_fields":{"display_name":"Cancel","variable_name":"cancel_action","value":"http://localhost:62110/Payment/PayStpaystackCancleCallback"}},"log":{"start_time":1658124264,"time_spent":4,"attempts":1,"errors":0,"success":true,"mobile":false,"input":[],"history":[{"type":"action","message":"Attempted to pay with card","time":3},{"type":"success","message":"Successfully paid with card","time":4}]},"fees":975,"fees_split":null,"authorization":{"authorization_code":"AUTH_zk93k42zfm","bin":"408408","last4":"4081","exp_month":"12","exp_year":"2030","channel":"card","card_type":"visa ","bank":"TEST BANK","country_code":"GH","brand":"visa","reusable":true,"signature":"SIG_mFkgYdLPHWaecI0s7bPG","account_name":null,"receiver_bank_account_number":null,"receiver_bank":null},"customer":{"id":86748908,"first_name":null,"last_name":null,"email":"sandeep@gmail.com","customer_code":"CUS_jk951dba19dukgq","phone":null,"metadata":null,"risk_action":"default","international_format_phone":null},"plan":null,"split":{},"order_id":null,"paidAt":"2022_07_18T06:03:20.000Z","createdAt":"2022_07_18T06:03:14.000Z","requested_amount":50000,"pos_transaction_data":null,"source":null,"fees_breakdown":null,"transaction_date":"2022_07_18T06:03:14.000Z","plan_object":{},"subaccount":{}}}
+2022-07-18 11:34:45,132 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-07-18 11:34:45,132 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-07-18 11:34:45,145 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-07-18 11:34:45,145 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-07-18 11:34:45,207 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ)
+2022-07-18 11:34:45,289 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-07-18 11:34:45,289 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-07-18 11:34:45,317 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ)
+2022-07-18 11:34:45,498 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-07-18 11:34:45,498 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-07-18 11:34:45,670 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ)
+2022-07-18 11:34:49,345 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :sandeep@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello sandeep,</p>
+        <p>
+            We are excited you are attending Retansh Event scheduled for 11/07/2022 03:32PM  <span>at Best Western, Accera</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=Best Western, Accera" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/2262642235.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62110///localhost:62113/ImageEvent/Kattah/1.png" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Chandan Tiwari <br>
+            <span>944907907797</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-07-18 11:34:49,355 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :sandeep@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello sandeep,</p>
+        <p>
+            We are excited you are attending Retansh Event scheduled for 11/07/2022 03:32PM  <span>at Best Western, Accera</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=Best Western, Accera" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/0626442237.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62110///localhost:62113/ImageEvent/Kattah/1.png" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Chandan Tiwari <br>
+            <span>944907907797</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-07-18 11:34:49,365 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :sandeep@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello sandeep,</p>
+        <p>
+            We are excited you are attending Retansh Event scheduled for 11/07/2022 03:32PM  <span>at Best Western, Accera</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=Best Western, Accera" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/6374072237.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62110///localhost:62113/ImageEvent/Kattah/1.png" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Chandan Tiwari <br>
+            <span>944907907797</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-07-18 11:34:49,366 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :sandeep@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello sandeep,</p>
+        <p>
+            We are excited you are attending Retansh Event scheduled for 11/07/2022 03:32PM  <span>at Best Western, Accera</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=Best Western, Accera" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/2262642235.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62110///localhost:62113/ImageEvent/Kattah/1.png" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Chandan Tiwari <br>
+            <span>944907907797</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-07-18 11:34:49,421 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ)
+2022-07-18 11:34:51,260 ERROR MonitoringLogger - SendTicketToMail :   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at EventManager1.Models.EmailSending.SendEmail(String email, String body, String MailfromName, String Subject)
+2022-07-18 11:34:51,283 ERROR MonitoringLogger - SendTicketToMail :   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at EventManager1.Models.EmailSending.SendEmail(String email, String body, String MailfromName, String Subject)
+2022-07-18 11:34:51,310 ERROR MonitoringLogger - SendTicketToMail :   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at EventManager1.Models.EmailSending.SendEmail(String email, String body, String MailfromName, String Subject)
+2022-07-18 11:34:51,737 ERROR MonitoringLogger - SendTicketToMail :   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at EventManager1.Models.EmailSending.SendEmail(String email, String body, String MailfromName, String Subject)

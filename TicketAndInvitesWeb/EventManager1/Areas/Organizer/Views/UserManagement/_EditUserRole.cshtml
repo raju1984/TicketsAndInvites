@@ -1,0 +1,74 @@
+﻿@model  EventManager1.Areas.Organizer.Models.EdituserRoleModel
+
+<div class="modal fade bd-example-modal-lg" id="Modeldivedituser" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalTitle">
+                    Edit user for permission
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            @using (Html.BeginForm("CreateUserPost", "UserManagement", FormMethod.Post))
+                            {
+                                <input type="hidden" id="hduserid" value="@Model.UserManageModel.UserId" />
+                                <div class="table-responsive mb-4">
+                                    <table class="table table-striped mb-2">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email Address</th>
+                                                <th scope="col">Account Type</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <input type="text" name="txteditname" id="txteditname" value="@Model.UserManageModel.Name" required class="form-control">
+                                                </th>
+                                                <td>
+                                                    <input type="email" name="txteditemail" id="txteditemail" value="@Model.UserManageModel.Email" required class="form-control">
+                                                </td>
+                                                <td>
+                                                    <select name="ddleditaccount" id="ddleditaccount" class="form-control">
+                                                        @if (Model != null && Model.Accounts != null)
+                                                        {
+                                                            foreach (var item in Model.Accounts)
+                                                            {
+                                                                if (item.Id == Model.UserManageModel.AccountTypeId)
+                                                                {
+                                                                    <option value="@item.Id">@item.Text</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option value="@item.Id">@item.Text</option>
+
+                                                                }
+                                                            }
+                                                        }
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button type="button" onclick="Update('@Model.UserManageModel.UserId')" class="btn btn-gradient-primary btn-rounded btn-fw">Update</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark btn-fw" onclick="ReloadPage()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

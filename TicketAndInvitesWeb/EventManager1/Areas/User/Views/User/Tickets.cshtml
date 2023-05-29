@@ -1,0 +1,229 @@
+﻿@model  EventManager1.Models.Event_
+@{
+    ViewBag.Title = "Tickets";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+    <style>
+        .borderOnLight{padding-top:5px;}
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            div #print {
+                margin-left: 0;
+            }
+
+            .footer {
+                background: #f2edf3;
+                padding: 30px 1rem 50px;
+            }
+        }
+    </style>
+
+}
+
+    <div class="content-wrapper" id="html-content-holder">
+
+        @using (Html.BeginForm("Tickets", "User", new { area = "User" }, FormMethod.Post))
+        {
+            @*<div>
+                <input type="hidden" name="gridHTML" />
+                <input type="submit" id="btnExportHTML" name="btnExportHTML" class="btn btn-success" value="Export Pdf" />
+            </div>*@
+        if (Model != null)
+        {
+            <div id="tblEmpData">
+                <div class="row">
+                    <div class="col-sm-2 page-header">
+                        <a href="Dashboard"
+                           class="btn btn-outline-primary btn-rounded btn-icon mr-2 icon-center">
+                            <i class="mdi mdi-backburger"></i>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 padding5">
+
+                        <h6 class="colorBlack noMargin page-title">
+                            @Model.EventName
+                        </h6>
+                        <p class="text-muted noMargin">@Convert.ToDateTime(Model.StartDate).ToString("dddd, dd MMM yyyy HH:mm")</p>
+                        <p class="text-muted noMargin">
+                            Address : <label id="VenueAddress"> @Model.CityName  </label>
+                        </p>
+                        <p class="text-muted noMargin">
+                            Venue :   @Model.Venue
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div class="col-md-5 offset-2 bgDark padding25 borderR10" id="print">
+                            <div class="card">
+
+                                <img src="@Model.Multimedia.FirstOrDefault().URL" class="card-img-top" width="100%"></img>
+                                @*<input type="image" src="@Model.Multimedia.FirstOrDefault().URL"></input>*@
+                                <div class="card-body pt-0">
+                                    <div class="arc top-12 right-12"></div>
+                                    <div class="arc top-12 left-12"></div>
+                                    <div class="arc bottom-12 right-12"></div>
+                                    <div class="arc bottom-12 left-12"></div>
+                                    <div class="row">
+                                        <div class="col-sm-12 padding5">
+                                            <h6 class="colorBlack noMargin page-title">
+                                                @Model.EventName
+                                            </h6>
+                                            <p class="text-muted noMargin">@Convert.ToDateTime(Model.StartDate).ToString("dd/MM/yyyy HH:mmtt") </p>
+                                            <p>
+                                                Address :
+                                                <a href="https://www.google.com/maps?saddr=My+Location&daddr=@Model.CityName" target="_blank">@Model.CityName</a>
+                                            </p>
+                                            <p class="text-muted noMargin">
+                                                Name :   @Model.UserName
+                                            </p>
+                                            @if (Model.Venue != null)
+                                            {
+                                                <p class="text-muted noMargin">
+
+                                                    Venue :   @Model.Venue
+                                                </p>}
+                                                <p class="text-muted noMargin">
+                                                    Ticket Name :   @Model.Tickets.FirstOrDefault().TicketName
+                                                </p>
+                                            </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12 text-center">
+                                            <h3>
+                                                <small>Gate no</small> <b> @Model.Tickets.FirstOrDefault().GateNo </b>
+                                            </h3>
+                                        </div>
+                                        @if (@Model.Tickets.FirstOrDefault().ColorArea != null)
+                                        {
+                                            <div class="col mr-1 borderOnLight text-center">
+                                                <h5>
+                                                    <small class="text-muted">Color Area</small>
+                                                    @Model.Tickets.FirstOrDefault().ColorArea
+                                                </h5>
+                                            </div>
+                                        }
+
+                                        <div class="col  borderOnLight text-center">
+                                            <h5>
+                                                <small class="text-muted">Total Seats</small>
+                                                @Model.Tickets.FirstOrDefault().Quantity
+                                            </h5>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="arc right-12"></div>
+                                    <div class="arc left-12"></div>
+                                    @*<hr class="borderDashed"></hr>*@
+                                    <div class="row">
+                                        <div class="col" style="text-align:center">
+                                            @if (Model.Tickets.FirstOrDefault().Barcode != null)
+                                            {
+                                                @*<input type="image" src="@String.Format("../../Content/BarCode/{0}.jpg", Model.Tickets.FirstOrDefault().Barcode)"></input>*@
+                                                <img src="@String.Format("../../Content/BarCode/{0}.jpg", Model.Tickets.FirstOrDefault().Barcode)" alt=""></img>
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="print-btn"></div>
+                        <div class="col-md-5 offset-2 padding25 borderR10">
+
+
+
+                            <button id="btnSubmit" style="width:100%" class="btn btn-primary">Download Ticket</button>
+
+                            @*<input type="button" style="width:100%" class="btn btn-primary" id="btnExportHTML" value="Download Ticket">*@
+                        </div>
+                    </div>
+
+                </div>
+            </div>}
+            }
+         
+        @*<div class="row pt-2 pb-2" id="divmapdetailjj" style="height:400px;">
+            @{
+                Html.RenderPartial("_MapDirection");
+            }
+        </div>*@
+    </div>
+@*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='GridHtml']").val($("#Grid").html());
+        });
+    });
+</script>*@
+<script>
+    $(document).ready(function () {
+        //initMaps();
+        $('#btnSubmit').click(function () {
+            debugger;
+            $("input[name='gridHTML']").val($("#tblEmpData").html());
+        });
+    });
+    
+    var lat1;
+    var long1;
+    if (!lat1 || !long1) {
+        lat1 = '7.9465';
+        long1 = '1.0232'
+    }
+    
+    function initMaps() {
+        
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var map = new google.maps.Map(document.getElementById('map_canvas'), {
+            zoom: 7,
+            center: { lat: lat1, lng: long1 }
+        });        
+        directionsDisplay.setMap(map);
+
+        //var onChangeHandler = function() {
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+        //};
+        //document.getElementById('start').addEventListener('change', onChangeHandler);
+        //document.getElementById('end').addEventListener('change', onChangeHandler);
+    }
+   // google.maps.event.addDomListener(window, 'load', GetLocations);
+    function GetLocations() {
+        debugger;
+        navigator.geolocation.getCurrentPosition(
+            function (position) { // success cb
+
+                /* Current Coordinate */
+                lat1 = position.coords.latitude;
+                long1 = position.coords.longitude;
+                //$('#lat').val(lat1);
+                //$('#lng').val(long1);
+                // alert("Latitude: " + lat + "\nLongitude: " + long);
+                initMaps();
+            },
+            function () { // fail cb
+
+
+            }
+        );}
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        debugger;
+        
+        var myCenter = new google.maps.LatLng(lat1, long1);
+        directionsService.route({            
+            origin: myCenter, // $('#ShopAddress').val(),//document.getElementById('start').value,
+            destination: $('#VenueAddress').text(),//document.getElementById('end').value,
+            travelMode: 'DRIVING'
+        }, function (response, status) {
+            if (status === 'OK') {
+                directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+    }
+</script>

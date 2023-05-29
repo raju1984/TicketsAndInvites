@@ -1,0 +1,57 @@
+﻿
+@model  EventManager1.Areas.Organizer.Models.EdituserEventPermisionModel
+
+
+
+<!-- Modal Header -->
+<div class="modal-header">
+    @if (Model.UserDetail != null)
+    {
+    <h4 class="modal-title">@Model.UserDetail.Name</h4>
+    }
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+    @if (Model.EventDataModel.Count() >0)
+    {
+        <input type="hidden" id="UserId" value="@Model.UserDetail.Id" />
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Event Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.EventDataModel)
+                {
+                <tr>
+                    <td><input type="checkbox" checked="@item.permission"  id="@item.Id" name="checkMr[]"  value="@item.Id"></td>
+                    <td>@item.EventName</td>
+                </tr>
+                }
+               
+            </tbody>
+        </table>
+    </div>
+    }
+</div>
+
+<!--Modal footer-->
+<div class="modal-footer">
+    @if (@Model.Showbutton == true)
+    {
+        <button type="button" onclick="Savedata(@Model.UserDetail.Id)" class="btn btn-outline-success" data-dismiss="modal">Save</button>
+    }
+    else
+    {
+        <button type="button" onclick="Editdata(@Model.UserDetail.Id)" class="btn btn-outline-success" data-dismiss="modal">Save</button>
+    }
+
+    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+</div>
+
+

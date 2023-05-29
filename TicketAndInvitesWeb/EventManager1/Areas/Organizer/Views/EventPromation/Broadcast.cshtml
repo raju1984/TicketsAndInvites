@@ -1,0 +1,331 @@
+﻿@model  EventManager1.Areas.Organizer.Models.BroadcastModel
+    @using EventManager1.Models
+@{
+    ViewBag.Title = "Broadcast";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+<style>
+    @@media all and (min-width: 320px) and (max-width: 480px) {
+        .content-wrapper {
+            background: #f2edf3;
+            padding: 2.75rem 1.25rem;
+        }
+
+        .btn.btn-icon {
+            margin-top: 10px;
+        }
+
+        .card .card-body {
+            padding: 1.5rem;
+        }
+
+        input#fileUpload {
+            background: #ece9e9;
+        }
+
+        .col-md-4.text-center.borderDottedOnLight {
+            margin: 0 20px;
+        }
+    }
+
+    .bx {
+        margin-bottom: 10px
+    }
+
+    .form-control {
+        padding: 0.275rem 1.175rem !important;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+
+    input[type="file"].form-control {
+        border: none;
+        background: #f7f7f7;
+        padding-bottom: 30px;
+    }
+</style>
+}
+
+<div class="content-wrapper">
+
+    <div class="page-header">        
+            <h3 class="page-title">
+
+                <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                    <i class="mdi mdi-bullhorn menu-icon"></i>
+                </span>
+                <span> Broadcast </span>
+            </h3>       
+            <a href="~/Organizer/EventPromation/PastBroadcast"> <span class="file-upload-browse btn btn-gradient-primary">Past Broadcast</span></a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <select class="form-control" id="EventId" name="EventId">
+                    <option value="0">Select Event</option>
+                    @if (Model != null && Model.Events != null)
+                    {
+                        foreach (var item in Model.Events)
+                        {
+                            <option value="@item.Id">@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form class="forms-sample">
+                        @*<div class="form-group">
+                            <label for="exampleInputUsername1">Your Email address</label>
+                            <input type="Email" class="form-control" id="txtemail"
+                                   placeholder="email">
+                        </div>*@
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">Subject</label>
+                            <input type="text" class="form-control" id="txtsubject"
+                                   placeholder="subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">Message</label>
+                            <textarea class="form-control" id="txtmessage" rows="4"></textarea>
+                        </div>
+                        <h3>Bulk Email Send</h3>
+                        <h5>Recipient Email addresses </h5>
+                        <div class="col-md-12 mt-2">
+                            <label for="exampleInputUsername1">Upload an Excel to Broadcast</label>
+                            <p>Download predefined excel template: <a href="~/Content/ExcelTemplate/EmailInvitation.xlsx" download="">Sample Excel Template</a></p>
+                        </div>
+                        <div class="input-group col-xs-12">
+
+                            <input type="file" id="fileUpload" class="form-control file-upload-info"
+                                   placeholder="Upload Excel">
+                            <span class="input-group-append">
+                                <button id="fileUploadExcel" class="file-upload-browse btn btn-gradient-primary"
+                                        type="button">
+                                    Upload
+                                </button>
+                            </span>
+                        </div>
+                        <h3 class="mt-4 mb-4">
+                            OR <small>
+                                <small class="text-muted">
+                                    Send one by one (Add more email by
+                                    clicking on
+                                    add button in the
+                                    bottom)
+                                </small>
+                            </small>
+                        </h3>
+                        <div class="form-group" id="divsendemail">
+                            <label for="exampleInputUsername1">Recipient Email address</label>
+                            <div class="row bx">
+                                <div class="col-6">
+                                    <input type="Email" class="form-control senderemail" id="txtmilemail"
+                                           placeholder="Email">
+                                </div>
+                                <div class="col-5">
+                                    <input type="number" class="form-control sendermob" id="txtmobile"
+                                           placeholder="Mobile no.">
+                                </div>
+                                <div class="col-1">
+                                    <button type="button" class="btn btn-inverse-primary btn-rounded btn-icon" onclick="AddEmailInput()">
+                                        <i class="mdi mdi-plus-box icon-md"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    
+                        <div class="mt-5">
+                            <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw" onclick="BroadcastEmail()">Send Request</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var Isexcelupoloade = false;
+    function AddEmailInput() {
+        debugger;
+        $("#divsendemail").append('<div class="row brodList">' +
+            ' <div class="col-6">' +    '  <input type="Email" class="form-control senderemail" id="txtmilemail"' + ' placeholder="email">' +
+            ' </div>' +        ' <div class="col-6">' +
+            '     <input type="number" class="form-control txtmobile" id="txtmobile"' +
+            '            placeholder="Mobile no.">' +      ' </div>' +     ' </div><br>'   );
+            //<br><input type='Email' class='form-control senderemail' id='txtmilemail' placeholder='email'>");
+    }
+    function BroadcastEmail() {
+        var reg = /^([A-Za-z0-9_\-\.])+\@@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        var EventId = $("#EventId").val();
+        var Emails = new Array();
+        //var emaillist = [];
+        var broadcost = {};
+        //broadcost.Youremail = $("#txtemail").val();
+        broadcost.Subject = $("#txtsubject").val();
+        broadcost.Message = $("#txtmessage").val();
+        broadcost.Emails = Emails;
+        //if (!broadcost.Youremail) {
+        //    $("#txtemail").css("border-color", "#E91E63");
+        //    $("#txtemail").focus();
+        //    return false;
+        //}
+        //else {
+        //    if (reg.test(broadcost.Youremail) == false) {
+        //        $("#txtemail").css("border-color", "#E91E63");
+        //        $("#txtemail").focus();
+        //        return false;
+        //    }
+        //    else {
+        //        $("#txtemail").css("border-color", "#ebedf2");
+        //    }
+        //    $("#txtemail").css("border-color", "#ebedf2");
+        //}
+        if (!broadcost.Subject) {
+            $("#txtsubject").focus();
+            $("#txtsubject").css("border-color", "#E91E63");
+            return false;
+        }
+        else {
+            $("#txtsubject").css("border-color", "#ebedf2");
+        }
+        if (!broadcost.Message) {
+            $("#txtmessage").focus();
+            $("#txtmessage").css("border-color", "#E91E63");
+            return false;
+        }
+        else {
+            $("#txtmessage").css("border-color", "#ebedf2");
+        }
+        debugger;
+        var isallpass = true; var isEmailcount = 0;
+        var emailf = $('#txtmilemail').val();
+        if (emailf != "" ) {
+        var Emaillistt = {
+            EmailAddress: $('#txtmilemail').val(),
+            Mobile: $('#txtmobile').val(),
+        }
+            isEmailcount = isEmailcount + 1;
+            Emails.push(Emaillistt);
+        }
+
+
+        $(".brodList").each(function (index) {
+
+            var items = $(".sendermob");
+            //var value = $(this).val();
+            var value = $('.senderemail',this).val();
+            var mob = $('.txtmobile', this).val();
+            //var mob = items.eq(index).val();
+            if (!value) {
+                $(this).css("border-color", "#E91E63");
+                $(this).focus();
+                isallpass = false;
+            }
+            else {
+                if (reg.test(value) == false) {
+                    $(this).css("border-color", "#E91E63");
+                    $(this).focus();
+                    isallpass = false;
+                }
+                else {
+                    var Emaillist = {
+                        EmailAddress: value,
+                        Mobile: mob,
+                    }
+                    Emails.push(Emaillist);
+                    $(this).css("border-color", "#ebedf2");
+                }
+            }
+        });
+        if (!Isexcelupoloade) {
+            if (!isallpass) {
+                return false;
+            }
+        }
+        var skillsSelect = document.getElementById("EventId");
+        var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
+        if ($("#EventId").val() > 0 ) {
+            $.ajax({
+                type: "POST",
+                url: '/Organizer/EventPromation/BroadCost',
+                data: '{broadcost: ' + JSON.stringify(broadcost) + ',type:0,EventId:' + JSON.stringify(EventId) + ',EventName:' + JSON.stringify(selectedText) + '}',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    debugger;
+                    //Isexcelupoloade = false;
+                    if (Isexcelupoloade) {
+                        if (result.Msg == null) { window.location.replace("/Organizer/Transaction/Summery"); }
+                        else { alertify.alert(result.Msg); } }
+                    else {
+                    var emails = isEmailcount ;                    
+                    if (emails > 0) {
+
+                        if (result.Msg == null) { window.location.replace("/Organizer/Transaction/Summery"); }
+                        else { alertify.alert(result.Msg); }
+                    }                    
+                    else {
+                        alertify.alert("Please upload excel or fill recipient email in textbox.");
+                        }
+                    }
+                },
+                error: function () {
+                    alertify.alert("Error while inserting data");
+                }
+            });
+        }
+        else { alertify.alert("Please select a event");}
+    }
+
+
+    $('#fileUploadExcel').click(function () {
+        if ($('#fileUpload').val() == "") {
+            alertify.alert("Please choose file to upload!");
+            return false;
+        }
+        // Checking whether FormData is available in browser
+        if (window.FormData !== undefined) {
+
+            var fileUpload = $("#fileUpload").get(0);
+            var files = fileUpload.files;
+            // Create FormData object
+            var fileData = new FormData();
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+            $.ajax({
+                url: '/Organizer/EventPromation/UploadFiles',
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (result) {
+                    if (result && result.Code == 200) {
+                        Isexcelupoloade = true;
+                        $('#fileUpload').val("");
+                        alertify.alert(result.Msg);
+                    }
+                    else {
+                        $('#fileUpload').val("");
+                        alertify.alert(result.Msg);
+                    }
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+        } else {
+            alert("FormData is not supported.");
+        }
+    });
+
+</script>

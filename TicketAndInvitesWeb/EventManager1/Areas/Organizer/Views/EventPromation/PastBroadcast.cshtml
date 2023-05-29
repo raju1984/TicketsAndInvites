@@ -1,0 +1,83 @@
+﻿@model  EventManager1.Areas.Organizer.Models.BroadcastModel
+@{
+    ViewBag.Title = "PastBroadcast";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+}
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-bullhorn menu-icon"></i>
+            </span>
+            <span>Past Broadcast </span>
+        </h3>
+        <a href="~/Organizer/EventPromation/Broadcast"><span class="file-upload-browse btn btn-gradient-primary">Send New Broadcast</span></a>
+</div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <select class="form-control" id="EventId" name="EventId">
+                    <option value="0">Select Event</option>
+                    @if (Model != null && Model.Events != null)
+                    {
+                        foreach (var item in Model.Events)
+                        {
+                            if (item.Id.ToString() == Request.QueryString["EventId"])
+                            {
+                                <option value="@item.Id" selected>@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Id">@item.Text</option>
+                            }
+
+                        }
+                    }
+                </select>
+            </div>
+            <button class="btn btn-danger" onclick="timedRefresh(1)"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</button>
+            <div id="broadcastList">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        var evntid = '@Request.QueryString["EventId"]'
+        if (evntid && evntid != '')
+        {
+            loadbradcost(evntid)
+        }
+    })
+    $('#EventId').on('change', function () {
+        debugger;
+        var Id = this.value;
+        window.location = '/Organizer/EventPromation/PastBroadcast?EventId=' + Id;
+        //loadbradcost(Id)
+       
+    })
+    function loadbradcost(Id)
+    {
+        Loader(true);
+        $.ajax({
+            url: '/Organizer/EventPromation/GetBroadcastList?EventId=' + Id,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                $('#broadcastList').html(result);
+                Loader(false);
+                //$('#tickets').modal('show');
+            },
+            error: function (xhr, status) {
+                Loader(false);
+                alert(status);
+            }
+        })
+    }
+</script>
+

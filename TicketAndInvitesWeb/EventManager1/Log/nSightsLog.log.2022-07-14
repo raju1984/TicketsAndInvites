@@ -1,0 +1,40 @@
+2022-07-14 16:13:57,156 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/qzae6y0faul7j16","access_code":"qzae6y0faul7j16","reference":"d916acc3_a72f_4650_8469_72080fc8ce54"}}
+2022-07-14 18:34:08,279 ERROR MonitoringLogger - PostTicket page  called1428name sandeep
+2022-07-14 18:34:08,285 ERROR MonitoringLogger - PostTicket page  called
+2022-07-14 18:34:45,834 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-07-14 18:34:45,837 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-07-14 18:34:45,894 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ) in G:\vsProcessor\EventManager1\Models\CommonSMSCallF.cs:line 34
+2022-07-14 18:34:48,239 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :sandeep@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello sandeep,</p>
+        <p>
+            We are excited you are attending Retansh Event scheduled for 11/07/2022 03:32PM  <span>at Best Western, Accera</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=Best Western, Accera" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/9336392236.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62110///localhost:62113/ImageEvent/Kattah/1.png" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Chandan Tiwari <br>
+            <span>944907907797</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-07-14 18:35:04,658 ERROR MonitoringLogger - SendTicketToMail :   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at EventManager1.Models.EmailSending.SendEmail(String email, String body, String MailfromName, String Subject) in G:\vsProcessor\EventManager1\Models\EmailSending.cs:line 36
+2022-07-14 18:53:00,607 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/rojz3vw9n5gjm6g","access_code":"rojz3vw9n5gjm6g","reference":"dc6f0be6_d4dc_4e18_8a01_130704eabdf2"}}

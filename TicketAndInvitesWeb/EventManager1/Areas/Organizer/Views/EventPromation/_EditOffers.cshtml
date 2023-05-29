@@ -1,0 +1,176 @@
+﻿@model  EventManager1.Areas.Organizer.Models.OffersModel
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<div class="modal fade bd-example-modal-lg" id="Offers" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalTitle">
+                    Update Offers
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <input type="hidden" name="Id" value="@Model.Id" />
+                            <div class="col-md-12">
+                                <p>Select your Discount in % below and genrate the coupon code.</p>
+                                @using (Html.BeginForm("PostOffers", "EventPromation", FormMethod.Post))
+                                {
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="hidden" name="Id" value="@Model.Id" />
+                                                <select class="form-control EventId1" id="EventId" name="EventId">
+                                                    <option value="0">Event</option>
+                                                    @if (Model != null && Model.Events != null)
+                                                    {
+                                                        foreach (var item in Model.Events)
+                                                        {
+                                                            if (Model.EventId != null && Model.EventId == item.Id)
+                                                            {
+                                                                <option value="@item.Id" selected>@item.Text</option>
+
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@item.Id">@item.Text</option>
+                                                            }
+
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                <select class="form-control TicketType" name="TicketType" id="TicketType">
+                                                    @*<option value="0">Ticket Type</option>*@
+
+                                                    @if (Model != null && Model.TicketTypeddl != null)
+                                                    {
+                                                        <option value="@Model.TicketTypeddl.FirstOrDefault().Id">@Model.TicketTypeddl.FirstOrDefault().Text</option>
+
+                                                    }
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @{ var sdate = Convert.ToDateTime(Model.startdate).ToString("yyyy-MM-dd");
+                                            var enddat = Convert.ToDateTime(Model.Enddate).ToString("yyyy-MM-dd");
+
+                                            <div class="col-3">
+                                                <input type="hidden" name="OfferPageCategory" id="OfferPageCategory" value="1" />
+                                                <div class="form-group">
+                                                    <input type="date" class="form-control d-inline-block" name="startdate" value="@sdate" required id="startdate" onchange="OndateChange()"
+                                                           aria-describedby="emailHelp" placeholder="Start Date">
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <input type="date" class="form-control d-inline-block" name="Enddate" value="@enddat" required id="Enddate" onchange="OndateChange()"
+                                                           aria-describedby="emailHelp" placeholder="End Date">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="CoupenCode" name="CoupenCode" value="@Model.CoupenCode" placeholder="Coupon Code" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <select class="form-control" name="OfferType" id="OfferType">
+                                                        @if (Model.OfferType == 1)
+                                                        {
+                                                            <option value="1" selected>Percentage</option>
+                                                            <option value="2">Fixed</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="2" selected>Fixed</option>
+                                                            <option value="1">Percentage</option>
+                                                        }
+
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group">
+                                                        <input type="number" id="valus" required name="valus" aria-label="" placeholder="ex. 10" value="@Model.valus"
+                                                               class="form-control">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">%</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div>
+                                                <button type="submit" onclick="return validate()"
+                                                        class="btn btn-gradient-danger btn-rounded btn-fw">
+                                                    Update
+                                                </button>
+                                            </div>
+                                        }
+                                    </div>
+                                            }
+                                <div class="mt-4 collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        <p>
+                                            The genrated coupon code for 10% discount is <b>SIRNBXC</b> &nbsp;
+                                            <i class="mdi mdi-content-copy icon-md"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark btn-fw" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.EventId1').change(function () {
+            debugger
+            var EvntId = $('.EventId1').val();
+            var E = {
+                EventId: EvntId,
+            };
+            $.ajax({
+                type: "POST",
+                url: '/Organizer/EventPromation/bindEventTicket',
+                data: JSON.stringify(E),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response != null) {
+                        debugger
+                        $('.TicketType').empty();
+                        $(response).each(function (index, item) {
+                            $('.TicketType').append($("<option>").val(item.Id).text(item.Text));
+                        });
+                    }
+                },
+
+            });
+
+        })
+    })
+</script>

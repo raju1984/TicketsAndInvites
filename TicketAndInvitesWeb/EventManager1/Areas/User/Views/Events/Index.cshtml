@@ -1,0 +1,260 @@
+﻿@model EventManager1.Areas.User.Models.EVideo
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+    <link rel="stylesheet" href="~/js/videojs/videre.css" />
+    <link rel="stylesheet" href="~/js/videojs/app.css" />
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/fonts/ionicons.eot">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="~/js/videojs/videre.js"></script>
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <script src="~/js/videojs/app.js"></script>
+    <style>
+        .vid-wrapper .vid-html5 video {
+            display: block;
+            background-color: black;
+            max-width: 100% !important;
+        }
+        .content-wrapper {
+            background: #f2edf3;
+            padding: 2.75rem 1.25rem;
+        }
+            .vid-wrapper {
+            position: relative;
+            height: 100%;
+            cursor: none;
+            /*width: auto !important;*/
+        }
+        @@media only screen and (max-width: 320px) {
+            .vid-wrapper {
+                position: relative;
+                height: 100%;
+                cursor: none;
+                width: auto !important;
+            }
+        }
+            @@media only screen and (max-width: 768px) {
+                .vid-wrapper {
+                    width: auto !important;
+                }
+                    /* For mobile phones: */
+                    /*#html-player {
+                width: 350px!important;
+            }
+            #player {
+                width: 340px!important;
+                
+            }*/
+                }
+    </style>
+    <style>
+   .spinner {
+   position: absolute;
+   left: 45%;
+   top: 42%;
+   height:60px;
+   width:60px;
+   margin:0px auto;
+   -webkit-animation: rotation .6s infinite linear;
+   -moz-animation: rotation .6s infinite linear;
+   -o-animation: rotation .6s infinite linear;
+   animation: rotation .6s infinite linear;
+   border-left:6px solid rgba(0,174,239,.15);
+   border-right:6px solid rgba(0,174,239,.15);
+   border-bottom:6px solid rgba(189,233,249,.15);
+   border-top:6px solid rgba(233,246,251,.8);
+   border-radius:100%;
+   z-index:100;
+}
+
+@@-webkit-keyframes rotation {
+   from {-webkit-transform: rotate(0deg);}
+   to {-webkit-transform: rotate(359deg);}
+}
+@@-moz-keyframes rotation {
+   from {-moz-transform: rotate(0deg);}
+   to {-moz-transform: rotate(359deg);}
+}
+@@-o-keyframes rotation {
+   from {-o-transform: rotate(0deg);}
+   to {-o-transform: rotate(359deg);}
+}
+@@keyframes rotation {
+   from {transform: rotate(0deg);}
+   to {transform: rotate(359deg);}
+}
+    </style>
+}
+
+    <div class="content-wrapper">
+        @*<h4>Your video will start shortly, depending on your internet connection it may take a while to start</h4>*@
+        <div class="page-header">
+            
+            <h3 class="page-title">
+                @*<span class="page-title-icon bg-gradient-primary text-white mr-2">
+                    <i class="mdi mdi-home"></i>
+                </span>*@
+                @Model.EventName
+            </h3>
+
+        </div>
+        <div class="container">
+            <div class="row" style="padding:0">
+
+
+                <div class="col-md-12" style="padding:0">
+                    @if (Model != null && Model.videoUrl != null)
+                    {
+                        <div id="player" class="tlClogo">
+                            <div id="divloader" class="spinner">
+
+                            </div>
+                        </div>
+                        <script>
+                            $(document).ready(function () {
+                                debugger
+                                refrss();
+                                function refrss(){
+                                $.ajax({
+                                    url: '@Url.Action("UserLoggedForVideo", "Events", new { area = "User" })',
+                                    type: "post",
+                                    cache: false,
+                                    success: function (msg) {
+                                        if (msg==false)
+                                        {
+                                            window.location.replace('@Url.Action("Logout", "User", new { area = "User" })');
+                                            //windows.location.href = '@Url.Action("Logout", "User", new { area = "User" })';
+                                        }
+                                        else
+                                        {
+                                            setTimeout(function () {
+                                                refrss();
+                                            }, 30000);
+                                        }
+                                    },
+                                    //error: function (xhr, ajaxOptions, thrownError) {
+
+                                    //}
+                                });
+                                }
+
+
+                                var eid = '@Model.EventId';
+                                if (eid == '128') {
+                                    $('#player').videre({
+                                        video: {
+                                            quality: [
+                                                {
+                                                    label: '360p',
+                                                    src: 'https://virtualtvbucket.s3-eu-west-1.amazonaws.com/Videos/MMAWT+VODMMWTN720.mp4'
+                                                },
+                                                {
+                                                    label: '720p',
+                                                    src: 'https://virtualtvbucket.s3-eu-west-1.amazonaws.com/Videos/MMAWT+VODMMWTN360.mp4'
+                                                },
+                                                {
+                                                    label: '1080p',
+                                                    /**/
+                                                    src: 'https://virtualtvbucket.s3-eu-west-1.amazonaws.com/Videos/MMAWT+VODMMWTN1080.mp4'
+                                                    /**/
+                                                }
+                                            ],
+                                            title: ''
+                                        },
+                                        dimensions: 768
+                                    });
+                                }
+                                else if(eid == '140') {
+                                    $('#player').videre({
+                                        video: {
+                                            quality: [
+                                                {
+                                                    label: '360p',
+                                                    src: 'https://virtualtvbucket.s3-eu-west-1.amazonaws.com/REJECTED+VOD+FINAL.mp4'
+                                                },
+                                                {
+                                                    label: '720p',
+                                                    src: 'https://virtualtvbucket.s3-eu-west-1.amazonaws.com/REJECTED+VOD+FINAL.mp4'
+                                                },
+                                                {
+                                                    label: '1080p',
+                                                    /**/
+                                                    src: 'https://virtualtvbucket.s3-eu-west-1.amazonaws.com/REJECTED+VOD+FINAL.mp4'
+                                                    /**/
+                                                }
+                                            ],
+                                            title: ''
+                                        },
+                                        dimensions: 768
+                                    });
+                                }
+                                else {
+                                    $('#player').videre({
+                                        video: {
+                                            quality: [
+                                                {
+                                                    label: '360p',
+                                                    src: '@Model.videoUrl'
+                                                },
+                                                {
+                                                    label: '720p',
+                                                    src: '@Model.videoUrl'
+                                                },
+                                                {
+                                                    label: '1080p',
+                                                    /**/
+                                                    src: '@Model.videoUrl'
+                                                    /**/
+                                                }
+                                            ],
+                                            title: ''
+                                        },
+                                        dimensions: 768
+                                    });
+                                }
+
+        });
+        $('.tlClogo').bind('contextmenu', function (e) {
+            return false;
+        });
+
+                            //function playerresize(x) {
+                            //    if (x.matches) { // If media query matches
+                            //        $('#player').videre({
+                            //            // Available diemnsions are: 2256, 1920, 1280, 1024, 768, 512
+                            //            dimensions: 512
+                            //        });
+                            //    }
+                            //    else {
+                            //        $('#player').videre({
+                            //            // Available diemnsions are: 2256, 1920, 1280, 1024, 768, 512
+                            //            dimensions: 768
+                            //        });
+                            //    }
+                            //}
+                            //var x = window.matchMedia("(max-width: 700px)")
+                            //playerresize(x) // Call listener function at run time
+                            //x.addListener(playerresize) // Attach listener function on state changes
+
+                        </script>
+
+                    }
+                    else
+                    {
+                        <h3 class="text-danger text-center">@Model.msg</h3>
+                    }
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+<script>
+   
+       
+</script>

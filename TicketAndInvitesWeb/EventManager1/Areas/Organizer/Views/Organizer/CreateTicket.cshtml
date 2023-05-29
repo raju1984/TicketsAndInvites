@@ -1,0 +1,888 @@
+﻿@using EventManager1.Models;
+
+@{
+    ViewBag.Title = "CreateTicket";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+    <link href="../../Areas/css/StyleArea.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            .borderDottedOnLight {
+                border: 1px dotted #ccc;
+                height: 480px;
+                margin: 0 20px 20px;
+            }
+
+            .content-wrapper {
+                background: #f2edf3;
+                padding: 2.75rem 1.25rem;
+            }
+
+            .padding5 {
+                padding: 0 20px !important;
+            }
+        }
+
+        .modal-dialog-scrollable .modal-body {
+            height: 100%;
+            max-height: 80vh;
+        }
+
+        .error {
+            visibility: hidden;
+            color: red;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+
+        .borderDottedOnLight {
+            border: 1px dotted #ccc;
+            height: 480px;
+        }
+
+        .card {
+            height: 480px;
+            margin-bottom: 20px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .minheight {
+            min-height: 230px
+        }
+
+        .form-control {
+            padding: 0.275rem 1.175rem !important;
+        }
+
+        h6.colorBlack.noMargin {
+            font-size: 16px;
+        }
+
+        .noMargin {
+            margin: 0 !important;
+            font-family: poppins;
+        }
+
+        p {
+            font-family: poppins;
+            line-height: 2.5;
+            margin-bottom:0;
+        }
+    </style>
+}
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-contacts menu-icon"></i>
+            </span>
+            Create Tickets
+        </h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @*<h3>Create Tickets</h3>*@
+            <p>
+                Here you will find all your events. Click on the Create button to "create tickets".
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Select Date</label>
+                <input type="date" class="form-control" id="txtdate" aria-describedby="emailHelp"
+                       placeholder="">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="ddlsearch">Select Event</label>
+                <select class="form-control" id="ddlsearch">
+                    <option value="1">All</option>
+                    <option value="2">Live</option>
+                    <option value="3">Past</option>
+                    <option value="4">Upcoming</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="ddlsearch">Search Event</label>
+                <div class="input-group mb-3">
+                    <input type="text" id="txtsearch" class="form-control" placeholder="" aria-label=""
+                           aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <span class="input-group-text btn-gradient-danger form-control" id="basic-addon2" onclick="DoSearch()">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4 text-center borderDottedOnLight" style="padding-left:0">
+            <span class="createEventMyEvent">
+                <a href="~/Organizer/Organizer/CreateEvent" class="btn btn-gradient-danger btn-rounded btn-fw">
+                    <i class="fa fa-plus"> </i> &nbsp; Create event
+                </a>
+            </span>
+
+        </div>
+        @if (ViewData["events"] != null)
+        {
+            foreach (var e in ViewData["events"] as IList<Event_>)
+            {
+                if (e.status != "3")
+                {
+                    <div class="col-md-4">
+
+                        <div class="card">
+                            <a href="">
+                                @*@e.Multimedia.FirstOrDefault().URL*@
+                                @*@foreach (var i in e.Multimedia)
+                                    {
+                                        <img src="@i.URL" class="card-img-top" alt="..." width="100%">}*@
+                                @if (e.Multimedia.FirstOrDefault(s => s.Mul_MainPic == true) != null)
+                                {
+                                    if (e.Multimedia.FirstOrDefault(s => s.Mul_MainPic == true).URL != null)
+                                    {
+                                        <img src="@e.Multimedia.FirstOrDefault(s => s.Mul_MainPic == true).URL" class="card-img-top" alt="..." width="100%;" height="170px" />
+                                    }
+                                    else
+                                    { <img src="@e.Multimedia.FirstOrDefault().URL" class="card-img-top" alt="..." width="100%" height="170px" /> }
+                                }
+                                else
+                                { <img src="@e.Multimedia.FirstOrDefault().URL" class="card-img-top" alt="..." width="100%" height="170px" />}
+                                <div class="tag">
+                                    <h6 class="noMargin text-success">
+                                        @if (e.status == "2")
+                                        {
+                                            if (Convert.ToDateTime(e.EndDate) < DateTime.Now)
+                                            {<span>Past</span> }
+                                            else if (Convert.ToDateTime(e.StartDate) <= DateTime.Now && Convert.ToDateTime(e.EndDate) > DateTime.Now)
+                                            {<span>Live</span> }
+                                            else
+                                            { <span>Upcoming</span>}
+                                        }
+                                        else if (e.status == "3")
+                                        {<span>Past</span>}
+                                        else if (e.status == "1")
+                                        {<span>Pending</span>}
+                                    </h6>
+                                </div>
+                            </a>
+                            <div class="card-body padding15">
+
+
+                                <div class="row">
+                                    <div class="col-sm-3 padding5 text-center text-danger">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        <p class=" noMargin">
+                                            @Convert.ToDateTime(e.StartDate).ToString("MMM dd")
+                                        </p>
+
+                                    </div>
+                                    <div class="col-sm-9 padding5 minheight">
+
+                                        <h6 class="colorBlack noMargin">
+                                            @e.EventName
+
+                                        </h6>
+                                        <p class="text-muted noMargin"><i class="fa fa-calendar" aria-hidden="true"></i> @Convert.ToDateTime(e.StartDate).ToString("dddd, dd MMM yyyy")</p>
+                                        @if (e.Eventtype == 0) { 
+                                        <p class="text-muted">
+                                            <i class="fa fa-building-o" aria-hidden="true"></i>
+                                            @e.address_ @e.Venue
+
+                                        </p>}
+                                        @if (e.Rsvp != null && e.Rsvp.Count > 0)
+                                        {
+                                            <p class="text-muted">
+                                                <i class="fa fa-user" aria-hidden="true"></i>
+                                                @e.Rsvp[0].Namer <br><i class="fa fa-phone" aria-hidden="true"></i>
+                                                @e.Rsvp[0].Phone
+                                            </p>
+                                        }
+                                        @if (e.Tickets.Count() > 0)
+                                        {
+                                            <a href="javascript:" onclick="LoadTicket('@e.Id')">
+                                                <p style="font-size: 16px;">
+                                                    Total tickets: @if (e.Tickets.FirstOrDefault().Seat != "")
+                                                    {<span> @e.Tickets.FirstOrDefault().Seat</span>}
+                                                else
+                                                {<span>0 </span>} /@e.Tickets.Sum(i => i.Quantity)
+                                            </p>
+                                        </a>
+                                    }
+
+                                    </div>
+                                    <div class="col-md-12 d-flex bd-highlight text-center">
+                                        <a href="" data-toggle="modal" data-target="#invitation" id="create" name="@e.EventName" itemid="@e.Id" data-content="@e.StartDate, @e.Venue, " data-icon="@e.Eventtype" class="btn btn-gradient-primary btn-rounded btn-fw flex-fill bd-highlight editticket create">
+                                            Create  Tickets
+                                        </a>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>}
+            }
+        }
+    </div>
+</div>
+<div class="modal fade bd-example-modal-lg" id="invitation" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalTitle" aria-hidden="true">
+    <form enctype="multipart/form-data">
+        <input id="event_id" type="hidden" />
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalTitle">
+                        <label id="eventname">Event Name</label> <br>
+                        <small class="text-muted">
+                            <label id="subhead"></label>
+                        </small>
+                    </h4>
+                    @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>*@
+                </div>
+
+                <div class="modal-body mycontainer">
+                    <div class="card">
+                        <div></div>
+
+
+                        <table class="mycontainer" id="mainrow">
+
+                            <tr>
+                                <td>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <input type="hidden" class="tid" id="tid" value="0" />
+                                            <div class="col-md-6">
+                                                <label for="">Ticket Type</label>  @*<span id="createType" style="float:right; color:green;">   +  </span>*@ @*data-toggle="modal" data-target="#modeltickettype"*@
+
+                                                @*@Html.DropDownList("Id", new SelectList(ViewBag.tType, "id", "TicketTypes"), new { @id = "TicketType", @class = "form-control TicketType" })*@
+                                                <select class="form-control TicketType" id="TicketType">
+                                                    <option value="1">Paid Ticket</option>
+                                                    <option value="2">Free Ticket</option>
+                                                </select> <br />
+                                                <input type="text" aria-label="" placeholder="Ticket Type" class="form-control txtTicketType" id="txtTicketType" style="display:none">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="">Ticket Name</label>
+                                                <div class="input-group">
+                                                    <input type="text" aria-label="" placeholder="" class="form-control TicketName" id="TicketName">
+
+                                                </div>
+                                                <span class="error" id="errName">Ticket Name is required</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <input type="number" aria-label="" placeholder="Seat " class="form-control Seat" id="Seat">
+                                                    <input type="number" aria-label="" placeholder="Table " class="form-control table" id="table">
+                                                    <input type="text" aria-label="" placeholder="Color Area" class="form-control ColorArea" id="ColorArea">
+                                                    <input type="text" aria-label="" placeholder="Gate No" class="form-control GateNo" id="GateNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <input type="text" aria-label="" placeholder="Price" class="form-control Price" id="Price">
+                                                    @*<input type="text" aria-label="" placeholder="Fee" class="form-control Fee" id="Fee">*@
+                                                    <input type="number" aria-label="" placeholder="Quantity" class="form-control Quantity" id="Quantity">
+                                                    <span style="font-size:small;">
+                                                        Ticket Enabled
+                                                        <label class="switch">
+                                                            <input type="checkbox" class="ticketEnable" name="ticketEnable" id="ticketEnable" checked>
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-12 input-group"><div class="error col-md-6" id="Priceerr">Price is required</div><div class="error col-md-6" id="Quantityerr">Quantity is required</div></div>
+                                                <div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 divdays"   style="display:none">
+                                                <div class="input-group">
+                                                    <input type="number" aria-label="" placeholder="Video Valid till (In days) " class="form-control Price ValidDays" id="ValidDays">
+                                                    
+                                                </div>
+                                                <div class="col-md-12 input-group"><div class="error col-md-6" id="Priceerr">Price is required</div><div class="error col-md-6" id="Quantityerr">Quantity is required</div></div>
+                                                <div>
+                                                </div>
+                                            </div>
+                                            @*<h4>
+                                                    <a href=""><i class="mdi mdi-delete icon-md"></i></a>
+                                                </h4>*@
+
+                                        </div>
+                                        <div class="row newbtn">
+                                            <div class="col-md-4 mt-4 mb-4">
+                                                <input type="button" id="add" value="Add More" class="btn btn-outline-primary btn-fw btn-block" />
+
+                                                @* <div class="btn btn-outline-primary btn-fw btn-block" id="add">Add More</div>*@
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div id="orderItems">
+                            <table class="table table-responsive" id="orderdetailsItems"></table>
+                            <span id="orderItemError" style="color:red"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark btn-fw" id="closebtn" data-dismiss="modal">Close</button>
+                    @*<input id="submit" type="button" value="Save" class="btn btn-gradient-danger btn-rounded btn-fw" />*@
+                    @*<button type="button" class="btn btn-outline-primary btn-fw">Save</button>*@
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade bd-example-modal-lg" id="modeltickettype" tabindex="-2" role="dialog"
+     aria-labelledby="exampleModalTitle" aria-hidden="true">
+    <form enctype="multipart/form-data">
+        <input id="event_id" type="hidden" />
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalTitle">
+                        <label id="eventnames">Ticket Type</label> <br>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body mycontainer">
+                    <div class="card">
+                        <table class="mycontainer" id="mainrow">
+                            <tr>
+                                <td>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <input type="hidden" class="tid" id="tid" value="0" />
+
+                                            <div class="col-md-6">
+                                                <label for="">Ticket Type</label>
+                                                <div class="input-group">
+                                                    @* <input type="text" aria-label="" placeholder="" class="form-control TicketName" id="txtTicketType">*@
+
+                                                </div>
+                                                <span class="error" id="errtType">Ticket Type is required</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark btn-fw" data-dismiss="modal">Close</button>
+                    <input id="createTicketType" type="button" value="Create" class="btn btn-gradient-danger btn-rounded btn-fw" />
+                    @*<button type="button" class="btn btn-outline-primary btn-fw">Save</button>*@
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="divticketcontent">
+
+</div>
+<button type="button" style="display:none" id="btnticketpopup" data-toggle="modal" data-target="#tickets" class="card-link flex-fill bd-highlight">Tickets</button>
+@section Scripts
+{
+
+    <script>
+
+        $(document).ready(function () {
+            $('#createType').click(function () { debugger; $('#txtTicketType').css("display", "block") });
+            $('#closebtn').click(function () { location.reload(true); });
+            $('.editticket').click(function () {
+                $('#orderdetailsItems').empty();
+                $('#TicketName,#Seat,#table,#ColorArea,#GateNo,#Price,#Quantity').val('');
+                $('#tid').val('0');
+                var id = $(this).attr('itemid'); // the id that's given to each button in the list
+                $('#event_id').val(id);
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetTicketbyid", "Organizer", new { area = "Organizer" })',
+                    dataType: "json",
+                    data: { id: id },
+                    success: function (result, i) {
+                        debugger;
+                        if (result != null) {
+                            var rlength = result.length;
+                            if (rlength > 0) {
+
+                                if (rlength > 0) {
+                                    for (var i = 0; i < rlength; i++) {
+
+                                        var $newRow = $('#mainrow').clone().removeAttr('id');
+                                        $('.tid', $newRow).val(result[i].Id);
+                                        $('.TicketType', $newRow).val(result[i].TicketType);
+                                        $('.TicketName', $newRow).val(result[i].TicketName);
+                                        $('.Seat', $newRow).val(result[i].Seat);
+                                        $('.table', $newRow).val(result[i].table);
+                                        $('.ColorArea', $newRow).val(result[i].ColorArea);
+                                        $('.GateNo', $newRow).val(result[i].GateNo);
+                                        $('.Price', $newRow).val(result[i].Price);
+                                        $('.Quantity', $newRow).val(result[i].Quantity);
+                                        //$('.Fee', $newRow).val($('#Fee').val());
+                                        $('.ticketEnable', $newRow).prop('checked', result[i].IsEnable);
+                                        //Replace add button with remove button
+                                        $('#add', $newRow).addClass('remove').val('Remove').removeClass('btn-success').addClass('btn-danger');
+                                        var r = $('<div class="col-md-4 mt-4 mb-4 newbtn" ><input type="button" id="update" value="Update" class="btn btn-success btn-fw btn-block update"/></div>');
+                                        $('.newbtn', $newRow).append(r);
+                                        //remove id attribute from new clone row
+                                        $('#tid,#TicketType,#TicketName,#Seat,#table,#ColorArea,#Price,#Quantity,#GateNo', $newRow).removeAttr('id');
+                                        $('span.error', $newRow).remove();
+                                        //append clone row
+                                        $('#orderdetailsItems').append($newRow);                //clear select data
+                                        $('#TicketName,#Seat,#table,#ColorArea,#GateNo,#Price,#Quantity').val('');
+                                        //$('#tid').val(result[i].Id);
+                                        //$('#TicketType').val(result[i].TicketType);
+                                        //$('#TicketName').val(result[i].TicketName);
+                                        //$('#Seat').val(result[i].Seat);
+                                        //$('#table').val(result[i].table);
+                                        //$('#ColorArea').val(result[i].ColorArea);
+                                        //$('#Price').val(result[i].Price);
+                                        //$('#Quantity').val(result[i].Quantity);
+                                        //$('#GateNo').val(result[i].GateNo);
+
+                                    }
+                                }
+                                //$('#tid').val(result[0].Id);
+                                //$('#TicketType').val(result[0].TicketType);
+                                //$('#TicketName').val(result[0].TicketName);
+                                //$('#Seat').val(result[0].Seat);
+                                //$('#table').val(result[0].table);
+                                //$('#ColorArea').val(result[0].ColorArea);
+                                //$('#Price').val(result[0].Price);
+                                //$('#Quantity').val(result[0].Quantity);
+                                //$('#GateNo').val(result[0].GateNo);
+                                //$('#ticketEnable').prop('checked', result[0].IsEnable);
+                            }
+
+                        }
+
+                    },
+                    error: function (error) {
+                        //alertify.alert(error);
+                    }
+                });
+            });
+            $('.create').click(function () {
+                debugger;
+                $('#event_id').val($(this).attr("itemid"));
+                $('#eventname').text($(this).attr("name"));
+                $('#subhead').text($(this).attr("data-content"))
+                var type = $(this).attr("data-icon");
+                if(type == "1"|| type=="2")
+                {
+                    $('.Seat').css("display","none");
+                    $('.table').css("display", "none");
+                    $('.ColorArea').css("display","none");
+                    $('.GateNo').css("display", "none");
+                    if (type == "1") {
+                        $('.divdays').css("display", "block");
+                    }
+                }
+                else {
+                    $('.Seat').css("display", "block");
+                    $('.table').css("display", "block");
+                    $('.ColorArea').css("display", "block");
+                    $('.GateNo').css("display", "block");
+                    $('.divdays').css("display", "none");
+                }
+            })
+            $('#TicketType').change(function () {
+                var ttype = $(this).val();
+                if (ttype == 2) { $('#Price').val("0"); $('#Price').prop('disabled', true) }
+                else { $('#Price').prop('disabled', false)}
+            })
+            $('#add').click(function () {
+                //validation and add order items
+                var isAllValid = true;
+                var ttype = $('#TicketType').val();
+                if (!($('#TicketName').val().trim() != '')) {
+                    isAllValid = false;
+                    $('#errName').css('visibility', 'visible');
+                }
+                else {
+                    $('#errName').css('visibility', 'hidden');
+                }
+                if (ttype != 2) {
+                    if (!($('#Price').val().trim() != '')) {
+                        isAllValid = false;
+                        $('#Priceerr').css('visibility', 'visible');
+                    }
+                    else {
+                        $('#Priceerr').css('visibility', 'hidden');
+                    }
+                }
+                else { $('#Priceerr').css('visibility', 'hidden');}
+                if (!($('#Quantity').val().trim() != '')) {
+                    isAllValid = false;
+                    $('#Quantityerr').css('visibility', 'visible');
+                }
+                else {
+                    $('#Quantityerr').css('visibility', 'hidden');
+                }
+
+                if (isAllValid) {
+                    Loader(true);
+
+                    var list = [];
+                    var EventTickett = {
+                        Id: $('#tid').val(),
+                        TicketType: $('#TicketType').val(),
+                        TicketTypeText: $('#txtTicketType').val(),
+                        TicketName: $('#TicketName').val(),
+                        Seat: $('#Seat').val(),
+                        table: $('#table').val(),
+                        ColorArea: $('#ColorArea').val(),
+                        Price: $('#Price').val(),
+                        validdays: parseInt($('#ValidDays').val()),
+                        //Fee: $('#Fee').val(),
+                        Quantity: $('#Quantity').val(),
+                        GateNo: $('#GateNo').val(),
+                        validdays: $('#ValidDays').val(),
+                        IsEnable: $('.ticketEnable', this).is(":checked") //$("#ticketEnable").val()
+                    }
+                    if (EventTickett) {
+                        list.push(EventTickett);
+                    }
+
+                    debugger;
+                    if (isAllValid) {
+
+                        var Register = {
+                            //UserName: $('#UserName').val(),
+                            EventId: $('#event_id').val(),
+                            Ticket_: list
+                        }
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Action("CreateTicket", "Organizer", new { area = "Organizer" })',
+                            data: '{ticket: ' + JSON.stringify(Register) + '}',/* JSON.stringify(Register),*/
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (resp) {
+                                debugger;
+                                if (resp.result.Code == 200) {
+                                    var $newRow = $('#mainrow').clone().removeAttr('id');
+                                    $('.tid', $newRow).val(resp.result.Msg);
+                                    $('.TicketType', $newRow).val($('#TicketType').val());
+                                    $('.TicketName', $newRow).val($('#TicketName').val());
+                                    $('.Seat', $newRow).val($('#Seat').val());
+                                    $('.table', $newRow).val($('#table').val());
+                                    $('.ColorArea', $newRow).val($('#ColorArea').val());
+                                    $('.GateNo', $newRow).val($('#GateNo').val());
+                                    $('.Price', $newRow).val($('#Price').val());
+                                    //$('.Fee', $newRow).val($('#Fee').val());
+                                    $('.Quantity', $newRow).val($('#Quantity').val());
+                                    //$('.createType', $newRow).css($('#createType').val());
+                                    //Replace add button with remove button
+                                    $('#add', $newRow).addClass('remove').val('Remove').removeClass('btn-success').addClass('btn-danger');
+                                    var r = $('<div class="col-md-4 mt-4 mb-4 newbtn" ><input type="button" id="update" value="Update" class="btn btn-success btn-fw btn-block update"/></div>');
+                                    $('.newbtn', $newRow).append(r);
+
+                                    //remove id attribute from new clone row
+                                    $('#TicketType,#TicketName,#Seat,#table,#ColorArea,#GateNo ,#Price,#Quantity,#createType', $newRow).removeAttr('id');
+                                    $('span.error', $newRow).remove();
+                                    //append clone row
+                                    $('#orderdetailsItems').append($newRow);                //clear select data
+                                    $('#TicketType,#TicketName,#Seat,#table,#ColorArea,#Price,#Quantity,#GateNo').val('');
+                                    //$('#orderdetailsItems').empty();
+                                    Loader(false);
+                                    //location.reload(true);
+                                }
+                                else {
+                                    Loader(false);
+                                    alertify.alert(resp.result.Msg);
+                                }
+
+                            },
+                            error: function (error) {
+                                Loader(false);
+                                alertify.alert(error);
+                            }
+                        });
+                    }
+
+                }
+            });
+
+            $('#orderdetailsItems').on('click', '.remove', function () {
+                var id = $(this).parents('tr').find('.tid').val();
+            $(this).parents('tr').remove();
+            debugger;
+            if (id > 0) {
+                $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("DeleteTicket", "Organizer", new { area = "Organizer" })',
+                        data: { id: id },
+                        dataType: "json",
+                        success: function (resp) {
+                            debugger;
+                            if (resp.result.Code == 200) {
+
+                            }
+                            //else {
+                            //    alertify.alert(resp.result.Msg);
+                            //}
+                        },
+                        error: function (error) {
+
+                            alertify.alert(error);
+                        }
+                    });
+            }
+
+            });
+            $('#orderdetailsItems').on('click', '.update', function () {
+                debugger;
+                Loader(true);
+                var id = $(this).parents('tr').find('.tid').val();
+                var list = [];
+                var EventTicket1 = {
+                    Id:id ,
+                    TicketType: $(this).parents('tr').find('.TicketType').val() ,
+                    TicketTypeText: $(this).parents('tr').find('.txtTicketType').val() ,
+                    TicketName: $(this).parents('tr').find('.TicketName').val() ,
+                    Seat: $(this).parents('tr').find('.Seat').val() ,
+                    table: $(this).parents('tr').find('.table').val() ,
+                    ColorArea: $(this).parents('tr').find('.ColorArea').val() ,
+                    Price: $(this).parents('tr').find('.Price').val() ,
+                    //Fee: $('.Fee', this).val(),
+                    Quantity: $(this).parents('tr').find('.Quantity').val() ,
+                    GateNo: $(this).parents('tr').find('.GateNo').val() ,
+                    IsEnable: $(this).parents('tr').find('.ticketEnable').is(":checked")
+                }
+                list.push(EventTicket1);
+                var Register = {
+                    //UserName: $('#UserName').val(),
+                    EventId: $('#event_id').val(),
+                    Ticket_: list
+                }
+            if (id > 0) {
+                $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("CreateTicket", "Organizer", new { area = "Organizer" })',
+                        data: '{ticket: ' + JSON.stringify(Register) + '}',/* JSON.stringify(Register),*/
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (resp) {
+                            debugger;
+                            if (resp.result.Code == 200) {
+
+                                Loader(false);
+
+                            }
+                            else {
+                                Loader(false);
+
+                            }
+
+                        },
+                        error: function (error) {
+                            Loader(false);
+                            alertify.alert(error);
+                        }
+                    });
+            }
+
+            });
+            $('#createTicketType').click(function () {
+                var isvalid = true;
+                if (!($('#txtTicketType').val().trim() != '')) {
+                    isvalid = false;
+                    $('#errtType').css('Display', 'block');
+                }
+                else {
+                    $('#errtType').css('Display', 'none');
+                }
+
+                debugger;
+                if(isvalid)
+                {
+                    var ttype = $('#txtTicketType').val();
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("CreateTicketType", "Organizer", new { area = "Organizer" })',
+                        data: {ticket: ttype },/* JSON.stringify(Register),*/
+
+                        dataType: "json",
+                        success: function (resp) {
+                            debugger;
+                            if (resp.result.Code == 200) {
+                                $('#txtTicketType').val('');
+                                location.reload(true);
+                            }
+                            else {
+                                alertify.alert(resp.result.Msg);
+                            }
+                        },
+                        error: function (error) {
+                            debugger;
+                            alertify.alert(error);
+                        }
+                    });
+                }
+                else { debugger; alertify.alert("@EventManager1.Resource.ResourceStrings.allfieldrequired"); return false; }
+            });
+
+            $('#submit').click(function () {
+                debugger;
+                var isAllValid = true;
+                if (!($('#TicketName').val().trim() != '')) {
+                    isAllValid = false;
+                    $('#errName').css('visibility', 'visible');
+                }
+                else {
+                    $('#errName').css('visibility', 'hidden');
+                }
+                //validate order items
+                Loader(true);
+                var list = [];
+                var EventTickett = {
+                    Id: $('#tid').val(),
+                    TicketType: $('#TicketType').val(),
+                    TicketTypeText: $('#txtTicketType').val(),
+                    TicketName: $('#TicketName').val(),
+                    Seat: $('#Seat').val(),
+                    table: $('#table').val(),
+                    ColorArea: $('#ColorArea').val(),
+                    Price: $('#Price').val(),
+                    validdays: $('#ValidDays').val(),
+                    Quantity: $('#Quantity').val(),
+                    GateNo: $('#GateNo').val(),
+                    IsEnable: $('.ticketEnable', this).is(":checked") //$("#ticketEnable").val()
+                }
+                if (EventTickett) {
+                    list.push(EventTickett);
+                }
+                $('#orderdetailsItems tr').each(function (index, ele) {
+                    var EventTicket1 = {
+                        Id: $('.tid', this).val(),
+                        TicketType: $('.TicketType', this).val(),
+                        TicketTypeText: $('.txtTicketType').val(),
+                        TicketName: $('.TicketName', this).val(),
+                        Seat: $('.Seat', this).val(),
+                        table: $('.table', this).val(),
+                        ColorArea: $('.ColorArea', this).val(),
+                        Price: $('.Price', this).val(),
+                        //Fee: $('.Fee', this).val(),
+                        Quantity: $('.Quantity', this).val(),
+                        GateNo: $('.GateNo', this).val(),
+                        IsEnable: $('.ticketEnable',this).is(":checked")//$(".ticketEnable").val()
+                    }
+                    list.push(EventTicket1);
+                })
+                debugger;
+                if (isAllValid) {
+
+                    var Register = {
+                        //UserName: $('#UserName').val(),
+                        EventId: $('#event_id').val(),
+                        Ticket_: list
+                    }
+                    //$(this).val('Please wait...');
+                    debugger;
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("CreateTicket", "Organizer", new { area = "Organizer" })',
+                        data: '{ticket: ' + JSON.stringify(Register) + '}',/* JSON.stringify(Register),*/
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (resp) {
+                            debugger;
+                            if (resp.result.Code == 200) {
+                                $('#TicketType,#TicketName,#Seat,#table,#ColorArea,#Price,#Quantity,#GateNo').val('');
+                                $('#orderdetailsItems').empty();
+                                Loader(false);
+                                location.reload(true);
+                            }
+                            else {
+                                Loader(false);
+                                alertify.alert(resp.result.Msg);
+                            }
+
+                        },
+                        error: function (error) {
+                            Loader(false);
+                            alertify.alert(error);
+                        }
+                    });
+                }
+                else { debugger; alertify.alert("@EventManager1.Resource.ResourceStrings.allfieldrequired"); return false; }
+
+            });
+        });
+        function DoSearch() {
+            var date = $("#txtdate").val();
+            if (date) {
+                window.location.href = '/Organizer/Organizer/CreateTicket?date=' + date;
+            }
+            var eventytpe = $('#ddlsearch').val();
+            if (eventytpe) {
+                window.location.href = '/Organizer/Organizer/CreateTicket?date=' + date + "&EventType=" + eventytpe;
+            }
+            var Eventname = $('#txtsearch').val();
+            if (Eventname) {
+                window.location.href = '/Organizer/Organizer/CreateTicket?date=' + date + "&EventType=" + eventytpe + "&Eventname=" + Eventname;
+            }
+            var EventId = $("#hfeventid").val()
+            if (EventId) {
+                window.location.href = '/Organizer/Organizer/CreateTicket?date=' + date + "&EventType=" + eventytpe + "&Eventname=" + Eventname + "&EventId=" + EventId;
+            }
+        }
+        function LoadTicket(Id) {
+            $.ajax({
+                url: '/Organizer/ManageEvent/AllTicket?EventId=' + Id,
+                contentType: 'application/html; charset=utf-8',
+                type: 'GET',
+                dataType: 'html',
+                success: function (result) {
+                    $('#divticketcontent').html(result);
+                    $("#btnticketpopup").trigger("click");
+                    //$('#tickets').modal('show');
+                },
+                error: function (xhr, status) {
+                    debugger;
+                    alert(status);
+                }
+            })
+        }
+    </script>
+
+}
+

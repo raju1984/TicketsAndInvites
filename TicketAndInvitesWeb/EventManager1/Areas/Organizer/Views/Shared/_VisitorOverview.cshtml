@@ -1,0 +1,108 @@
+﻿@model  EventManager1.Areas.Organizer.Models.OvertrackModels
+<style type="text/css">
+    .form-inline {
+        display: inherit;
+        flex-flow: row wrap;
+        align-items: center;
+    }
+
+    .card .card-body {
+        padding: 0.65rem 0.65rem !important;
+    }
+
+    .table th, .table td {
+        padding: 0.6rem !important
+    }
+    .form-inline label {
+        display: block !important;
+    }
+</style>
+<div class="row ">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Recent Visitor Overview</h4>
+                <div class="row col-md-12">
+                    Select to filter for an event : &nbsp; <select name="ddlCategory" id="ddlCategory" class="selectpicker form-control" style="width:auto; margin-bottom:10px" data-show-subtext="false" data-live-search="true" onchange="OnEventChange(this)">
+
+                        @{
+                            if (Model != null && Model.Events.Count > 0)
+                            {
+                                foreach (var item in Model.Events)
+                                {
+                                    <option value="@item.Id">@item.Text</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped table-bordered"
+                           cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>S. No</th>
+                                <th>User Name</th>
+                                <th>Ticket name</th>
+                                <th>Email</th>
+                                <th>Ticket status</th>
+                                <th>Ticket scaned at</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Tickets.Count > 0)
+                            {
+                                int i = 0;
+                                foreach (var tk in Model.Tickets)
+                                {
+
+                                    i = i + 1;
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@tk.Name </td>
+                                        <td>
+                                            @tk.TicketName
+                                        </td>
+                                        <td>@tk.TicketbuyerEmail </td>
+                                        <td>
+                                            @if (tk.CheckInStatus == true)
+                                            {
+                                                @: Ticket Scaned
+                                            }
+                                            else
+                                            {
+                                                @:  Ticket Not Scaned
+                                            }
+
+                                        </td>
+                                        <td>
+                                            @if (tk.CheckInStatus == true)
+                                            {
+                                                @Convert.ToDateTime(tk.CheckInDate).ToString("dd/MM/yy HH:mm:ss")
+                                            }
+
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6" style="padding:50px; text-align:center">No Data Found!</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#datatable').DataTable({
+            responsive: true
+        });
+    });
+</script>

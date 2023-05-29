@@ -1,0 +1,299 @@
+﻿@model  EventManager1.Areas.Organizer.Models.CompnayProfile
+@using EventManager1.Models;
+@{
+    ViewBag.Title = "CompanyProfile";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+    <style>
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            .content-wrapper {
+                background: #f2edf3;
+                padding: 1.75rem 1.25rem !important;
+            }
+
+            .card .card-body {
+                padding: 20px;
+            }
+            .col-md-3.borderOnPadding0 {
+    margin-bottom: 20px;
+}
+        }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+        </style>
+
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css" />
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-home"></i>
+            </span>
+            Company Account
+        </h3>
+    </div>
+    <div class="row">
+        <div class="col-md-3 borderOnPadding0">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-Settings-list" data-toggle="list"
+                   href="#list-Settings" role="tab" aria-controls="Settings">
+                    Company
+                    Settings
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-Security-list" data-toggle="list"
+                   href="#list-Security" role="tab" aria-controls="Security">Security</a>
+                <a class="list-group-item list-group-item-action" id="list-Banking-list" data-toggle="list"
+                   href="#list-Banking" role="tab" aria-controls="Banking">Banking Details</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-Settings" role="tabpanel"
+                     aria-labelledby="list-Settings-list">
+                    <div class="card">
+                        @using (Html.BeginForm("UpdateCompanyDetail", "Organizer", FormMethod.Post))
+                        {
+                            <div class="card-body">
+                                <h3>Company Details</h3>
+                                <input type="hidden" value="cmpdt" id="hftype" name="hftype" />
+                                <div class="form-group">
+                                    <label for="">Company Email</label>
+                                    <input type="email" class="form-control" name="txtemail" required id="txtemail" value="@Model.Email" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" style="display:block;">Company Country</label>
+                                    <select class="selectpicker form-control" data-show-subtext="false" data-live-search="true" id="CountryId" >
+                                        @if (Model.Country != null && Model.Country.Count() > 0)
+                                        {
+                                            foreach (var item in Model.Country)
+                                            {
+                                                if (item.Id == Model.CountryId)
+                                                {
+                                                    <option selected value="@item.Id">@item.Text</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Id">@item.Text</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Company Name</label>
+                                    <input type="text" class="form-control" required id="txtcmname" name="txtcmname" value="@Model.CompnayName" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Company Contact Number</label>
+                                    <input type="number" class="form-control" required id="txtnumber" name="txtnumber" value="@Model.Contact_Number" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Company Address</label>
+                                    <input type="text" class="form-control" required id="txtaddress" name="txtaddress" value="@Model.Address" placeholder="">
+                                </div>
+                                <button type="submit" class="btn btn-gradient-primary btn-rounded btn-fw">Update details</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="list-Security" role="tabpanel" aria-labelledby="list-Security-list">
+                    <div class="card">
+                        @using (Html.BeginForm("UpdateAdminSecurity", "Organizer", FormMethod.Post))
+                        {
+                            <div class="card-body">
+                                <h3>Security</h3>
+                                <div class="form-group">
+                                    <label for="">Current password</label>
+                                    <input type="password" class="form-control" required name="txtcurretpassword" id="txtcurretpassword" placeholder="*******">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">New password</label>
+                                    <input type="password" class="form-control" required name="txtnewpassword" id="txtnewpassword" placeholder="*******">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">New password</label>
+                                    <input type="password" class="form-control" required name="txtconffirmpassword" id="txtconffirmpassword" placeholder="*******">
+                                </div>
+                                <button type="submit" class="btn btn-gradient-primary btn-rounded btn-fw">Change password</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="list-Banking" role="tabpanel" aria-labelledby="list-Banking-list">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Banking Details</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <form action="/Organizer/Organizer/AddUpdateBankDetail" method="post">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-12 mb-3">
+                                                        <b> Bank account </b>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group  col-md-6">
+                                                        <label for="">Select Bank</label>
+                                                        <select class="selectpicker" data-show-subtext="false" data-live-search="true" name="BankId" id="BankId">
+                                                            <option value="0">Choose Bank</option>
+                                                            @if (Model.Banks != null && Model.Banks.Count() > 0)
+                                                            {
+                                                                foreach (var item in Model.Banks)
+                                                                {
+                                                                    if (item.Id == Model.BankDetails.BankId)
+                                                                    {
+                                                                        <option selected value="@item.Id">@item.Text</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="@item.Id">@item.Text</option>
+                                                                    }
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                        <div class="form-group  col-md-6">
+                                                            <label for="">Account Holder Name</label>
+                                                            <input type="text" class="form-control" id="txtholdername" name="txtholdername" aria-describedby=""
+                                                              value="@Model.BankDetails.Account_Holder_Name"     placeholder="Account Holder Name">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="">Account Number</label>
+                                                            <input type="number" class="form-control" name="txtaccounumber" id="txtaccounumber" aria-describedby=""
+                                                                value="@Model.BankDetails.Account_Number"    placeholder="Account Number">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="">Swift Code</label>
+                                                            <input type="text" class="form-control" name="txtbankreg" id="txtbankreg" aria-describedby=""
+                                                                 value="@Model.BankDetails.Bank_Registration_Number"   placeholder="Swift Code">
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <h3 class="text-center">
+                                                                OR
+                                                            </h3>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-5">
+                                                        <b> Mobile money account </b>
+                                                    </div>
+
+                                                    <div class="form-group  col-md-6">
+                                                        <label for="">Select mobile money provider</label>
+                                                        <select class="selectpicker" data-show-subtext="false" data-live-search="true" name="MobileAccountId" id="MobileAccountId">
+                                                            <option value=0">Choose Mobile Provider</option>
+                                                            @if (Model.MobileWallet != null && Model.MobileWallet.Count() > 0)
+                                                        {
+                                                                foreach (var item in Model.MobileWallet)
+                                                                {
+                                                                            if (item.Id == Model.BankDetails.MobileAccountId)
+                                                                            {
+                                                            <option selected value="@item.Id">@item.Text</option>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                            <option value="@item.Id">@item.Text</option>
+                                                                            }
+                                                                }
+                                                        }
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group  col-md-6">
+                                                        <label for="">Mobile Money Number</label>
+
+                                                        <input type="text" class="form-control" name="txtmobileuniquenumber" id="txtmobileuniquenumber" aria-describedby="" value="@Model.BankDetails.mobile_money_UniqueId"
+                                                               placeholder="ABC123DSD">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <button type="submit" onclick="return Validate()" class="btn btn-gradient-primary btn-rounded btn-fw">Save</button>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#CountryId').selectpicker();
+        $('#BankId').selectpicker();
+        $('#MobileAccountId').selectpicker();
+    });
+
+    function Validate()
+    {
+        debugger;
+        var Isvalid = false;
+        var BankId = $("#BankId").val();
+        var MobileAccountId = $("#MobileAccountId").val();
+        if (MobileAccountId && MobileAccountId > 0) {
+            var txtmobileuniquenumber = $("#txtmobileuniquenumber").val();
+            if (!txtmobileuniquenumber) {
+                $("#txtmobileuniquenumber").css("border-color", "#E91E63");
+                return false;
+            }
+            else {
+                $("#txtmobileuniquenumber").css("border-color", "#ebedf2");
+            }
+        }
+        else if (BankId && BankId > 0) {
+            var bankreg = $("#txtbankreg").val();
+            var txtaccounumber = $("#txtaccounumber").val();
+            var txtholdername = $("#txtholdername").val();
+            if (!txtholdername) {
+                $("#txtholdername").css("border-color", "#E91E63");
+                return false;
+            }
+            else {
+                $("#txtholdername").css("border-color", "#ebedf2");
+            }
+            if (!txtaccounumber) {
+                $("#txtaccounumber").css("border-color", "#E91E63");
+                return false;
+            }
+            else {
+                $("#txtaccounumber").css("border-color", "#ebedf2");
+            }
+            if (!bankreg) {
+                $("#txtbankreg").css("border-color", "#E91E63");
+                return false;
+            }
+            else {
+                $("#txtbankreg").css("border-color", "#ebedf2");
+            }
+
+
+        }
+        else { alertify.alert("Please fill all details."); return false; }
+    }
+</script>
+

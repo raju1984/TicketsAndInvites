@@ -1,0 +1,188 @@
+﻿@using EventManager1.Models;
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+    <style>
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            .card .card-body {
+    padding: 1.5rem 1.5rem;
+}
+        .col-md-3.borderOnPadding0 {
+    margin-bottom: 20px;
+}
+            .content-wrapper {
+                background: #f2edf3;
+                padding: 2.75rem 1.25rem;
+            }
+        }
+
+
+        .small-btn {
+            background: #000;
+            color: #fff;
+            border: none;
+        }
+
+            .small-btn:hover {
+                background: #fb0000;
+                color: #fff !important;
+                border: none;
+            }
+    </style>
+}
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-home"></i>
+            </span>
+            My Account
+        </h3>
+        <!-- <nav aria-label="breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <span></span>Overview
+              <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+            </li>
+          </ul>
+        </nav> -->
+    </div>
+    <div class="row">
+        <div class="col-md-3 borderOnPadding0">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-Settings-list" data-toggle="list"
+                   href="#list-Settings" role="tab" aria-controls="Settings">
+                    Personal
+                    Settings
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-Security-list" data-toggle="list"
+                   href="#list-Security" role="tab" aria-controls="Security">Change Password</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-Settings" role="tabpanel"
+                     aria-labelledby="list-Settings-list">
+                    <div class="card">
+                        @using (Html.BeginForm("Settings", "User", FormMethod.Post))
+                        {
+                            <div class="card-body">
+                                <h3>Personal settings</h3>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Email address</label>
+                                    <input type="email" name="txtemail" class="form-control" id="txtemail" required
+                                           value="@ManageSession.UserSession.EmailId">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">First Name</label>
+                                    <input type="text"  name="txtfirsname" class="form-control" id="txtfirsname" required value="@ManageSession.UserSession.FirstName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Last Name</label>
+                                    <input type="text" class="form-control" name="txtlastname" id="txtlastname" required value="@ManageSession.UserSession.LastName">
+                                </div>
+                                <button type="submit" class="btn btn-gradient-primary btn-rounded btn-fw small-btn">Update settings</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="list-Security" role="tabpanel" aria-labelledby="list-Security-list">
+                    <div class="card">
+                        @*@using (Html.BeginForm("Security", "User", FormMethod.Post))
+                        {*@
+                            <div class="card-body">
+                                <h3>Change Password</h3>
+                                <div class="form-group">
+                                    <label for="">Current password</label>
+                                    <input type="password" class="form-control" required name="txtcurretpassword" id="txtcurretpassword" placeholder="*******">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">New password</label>
+                                    <input type="password" class="form-control" required name="txtnewpassword" id="txtnewpassword" placeholder="*******">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Confirm password</label>
+                                    <input type="password" class="form-control" required name="txtconffirmpassword" id="txtconffirmpassword" placeholder="*******">
+                                </div>
+                                <button type="submit" id="btnChngPssword" class="btn btn-gradient-primary btn-rounded btn-fw">Change password</button>
+                            </div>
+                        @*}*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@*@{
+
+    if (ViewData["Error"] != null)
+    {
+        var error = ViewData["Error"] as ApiResponse;
+        if (error != null && error.Code != (int)ApiResponseCode.ok)
+        {
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    swal({
+                        title: "Password Updated!",
+                        text: "Password Updated!",
+                        icon: "Success",
+                    });
+                    window.location.reload();
+                })
+            </script>
+        }
+    }
+}*@
+
+<script>
+    $(document).ready(function () {
+
+        $('#btnChngPssword').click(function () {
+            var crntpssword = $('#txtcurretpassword').val();
+            var newpssword = $('#txtnewpassword').val();
+            var confirmpssword = $('#txtconffirmpassword').val();
+            var data = {
+                currentpassword: crntpssword,
+                newpassword: newpssword
+            };
+            if (crntpssword != "" && newpssword !="")
+            {
+                if (newpssword == confirmpssword) {
+                    debugger
+                    $.ajax({
+                        url: '@Url.Action("Security", "User", new { area = "User" })',
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+                            if (result == 200) {
+                                swal({
+                                    title: "Password Updated!",
+                                    text: "Password Updated!",
+                                    icon: "Success",
+                                });
+                                window.location.reload();
+                            }
+                        },
+                        error: function (err) {
+                            Loader(false);
+                            alertify.alert(err.statusText);
+                        }
+                    });
+                }
+                else
+                {
+                    swal({
+                        title: "Not Match",
+                        text: "New Password and Confirm Password does not match!",
+                        icon: "Success",
+                    });
+                }
+            }
+
+        })
+    })
+</script>

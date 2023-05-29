@@ -1,0 +1,42 @@
+﻿@model  IEnumerable<EventManager1.Models.NotificationModel>
+
+@using (Html.BeginForm("Message", "AllNotification", new { area = "Organizer" }, FormMethod.Post))
+{
+    if (Model != null)
+    {
+        <input type="hidden" value="@Model.FirstOrDefault().Id" id="MsgId" name="MsgId" />
+
+
+        <div class="row col-md-12" style="padding:0">
+            <div class="user-message">
+                <h3>  @Model.FirstOrDefault(x => x.MsgTitle != null).MsgTitle</h3>
+            </div>
+            @foreach (var i in Model)
+            {
+                if (i.GeneratedBy == 0)
+                {
+                    <div class="user-message">
+                        <p> @i.Text <br /><span> @i.CreatedDate</span></p>
+                    </div>
+                }
+                else
+                {
+                    <div class="admin-message">
+                        <p> @i.Text <br /><span>@i.CreatedDate</span></p>
+                    </div>
+                }
+            }
+        </div>
+
+        <div class="col-md-12" style="padding:0">
+            <div class="form-group">
+
+                <input type="text" class="form-control" id="txtmessage" name="txtmessage" style=" width: 70%;float: left;    border-radius: 50px;
+    height: 43px;" value="" placeholder=""><button type="submit" class="btn btn-gradient-primary btn-rounded btn-fw" style=" width: 28%;
+    margin-left: 2%;">
+                    Send Message
+                </button>
+            </div>
+        </div>
+    }
+}

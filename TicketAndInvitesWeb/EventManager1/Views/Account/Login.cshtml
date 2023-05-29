@@ -1,0 +1,201 @@
+﻿@using EventManager1.Models
+@model LoginViewModel
+@{
+    Layout = null;
+    <meta charset="utf-8">
+    <link rel="icon" href="~/images/fav.png" type="image/gif">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/alertify.core.css" rel="stylesheet" />
+    <link href="~/css/alertify.default.css" rel="stylesheet" />
+    <style>
+        
+        .bgimg {
+            background-image: url(../images/bg.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .bttn {
+            width: 100%;
+            float: left;
+            text-align: center !important;
+            margin: 20px 101px !important;
+        }
+        .social-icon {
+            width: 14% !important;
+            float: left;
+            margin-top: 10px;
+            border-radius: 50%;
+            padding: 0;
+            margin: 0px 3px;
+            height: 52px;
+        }
+            .social-icon i {
+                font-size: 20px;
+                padding-left: 8px;
+            }
+            .content-wrapper {
+                background: transparent;
+                padding: 0;
+            }
+
+        .auth .brand-logo {
+            margin-bottom: 10px;
+        }
+
+        .auth .auth-form-light {
+            border-radius: 25px;
+        }
+
+        .auth form .form-group .form-control,
+        select.form-control {
+            border-radius: 20px;
+            border-color: #ccc;
+            border: 1px solid;
+            outline: none;
+            color: #495057;
+        }
+
+        .auth form .auth-form-btn,
+        .btn-Round {
+            border-radius: 30px;
+        }
+
+        .w-75 {
+            width: 75%;
+        }
+
+        .auth form .form-group {
+            margin-bottom: .5rem;
+        }
+        .fa {
+            padding: 20px;
+            font-size: 30px;
+            width: 70px;
+            text-align: center;
+            text-decoration: none;
+            margin: 5px 2px;
+            border-radius: 50%;
+            border:none;
+        }
+
+            .fa:hover {
+                opacity: 0.7;
+            }
+
+        .fa-facebook {
+            background: #3B5998;
+            color: white;
+        }
+
+        .fa-instagram {
+            background: #ea4c89;
+            color: white;
+        }
+
+        .fa-google {
+            background: #dd4b39;
+            color: white;
+        }
+        .card-img-top {
+            display: none !important
+        }
+    </style>
+}
+<div class="container-scroller bgimg">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth">
+            <div class="row w-100" style="margin:0">
+                <div class="col-lg-4 mx-auto">
+                    <div class="auth-form-light text-left p-3">
+                        <div class="brand-logo">
+                            <!-- <img src="../../images/logo.svg"> -->
+                            <h3>
+                                <span>
+                                    <a href="/" class="btn btn-inverse-primary btn-rounded btn-icon icon-center" style="float: left;">
+                                        <i class="mdi mdi-arrow-left-drop-circle-outline "></i>
+                                        @*<img src="~/images/rovermanLogo.png" />*@
+                                    </a>
+                                </span>
+                                <b style="margin-top: 6px;display: inline-block; margin-left: 10px;">
+                                    Stream233
+                                </b>
+                            </h3>
+                        </div>
+                        <div class="text-center">
+                            @*<section id="socialLoginForm">
+                                <h6 class="font-weight-light text-center">Sign in with </h6>
+                                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                            </section>*@
+
+                        </div>
+
+                      
+                        @*<h3 style="text-align:center">OR</h3>*@
+
+                        <h6 class="font-weight-light text-center">Sign in to continue </h6>
+                        <hr />
+                        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { defaultbutton = "Login" }))
+                        {@Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="w-75 mx-auto">
+                            <input type="hidden" value="@ViewBag.ReturnUrl" name="returnUrl" id="returnUrl" />
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-lg", placeholder = "Email / Mobile No" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "error" })
+                                @*<input type="email" class="form-control form-control-lg " id="exampleInputEmail1"
+                placeholder="Username">*@
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-lg", placeholder = "Password", type = "password" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
+                                @*<input type="password" class="form-control form-control-lg" id="exampleInputPassword1"
+                placeholder="Password">*@
+                            </div>
+                            <div class="mt-2 text-right">
+                                <a href="~/Account/ForgetPassword?f=user" class="auth-link text-black text-primary">Forgot password?</a>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-between align-items-center">
+                            <div class="col-md-12 mt-2 text-center">
+                                <button type="submit" class="w-75 btn btn-gradient-primary font-weight-medium auth-form-btn" id="Login">SIGN IN</button>
+                            </div>
+                        </div>
+                    }
+
+
+                        <hr class="my-3">
+                        <div class="text-center mt-5 font-weight-light">
+                            Don't have an account? <a href="~/Account/Register" class="text-primary">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/js/jquery.min.js"></script>
+@*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>*@
+<script src="~/js/alertify.js"></script>
+@{
+    if (ViewBag.message != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                alertify.alert("@ViewBag.message");
+            })
+        </script>
+    }
+}
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

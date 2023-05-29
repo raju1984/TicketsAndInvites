@@ -1,0 +1,385 @@
+﻿@model  IEnumerable<EventManager1.Models.Event_>
+@using EventManager1.Models;
+@{
+    ViewBag.Title = "MyEvent";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            .content-wrapper {
+                background: #f2edf3;
+                padding: 2.75rem 1.25rem;
+            }
+
+            .col-md-4.text-center.borderDottedOnLight {
+                margin: 0 20px;
+            }
+
+            .padding5 {
+                padding: 0 20px !important;
+            }
+        }
+
+        .card {
+            height: 480px;
+            margin-bottom: 20px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .borderDottedOnLight {
+            border: 1px dotted #ccc;
+            height: 480px;
+        }
+
+        .minheight {
+            min-height: 230px
+        }
+
+        h6.colorBlack.noMargin {
+            font-size: 16px;
+        }
+
+        .noMargin {
+            margin: 0 !important;
+            font-family: poppins;
+        }
+
+        p {
+            font-family: poppins;
+            line-height: 2.5;
+            margin-bottom: 0;
+        }
+        a.card-link.flex-fill.bd-highlight {
+            font-family: poppins;
+        }
+    </style>
+}
+
+<div class="content-wrapper">
+    <input type="hidden" id="hfeventid" />
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-contacts menu-icon"></i>
+            </span>
+            Manage Events
+        </h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @*<h3>Manage events</h3>*@
+            <p>
+                Here you can find the list of the events you've created. The "Tickets" button will allow
+                you to view your tickets, to Create tickets go to the "Create Ticket Section". The
+                "Edit" button will take you back to the eventcreator to change the specific event page.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Select Date</label>
+                <input type="date" class="form-control" id="txtdate" aria-describedby="emailHelp"
+                       placeholder="">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="ddlsearch">Select Event</label>
+                <select class="form-control" id="ddlsearch">
+                    <option value="1">All</option>
+                    <option value="2">Live</option>
+                    <option value="3">Past</option>
+                    <option value="4">Upcoming</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="ddlsearch">Search Event</label>
+                <div class="input-group mb-3">
+                    <input type="text" id="txtsearch" class="form-control" placeholder="" aria-label=""
+                           aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <span class="input-group-text btn-gradient-danger form-control" id="basic-addon2" onclick="DoSearch()">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4 text-center borderDottedOnLight" style="padding-left:0">
+            <span class="createEventMyEvent">
+                <a href="@Url.Action("CreateEvent","Organizer",new {area="Organizer" })" class="btn btn-gradient-danger btn-rounded btn-fw">
+                    <i class="fa fa-plus"> </i> &nbsp; Create event
+                </a>
+            </span>
+
+        </div>
+
+        @{
+            if (Model != null && Model.Count() > 0)
+            {
+                foreach (var e in Model)
+                {
+                    string url;
+                    if (e.Multimedia.FirstOrDefault(s => s.Mul_MainPic == true) != null)
+                    {
+                        url = e.Multimedia != null && e.Multimedia.Count() > 0 ? e.Multimedia.FirstOrDefault(s => s.Mul_MainPic == true).URL : "";
+                    }
+                    else { url = e.Multimedia != null && e.Multimedia.Count() > 0 ? e.Multimedia.FirstOrDefault().URL : ""; }
+                    if (e.status != "1" || e.status != "0")
+                    {
+                        <div class="col-md-4">
+
+                            <div class="card">
+                                <a href="">
+                                    @*@e.Multimedia.FirstOrDefault().URL*@
+                                    @*@foreach (var i in e.Multimedia)
+                                        {
+                                            <img src="@i.URL" class="card-img-top" alt="..." width="100%">}*@
+                                    <img src="@url" class="card-img-top" alt="..." width="100%" height="170px" />
+                                    <div class="tag">
+                                        <h6 class="noMargin text-success">
+                                            @if (e.status == "2")
+                                            {
+                                                if (Convert.ToDateTime(e.EndDate) < DateTime.Now)
+                                                {<span>Past</span> }
+                                                else if (Convert.ToDateTime(e.StartDate) <= DateTime.Now && Convert.ToDateTime(e.EndDate) > DateTime.Now)
+                                                {<span>Live</span> }
+                                                else
+                                                { <span>Upcoming</span>}
+                                            }
+                                            else if (e.status == "3")
+                                            {<span>Past</span>}
+                                            else if (e.status == "1")
+                                            {<span>Pending</span>}
+                                        </h6>
+                                    </div>
+                                </a>
+                                <div class="card-body padding15">
+                                    <div class="row">
+                                        <div class="col-sm-3 padding5 text-center text-danger ">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <p class="noMargin">
+
+                                                @Convert.ToDateTime(e.StartDate).ToString("MMM dd")
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-9 padding5 minheight">
+
+                                            <h6 class="colorBlack noMargin">
+                                                @e.EventName
+                                            </h6>
+                                            <p class="text-muted noMargin"><i class="fa fa-calendar" aria-hidden="true"></i> @Convert.ToDateTime(e.StartDate).ToString("dddd, dd MMM yyyy")</p>
+                                            <p class="text-muted">
+
+                                                @if (e.Rsvp != null && e.Rsvp.Count > 0)
+                                                {
+                                                <p class="text-muted">
+                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                    @e.Rsvp[0].Namer <br><i class="fa fa-phone" aria-hidden="true"></i>
+                                                    @e.Rsvp[0].Phone
+                                                </p>
+                                            }
+                                                @if (e.Tickets.Count() > 0)
+                                                {
+                                                    <a href="javascript:" onclick="LoadTicket('@e.Id')">
+                                                        <p style="font-size: 16px;">
+                                                            Total tickets: @e.Tickets.Sum(i => i.Quantity)
+                                                        </p>
+                                                    </a>
+                                                }
+
+                                                @*@e.address_ @e.Venue
+                                                    @if (e.Rsvp != null && e.Rsvp.Count > 0)
+                                                    {
+                                                        <p class="text-muted">
+                                                            @e.Rsvp[0].Namer<br />
+                                                            @e.Rsvp[0].Phone
+                                                        </p>
+
+                                                    }*@
+                                                @*<a href="javascript:" onclick="LoadTicket('@e.Id')">
+                                                        Total tickets: @e.Tickets.Sum(i => i.Quantity)
+                                                    </a>*@
+
+                                            </div>
+                                            <div class="col-md-12 d-flex bd-highlight">
+                                                <a href="javascript:" onclick="LoadSale('@e.Id')"
+                                                   class="card-link flex-fill bd-highlight">Sale</a>
+                                                <a href="javascript:" onclick="LoadInvitaion('@e.Id')"
+                                                   class="card-link flex-fill bd-highlight">Invitation List</a>
+                                                <a href="~/Organizer/Organizer/CreateEvent?id=@e.Id" class="card-link flex-fill bd-highlight">Edit</a>
+                                                <a href="~/Organizer/Organizer/CreateEvent?id=@e.Id&cl=1" class="card-link flex-fill bd-highlight">Clone</a> @*href="javascript:" onclick="CloneEvent('@e.Id')"*@
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    }
+                }
+        }
+
+    </div>
+</div>
+<div id="divticketcontent">
+
+</div>
+<button type="button" style="display:none" id="btnticketpopup" data-toggle="modal" data-target="#tickets" class="card-link flex-fill bd-highlight">Tickets</button>
+<div id="divsale">
+
+</div>
+<button type="button" style="display:none" id="btnsalepopup" data-toggle="modal" data-target="#sales" class="card-link flex-fill bd-highlight">Tickets</button>
+
+<div id="divinvitaion">
+
+</div>
+<button type="button" style="display:none" id="btninvitationpopup" data-toggle="modal" data-target="#invitationList" class="card-link flex-fill bd-highlight">Tickets</button>
+
+<script type="text/javascript">
+    $.noConflict();
+    $(document).ready(function () {
+        $("#txtsearch").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Organizer/ManageEvent/GetEventName",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        prefix: request.term
+                    },
+                    success: function (data) {
+
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.Text,
+                                value: item.Id
+                            };
+                        }))
+                    },
+
+                    error: function () {
+                        alert('something went wrong !');
+                    }
+                })
+            },
+            select: function (event, ui) {
+                //$("#hfCustomer").val(i.item.val);
+                debugger;
+                event.preventDefault();
+                var res = ui.item.value;
+                $("#hfeventid").val(res);
+                $("#txtsearch").val(ui.item.label);
+                //$("#selected-customer").val(ui.item.label);
+            },
+            focus: function (event, ui) {
+                debugger;
+                event.preventDefault();
+                var res = ui.item.value;
+                $("#hfeventid").val(res);
+                $("#txtsearch").val(ui.item.label);
+            },
+            minLength: 3
+        });
+    })
+
+    //$("#divticketcontent").load('@Url.Action("AllTicket", "ManageEvent", new {area= "Organizer", EventId =12})'.replace("&amp;", "&"));
+    function LoadTicket(Id) {
+        $.ajax({
+            url: '/Organizer/ManageEvent/AllTicket?EventId=' + Id,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                $('#divticketcontent').html(result);
+                $("#btnticketpopup").trigger("click");
+                //$('#tickets').modal('show');
+            },
+            error: function (xhr, status) {
+                alert(status);
+            }
+        })
+    }
+    function LoadSale(Id) {
+        $.ajax({
+            url: '/Organizer/ManageEvent/AllSale?EventId=' + Id,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                $('#divsale').html(result);
+                $("#btnsalepopup").trigger("click");
+                //$('#tickets').modal('show');
+            },
+            error: function (xhr, status) {
+                alert(status);
+            }
+        })
+    }
+    function LoadInvitaion(Id) {
+        $.ajax({
+            url: '/Organizer/ManageEvent/GetInviation?EventId=' + Id,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                $('#divinvitaion').html(result);
+                $("#btninvitationpopup").trigger("click");
+                //$('#tickets').modal('show');
+            },
+            error: function (xhr, status) {
+                alert(status);
+            }
+        })
+    }
+    function DoSearch() {
+        var date = $("#txtdate").val();
+        if (date) {
+            window.location.href = '/Organizer/ManageEvent/MyEvent?date=' + date;
+        }
+        var eventytpe = $('#ddlsearch').val();
+        if (eventytpe) {
+            window.location.href = '/Organizer/ManageEvent/MyEvent?date=' + date + "&EventType=" + eventytpe;
+        }
+        var Eventname = $('#txtsearch').val();
+        if (Eventname) {
+            window.location.href = '/Organizer/ManageEvent/MyEvent?date=' + date + "&EventType=" + eventytpe + "&Eventname=" + Eventname;
+        }
+        var EventId = $("#hfeventid").val()
+        if (EventId) {
+            window.location.href = '/Organizer/ManageEvent/MyEvent?date=' + date + "&EventType=" + eventytpe + "&Eventname=" + Eventname + "&EventId=" + EventId;
+        }
+    }
+
+    function CloneEvent(EventId) {
+        $.ajax({
+            type: "POST",
+            url: "/Organizer/ManageEvent/CloneEvent",
+            data: '{EventId: "' + EventId + '" }',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response.Code == "200") {
+                    window.location.reload()
+                }
+                else {
+                    alertify.alert(response.Msg);
+                }
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+</script>

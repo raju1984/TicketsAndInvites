@@ -1,0 +1,72 @@
+﻿@model  IEnumerable<EventManager1.Models.Failedpaymentmodel>
+
+        
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dtBasicExample" class="table table-striped table-bordered w-100 nowrap" style="width:100%;" cellspacing="0" >
+                            <thead>
+                                <tr>
+                                    <th data-columns-data="username" >User Name</th>
+                                    <th data-columns-data="firstname" >First Name</th>
+                                    <th data-columns-data="lastname">Last Name</th>
+                                    <th data-columns-data="phn" >User Phone</th>
+                                    @*<th id="event">Event name</th>*@
+                                    <th data-columns-data="date" >Date</th>
+                                    @*<th>Payment For</th>*@
+                                    <th data-columns-data="amt" >Amount</th>
+                                    <th data-columns-data="id">Transaction Id</th>
+                                    <th data-columns-data="pay" >Payment Status</th>
+                                    <th data-columns-data="action" >Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @{
+                                    if (Model != null && Model.Count() > 0)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.UserName</td>
+                                                <td>@item.FirstName</td>
+                                                <td>@item.LastName</td>
+                                                <td>@item.PhoneNo</td>
+                                                @*<td>
+                                                    <a href="">
+                                                        @item.EventName
+                                                    </a>
+                                                </td>*@
+                                                <td>@item.Date.ToString("yyyy-MM-dd h:mm")</td>
+                                                @*<td>@item.PaymentFor </td>*@
+                                                <td>@item.Amount Gh₵</td>
+                                                <td>@item.TransactionId</td>
+                                                @if (item.PaymentStatus == 1)
+                                                {
+                                                    <td>Success</td>
+                                                }
+                                                else if (item.PaymentStatus == 4)
+                                                {
+                                                    <td>Failed</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>Unknown</td>
+                                                }
+                                                <td><a href="javascript:" onclick="LoadTicket('@item.PaymentId', '@item.TransactionId', '@item.PaymentFor','@item.Gateway',@item.EventId)">Get Status</a></td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            
+  
+<script type="text/javascript">
+    $("document").ready(function () {
+        $('#dtBasicExample').DataTable();
+
+    });
+</script>

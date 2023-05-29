@@ -1,0 +1,684 @@
+﻿@using EventManager1.Models
+@model EventManager1.Models.TicketModelPopup
+@{
+
+    <style>
+        .card {
+            background: #000;
+            border-color: #313131;
+            border-bottom: 1px solid #313131 !important;
+        }
+
+        p.alertify-message {
+            color: #000;
+        }
+
+        .text-center {
+            text-align: center !important;
+            padding: 0 20px;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: .5rem;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .card-header {
+            border-bottom-color: #313131;
+            color: #fff;
+        }
+
+        .btn-payment {
+            margin-left: 40px;
+            margin-top: 10px;
+        }
+
+        .smal-btn {
+            border: #fff solid 1px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .smal-btn2 {
+            border: #fff solid 2px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .card-body h4, h6, p {
+            color: #fff;
+        }
+
+        .bold-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff !important;
+        }
+
+        .card a:hover {
+            color: #f48534 !important;
+        }
+        /*.smal-btn:hover {
+            background: #fb0000 !important;
+            color: #fff !important;
+            border: none;
+        }*/
+        .minheight {
+            min-height: 300px;
+        }
+
+        .tab-content > .active {
+            display: block;
+            margin-top: 100px;
+            text-align: center;
+            margin-left: 0px;
+        }
+
+        .form-control {
+            height: 35px;
+            padding-left: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px !important;
+        }
+
+        b {
+            font-weight: bolder;
+            font-size: 21px;
+        }
+
+        .list-group {
+            flex-direction: row;
+        }
+
+        .form-check-label {
+            margin-bottom: 0;
+            font-size: 16px;
+        }
+
+
+        .mt-5, .my-5 {
+            margin-top: 7rem !important;
+        }
+
+        .list-group-item-action {
+            width: auto;
+        }
+
+
+        /*Input type number styling*/
+        input[type="number"] {
+            -webkit-appearance: textfield;
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+
+        .number-input {
+            border: 2px solid #ddd;
+            display: inline-flex;
+        }
+
+            .number-input,
+            .number-input * {
+                box-sizing: border-box;
+                border-radius: 4px;
+            }
+
+                .number-input button {
+                    outline: none;
+                    -webkit-appearance: none;
+                    background-color: transparent;
+                    border: none;
+                    align-items: center;
+                    justify-content: center;
+                    width: 2rem;
+                    height: 3rem;
+                    cursor: pointer;
+                    margin: 0;
+                    position: relative;
+                }
+
+                    .number-input button:before,
+                    .number-input button:after {
+                        display: inline-block;
+                        position: absolute;
+                        content: '';
+                        width: 1rem;
+                        height: 2px;
+                        background-color: #fff;
+                        transform: translate(-50%, -50%);
+                    }
+
+                    .number-input button.plus:after {
+                        transform: translate(-50%, -50%) rotate(90deg);
+                    }
+
+                .number-input input[type=number] {
+                    font-family: sans-serif;
+                    max-width: 10rem;
+                    padding: .5rem;
+                    border: solid #ddd;
+                    border-width: 0 2px;
+                    font-size: 2rem;
+                    height: 3rem;
+                    font-weight: bold;
+                    text-align: center;
+                    background: #fff !important;
+                }
+    </style>
+}
+@{
+
+    <div class="row mt-5 " style="text-align:center">
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4 bg-white pt-3">
+            <div class="card borderonTicket">
+                <input type="hidden" id="offerid" />
+                <div class="arc top-12 right-12"></div>
+                <div class="arc top-12 left-12"></div>
+                <div class="arc bottom-12 right-12"></div>
+                <div class="arc bottom-12 left-12"></div>
+                <img src="@Model.CoverImage" style="max-height:150px" class="" alt="...">
+                <div class="card-body text-center">
+
+                    <div class="pc" style="display:none">
+                        <div class="borderOnLight" style="padding: 10px 0;">
+                            <h4>Payment Confirmation</h4>
+
+                        </div>
+
+                        <p style="background: #333; color: #fff;  padding: 15px 20px;  min-height: 200px; margin: 20px 0; font-size: 16px;border-radius:10px;} ">
+                            <span style="color:#f00;font-weight:600;display:block;margin-bottom: 20px;">We have been advised that your payment wasn't successful.</span>
+                            You may click on the confirm button again if you have been debited, We will check again.
+                        </p>
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <button type="button" class="btn btn-danger" style="background: #f48534 !important;padding: 5px 30px; color: #fff !important;">Confirm</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-warning" style="padding: 5px 30px;">Cancel</button>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="ss">
+                        <div class="borderOnLight" style="padding: 10px 0;">
+                            <h4 style="color:#ecce0d;font-weight:500;font-size:18px;">@Model.Eventname</h4>
+                            <div>
+                                @if (Model.Tickest != null && Model.Tickest.Count() == 1)
+                                {
+
+                                    foreach (var i in Model.Tickest)
+                                    {
+                                        if (i.IsPurchased && i.TicketId == ViewBag.tid)
+                                        {
+                                            <div class="flex purchase" id="@i.TicketId" style="display:block">
+                                                <p> You have already bought a @i.TicketName for this event. <a href="/User/User/Dashboard" style="color:red;font-size:16px !important;">Click here </a> to view tickets. </p>
+                                            </div>
+
+                                            <input type="hidden" id="hfevid1" value="@Model.VideoTicket" />
+                                            <input type="hidden" id="hfevid2" value="@Model.LivestreamTiccket" />
+                                        }
+                                    }
+                                }
+                                @*About the play: What should a man expect after working hard...*@
+                                @*<a href="/Home/EventDetail?Id=@Model.EventId">Read more or Watch Trailer</a>*@
+                                @*&nbsp;&nbsp;&nbsp;<a href="/Home/EventDetail?Id=@Model.EventId">Watch Trailer.</a>*@
+                            </div>
+                        </div>
+                        <br />
+
+                        @if (Model.Tickest != null && Model.Tickest.Count() == 1)
+                        {
+
+                            foreach (var ticket in Model.Tickest)
+                            {
+
+                                <input type="hidden" id="hdnsingleTicket" value="@ticket.Price" />
+                                <input type="hidden" id="hdnsingleTicketId" value="@ticket.TicketId" sn-quantity="@ticket.AvailableQnty" />
+                                <h4 class="text-center pt-2 pb-2 mt-4  mb-4 text-white smal-btn">
+                                    <span style="color: #ecce0d;font-size: 18px;font-weight: 600;"><h5>Price: Gh₵@ticket.Price </h5></span>
+
+                                    @*<span style="color: #ecce0d;font-weight: 600;">Subscription is valid for 3 days</span>*@
+                                </h4>
+                                if (ticket.AvailableQnty > 1)
+                                {
+                                    <div class="OrderQuantity">
+                                        <label for="Quantity" style="position:relative;bottom:-0.5rem !important;">Quantity : </label>
+                                        <div class="number-input">
+                                            <button type="button" class="minus" style="cursor:pointer;"></button>
+                                            <input class="quantity" min="1" max="@ticket.AvailableQnty" maxlength="@ticket.AvailableQnty.ToString().Length" name="quantity" value="1" type="number" disabled>
+                                            <button type="button" class="plus" style="cursor:pointer;"></button>
+                                        </div>
+                                    </div>
+                                    <br />
+                                }
+
+                            }
+
+                        }
+
+
+                        @if (Model.Tickest != null && Model.Tickest.Count() > 1)
+                        {
+                            <div class="borderOnLight" style="margin:20px 0;padding:10px 20px;">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Select your preferred ticket</label>
+                                    <select class="form-control" id="tickettypee" name="tickettypee" style="width:90%; margin-left:5%; height:auto">
+                                        <option value="0">Select Ticket</option>
+                                        @foreach (var ticket in Model.Tickest)
+                                        {
+                                            <option value="@ticket.TicketId" name="@ticket.Price" day="@ticket.TicketName">@ticket.TicketName -  @ticket.Price Gh₵</option>
+                                        }
+                                    </select>
+                                    @foreach (var i in Model.Tickest)
+                                    {
+                                        if (i.IsPurchased)
+                                        {
+                                            <div class="flex purchase" id="@i.TicketId" style="display:none">
+                                                <p> You have already bought a @i.TicketName for this play. DO NOT BUY AGAIN. <a href="/User/User/Dashboard" style="color:red;font-size:16px !important;">Click here to watch </a>. </p>
+                                            </div>
+
+                                        }
+                                    }
+
+
+                                </div>
+                                <div id="msg"><label id="validmsg" for="exampleFormControlSelect1" style="color:#ecce0d;"></label></div>
+                            </div>
+
+                        }
+                        @if (Model.Tickest != null && Model.Tickest.Count() > 1)
+                        {
+                            <div id="divHaveTicket" style="display:none">
+                                @*<p class="mb-0" style="color: #fff !important;font-size: 16px; font-weight: 600; padding: 15px 0px;">Order Summery</p>*@
+                                <div class="borderOnLight">
+                                    @*<h6 class="text-center pt-2">i.Qnty x i.TicketName &nbsp;Gh₵i.Price</h6>*@
+
+                                    @*<p class="borderTBdasshed pt-2 pb-2 noMargin text-center">
+
+                                            <a data-toggle="collapse" href="#collapseExample2" role="button"
+                                               aria-expanded="false" aria-controls="collapseExample2" class="bold-text">
+                                                Have a Coupon or eGift Code?
+                                            </a>
+                                        </p>*@
+                                    @*<div class="collapse" id="collapseExample2" style="max-height:150px">*@
+                                    <div class="card card-body" style="min-height:150px;margin-bottom: 0px;">
+                                        <div class="input-group mb-3">
+                                            <span style="color:white;font-weight:600;">If you have a valid coupon/gift code, please enter below and click apply.</span>
+                                            <input type="text" class="form-control" placeholder="Enter Coupon Code" id="Coupancode" style="height: 40px;"
+                                                   aria-label="Enter Coupon Code" aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="basic-addon2"><input type="button" value="Apply" id="applycoupan" /></span>
+                                            </div>
+                                        </div>
+                                        <div>Discount : Gh₵<label id="discount">00</label> </div>
+                                    </div>
+                                    @*</div>*@
+                                </div>
+                                <div class="arc right-12"></div>
+                                <div class="arc left-12"></div>
+
+                                <hr class="borderDashed">
+                                <h4 class="text-center pt-2 pb-2 mt-4  mb-4 text-white smal-btn">
+                                    <span style="color: #ecce0d;font-size: 18px;font-weight: 600;">Gh₵ <lable id="lbltotal" sn-total="0">total </lable>  </span>
+
+                                </h4>
+                                <h4 class="text-center pt-2 pb-2 mt-4  mb-4 text-white smal-btn">
+                                    <span style="color: #ecce0d;font-size: 16px;font-weight: 600;">Total amount at Checkout is inclusive of Handling and Service charges.</span>
+
+                                </h4>
+
+                                <form class="row" id="fdiscount" action="@Url.Content("~/Payment/DsPay")" method="post" onsubmit="Loader(true)" style="display:none">
+                                    <input type="hidden" style="margin-left: 10px;" id="hfeventId" name="hfeventid" value="@ViewBag.evId" />
+                                    <input type="hidden" style="margin-left: 10px;" id="mob" name="mob" value="" />
+                                    <div class="col-md-12">
+                                        <div class=" font-weight-light">
+                                            <input type="submit" class="btn btn-primary smal-btn2" value="Grab Your Ticket" id="expressPay" style="width: 83%;background: #f48534 !important;color: #fff !important;width: 100%;padding: 10px 0; margin-left: -7px;" />
+                                        </div>
+                                    </div>
+                                </form>
+                                @*<form class="row" id="fpay" action="~/Payment/ExpressPay" method="post" onsubmit="Loader(true)">
+                                        <input type="hidden" style="margin-left: 50px;" id="hfeventId" name="hfeventid" value="@ViewBag.evId" />
+
+                                        <div class="col-md-12">
+                                            <div class=" font-weight-light" style=" margin-bottom 20px;">
+                                                <input type="submit" class="btn btn-primary smal-btn2" value="Proceed to Pay" id="expressPay" style="width: 83%;background: #fb0000 !important;color: #fff !important;width: 100%;padding: 10px 0; margin-left: -7px;" />
+                                            </div>
+                                        </div>
+
+                                    </form>*@
+                                <form class="row" id="fpay" action="~/Payment/PayStackPayment" method="post" onsubmit="Loader(true)">
+                                    <input type="hidden" style="margin-left: 50px;" id="hfeventId" name="hfeventid" value="@ViewBag.evId" />
+                                    <div class="col-md-12">
+                                        <div class="checkbox">
+                                            <label style="font-size: 14px;"><input type="checkbox" value="" id="terms" onclick="validateTerms();"> Please accept terms & Condition. <a href="/Home/Terms" style=" color: #ecce0d;">Read...</a></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="font-weight-light" style="margin-bottom:20px;" id="PaymentArea">
+                                            <input type="button" class="btn btn-primary smal-btn2 paybtn" value="Proceed to Pay" id="Paystack" style="width: 83%;background: #f48534 !important;color: #fff !important;width: 100%;padding: 10px 0; margin-left: -7px;" />
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="divHaveTicket">
+                                @*<p class="mb-0" style="color: #fff !important;font-size: 16px; font-weight: 600; padding: 15px 0px;">Order Summery</p>*@
+                                <div class="borderOnLight">
+                                    @*<h6 class="text-center pt-2">i.Qnty x i.TicketName &nbsp;Gh₵i.Price</h6>*@
+
+                                    @*<p class="borderTBdasshed pt-2 pb-2 noMargin text-center">
+
+                                            <a data-toggle="collapse" href="#collapseExample2" role="button"
+                                               aria-expanded="false" aria-controls="collapseExample2" class="bold-text">
+                                                Have a Coupon or eGift Code?
+                                            </a>
+                                        </p>
+                                        <div class="collapse" id="collapseExample2" style="max-height:150px">*@
+                                    <div class="card card-body" style="min-height:150px;margin-bottom: 0px;">
+                                        <div class="input-group mb-3">
+                                            <span style="color:white;font-weight:600;">If you have a valid coupon/gift code, please enter below and click apply.</span>
+                                            <input type="text" class="form-control" placeholder="Enter Coupon Code" id="Coupancode" style="height: 40px;"
+                                                   aria-label="Enter Coupon Code" aria-describedby="basic-addon2">
+                                            <div class="input-group-append" style="justify-content:center;margin-top:60px !important;">
+                                                <span class="input-group-text" id="basic-addon2"><input type="button" value="Apply" id="applycoupan" /></span>
+                                            </div>
+                                        </div>
+                                        <div>Discount : Gh₵<label id="discount">00</label> </div>
+                                    </div>
+                                    @*</div>*@
+                                </div>
+                                <div class="arc right-12"></div>
+                                <div class="arc left-12"></div>
+
+                                <hr class="borderDashed">
+                                <h4 class="text-center pt-2 pb-2 mt-4  mb-4 text-white smal-btn">
+                                    <span style="color: #ecce0d;font-size: 18px;font-weight: 600;">Gh₵ <lable id="lblsingletotal">total</lable>  </span>
+
+                                </h4>
+                                <h4 class="text-center pt-2 pb-2 mt-4  mb-4 text-white smal-btn">
+                                    <span style="color: #ecce0d;font-size: 16px;font-weight: 600;">Total amount at Checkout is inclusive of Handling and Service charges.</span>
+
+                                </h4>
+
+                                <form class="row" id="fdiscount" action="@Url.Content("~/Payment/DsPay")" method="post" onsubmit="Loader(true)" style="display:none">
+                                    <input type="hidden" style="margin-left: 10px;" id="hfeventId" name="hfeventid" value="@ViewBag.evId" />
+                                    <input type="hidden" style="margin-left: 10px;" id="mob" name="mob" value="" />
+                                    <div class="col-md-12">
+                                        <div class="font-weight-light">
+                                            <input type="submit" class="btn btn-primary smal-btn2" value="Grab Your Ticket" style="width: 83%;background: #f48534 !important;color: #fff !important;width: 100%;padding: 10px 0; margin-left: -7px;" />
+                                        </div>
+                                    </div>
+                                </form>
+                                @*<form class="row" id="fpay" action="~/Payment/ExpressPay" method="post" onsubmit="Loader(true)">
+                                        <input type="hidden" style="margin-left: 50px;" id="hfeventId" name="hfeventid" value="@ViewBag.evId" />
+
+                                        <div class="col-md-12">
+                                            <div class=" font-weight-light" style=" margin-bottom 20px;">
+                                                <input type="submit" class="btn btn-primary smal-btn2" value="Proceed to Pay" id="expressPay" style="width: 83%;background: #fb0000 !important;color: #fff !important;width: 100%;padding: 10px 0; margin-left: -7px;" />
+                                            </div>
+                                        </div>
+
+                                    </form>*@
+                                <form class="row" id="fpay" action="~/Payment/PayStackPayment" method="post" onsubmit="Loader(true)">
+                                    <input type="hidden" style="margin-left: 50px;" id="hfeventId" name="hfeventid" value="@ViewBag.evId" />
+                                    <div class="col-md-12">
+                                        <div class="checkbox">
+                                            <label style="font-size: 14px;"><input type="checkbox" value="" id="terms" onclick="validateTerms();"> Please accept terms & Condition. <a href="/Home/Terms" style=" color: #ecce0d;">Read...</a></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="font-weight-light" style="margin-bottom:20px;" id="PaymentArea">
+                                            <input type="button" class="btn btn-primary smal-btn2 paybtn" value="Proceed to Pay" id="Paystack" style="width: 83%;background: #f48534 !important;color: #fff !important;width: 100%;padding: 10px 0; margin-left: -7px;" />
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        }
+
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+             var tickcount = '@Model.Tickest.Count()';
+                $('#msg').hide();
+                $('#lblsingletotal').text($('#hdnsingleTicket').val());
+                if (parseInt(tickcount) < 2) {
+                    AddTickeToCart($('#hdnsingleTicketId').val(), $('#hdnsingleTicket').val());
+                    $('#lbltotal').text($('#hdnsingleTicket').val());
+                }
+
+            $(document).on("click", ".minus", function () {
+                debugger;
+                 var current = $('.quantity').val();
+                 if (parseInt(current) > 1) {
+                     var rPrice = parseFloat($('#hdnsingleTicket').val());
+                     $('.quantity').val(parseInt(current) - 1);
+                     AddTickeToCart($('#hdnsingleTicketId').val(), $('#hdnsingleTicket').val(), parseInt(current) - 1);
+                     var total = rPrice * (parseInt(current) - 1);
+
+                     var totalamount = total;
+                     var discount = 0;
+                     var Offertype = $("#offerid").attr("sn-type");
+                     var Pdiscount = $("#offerid").attr("sn-offer");
+
+                     if (typeof Offertype !== 'undefined' && Offertype !== false && typeof Pdiscount !== 'undefined' && Pdiscount !== false) {
+                         if (parseInt(Offertype) == 1) {
+                             discount = total * parseFloat(Pdiscount) / 100;
+                             totalamount = total - discount;
+                         }
+                         else if (parseInt(Offertype) == 2) {
+                             discount = parseFloat(Pdiscount);
+                             totalamount = total - parseFloat(Pdiscount);
+                         }
+
+                         $("#discount").text(parseFloat(discount).toFixed(2));
+                     }
+                     var sTotal = totalamount.toFixed(2);
+                     $("#lbltotal").text(sTotal);
+                     $("#lblsingletotal").text(sTotal);
+                 }
+             });
+
+            $(document).on("click", ".plus", function () {
+                debugger;
+                 var current = $('.quantity').val();
+                 var max = $('.quantity').attr('max');
+                 if (parseInt(current) < parseInt(max)) {
+                     var rPrice = parseFloat($('#hdnsingleTicket').val());
+                     $('.quantity').val(parseInt(current) + 1);
+                     AddTickeToCart($('#hdnsingleTicketId').val(), $('#hdnsingleTicket').val(), parseInt(current) + 1);
+                     var total = rPrice * (parseInt(current) + 1);
+                     var totalamount = total;
+                     var discount = 0;
+                     var Offertype = $("#offerid").attr("sn-type");
+                     var Pdiscount = $("#offerid").attr("sn-offer");
+
+                     if (typeof Offertype !== 'undefined' && Offertype !== false && typeof Pdiscount !== 'undefined' && Pdiscount !== false) {
+                         if (parseInt(Offertype) == 1) {
+                             discount = total * parseFloat(Pdiscount) / 100;
+                             totalamount = total - discount;
+                         }
+                         else if (parseInt(Offertype) == 2) {
+                             discount = parseFloat(Pdiscount);
+                             totalamount = total - parseFloat(Pdiscount);
+                         }
+
+                         $("#discount").text(parseFloat(discount).toFixed(2));
+                     }
+                     var sTotal = totalamount.toFixed(2);
+                     $("#lbltotal").text(sTotal);
+                     $("#lblsingletotal").text(sTotal);
+                 }
+             });
+            });
+         $(function () {
+
+                $("#tickettypee").change(function () {
+                    debugger
+                    $('#msg').show();
+                    var id = $(this).val();
+                    var vall = $(this).children("option:selected").attr("name");
+                    var Day = $(this).children("option:selected").attr("day");
+                    var res = Day.substring(0, 2);
+                    $('#validmsg').text('Subscription is valid for' + ' ' + res + ' ' + 'days')
+                    if (parseInt(id) > 0) {
+                        var name = $('#' + id).attr("id");
+                        if (name != null) {
+                            $('#divHaveTicket').css("display", "none");
+                            $('#' + id).css("display", "block");
+
+                        }
+                        else {
+                            AddTickeToCart(id, vall);
+                            $('#lbltotal').text(vall);
+                            $('#divHaveTicket').css("display", "block");
+                            $('.purchase').css("display", "none");
+                        }
+                    }
+                    else {
+                        $('#divHaveTicket').css("display", "none");
+                        $('.purchase').css("display", "none");
+                    }
+                });
+            });
+            $('#applycoupan').click(function () {
+                debugger;
+                var coupan = $('#Coupancode').val();
+                var ticketId = $('#hdnsingleTicketId').val();
+                var tickcount = '@Model.Tickest.Count()';
+                var total;
+                if (parseInt(tickcount) < 2) {
+                    total = $('#lblsingletotal').text();
+                }
+                else{
+                    var total = $('#lbltotal').text();
+                }
+                var offeri = $("#offerid").val();
+                var evID = '@ViewBag.evId';
+                if (offeri == '' || offeri == null) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("checkOffers", "Payment")',
+                        data: '{coupan: ' + JSON.stringify(coupan) + ', eventId: ' + JSON.stringify(evID) + ',ticketId: ' + JSON.stringify(ticketId)+'}',  //{ model: logindata, returnUrl: returnUrl },
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (resp) {
+                            debugger;
+                            var discount;
+                            var totalamount;
+                            if (resp != null) {
+                                if (resp[0].Offertype == 1) {
+                                    discount = total * resp[0].discount / 100;
+                                    totalamount = total - discount;
+                                }
+                                else if (resp[0].Offertype == 2)
+                                {
+                                    discount = resp[0].discount;
+                                    totalamount = total - resp[0].discount;
+                                }
+                                $("#lbltotal").text(parseFloat(totalamount).toFixed(2));
+                                $("#lblsingletotal").text(parseFloat(totalamount).toFixed(2));
+                                $("#discount").text(parseFloat(discount).toFixed(2));
+                                $("#offerid").val(resp[0].Id);
+                                $("#offerid").attr("sn-type", resp[0].Offertype);
+                                $("#offerid").attr("sn-offer", resp[0].discount);
+                                if (totalamount == 0) {
+                                    $("#fpay").css("display", "none");
+                                    $("#fdiscount").css("display", "block");
+                                }
+                            }
+                            else { alertify.alert("Invalid Coupon"); }
+
+                        },
+                        error: function (error) {
+
+                            alertify.alert("Invalid Coupon");
+                        }
+                    });
+                }
+            });
+        function AddTickeToCart(TicketId, total, _quant) {
+            debugger;
+                var evid = '@ViewBag.evId';
+                if (_quant === undefined || _quant === "") {
+                    _quant = 1;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("PostTicketnew", "Home", new { area = "" })',
+                    data: { EventIds: evid, tickettype: TicketId, price: total, quantity: parseInt(_quant) },
+                    dataType: "json",
+                    success: function (resp) {
+                        debugger;
+                        //if (resp.result.Code == 200) {
+
+                        //}
+                    },
+                    error: function (error) {
+                        alertify.alert(error);
+                        return false;
+                    }
+                });
+        }
+
+        function validateTerms() {
+            debugger;
+            var term = $('#terms');
+            if ($(term).is(":checked")) {
+                $('#PaymentArea').empty();
+                $('#PaymentArea').append('<input type="submit" class="btn btn-primary smal-btn2" value="Proceed to Pay" id="Paystack" style="width: 83%;background: #f48534 !important;color: #fff !important;width: 100%;padding: 10px 0; margin-left: -7px;" />');
+            }
+            else {
+                $('#PaymentArea').empty();
+                $('#PaymentArea').append('<input type="button" class="btn btn-primary smal-btn2 paybtn" value="Proceed to Pay" id="Paystack" style="width: 83%;background: #f48534 !important;color: #fff !important;width: 100%;padding: 10px 0; margin-left: -7px;" />');
+            }
+
+        }
+
+        $(document).on("click", ".paybtn", function () {
+            alertify.alert('Please accept terms & Conditions to proceed..');
+        });
+    </script>
+    @*<input type="hidden" id="vidtic" value="@Model.VideoTicket" /> <input type="hidden" id="livetic" value="@Model.LivestreamTiccket" />*@
+    @section Scripts
+{
+        <script src="https://js.paystack.co/v1/inline.js"></script>
+        <script>
+
+
+
+        </script>
+    }
+}
+
+

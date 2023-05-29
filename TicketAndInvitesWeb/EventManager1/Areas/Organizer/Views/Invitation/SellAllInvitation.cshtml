@@ -1,0 +1,101 @@
+﻿@model IEnumerable<EventManager1.Areas.Organizer.Models.InvitationDetail>
+@using EventManager1.Models
+@{
+    ViewBag.Title = "InvitationList";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+    <style>
+        .table-bordered td {
+            border: 1px solid #ced1d6;
+        }
+
+    </style>
+
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-account-plus"></i>
+            </span>
+            All Invitation
+        </h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <button class="btn btn-danger" onclick="timedRefresh(1)"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</button>
+                    <div class="table-responsive">
+                        <table id="dtBasicExample" class="table table-striped table-bordered"
+                               cellspacing="0" width="100%" style="border: 1px solid #ced1d6;margin:20px 0">
+                            <thead>
+                                <tr>
+                                    <th>Event Name</th>
+                                    <th>Name</th>
+                                    <th>Email Address</th>
+                                    <th>Seat Name</th>
+                                    <th>Table Number</th>
+                                    <th>Color Code</th>
+                                    <th>Status</th>
+                                    <th>Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.EventName</td>
+                                            <td>@item.FirstName</td>
+                                            <td>
+                                                @item.EmailAddress
+                                            </td>
+                                            <td>@item.SeatNumber </td>
+                                            <td>@item.TableNumber </td>
+                                            <td>
+                                                @item.ColorCode
+                                            </td>
+                                            @if (item.PaymentStatus == (int)PaymentStatus.PaymentSuccess)
+                                            {
+                                                if (item.Status == 1)
+                                                {
+                                                    <td>Confirm</td>
+                                                }
+                                                else if (item.Status == 2)
+                                                {
+                                                    <td>Tentative</td>
+                                                }
+                                                else if (item.Status == 3)
+                                                {
+                                                    <td>Declined</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>Invitation Delivered</td>
+                                                }
+                                            }
+                                            else if (item.PaymentStatus == (int)PaymentStatus.PaymentPending)
+                                            {
+                                                <td>Waiting for Payment Confirmation</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Failed</td>
+                                            }
+                                            <td>
+                                                @item.Remark
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

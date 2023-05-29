@@ -1,0 +1,185 @@
+﻿
+@model  IEnumerable<EventManager1.Models.IndexView>
+<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+<style>
+    body {
+    text-align: center;
+   
+}
+    .item {
+        height: 100% !important;
+    }
+    p{width:100% !important}
+        .item .events-box {
+            height: 99% !important;
+        }
+        .down-sec h3{color:#fff}
+        
+    .small-btn {
+        margin: auto;
+        padding: 6px 40px;
+    }
+    a.small-btn {
+        background: #f48534;
+        color: #fff !important;
+    }
+    p {
+        font-size: 16px;
+        font-family: poppins !important;
+        width: 45%;
+        margin: 0 auto 20px;
+    }
+
+    .sorry a {
+        padding: 10px 20px;
+        border-radius: 8px;
+        /* margin-top: 20px; */
+        display: block;
+        width: 150px;
+        margin: 0 auto;
+    }
+
+    .notfound {
+        text-align: center;
+        padding: 150px;
+        color: red
+    }
+
+    .sorry {
+        margin: 0 auto;
+        text-align: center
+    }
+
+        .sorry a {
+        }
+
+    .right-form {
+        display: none;
+        position: absolute !important;
+        float: none !important;
+        width: 350px;
+        top: 65px;
+        right: 7%;
+        border: 1px solid #999;
+        background: #FFFFFE;
+        padding: 30px;
+        border-radius: 5px;
+        z-index: 1;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        font-family: 'Raleway', sans-serif;
+    }
+    .bottom-sec {
+        padding: 0px 0 10px 0;
+        margin-top: 20px !important;
+    }
+</style>
+@{
+    /**/
+
+    if (Model != null && Model.Count() > 0)
+    {
+        <secton>
+            <div class="container" style="padding-top:110px">
+                <div class="right-form" id="showBox">
+                    <div class="form-group">
+                        <input type="text" id="txtname" name="looking for" class="form-control" placeholder="Event">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtplace" name="looking for" class="form-control" placeholder="Place Name">
+                    </div>
+                    <a href="javascript:" onclick="SearchEvent()" class="btn btn-default">Search</a>
+                </div>
+                <h2 class="main-heading"><span>Videos</span></h2>
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        if (item.Price != null && item.Price.Count > 0)
+                        {
+                            decimal? price = item.Price.OrderByDescending(a => a.Price).Select(a => a.Price).FirstOrDefault();
+                            //string imageurl = item.Images != null && item.Images.Where(a => a.MulType == 1 && a.mainpic == true).FirstOrDefault() != null ? item.Images.Where(a => a.MulType == 1).FirstOrDefault().Url : "/images/img3.jpg";
+                            string imageurl = "";// item.Images != null && item.Images.Where(a => a.mainpic == true).FirstOrDefault() !=null? item.Images.FirstOrDefault().Url : "/images/img3.jpg";
+                            if (item.Images.FirstOrDefault(x => x.MulType == 1) != null)
+                            {
+                                if (item.Images.FirstOrDefault(s => s.mainpic == true) != null)
+                                {
+                                    imageurl = item.Images.FirstOrDefault(s => s.mainpic == true).Url.ToString();
+                                    if (imageurl == null) { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+                                }
+                                else { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+                            }
+                            else { imageurl = "/images/img3.jpg"; }
+                            string alt = Path.GetFileName(imageurl);
+                            <div class="col-lg-4 col-sm-6">
+                                <a href="@Url.Action("EventDetail","Home",new {area="",Id= item.Id})">
+                                    <div class="events-box">
+                                        <figure><img src="@imageurl" alt="@alt"></figure>
+                                        <div class="down-sec">
+                                            @*<h4 style="height: 45px;">@item.EventName</h4>
+                                            <p class="location-time">
+                                                <span>
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                    @item.Location
+                                                </span> <span>
+                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    @Convert.ToDateTime(item.EventStartDate).ToString("dd/MM/yyyy hh:mmtt")  - @Convert.ToDateTime(item.EventEndDate).ToString("dd/MM/yyyy hh:mm tt")
+                                                </span>
+                                            </p>*@
+                                            <div class="bottom-sec">
+                                                <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})" class="small-btn">Buy Now</a>
+                                                @*<a href="@Url.Action("EventDetail","Home",new {area="",Id= item.Id})" class="small-btn">Grab your ticket</a>*@
+                                                @*<strong><span>@item.Currency</span>@price</strong>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </secton>
+    }
+    else
+    {
+        <secton>
+            <div class="container">
+                <div class="right-form" id="showBox">
+                    <div class="form-group">
+                        <input type="text" id="txtname" name="looking for" class="form-control" required="" placeholder="Event">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtplace" name="looking for" class="form-control" required="" placeholder="Place Name">
+                    </div>
+                    @*<div class="form-group">
+                            <select id="dayselect" class="form-control">
+                                <option value="td">Today</option>
+                                <option value="tm">Tommorow</option>
+                                <option value="twek">Weekend</option>
+                            </select>
+                        </div>*@
+                    <a href="javascript:" onclick="SearchEvent()" class="btn btn-default">Search</a>
+                </div>
+                <div class="row" style="min-height:400px;margin-top:100px">
+                    <div class="col-md-12">
+                        <div class="sorry">
+                            <h1><img src="~/images/sorry.jpg" class="img-responsive" /></h1>
+                            <h2>We Are Sorry !</h2>
+                            <p>
+                                We did Not find Any Event for Your search<br />
+                                Choose a different filter to view Event results relevant to you
+
+                            </p>
+                            <a href="\" class="btn-success">Search Again</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </secton>
+    }
+}
+

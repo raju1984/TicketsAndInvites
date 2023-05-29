@@ -1,0 +1,132 @@
+﻿@model  EventManager1.Areas.Organizer.Models.OverModels
+@{
+    ViewBag.Title = "Overview";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+    <style>
+    @@media all and (min-width: 320px) and (max-width: 480px) {
+         .content-wrapper {
+                background: #f2edf3;
+                padding: 2.75rem 1.25rem;
+            }
+         .col-md-4.text-center.borderDottedOnLight {
+    margin: 0 20px;
+}
+         h3, .h3 {
+    font-size: 18px;
+}
+         .float-right {
+    float: right !important;
+    margin-top: 25px;
+}
+         lable {
+    margin-bottom: 10px;
+    display: inline-block;
+}
+         .padding5 {
+    padding: 0 20px !important;
+}
+         .card .card-body {
+    padding: 10px;
+}
+         .table th,td{padding:5px !important}
+        }
+    </style>
+}
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css" />
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title w-100">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+
+                <i class="mdi mdi-calendar-multiple menu-icon"></i>
+            </span>
+            Overview
+            <span class="float-right">
+                <lable>Select to filter for an event</lable>
+                <select name="ddlCategory" id="ddlCategory" class="selectpicker" data-show-subtext="false" data-live-search="true" onchange="OnEventChange(this)">
+                    <option value="select">Choose</option>
+                    @{
+                        if (Model != null && Model.Events != null)
+                        {
+                            foreach (var item in Model.Events)
+                            {
+                                <option value="@item.Id">@item.Text</option>
+                            }
+                        }
+                    }
+                </select>
+            </span>
+        </h3>
+    </div>
+    @if (Model != null && Model.Tickets != null )
+    {
+        foreach (var ticket in Model.Tickets)
+        {            
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <h3>@ticket.EventName</h3>
+                    </p>
+                    <p class="text-muted">
+                       @Convert.ToDateTime(ticket.Startdate).ToString("dd/MM/yyyy hh:mmtt"), @ticket.Venuename
+                    </p>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <table id="dtBasicExample" class="table table-striped table-bordered"
+                                   cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Ticket Type</th>
+                                        <th>Ticket name</th>
+                                        <th>Booked / Total</th>
+                                        <th>Ticket Price</th>
+                                        <th>Event Revenue</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ticket.Tickets != null && ticket.Tickets.Count() > 0)
+                                    {
+                                        foreach (var tk in ticket.Tickets)
+                                        {
+                                            <tr>
+                                                <td>@tk.TickeType</td>
+                                                <td>
+                                                    @tk.TicketName
+                                                </td>
+                                                <td>@tk.SoldTicket / @tk.Quantity </td>
+                                                <td>@tk.TicketPrice Gh₵ </td>
+                                                <td>
+                                                    @(Convert.ToDouble(tk.SoldTicket) * Convert.ToDouble(tk.TicketPrice)) Gh₵
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#ddlCategory').selectpicker();
+    });
+    function OnEventChange(element) {
+        window.location = '/Organizer/ManageEvent/Overview?EventId=' + element.value;
+    }
+</script>

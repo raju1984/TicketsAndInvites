@@ -1,0 +1,435 @@
+﻿@using EventManager1.Models
+@model LoginphoneModel
+@{
+    ViewBag.Title = "User login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <style>
+        .row {
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+        }
+
+        .text-justify {
+            text-align: justify !important;
+            display: flex;
+            /*align-items: center;
+        justify-content: center;*/
+            height: 100%;
+        }
+
+        .bgLight {
+            background: #383636;
+            color: #fff;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .bgContainer {
+            background: #000 !important;
+            height: 100vh !important;
+        }
+
+        .card {
+            background: #000;
+            border-color: #313131;
+            border-bottom: 1px solid #313131 !important;
+        }
+
+        input#Phone {
+            position: relative;
+            border-radius: 0px 5px 5px 0;
+            /*padding-right: 0;
+                width: 100%;*/
+        }
+
+        .col-md-4.cc {
+            padding-left: 0;
+        }
+
+        .card {
+            min-height: 75vh !important;
+        }
+
+        .text-justify {
+            text-align: justify !important;
+            display: flex;
+            /*align-items: center;
+                        justify-content: center;*/
+            height: 100%;
+        }
+
+        .card {
+            background: #000;
+            border-color: #313131;
+            border-bottom: 1px solid #313131 !important;
+        }
+
+        input#Phone {
+            position: relative;
+            border-radius: 0px 5px 5px 0;
+            /* padding-right: 0; */
+            width: 100%;
+        }
+
+        p.alertify-message {
+            color: #000;
+        }
+
+        .text-center {
+            text-align: center !important;
+            padding: 0 20px;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: .5rem;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .card-header {
+            border-bottom-color: #313131;
+            color: #fff;
+        }
+
+        .btn-payment {
+            margin-left: 40px;
+            margin-top: 10px;
+        }
+
+        .smal-btn {
+            border: #fff solid 1px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .smal-btn2 {
+            border: #fff solid 2px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .card-body h4, h6, p {
+            color: #fff;
+        }
+
+        .bold-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff !important;
+        }
+
+        .login {
+            display: block;
+        }
+
+
+        .card a:hover {
+            color: #f48534 !important;
+        }
+        /*.smal-btn:hover {
+                        background: #fb0000 !important;
+                        color: #fff !important;
+                        border: none;
+                    }*/
+        .minheight {
+            min-height: 300px;
+        }
+
+        .tab-content > .active {
+            display: block;
+            margin-top: 100px;
+            text-align: center;
+            margin-left: 0px;
+        }
+
+        .form-control {
+            height: 35px;
+            padding-left: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px !important;
+        }
+
+        b {
+            font-weight: bolder;
+            font-size: 21px;
+        }
+
+        .list-group {
+            flex-direction: row;
+        }
+
+        .form-check-label {
+            margin-bottom: 0;
+            font-size: 16px;
+        }
+
+
+        .mt-5, .my-5 {
+            margin-top: 7rem !important;
+        }
+
+        .list-group-item-action {
+            width: auto;
+        }
+
+        .text-primary {
+            color: #f6d605 !important;
+        }
+
+        .card-img-top {
+            display: none !important;
+        }
+
+        .caret {
+            display: none !important;
+            width: 0;
+            height: 0;
+            margin-left: 2px;
+            border-top: 4px dashed;
+            border-top: 4px solid\9;
+            border-right: 4px solid transparent;
+            border-left: 4px solid transparent;
+        }
+
+        .container i {
+            cursor: pointer;
+            float: right;
+            position: relative;
+            right: 10px;
+        }
+
+        @@media (min-width: 481px) and (max-width: 767px) {
+            .cc {
+                width: 30%;
+                float: left;
+            }
+
+            .nn {
+                width: 70%;
+                float: left;
+            }
+
+            .input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group {
+                margin-right: -12px !important;
+            }
+        }
+
+        /*
+              ##Device = Most of the Smartphones Mobiles (Portrait)
+              ##Screen = B/w 320px to 479px
+            */
+
+        @@media (min-width: 320px) and (max-width: 480px) {
+
+            .cc {
+                width: 30%;
+                float: left;
+            }
+
+            .nn {
+                width: 70%;
+                float: left;
+            }
+
+            .input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group {
+                margin-right: -12px !important;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+}
+@{
+
+
+    <link rel="stylesheet" href="~/css/intlInputPhone.min.css">
+    <link href="~/css/alertify.core.css" rel="stylesheet" />
+    <link href="~/css/alertify.default.css" rel="stylesheet" />
+    <div class="container-fluid bgContainer">
+        <div class="row ">
+            <div class="container">
+                <div class="row mt-5 " style="text-align:center">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 bg-white pt-3">
+                        <div class="card borderonTicket">
+                            <input type="hidden" id="offerid" />
+                            <div class="arc top-12 right-12"></div>
+                            <div class="arc top-12 left-12"></div>
+                            <div class="arc bottom-12 right-12"></div>
+                            <div class="arc bottom-12 left-12"></div>
+                            <img src="aa"
+                                 class="card-img-top" alt="...">
+                            <div class="card-body text-justify">
+                                <div class="login">
+                                    <h4 style="text-align:center; font-weight:bold;margin-top:10px">
+                                       Enter either your email below and click next. We will send you a verification code to enter on the next screen.
+                                        <br /><br /> 
+                                    </h4>
+                                    <br />
+                                    @using (Html.BeginForm("userlogin", "Account", FormMethod.Post, new { defaultbutton = "Login" }))
+                                    {
+                                        <input type="hidden" value="@ViewBag.ReturnUrl" name="returnUrl" />
+                                        @Html.AntiForgeryToken()
+                                        @*@Html.HiddenFor(x => x.Phone_CountryCode, new { Value = "233" });*@
+                                        <div id="divMobile" class="form-group" style="margin-top:20px">
+                                            <!--<label for="email">Mobile Number:</label>
+
+                                            <div id="divMobile" class="row">
+                                                <div class="col-md-4 cc ">
+                                                    <div class="input-phone"></div>
+                                                </div>
+                                                <div class="col-md-8 nn">
+                                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control form-control-lg", placeholder = "Mobile No", maxlength = 10 })-->
+                                                    @*<span style="color:red"> @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "error" })</span>*@<!--<br />
+                                                    <label for="email">OR </label> <br />
+                                                </div>
+                                            </div>-->
+                                            <div class="col-md-12" style="padding:0">
+                                                <span class="flag gh btn-flag"> <label for="email">Email Id:</label> </span> @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control form-control-lg", placeholder = "Email Id", type = "Email" })
+                                            </div>
+                                            <div class="col-md-12" style="text-align:center">
+                                                <button type="submit" id="btnSignIn" class="btn btn-danger" style="background: #f48534 !important;text-align:center;padding:5px 25px;  margin:10px auto; color: #fff !important;">Next</button>
+
+                                            </div>
+                                        </div> 
+                                    }
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        @*
+            <script src="~/js/bootstrap.min.js"></script>*@
+        <script src="~/js/intlInputPhone.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#btnSignIn').click(function () {
+                    debugger;
+                    
+                    var email = $('#EmailId').val();
+                    if (!email) {
+                        alertify.alert('Please enter email id.');
+                        return false;
+                    }
+                })
+                $('.input-phone').intlInputPhone();
+                $('.country').click(function () {
+                    debugger
+                    var cobt = $(this).text();
+                    var res = cobt.split("+");
+                    var country = res[0];
+                    var v;
+                    $("#CountryId option").each(function () {
+                        $(this).removeAttr("selected");
+                    });
+                    $("#CountryId option:contains(" + country + ")").each(function () {
+                        if ($(this).text() == country) {
+                            v = $(this).val();
+                            $(this).attr("selected", "selected");
+                        }
+                    });
+                    $('#Phone_CountryCode').val(res[1]);
+                    //var cval = $("#CountryId option:contains(" + country + ")").val();
+                    $('#CountryId').val(v);
+                    //$("#CountryId option[value='" + v + "']").attr('selected', 'selected');
+
+                    //$("#CountryId option:contains(" + country + ")").attr('selected', 'selected');
+
+                    //$('#CountryId').trigger('change');
+                });
+
+                //$('#phoneNumber').val('0509336844');
+                //$('#phoneNumber').css("display", "none");
+                //$("#phoneNumber").remove();
+
+
+                //$('#divPssword').hide();
+                //$('#btnSignIn').hide();
+                //$('#linkfrgetpwssword').hide();
+                //$('#btnBack').hide();
+                //$('#btnNext').hide();
+                //$('#btnNext').click(function () {
+                //    $('#divMobile').hide();
+                //    //$('#divPssword').show();
+                //    $('#btnSignIn').show();
+                //    $('#linkfrgetpwssword').show();
+                //    $('#linkRegister').hide();
+                //    $('#btnBack').hide();
+                //    $('#btnNext').hide();
+
+                //});
+                function disablePrev() { window.history.forward() }
+                window.onload = disablePrev();
+                //window.onpageshow = function (evt) { if (evt.persisted) disableBack() }
+                //$('.country').click(function () {
+                //    debugger
+                //    var cobt = $(this).text();
+                //    var res = cobt.split("+");
+                //    var country = res[0];
+                //    var v;
+                //    $("#CountryId option").each(function () {
+                //        $(this).removeAttr("selected");
+                //    });
+                //    $("#CountryId option:contains(" + country + ")").each(function () {
+                //        if ($(this).text() == country) {
+                //            v = $(this).val();
+                //            $(this).attr("selected", "selected");
+                //        }
+                //    });
+                //    $('#Phone').val(res[1]);
+
+                //    $('#CountryId').val(v);
+
+                //});
+
+                //$('#btnSignIn').click(function () {
+                //    //var country = $('#btn-country .btn-cc').text().trim();
+                //    //$('#Phone').val($('#phoneNumber').val());
+                //    //$('.popover').css('display','none');
+
+                //})
+
+            });
+            //const togglePassword = document.querySelector('#togglePassword');
+            //const password = document.querySelector('#Password');
+            //togglePassword.addEventListener('click', function (e) {
+            //    // toggle the type attribute
+            //    const type = password.getAttribute('type') === 'password' ? 'text' : 'password'; // $('#Password').attr("type");//
+            //    password.setAttribute('type', type);
+            //    // toggle the eye slash icon
+            //    this.classList.toggle('fa-eye-slash');
+            //});
+        </script>
+    }
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/alertify.js"></script>
+
+    if (ViewBag.message != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                alertify.alert("@ViewBag.message");
+
+            })
+
+        </script>
+    }
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>}
+
+

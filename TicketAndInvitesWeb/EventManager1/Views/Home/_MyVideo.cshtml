@@ -1,0 +1,552 @@
+﻿@model  IEnumerable<EventManager1.Models.Event_>
+@using EventManager1.Models;
+<style>
+    .Timer {
+        color: red;
+    }
+
+    .events-box {
+        color: red;
+    }
+
+    .refresh {
+        text-align: right;
+    }
+
+    .main-heading {
+        text-transform: capitalize;
+        padding-bottom: 10px;
+        margin-bottom: 0;
+        position: relative;
+    }
+
+    .small-btn {
+        background: #000;
+        color: #fff;
+        margin: auto;
+        padding: 10px 20px;
+    }
+
+    .events-box {
+        overflow: hidden;
+        transition: all 0.3s ease-in-out;
+        border-radius: 5px;
+        margin: 0 0px 30px;
+        padding: 0 5px;
+    }
+
+    .card {
+        overflow-y: hidden !important;
+        overflow-x: hidden;
+        background: none;
+        margin-bottom: 0 !important;
+    }
+
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .small-btn:hover {
+        background: #f48534;
+        color: #fff !important;
+        border: none;
+    }
+
+    .events-box img {
+        width: 100%;
+        height: 207px;
+        object-fit: scale-down;
+    }
+
+    @@media all and (min-width: 320px) and (max-width: 480px) {
+        .col-lg-4.col-sm-6.events-box {
+            box-shadow: none !important;
+            margin: 30px 10px;
+        }
+
+        .content-wrapper {
+            background: #f2edf3;
+            padding: 2.75rem 1.25rem !important;
+        }
+
+        .imgbox {
+            height: 150px !important;
+            width: 100%;
+        }
+
+        .refresh {
+            text-align: left;
+        }
+
+            .refresh button {
+                margin: 20px 0;
+                padding: 10px;
+            }
+
+        .minheight {
+            min-height: 150px !important;
+            padding: 0 18px;
+        }
+
+        .footer {
+            background: #f2edf3;
+            padding: 30px 1rem 50px;
+        }
+
+        .refresh {
+            text-align: left;
+        }
+
+        .padding5 {
+            padding: 0 20px !important;
+        }
+    }
+
+    @@media all and (min-width: 320px) and (max-width: 480px) {
+        .col-lg-4.col-sm-6.events-box {
+            box-shadow: none !important;
+            margin: 30px 10px;
+        }
+    }
+
+    @@media all and (min-width: 481px) and (max-width: 767px) {
+        .content-wrapper {
+            background: #f2edf3;
+            padding: 2.75rem 1.25rem !important;
+        }
+
+        .col-lg-4.col-sm-6.events-box {
+            box-shadow: none !important;
+            margin: 30px 10px;
+        }
+
+        .imgbox {
+            height: 150px !important;
+            width: 100%;
+        }
+
+        .refresh {
+            text-align: left;
+        }
+
+            .refresh button {
+                margin: 20px 0;
+                padding: 10px;
+            }
+
+        .padding5 {
+            padding: 0 20px !important;
+        }
+
+        .minheight {
+            min-height: 150px !important;
+            padding: 0 18px !important;
+        }
+
+        .footer {
+            background: #f2edf3;
+            padding: 30px 1rem 50px;
+        }
+    }
+
+    .card {
+        min-height: auto !important;
+    }
+
+    .card {
+        height: auto;
+        margin-bottom: 20px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .minheight {
+        min-height: 150px;
+    }
+
+    .imgbox {
+        height: 200px;
+        width: 100%;
+    }
+
+    .noMargin {
+        margin: 0 !important;
+        font-family: poppins;
+    }
+
+    p {
+        font-family: poppins;
+        line-height: 1.8;
+        color: #9c9fa6 !important;
+        margin-bottom: 0;
+    }
+
+    a.card-link.flex-fill.bd-highlight {
+        font-family: poppins;
+    }
+
+    .card-img-top {
+        display: block !important;
+    }
+</style>
+@if (Model != null && Model.Where(x => Convert.ToDateTime(x.EndDate) >= DateTime.Now).Count() > 0)
+{
+    <div class="container">
+
+        <h2 class="main-heading"><span>My </span>Videos </h2>
+        <div class="row">
+            <div class="col-md-12">
+                @*<div class="row">
+                        <div class="col-md-6">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="Tickets-tab" data-toggle="tab" href="#Tickets"
+                                       role="tab" aria-controls="Tickets" aria-selected="true">Current Tickets</a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>*@
+                <div class="tab-content pt-4">
+                    <div class="tab-pane active" id="Tickets" role="tabpanel" aria-labelledby="Tickets-tab">
+                        @*<h3>My tickets</h3>*@
+
+
+
+
+                        <div class="row">
+                            @{
+
+                                var sn = 1;
+                                foreach (var e in Model)
+                                {
+                                    if (Convert.ToDateTime(e.EndDate) >= DateTime.Now)
+                                    {
+
+                                        if (e.paymentStatus == (int)PaymentStatus.PaymentSuccess)
+                                        {
+                                            if (e.Eventtype == 2)
+                                            {
+                                                if (e.streamType == 2)
+                                                {
+                                                    if (e.EventKey != null)
+                                                    {
+                                                        <div class="col-md-4 events-box" style=" margin 0 10px;
+                                                             box-shadow none;">
+                                                            <div class="card">
+                                                              
+                                                                @*<a href="http://stream.stream233.com/?ev=@e.evid" target="_blank" class="card-link">*@
+                                                                    <a href="/OnlineStreaming/Index/?ev=@e.evid" target="_blank" class="card-link">
+                                                                        <img src="@e.Multimedia.FirstOrDefault().URL" class="card-img-top imgbox" alt="..." />
+                                                                        <div class="centered"><img src="~/images/play.png" class="img-fluid" /></div>
+                                                                    </a>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="col-md-4">
+                                                            <div class="card" style="margin:0">
+                                                                <img src="@e.Multimedia.FirstOrDefault().URL" class="card-img-top imgbox" style="height:180px" />
+                                                                <span>
+                                                                    This event is scheduled to stream on @Convert.ToDateTime(e.StartDate).ToString("dd MMM yyyy").
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                            }
+                                            else if (e.Eventtype == 1)
+                                            {
+                                                if (e.paymentStatus == (int)PaymentStatus.PaymentSuccess)
+                                                {
+                                                    var date = e.purchaseDate.ToString("dd-MM-yyyy HH:mm");
+                                                    DateTime now = DateTime.UtcNow;
+                                                    var Noww = now.ToString("MM dd,yyyy HH:mm:ss");
+                                                    var days = e.Tickets.FirstOrDefault().validdays;
+                                                    string ExtendDate = e.purchaseDate.AddHours(24 * days).ToString("MM dd,yyyy HH:mm:ss");
+                                                    if (now > e.purchaseDate.AddHours(0) && now <= e.purchaseDate.AddHours(24 * days))
+                                                    {
+                                                        <div class="col-lg-4 col-sm-6 events-box">
+                                                            <div class="card">
+                                                                <a href="/User/Events/Index?v=@e.Multimedia.FirstOrDefault().videoId" class="card-link">
+                                                                    <img src="@e.Multimedia.FirstOrDefault().URL" class="card-img-top imgbox" alt="..." />
+                                                                    <div class="centered"><img src="~/images/play.png" class="img-fluid" /></div>
+                                                                </a>
+                                                            </div>
+                                                            Expires in: <span id="Timer_@sn" class="Timer"></span>
+                                                        </div>
+                                                        <script>
+                                                            var countDownDate_@sn = new Date('@ExtendDate');
+                                                            var is_safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                                                            var x = setInterval(function () {
+                                                                var now_@sn = new Date('@Noww');
+                                                                if (is_safari) {
+                                                                    //countDownDate_@sn = new Date('@date'.replace(/\s/, 'T') + 'Z');
+                                                                    var mydate = '@ExtendDate'
+                                                                    @*var mydate = '@date'*@
+                                                                    //var ddd= '"'+now_@sn+'"'
+                                                                    debugger
+                                                                    var dateParts = mydate.substring(3, 10).split(',');
+                                                                    var timePart = mydate.substr(11);
+                                                                    var countDownDate_ = dateParts[1] + '/' + mydate.substring(0, 2) + '/' + dateParts[0] + ' ' + timePart;
+                                                                    var timeParth = timePart.substring(0, 8).split(':');
+                                                                    var h = timeParth[0]; var m = timeParth[1]; t = timeParth[2]
+                                                                    //now_@sn = parseDate(now_@sn);
+                                                                    var t = parseDate(countDownDate_, 'yyyy/mm/dd', h, m, h);
+                                                                    countDownDate_@sn = t;
+                                                                }
+
+                                                                var distance_@sn = countDownDate_@sn - now_@sn;
+                                                                var days_@sn = Math.floor(distance_@sn / (1000 * 60 * 60 * 24));
+                                                                var hours_@sn = Math.floor((distance_@sn % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                                var minutes_@sn = Math.floor((distance_@sn % (1000 * 60 * 60)) / (1000 * 60));
+                                                                var seconds_@sn = Math.floor((distance_@sn % (1000 * 60)) / 1000);
+                                                                document.getElementById('Timer_@sn').innerHTML = days_@sn + "d " + hours_@sn + "h " + minutes_@sn + "m ";
+
+                                                            }, 1000);
+                                                            function ismac() {
+                                                                if (navigator.userAgent.match(/(iPhone|iPod|iPad)/) != null || navigator.userAgent.indexOf('Mac OS X') != -1) {
+                                                                    return true;
+                                                                }
+                                                                return false;
+                                                            }
+                                                            function parseDate(input, format, h, m, t) {
+                                                                format = format || 'yyyy-mm-dd '; // default format
+                                                                var parts = input.match(/(\d+)/g),
+                                                                    i = 0, fmt = {};
+                                                                // extract date-part indexes from the format
+                                                                format.replace(/(yyyy|dd|mm)/g, function (part) { fmt[part] = i++; });
+
+                                                                return new Date(parts[fmt['yyyy']], parts[fmt['mm']] - 1, parts[fmt['dd']], h, m, t);
+                                                            }
+                                                        </script>
+                                                    }
+
+                                                }
+
+
+                                            }
+
+                                        }
+
+
+
+                                        @*<div class="tag">
+                                                <h6 class="noMargin text-success">
+                                                    @if (e.status == "2")
+                                                    {
+                                                    if (Convert.ToDateTime(e.EndDate) < DateTime.Now)
+                                                    {<span>Past</span> }
+                                                    else if (Convert.ToDateTime(e.StartDate) <= DateTime.Now && Convert.ToDateTime(e.EndDate) > DateTime.Now)
+                                                    {<span>Live</span> }
+                                                    else
+                                                    { <span>Upcoming</span>}
+                                                    }
+                                                    else if (e.status == "3")
+                                                    {<span>Past</span>}
+                                                </h6>
+                                            </div>*@
+                                        <div class="card-body padding15" style="display:none">
+                                            <div class="row">
+                                                <div class="col-sm-3 padding5 text-center text-danger">
+                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    <p class="text-danger noMargin">
+                                                        @Convert.ToDateTime(e.StartDate).ToString("MMM dd")
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-9 padding5 minheight">
+
+                                                    <h6 class="colorBlack noMargin">
+                                                        @e.EventName
+                                                    </h6>
+                                                    <p class="text-muted noMargin"><i class="fa fa-calendar" aria-hidden="true"></i> @Convert.ToDateTime(e.StartDate).ToString("dddd, dd MMM yyyy HH:mm")</p>
+                                                    <p class="text-muted">
+                                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                        @e.address_ @e.Venue
+                                                        <br />
+                                                        @if (e.Eventtype != 1 && e.Eventtype != 2)
+                                                        {
+                                                        <p class="">Total Tickets: @e.Tickets.FirstOrDefault().Quantity</p>}
+                                                        <p class="">Ticket Name: @e.Tickets.FirstOrDefault().TicketName</p>
+                                                    </div>
+                                                    <div class="col-md-12 d-flex bd-highlight">
+                                                        @if (e.paymentStatus == 2)
+                                                        {
+                                                            <a href="Dashboard" class="card-link"> Payment Status :<b style="color:#FF9800">Pending</b> </a>
+                                                            <a href="@Url.Action(" EventDetail", "Home" , new { area="" , Id=e.EventId })" target="_blank" class="ml-auto card-link">Event Detail</a>
+                                                        }
+                                                        else if (e.paymentStatus == (int)PaymentStatus.PaymentSuccess)
+                                                        {
+                                                            if (e.Eventtype != 1 && e.Eventtype != 2)
+                                                            {
+                                                                <a href="Tickets?id=@e.Id&tmap=@e.BusinessOwner_Id" class="card-link">
+                                                                    View ticket
+                                                                </a>}
+                                                            else if (e.Eventtype == 2)
+                                                            {
+                                                                if (e.streamType == 2)
+                                                                {
+                                                                    if (e.EventKey != null)
+                                                                    {
+                                                                        @*<a href="http://stream.stream233.com/Home/Livestream/@e.evid#@e.EventURLWebrtc" target="_blank" class="card-link" style="padding:10px 0">*@
+                                                                        <a href="/OnlineStreaming/Livestream/@e.evid#@e.EventURLWebrtc" target="_blank" class="card-link" style="padding:10px 0">
+                                                                            Watch Live Stream
+                                                                            @*<a href="http://localhost.com/?ev=@e.evid" target="_blank" class="card-link" style="padding:10px 0">
+                                                                                Watch Live Stream*@
+                                                                        </a>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span>
+                                                                            This event is scheduled to stream on @Convert.ToDateTime(e.StartDate).ToString("dd MMM yyyy").
+                                                                        </span>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    if (e.EventURLWebrtc != null)
+                                                                    {
+                                                                        @*<a href="http://stream.stream233.com/Home/Livestream/@e.evid#@e.EventURLWebrtc" target="_blank" class="card-link" style="padding:10px 0">*@
+                                                                        <a href="/OnlineStreaming/Livestream/@e.evid#@e.EventURLWebrtc" target="_blank" class="card-link" style="padding:10px 0">
+                                                                            Watch Live Stream
+                                                                        </a>
+                                                                    }
+                                                                    <div style="width:100%">
+                                                                        This event is scheduled to stream on  @Convert.ToDateTime(e.StartDate).ToString("dd MMM yyyy ").
+                                                                    </div>
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                DateTime now = DateTime.UtcNow;
+                                                                var days = e.Tickets.FirstOrDefault().validdays;
+                                                                if (now > e.purchaseDate.AddHours(0) && now <= e.purchaseDate.AddHours(24 * days))
+                                                                {
+                                                                    <a href="/User/Events/Index?v=@e.Multimedia.FirstOrDefault().videoId" class="card-link">
+                                                                        Watch Video
+                                                                    </a>
+                                                                }
+
+                                                            }
+                                                            <a href="@Url.Action(" EventDetail", "Home" , new { area="" , Id=e.EventId })" target="_blank" class="ml-auto card-link">Event Detail</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="@Url.Action(" FailedPayment", "Transaction" , new { area="User" })" class="card-link"> Payment Status :<b style="color:red">Failed</b> </a>
+                                                            <a href="@Url.Action(" EventDetail", "Home" , new { area="" , Id=e.EventId })" target="_blank" class="ml-auto card-link">Event Detail</a>
+                                                        }
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                    }
+                                    sn++;
+                                }
+                            }
+
+                            }
+
+                        </div>
+                    </div>
+
+                    @*<div class="tab-pane" id="Past" role="tabpanel" aria-labelledby="Past-tab">
+                            <h3>Past tickets</h3>
+                            <p>Events shown in this last are the past events you have had tickets for.</p>
+                            <hr>
+                            <div class="row">
+                                @{
+                                if (Model != null && Model.Count() > 0)
+                                {
+                                var enddate = Model.FirstOrDefault(x => Convert.ToDateTime(x.EndDate) < DateTime.Now);
+                                if (enddate != null)
+                                {
+                                foreach (var e in Model)
+                                {
+                                if (Convert.ToDateTime(e.EndDate) < DateTime.Now)
+                                {
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <a href="">
+                                            <img src="@e.Multimedia.FirstOrDefault().URL" class="card-img-top imgbox" alt="..." width="100%" />
+                                            <div class="tag">
+                                                <h6 class="noMargin text-success">Past</h6>
+                                            </div>
+                                        </a>
+                                        <div class="card-body padding15">
+                                            <div class="row">
+                                                <div class="col-sm-3 padding5 text-center text-danger">
+                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    <p class="text-danger noMargin">
+                                                        @Convert.ToDateTime(e.StartDate).ToString("MMM dd")
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-9 padding5 minheight">
+
+                                                    <h6 class="colorBlack noMargin">
+                                                        @e.EventName
+                                                    </h6>
+                                                    <p class="text-muted noMargin"><i class="fa fa-calendar" aria-hidden="true"></i> @Convert.ToDateTime(e.StartDate).ToString("dddd, dd MMM yyyy HH:mm")</p>
+                                                    <p class="text-muted">
+                                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                        @e.address_ @e.Venue
+                                                        <br />
+                                                        @if (e.Eventtype != 1)
+                                                        {
+                                                    <p class="">Total Tickets: @e.Tickets.FirstOrDefault().Quantity</p>}
+                                                    <p class="">Ticket Name: @e.Tickets.FirstOrDefault().TicketName</p>
+
+
+                                                </div>
+                                                <div class="col-md-12 d-flex bd-highlight">
+                                                    @if (e.Eventtype == 0)
+                                                    {
+                                                    <a href="Tickets?id=@e.Id&tmap=@e.BusinessOwner_Id" class="card-link">
+                                                        View ticket
+                                                    </a>}
+                                                    else
+                                                    {}
+                                                    <a href="@Url.Action(" EventDetail", "Home" , new { area="" , Id=e.EventId })" target="_blank" class="ml-auto card-link">Event Detail</a>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                                }
+                                }
+                                else
+                                {
+                                <div class="col-12 mx-auto my-auto">
+                                    <div class="text-center">
+                                        <h2 class="ticketIcon">
+                                            <i class="fa fa-ticket"></i>
+                                        </h2>
+                                        <h4>No Tickets</h4>
+                                        <a href="/" class="btn btn-primary">Search for events</a>
+                                    </div>
+                                </div>
+                                }
+                                }
+
+                                }
+
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+                                }
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

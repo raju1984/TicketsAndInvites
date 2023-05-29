@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "ManageEvents";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+    <style>
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            .content-wrapper {
+                background: #f2edf3;
+                padding: 2.75rem 1.25rem !important;
+            }
+
+        }
+
+    </style>
+}
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-home"></i>
+            </span>
+            Manage Events
+        </h3>
+        <!-- <nav aria-label="breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <span></span>Overview
+              <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+            </li>
+          </ul>
+        </nav> -->
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Manage Events</h3>
+            <hr>
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="tickerDetail.html">
+                        <img src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F62757241%2F280529842488%2F1%2Foriginal.20190523-054405?w=600&auto=compress&rect=49%2C0%2C1008%2C504&s=feaa2b9e8cef5d1e7ad842c5ab61ec63"
+                             class="card-img-top" alt="..." width="100%">
+
+                    </a>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-2 padding5 text-center">
+                                <p class="text-danger noMargin">Dec</p>
+                                <h6><b> 5 </b></h6>
+                            </div>
+                            <div class="col-sm-10 padding5">
+                                <h6 class="colorBlack noMargin">
+                                    Industrial Internet of
+                                    Things
+                                    India 2019 (IIoT India
+                                    2019)
+                                </h6>
+                                <p class="text-muted noMargin">Thu, Dec 5, 9:00am</p>
+                                <p class="text-muted noMargin">
+                                    Indian Institute of
+                                    Technology
+                                    Delhi, New Delhi, DL
+                                    Free
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row pl-2 pr-2 ">
+                            <a href="createEvent.html" class="card-link">Edit</a>
+                            <a href="sendInvitation.html" class="card-link">Invite</a>
+                            <a href="../EventDetail.html" class="ml-auto card-link">Preview</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

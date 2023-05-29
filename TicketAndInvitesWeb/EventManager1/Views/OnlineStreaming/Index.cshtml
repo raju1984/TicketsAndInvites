@@ -1,0 +1,488 @@
+﻿@{
+    ViewBag.Title = "Event Streaming";
+    Layout = null;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/all.css" rel="stylesheet">
+    <link href="~/css/custom.css" rel="stylesheet">
+    <link href="~/css/custom2.css" rel="stylesheet">
+    <link href="~/css/HomeStyle.css" rel="stylesheet" />
+    
+    <link href="https://vjs.zencdn.net/5.19.2/video-js.css" rel="stylesheet"><!-- https://videojs.com -->
+    <style type="text/css">
+        @@media (min-width: 320px) and (max-width: 480px) {
+            iframe {
+                width: 100%;
+                height: auto !important;
+                min-width: 220px;
+                min-height: 220px !important;
+            }
+        }
+
+        @@media (min-width: 768px) and (max-width: 1024px) {
+            iframe {
+                width: 100%;
+                height: auto !important;
+                min-height: 350px !important;
+            }
+        }
+
+        @@media (min-width: 481px) and (max-width: 767px) {
+            iframe {
+                width: 100%;
+                height: auto !important;
+                min-width: 280px;
+                min-height: 280px !important;
+            }
+        }
+
+        iframe {
+            width: 100%;
+            height: auto !important;
+            min-width: 280px;
+            min-height: 400px !important;
+        }
+
+        .video-js {
+            font-size: 1rem;
+            width: 100% !important;
+            height: 410px !important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /*@@media only (min-width: 320px) {
+            .col-md-8 {
+                -ms-flex: 100%;
+                flex: 100%;
+                max-width:100% !important;
+            }
+            .col-md-4 {
+                -ms-flex: 100%;
+                flex: 100%;
+                max-width: 100% !important;
+            }
+
+        }*/
+        .navbar-nav {
+            margin: 7.5px 15px;
+        }
+
+        .navbar-header {
+            padding-bottom: 15px;
+        }
+
+        .row {
+            margin: 0 !important;
+        }
+
+        .container-fluid {
+            padding: 0;
+        }
+
+        .navbar {
+            padding: 10px 0 20px;
+            border-radius: 0;
+        }
+
+        #mep_0 {
+            width: 100% !important;
+            max-height: 100vh !important;
+        }
+
+        #player_native_hls {
+            max-height: 100vh !important;
+        }
+
+        .navbar a {
+            color: #f9f7f7 !important;
+        }
+
+        .navbar-brand {
+            padding: 5px 15px !important;
+        }
+
+
+        .navbar {
+            margin-bottom: 10px !important;
+        }
+
+        ul#menu {
+            padding-top: 20px;
+            padding-left: 100px;
+        }
+
+        a.nav-link {
+            padding: 15px;
+        }
+    </style>
+    <style>
+        .chat {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+            .chat li {
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                /*border-bottom: 1px dotted #999;*/
+            }
+
+                .chat li.left .chat-body {
+                    margin-left: 60px;
+                }
+
+                .chat li.right .chat-body {
+                    margin-right: 60px;
+                }
+
+                .chat li .chat-body p {
+                    margin: 0;
+                    color: #333;
+                }
+
+            .panel .slidedown .glyphicon, .chat .glyphicon {
+                margin-right: 5px;
+            }
+
+        p {
+            font-size: 1rem;
+        }
+
+        .panel {
+            width: 80% !important;
+        }
+
+        .panel-primary {
+            border-color: #999;
+            width: 100% !important;
+        }
+
+        .panel-body {
+            overflow-y: scroll;
+            height: 60VH;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #555;
+        }
+        /*.primary-font {
+            font-weight: 300;
+            color: #333
+        }*/
+        .panel-primary {
+            border-color: #999;
+        }
+
+            .panel-primary > .panel-heading {
+                color: #fff;
+                background-color: black;
+                border-color: #999;
+            }
+
+        .like-button {
+            border: none;
+            background: none;
+            padding: 0 10px;
+        }
+
+        .dislike-button {
+            border: none;
+            background: none;
+            padding: 0 10px;
+        }
+
+        #btnlike:hover {
+            cursor: pointer;
+        }
+
+        #btndislike:hover {
+            cursor: pointer;
+        }
+    </style>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+}
+
+@using EventManager1.Models
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="@ManageSession.CompanySession.website"><img src="@ManageSession.CompanySession.FirstName" style="width:120px" /> </a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/User/User/Dashboard">My Dashboard</a></li>
+                        @*<li><a href="https://www.stream233.com/Home/Events">Events</a></li>
+                            <li><a href="https://www.stream233.com/Home/LiveStream">Live Stream</a></li>
+                            <li><a href="https://www.stream233.com/Home/Videos">Videos</a></li>*@
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+        
+    </div>
+
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12" style="margin-top:10px;">
+            @if (ViewBag.liveurl != null)
+            {
+                <input type="hidden" id="userId" value="@ViewBag.userId" /> <input type="hidden" id="EventId" value="@ViewBag.EventId" />
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-11">
+                            @*<video id="video" class="embed-responsive-item video-js vjs-default-skin" width="640" height="360" autoplay controls></video>*@
+                            @*<iframe src="https://iframe.dacast.com/live/27431856-05f7-5325-a9cd-2b89da59df3b/e0df752f-54f9-ffa6-25c0-5c94b02643e0"   style="width:100%;height:70%;min-width:280px;min-height:280px;" frameborder="0" scrolling="no" allow="autoplay" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>*@
+                            @if (ViewBag.IsStreaming == true || ViewBag.date == DateTime.UtcNow.Date)
+                            {
+                                @*<video id="video" class="embed-responsive-item video-js vjs-default-skin" width="640" height="360" autoplay controls></video>*@
+                                <iframe src="@ViewBag.liveurl" width="100%" height="100%" frameborder="0" scrolling="no" allow="autoplay" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+                            }
+                            else
+                            {
+                                <img src="~/images/live-Stream-header.jpg" class="embed-responsive-item video-js vjs-default-skin" width="640" height="360" />
+                            }
+                            
+                        </div>
+                        
+                        <div style="padding:1%; color:#333; ">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-11" style="border-bottom:1px solid #333; padding:4px 10px;width: 90%; margin-left: 9% "><strong>@ViewBag.eventname (Streaming starts at :@ViewBag.date)</strong><label id="llll"></label></div>
+
+                        </div>
+                        <div style="padding:1%; color:#333; ">
+                            <div class="row">
+                                <div class="col-md-12" style="padding-left:11%">
+                                    <strong><label id="totalcount">1</label> views</strong>
+                                    <b style="float:right">
+                                        <span id="btnlike" type="button" class="like-button" title="Click to like this post!">
+                                            <i class="far fa-thumbs-up"></i>
+                                            <span class="like-count"><label id="totallike">0</label></span>
+                                        </span>
+                                        <span id="btndislike" type="button" class="dislike-button" title="Click to dislike this post!">
+                                            <i class="far fa-thumbs-down"></i>
+                                            <span class="like-count"><label id="totaldislike">0</label></span>
+                                        </span>
+                                    </b>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <span class="glyphicon glyphicon-comment"></span> Chat <div class="btn-group pull-right">
+                                        </div>
+                                    </div> <div class="panel-body" style="text-align:justify; width:100%">
+                                        <ul id="discussion" class="chat"></ul>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <div class="input-group">
+                                            <input id="message" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                                            <span class="input-group-btn"> <button class="btn btn-danger btn-sm" id="sendmessage"> Send</button> </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <h4 class="text-danger text-center">Sorry, Live streaming not found.</h4>
+            }
+            <input type="hidden" value="@ViewBag.username" id="username" />
+           
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Welcome</h5>
+                
+            </div>
+            <div class="modal-body">
+                <p>This is for live chat purposes only</p>
+               
+                <div class="form-group">
+                    <input type="text" class="form-control" id="txtUserName" name="txtUserName" placeholder="Name">
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="btnname" onclick="SetUsername()">Submit</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+<script src="~/signalr/hubs"></script>
+<script>
+        $(document).ready(function () {
+            /*LoadAllmessage();*/
+            //$("#myModal").modal('show');
+        })
+
+        function SetUsername() {
+            $('#username').val($("#txtUserName").val());
+            $("#myModal").modal('hide');
+        }
+        //refrss();-->
+        @*function refrss() {
+            $.ajax({
+                url: '@Url.Action("UserLoggedForVideo", "OnlineStreaming", new { area = "" })',
+                type: "post",
+                cache: false,
+                success: function (msg) {
+                    if (msg == false) {
+                        window.location.href = 'https://www.rovermanproductions.com/User/User/Logout';
+                        //windows.location.href = '@Url.Action("Logout", "User", new { area = "User" })';
+                    }
+                    else {
+                        setTimeout(function () {
+                            refrss();
+                        }, 30000);
+                    }
+                },
+                //error: function (xhr, ajaxOptions, thrownError) {
+
+                //}
+            });
+        }*@
+
+    <!--$(function () {
+        debugger
+            var chat = $.connection.chatHub;
+            chat.client.addNewMessageToPage = function (name, message) {
+                $('#discussion').append(' <li class=" clearfix">' //<span class="chat-img pull-left">  <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" /> </span>
+                    + '<div class="chat-body clearfix"> <div class="header"> <b class="primary-font" style="font-size:12px">' + htmlEncode(name) + '</b> </span> <span style="word-wrap: break-word;"> : ' + htmlEncode(message) + ' </span></div>  </div> </li >  ');
+
+
+                $('.panel-body').stop().animate({
+                    scrollTop: $('.panel-body')[0].scrollHeight
+                });
+                // $('#discussion').append('<ul style="list-style-type:none"><li><strong style="color:red;font-style:normal;font-size:medium;text-transform:uppercase">' + htmlEncode('Ram') + '  '  + '<strong style="color:blue;font-style:oblique;font-size:medium">' + htmlEncode(message) + '</strong>' + '</li></ul>');
+            };
+            chat.client.updateLikeCount = function (Likecount, dislikecount, viewers) {
+                $('#totallike').text(Likecount);
+                $('#totaldislike').text(dislikecount);
+                $('#totalcount').text(viewers);
+
+            };
+            $('#displayname').val($('#username').val());
+            $('#message').focus();
+            $.connection.hub.start().done(function () {
+
+                $('#sendmessage').click(function () {
+                    chat.server.send($('#userId').val(), $('#EventId').val(), $('#message').val(), $('#username').val());
+                    $('#message').val('').focus();
+                    $('.panel-body').stop().animate({
+                        scrollTop: $('.panel-body')[0].scrollHeight
+                    });
+                });
+                $('#btnlike').click(function () {
+                    debugger
+                    var valLike="0";
+                    var color = document.getElementsByClassName('fa-thumbs-up')[0];
+                    if (color.style.color == "black" || color.style.color == "" ) { valLike = "1"; }
+                    chat.server.send($('#userId').val(), $('#EventId').val(), valLike, "1");
+                    like();
+                    //chat.server.Send($('#userId').val(), $('#EventId').val(), valLike, "1");
+                });
+                $('#btndislike').click(function () {
+                    debugger
+                    var valLike = "0";
+                    var color = document.getElementsByClassName('fa-thumbs-down')[0];
+                    if (color.style.color == "black" || color.style.color == "") { valLike = "2"; }
+                    chat.server.send($('#userId').val(), $('#EventId').val(), valLike, "1");
+                    dislike();
+                });
+            });
+        });
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
+        function LoadAllmessage() {
+            var evid = $('#EventId').val();
+            debugger;
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("message", "OnlineStreaming", new { area = "" })',
+                    //contentType: "application/json; charset=utf-8",
+                    data: { eventId: evid  },
+                        dataType: "json",
+                    success: function (resp) {
+                        debugger;
+                        for (i = 0; i < resp.result.chatlist.length;i++) {
+                        if (resp.result != null) {
+                            $('#discussion').append(' <li class=" clearfix">' //<span class="chat-img pull-left">  <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" /> </span>
+                                + '<div class="chat-body clearfix"> <div class="header"> <b class="primary-font" style="font-size:12px">' + resp.result.chatlist[i].UserName + '</b> </span> <span style="word-wrap: break-word;"> : ' + resp.result.chatlist[i].Message + ' </span></div>  </div> </li >  ');
+                            $('#totallike').text(resp.result.Totallike);
+                            $('#totaldislike').text(resp.result.Totaldislike);
+                            $('#totalcount').text(resp.result.Totalviewer);
+                        }
+                        }
+                        $('.panel-body').stop().animate({
+                            scrollTop: $('.panel-body')[0].scrollHeight
+                        });
+
+                    },
+                    error: function (xhr, status) {
+                        //alert(status);
+                    }
+                })
+
+        }
+        var color1 = document.getElementsByClassName('fa-thumbs-up')[0];
+        var color2 = document.getElementsByClassName('fa-thumbs-down')[0];
+
+        function like() {
+            color1.style.color = color1.style.color === 'blue' ? 'black' : 'blue';
+            color2.style.color = 'black';
+        }
+
+        function dislike() {
+            color1.style.color = 'black';
+            color2.style.color = color2.style.color === 'red' ? 'black' : 'red';
+    }
+
+    $(document).bind('keydown', function (e) {
+        if (e.which === 13) { // return
+            $('#sendmessage').trigger('click');
+        }
+    });
+
+</script>-->

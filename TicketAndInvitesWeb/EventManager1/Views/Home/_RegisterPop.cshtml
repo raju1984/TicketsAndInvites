@@ -1,0 +1,95 @@
+﻿
+@{
+    <style>
+        .form-check-input {
+            position: inherit !important;
+        }
+    </style>
+    <div class="modal fade" id="RegisterPopups" tabindex="-1" role="dialog" aria-labelledby="bookTicketsLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title w100" id="exampleModalLabel">
+                        Signing up is easy. It only takes a few steps
+
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div style="padding:2% 10%">
+                    @*<h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>*@
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" id="FirstName" class="form-control " placeholder="First Name" />
+                            <input type="text" id="LastName" class="form-control " placeholder="Last Name" />
+
+                            @*@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", required = "required", placeholder = "First Name" })
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", required = "required", placeholder = "Last Name" })*@
+
+                        </div>
+                    </div>
+                    @*<div><span class="text-danger" id="FirstNamee">First Name is required.</span><span class="text-danger" id="LastNamee">Last Name is required.</span></div>*@
+
+                    
+                    <div class="input-group">
+                        <input type="text" id="Email" class="form-control " placeholder="Email" /><input type="text" id="PhoneNo" class="form-control " placeholder="Phone number" />
+                        @*<span class="text-danger" id="Emaile">Email is required.</span>*@
+                        @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-lg", type = "email", required = "required", placeholder = "Email" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "error" })*@
+
+                    </div>
+                    <br />
+                        
+                        @*@Html.TextBoxFor(m => m.PhoneNo, new { @class = "form-control form-control-lg", type = "number", required = "required", placeholder = "Phone number" })
+            @Html.ValidationMessageFor(m => m.PhoneNo, "", new { @class = "error" })*@
+                    
+                    <div class="form-group">
+                        @Html.DropDownList("CountryId", new SelectList(ViewBag.country, "Id", "Text"), "Please select a country", new { @id = "CountryId", @class = "form-control form-control-lg" })
+                        @*<input type="text" id="Email" class="form-control form-control-lg" placeholder="Country" />*@
+                        @* @Html.DropDownListFor(M => M.CountryId, new SelectList(Model.Country, "Id", "Text"), new { @class = " form-control" })*@
+                    </div>
+                    <div class="form-group">
+                        <input type="Password" id="Password" class="form-control form-control-lg" placeholder="Password" />
+                        @*@Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-lg", placeholder = "Password", type = "password", required = "required" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })*@
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="ConfPassword" class="form-control form-control-lg" placeholder="ConfPassword" />
+                        @*@Html.TextBoxFor(m => m.ConfPassword, new { @class = "form-control form-control-lg", placeholder = "Confirm Password", type = "password", required = "required" })
+            @Html.ValidationMessageFor(m => m.ConfPassword, "", new { @class = "error" })*@
+                    </div>
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <label class="form-check-label text-muted">
+                                <input type="checkbox" class="form-check-input" id="chkTerm" checked="checked" style="opacity: 1; height:21px">
+
+                            </label> &nbsp; &nbsp;  &nbsp; I agree to all <a href="~/Home/Terms" target="_blank"> Terms & Conditions </a>
+
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn"  onclick="userRegister()" id="Register">SIGN UP</button>
+                    </div>
+                </div>
+            
+                <hr class="">
+                <div class="text-center " style="margin-bottom:20px">
+                    Already have an account? <input type="button" class="text-primary" style="border:none; background:none" id="btnLogin" onclick="btnLogin()" value="Login"/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @section scripts {
+        <script>
+            debugger;
+
+
+        </script>
+    }}
+
+
+

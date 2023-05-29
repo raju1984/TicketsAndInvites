@@ -1,0 +1,168 @@
+﻿@model  IEnumerable<EventManager1.Areas.Organizer.Models.TicketsModelView>
+<link href="../../Areas/css/StyleArea.css" rel="stylesheet" />
+<div class="modal fade bd-example-modal-lg" id="tickets" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalTitle">
+                    @Model.FirstOrDefault().EventName <br>
+                    <small class="text-muted">
+                        @Model.FirstOrDefault().StartDate, @Model.FirstOrDefault().Venuname
+                    </small>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Ticket Type</th>
+                                        <th>Ticket Name</th>
+                                        <th>Seat</th>
+                                        <th>Table</th>
+                                        <th>Color Area</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Ticket Enabled</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="TblTicket">
+                                    @{
+                                        if (Model != null)
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                if (!string.IsNullOrEmpty(item.TicketName) && item.StartDate != null)
+                                                {
+                                                    <tr>
+                                                        <td class="td">
+                                                            @if (item.TicketType == "1")
+                                                            {<span>Paid</span>}
+                                                            else
+                                                            {<span>Free</span>}
+                                                            <input type="hidden" value="@item.Id" class="id" />
+                                                        </td>
+                                                        <td>@item.TicketName</td>
+                                                        <td> @item.Seat </td>
+                                                        <td> @item.Table </td>
+                                                        <td> @item.Colorarea </td>
+                                                        <td> @item.Price Gh₵ </td>
+                                                        <td class="td1"><input type="number" value="@item.Quantity" class="qty form-control" style="width:75px" />   </td>
+
+                                                        <td>
+                                                            @if (Convert.ToBoolean(item.isEnabled))
+                                                            {<span style="font-size:small;">
+                                                                    <label class="switch">
+                                                                        <input type="checkbox" class="ticketEnable" name="ticketEnable" id="ticketEnable" checked>
+                                                                        <span class="slider round"></span>
+                                                                    </label>
+                                                                </span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span style="font-size:small;">
+                                                                    <label class="switch">
+                                                                        <input type="checkbox" class="ticketEnable" name="ticketEnable" id="ticketEnable">
+                                                                        <span class="slider round"></span>
+                                                                    </label>
+                                                                </span>
+                                                            }
+
+
+
+                                                        </td>
+                                                        <td><input type="button" class="btnQtyUpdate btn btn-facebook" value="Update" /> </td>
+                                                    </tr>
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark btn-fw" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#TblTicket").on('click', '.btnQtyUpdate', function () {
+        debugger;
+        // get the current row
+        var id = $(this).closest("tr").find(".td").find(".id").val();
+        var qty = $(this).closest("tr").find(".td1").find(".qty").val();  // Gets a descendent with class="td"  
+        Loader(false);
+        if (id > 0) {
+                $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("UpdateTicketQty", "Organizer", new { area = "Organizer" })',
+                    data: { id: id, qty: qty },
+                        dataType: "json",
+                        success: function (resp) {
+                            debugger;
+                            Loader(false);
+                            if (resp.result.Code == 200) {
+
+                            }
+                            //else {
+                            //    alertify.alert(resp.result.Msg);
+                            //}
+                        },
+                        error: function (error) {
+                            Loader(false);
+                            alertify.alert(error);
+                        }
+                    });
+            }
+
+    });
+    $("#TblTicket").on('click', '.ticketEnable', function () {
+        debugger
+        var id = $(this).closest("tr").find(".td").find(".id").val();
+        //var vall = $(this).closest("tr").find(".td").find('.switch').find(".ticketEnable").val();
+        var ischecked;
+        if ($(this).is(':checked')) {
+           ischecked = true;
+        }
+        else {
+            ischecked = false;
+        }
+           
+        //var ischeckedd = $(':checkbox').each(function () {
+        //    ischecked = this.checked;
+        //});       
+        Loader(false);
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("UpdateTicketstate", "Organizer", new { area = "Organizer" })',
+            data: { id: id, isEnable: ischecked },
+                        dataType: "json",
+            success: function (resp) {
+                Loader(false);
+                            debugger;
+                            if (resp.result.Code == 200) {
+
+                            }
+                            //else {
+                            //    alertify.alert(resp.result.Msg);
+                            //}
+                        },
+            error: function (error) {
+                Loader(false);
+                            alertify.alert(error);
+                        }
+                    });
+    });
+</script>

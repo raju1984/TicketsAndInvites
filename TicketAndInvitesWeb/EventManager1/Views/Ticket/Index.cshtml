@@ -1,0 +1,1106 @@
+﻿@model  EventManager1.Models.Event_
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = null;
+    <style>
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            div#print {
+                margin-left: 0;
+            }
+
+            .footer {
+                background: #f2edf3;
+                padding: 30px 1rem 50px;
+            }
+
+            .ticket {
+                width: 100% !important;
+                margin: 0 auto;
+            }
+        }
+
+        .ticket {
+            width: 40% !important;
+            margin: 0 auto;
+        }
+    </style>
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- core CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="~/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+    <link href="~/css/all.css" rel="stylesheet">
+    <link href="~/css/custom.css" rel="stylesheet">
+    <link href="~/css/custom2.css" rel="stylesheet">
+
+    <link href="../../css/alertify.core.css" rel="stylesheet" />
+    <link href="../../css/alertify.default.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            h2 {
+                font-family: 'Roboto Slab', serif;
+                font-weight: bold;
+                font-size: 30px !important;
+                line-height: 36px !important;
+            }
+
+            .ticket {
+                width: 100% !important;
+                margin: 0 auto;
+            }
+
+            .main-heading {
+                text-transform: capitalize;
+                padding-bottom: 10px;
+                margin-bottom: 20px !important;
+                position: relative;
+                margin-top: 10px !important;
+            }
+
+            .right-form.active {
+                display: block;
+                z-index: 9999;
+            }
+
+            .user {
+                padding: 25px 0 !important;
+            }
+
+            .organiser {
+                padding: 25px 0 !important;
+                margin-top: 20px !important;
+                text-align: center;
+            }
+
+            .parallax-mirror {
+                width: -webkit-fill-available !important;
+            }
+
+            .bottom-btn {
+                margin-top: 0 !important;
+                margin-bottom: 20px;
+            }
+
+            .owl-carousel .owl-nav button.owl-prev {
+                position: absolute;
+                top: 12% !important;
+                left: -15px !important;
+                background: #5f5e5ed1;
+                padding: 0 6px !important;
+                border-radius: 0% !important;
+                opacity: 0.5;
+            }
+
+            .owl-carousel .owl-nav button.owl-next {
+                position: absolute;
+                top: 12% !important;
+                right: -15px !important;
+                background: #5f5e5ed1;
+                padding: 0 6px !important;
+                border-radius: 0% !important;
+                opacity: 0.5;
+            }
+
+            .navv {
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                z-index: 1030;
+                background: #fff;
+                box-shadow: #555 2px 2px 6px;
+                padding: 15px 15px;
+            }
+
+            .bottom-sec strong {
+                display: inline-block !important;
+                font-size: 20px;
+                margin-left: 80px;
+            }
+
+            .small-btn {
+                padding: 6px 13px !important;
+            }
+
+            .benn-btn {
+                padding: 6px 12px !important;
+            }
+
+            .main-heading span {
+                font-family: 'Roboto Slab', serif;
+                font-weight: bold;
+                font-size: 30px !important;
+                line-height: 45px !important;
+                color: #21ab64;
+            }
+        }
+
+        @@media all and (min-width: 481px) and (max-width: 767px) {
+            h2 {
+                font-family: 'Roboto Slab', serif;
+                font-weight: bold;
+                font-size: 30px !important;
+                line-height: 36px !important;
+            }
+
+            .ticket {
+                width: 100% !important;
+                margin: 0 auto;
+            }
+
+            .right-form.active {
+                display: block;
+                z-index: 9999;
+            }
+
+            .bottom-btn {
+                margin-top: 0 !important;
+                margin-bottom: 20px;
+            }
+
+            .benn-btn {
+                padding: 6px 12px !important;
+            }
+
+            .owl-carousel .owl-nav button.owl-next {
+                position: absolute;
+                top: 12% !important;
+                right: -15px !important;
+                background: #5f5e5ed1;
+                padding: 0 6px !important;
+                border-radius: 0% !important;
+                opacity: 0.5;
+            }
+
+            .small-btn {
+                padding: 6px 13px !important;
+            }
+
+            .owl-carousel .owl-nav button.owl-prev {
+                position: absolute;
+                top: 12% !important;
+                left: -15px !important;
+                background: #5f5e5ed1;
+                padding: 0 6px !important;
+                border-radius: 0% !important;
+                opacity: 0.5;
+            }
+
+            .bottom-sec strong {
+                display: inline-block !important;
+                font-size: 20px;
+                margin-left: 80px;
+            }
+
+            .main-heading span {
+                font-family: 'Roboto Slab', serif;
+                font-weight: bold;
+                font-size: 30px !important;
+                line-height: 45px !important;
+                color: #21ab64;
+            }
+
+            .main-heading {
+                text-transform: capitalize;
+                padding-bottom: 10px;
+                margin-bottom: 20px !important;
+                position: relative;
+                margin-top: 10px !important;
+            }
+
+            .parallax-mirror {
+                width: -webkit-fill-available !important;
+            }
+
+            .navv {
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                z-index: 1030;
+                background: #fff;
+                box-shadow: #555 2px 2px 6px;
+                padding: 15px 15px;
+            }
+        }
+
+        .navv {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+            background: #fff;
+            box-shadow: #555 2px 2px 6px;
+        }
+
+        li {
+            /*width: 50%;*/
+            text-align: center;
+        }
+
+        .events-box img {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .bottom-sec strong {
+            display: block;
+            font-size: 20px;
+        }
+
+            .bottom-sec strong span {
+                color: #21ab64;
+                font-size: 24px;
+            }
+
+        .bottom-btn {
+            margin-top: 40px;
+        }
+
+        .userl {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+            .userl a {
+                font-size: 36px;
+            }
+
+        .user {
+            padding: 100px 0;
+            text-align: center;
+            background: #21ab64;
+            border-radius: 25px;
+            margin: 0 10px;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+
+            .user:hover {
+                opacity: 1
+            }
+
+            .user a {
+                font-size: 36px;
+                color: #fff;
+            }
+
+                .user a:hover {
+                    font-size: 36px;
+                    color: #fff !important;
+                }
+
+        .organiser {
+            padding: 100px 0;
+            text-align: center;
+            background: #00275e;
+            border-radius: 25px;
+            margin: 0 10px;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+
+            .organiser:hover {
+                opacity: 1
+            }
+
+            .organiser a {
+                font-size: 36px;
+                color: #fff !important;
+            }
+
+        .card {
+            min-height: 540px
+        }
+
+        .open-nav,
+        .close-nav {
+            display: none;
+        }
+
+        .bgContainer {
+            background-color: #d8d7d7;
+            padding-bottom: 40px;
+        }
+
+        .nav-tabs {
+            border-bottom: none;
+        }
+
+        a:hover {
+            color: #333 !important
+        }
+
+        @@media (min-width: 576px) {
+
+            .modal-sm {
+                max-width: 65%;
+            }
+        }
+    </style>
+    <style>
+        @@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,800,900&display=swap');
+        @@import url('https://fonts.googleapis.com/css?family=Raleway:100,400,700,800,900|Roboto+Slab&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        h2 {
+            font-family: 'Roboto Slab', serif;
+            font-weight: bold;
+            font-size: 38px;
+            line-height: 60px;
+        }
+
+        .dropdown-menu.show {
+            right: 0 !important;
+            left: auto !important;
+        }
+
+        .dropdown-item {
+            white-space: pre-wrap !important;
+        }
+
+        .navv {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+            background: #fff;
+            box-shadow: #555 2px 2px 6px;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+            ul li {
+                list-style: none;
+                text-align: left;
+            }
+
+        a {
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: none;
+            }
+
+        img {
+            max-width: 100%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 40px;
+            background: #fff;
+            align-items: center;
+        }
+
+        .logo a {
+            color: #21ab64;
+            font-size: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .main-nav ul {
+            display: flex;
+            justify-content: space-between;
+        }
+
+            .main-nav ul li {
+                padding: 0 15px;
+            }
+
+                .main-nav ul li a {
+                    color: #000;
+                    font-size: 15px;
+                    text-transform: capitalize;
+                    position: relative;
+                    padding: 10px 0;
+                    display: block;
+                    transition: all 0.3s ease-in-out;
+                }
+
+                    .main-nav ul li a:after {
+                        position: absolute;
+                        content: "";
+                        height: 4px;
+                        width: 0;
+                        background: #21ab64;
+                        left: 0;
+                        right: 0;
+                        margin: 0 auto;
+                        bottom: -16px;
+                        transition: all 0.3s ease-in-out;
+                    }
+
+                    .main-nav ul li a:hover:after {
+                        width: 100%;
+                        transition: all 0.3s ease-in-out;
+                    }
+
+                    .main-nav ul li a:hover {
+                        color: #21ab64;
+                        transition: all 0.3s ease-in-out;
+                    }
+
+        #search-form {
+            position: absolute;
+            top: -5px;
+            right: 0;
+            width: 100%;
+            display: none;
+        }
+
+        .search-li {
+            position: relative;
+        }
+
+        #search-form input {
+            width: 0;
+            border: none;
+        }
+
+        .opensearch #search-form input {
+            width: 100%;
+            right: 0;
+            padding: 7px;
+            border-radius: 3px;
+            border: 1px solid#eaeaea;
+        }
+
+        .search-li button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #fff;
+            vertical-align: middle;
+            display: none;
+        }
+
+            .search-li button i {
+                cursor: pointer;
+            }
+
+        .opensearch #search-form {
+            width: 560px;
+            transition: all 0.4s ease-in-out;
+        }
+
+        #s-btn {
+            position: absolute;
+            top: 0px;
+            right: 0;
+            color: #000;
+        }
+
+        #s-btn {
+            position: absolute;
+            top: 4px;
+            right: 10px;
+            color: #21ab64;
+            display: none;
+        }
+
+        li.login-si-li a {
+            border: 1px solid #21ab64;
+            color: #21ab64 !important;
+            padding: 7px 15px !important;
+            border-radius: 20px;
+            font-size: 14px !important;
+            vertical-align: middle;
+        }
+
+            li.login-si-li a i {
+                margin-right: 5px;
+            }
+
+        .first-li {
+            margin-left: 20px;
+        }
+
+        li.login-si-li {
+            padding: 0 5px !important;
+        }
+
+            li.login-si-li a:after {
+                display: none;
+            }
+
+        .login-si-li a:hover {
+            background: #21ab64;
+            transition: all 0.3s ease-in-out;
+            color: #fff !important;
+        }
+
+
+        #parallax-window {
+            height: 350px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+            #parallax-window .container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            #parallax-window:after {
+                position: absolute;
+                content: "";
+                height: 100%;
+                width: 100%;
+                background: #000;
+                top: 0;
+                left: 0;
+                opacity: 0.5;
+                z-index: -1;
+            }
+
+        .banner-holder {
+            width: 100%;
+        }
+
+        .right-form {
+            display: none;
+            float: right;
+            width: 350px;
+            background: #FFFFFE;
+            padding: 30px;
+            border-radius: 5px;
+        }
+
+            .right-form.active {
+                display: block;
+            }
+
+        .form-control {
+            height: 44px;
+            padding-left: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: #21ab64;
+        }
+
+        .btn-default {
+            background: #21ab64;
+            padding: 10px 20px;
+            color: #fff;
+            width: 100%;
+        }
+
+            .btn-default:hover {
+                color: #fff;
+            }
+
+        .left-box {
+            color: #fff;
+        }
+
+            .left-box p {
+                margin: 40px 0;
+                font-size: 18px;
+                color: #fff;
+            }
+
+        .benn-btn {
+            display: inline-block;
+            background: #21ab64;
+            border: 2px solid #21ab64;
+            color: #fff !important;
+            padding: 10px 30px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+
+        .left-box a i {
+            margin-left: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .left-box a:hover i {
+            margin-left: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        .popular-events {
+            margin: 50px 0;
+        }
+
+        .main-heading {
+            text-transform: capitalize;
+            padding-bottom: 10px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+            .main-heading span {
+                font-family: 'Roboto Slab', serif;
+                font-weight: bold;
+                font-size: 38px;
+                line-height: 60px;
+                color: #21ab64;
+            }
+
+        h2.main-heading:after {
+            position: absolute;
+            content: "";
+            height: 5px;
+            bottom: 0;
+            width: 100px;
+            background: #21ab64;
+            left: 0;
+        }
+
+
+        .events-box {
+            box-shadow: 3px 4px 10px #eaeaea;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .down-sec {
+            padding: 15px;
+        }
+
+        figure {
+            margin: 0;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        p.location-time {
+            color: #a2a2a2;
+        }
+
+            p.location-time span {
+                font-size: 13px;
+                display: block;
+                margin-bottom: 5px;
+            }
+
+                p.location-time span i {
+                    color: #21ab64;
+                    margin-right: 8px;
+                }
+
+        .bottom-sec {
+            padding: 20px 0 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .small-btn {
+            background: #fff;
+            color: #21ab64;
+            border: 1px solid#21ab64;
+            padding: 6px 20px;
+            border-radius: 20px;
+            display: block;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .events-box:hover .small-btn {
+            background: #21ab64;
+            color: #fff;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .events-box:hover img {
+            transform: scale(1.1, 1.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .events-box img {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .bottom-sec strong {
+            display: block;
+            font-size: 20px;
+        }
+
+            .bottom-sec strong span {
+                color: #21ab64;
+                font-size: 24px;
+            }
+
+        .bottom-btn {
+            margin-top: 40px;
+        }
+
+        .open-nav,
+        .close-nav {
+            display: none;
+        }
+
+
+
+
+
+        /* media css start here */
+
+        @@media (max-width: 992px) {
+
+            .open-nav,
+            .close-nav {
+                display: block;
+            }
+
+            nav.main-nav {
+                position: fixed;
+                background: #ccc;
+                height: 100vh;
+                top: 0;
+                z-index: 99;
+                left: 0;
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            background: #4646462b;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 100;
+        }
+
+        .dot {
+            background: tomato;
+        }
+
+            .dot, .dot:after {
+                display: inline-block;
+                width: 2em;
+                height: 2em;
+                border-radius: 50%;
+                animation: a 1.5s calc(((var(--i) + var(--o, 0))/var(--n) - 1)*1.5s) infinite;
+            }
+
+                .dot:after {
+                    --o: 1;
+                    background: currentcolor;
+                    content: '';
+                }
+
+        @@keyframes a {
+            0%, 50% {
+                transform: scale(0);
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        function Loader(_value) {
+            if (_value) {
+                document.getElementById("divloader").style.display = "block";
+            }
+            else {
+                document.getElementById("divloader").style.display = "none";
+            }
+            setTimeout(function () { document.getElementById("divloader").style.display = "none"; }, 30000);
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <div class="container">
+        <div class="row">
+            <nav class="navbar navbar-expand-lg static-top navv">
+                <div class="container">
+                    <a class="navbar-brand" href="@Url.Action("Index","Home")">VSPASS</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    @if (Model != null && !string.IsNullOrEmpty(Model.Venue))
+    {
+        <div class="container">
+            <div class="content-wrapper" id="html-content-holder">
+
+                @using (Html.BeginForm("Index", "Ticket", new { area = "" }, FormMethod.Post))
+                {
+
+                    <div id="tblEmpData">
+
+                        <div class="container" style="padding-top: 15px;">
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <div class="col-md-12 bgDark padding25 borderR10 ticket" id="print">
+                                        <div class="card">
+
+                                            <img src="@Model.Multimedia.FirstOrDefault().URL" class="card-img-top" />
+                                            @*<input type="image" src="@Model.Multimedia.FirstOrDefault().URL"></input>*@
+                                            <div class="card-body pt-0">
+                                                <div class="arc top-12 right-12"></div>
+                                                <div class="arc top-12 left-12"></div>
+                                                <div class="arc bottom-12 right-12"></div>
+                                                <div class="arc bottom-12 left-12"></div>
+                                                <div class="row">
+                                                    <div class="col-sm-12 padding5">
+                                                        <h5 class="colorBlack noMargin page-title">
+                                                            @Model.EventName
+                                                        </h5>
+                                                        <p class="text-muted noMargin">@Convert.ToDateTime(Model.StartDate).ToString("dd/MM/yyyy HH:mmtt") </p>
+                                                        <p>
+                                                            Address :
+                                                            <a href="https://www.google.com/maps?saddr=My+Location&daddr=@Model.CityName" target="_blank">@Model.CityName</a>
+                                                        </p>
+                                                        <p class="text-muted noMargin">
+                                                            Venue :   @Model.Venue
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-3">
+                                                    <div class="col-md-12 text-center">
+                                                        <h3>
+                                                            <small>Gate no</small> <b> @Model.Tickets.FirstOrDefault().GateNo </b>
+                                                        </h3>
+                                                    </div>
+                                                    @if (@Model.Tickets.FirstOrDefault().ColorArea != null)
+                                                    {
+                                                        <div class="col mr-1 borderOnLight text-center">
+                                                            <h5>
+                                                                <small class="text-muted">Color Area</small>
+                                                                @Model.Tickets.FirstOrDefault().ColorArea
+                                                            </h5>
+                                                        </div>
+                                                    }
+
+                                                    <div class="col  borderOnLight text-center">
+                                                        <h5>
+                                                            <small class="text-muted">Total Seats</small>
+                                                            @Model.Tickets.FirstOrDefault().Quantity
+                                                        </h5>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="arc right-12"></div>
+                                                <div class="arc left-12"></div>
+                                                @*<hr class="borderDashed"></hr>*@
+                                                <div class="row">
+                                                    <div class="col" style="text-align:center">
+                                                        @if (Model.Tickets.FirstOrDefault().Barcode != null)
+                                                        {
+                                                            @*<input type="image" src="@String.Format("../../Content/BarCode/{0}.jpg", Model.Tickets.FirstOrDefault().Barcode)"></input>*@
+                                                            <img src="@String.Format("../../Content/BarCode/{0}.jpg", Model.Tickets.FirstOrDefault().Barcode)" alt=""></img>
+                                                        }
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div id="print-btn"></div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="padding25 borderR10 ticket justify-content-center d-flex" style="padding:5px !important">
+                        @if (Model.IsTicket)
+                        {
+                            <button id="btnSubmit" type="button" style="width:100%" class="btn btn-primary" onclick="DownloadDiv();">Download Ticket</button>
+
+                        }
+                        else
+                        {
+                            <button id="btnSubmit" type="button" style="width:100%" class="btn btn-primary" onclick="DownloadDiv();">Download Invitation</button>
+
+                        }
+                    </div>
+                    <div class="padding25 borderR10 ticket justify-content-center d-flex" style="padding:5px !important">
+                        @if (Model.IsTicket)
+                        {
+                            <button type="button" style="width:100%" class="btn btn-warning" onclick="printDiv();">Print Ticket</button>
+                        }
+                        else
+                        {
+                            <button type="button" style="width:100%" class="btn btn-warning" onclick="printDiv();">Print Invitation</button>
+                        }
+                    </div>
+
+
+                }
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <h4> Ticket is not Valid </h4>
+        </div>
+    }
+    @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#btnSubmit").click(function () {
+                    $("input[name='GridHtml']").val($("#Grid").html());
+                });
+            });
+        </script>*@
+
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>*@
+    <script>
+        $(document).ready(function () {
+            /*initMaps();*/
+
+        });
+
+        var lat1;
+        var long1;
+        if (!lat1 || !long1) {
+            lat1 = '7.9465';
+            long1 = '1.0232'
+        }
+
+        function initMaps() {
+
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+            var map = new google.maps.Map(document.getElementById('map_canvas'), {
+                zoom: 7,
+                center: { lat: lat1, lng: long1 }
+            });
+            directionsDisplay.setMap(map);
+
+            //var onChangeHandler = function() {
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+            //};
+            //document.getElementById('start').addEventListener('change', onChangeHandler);
+            //document.getElementById('end').addEventListener('change', onChangeHandler);
+        }
+        // google.maps.event.addDomListener(window, 'load', GetLocations);
+        function GetLocations() {
+            debugger;
+            navigator.geolocation.getCurrentPosition(
+                function (position) { // success cb
+
+                    /* Current Coordinate */
+                    lat1 = position.coords.latitude;
+                    long1 = position.coords.longitude;
+                    //$('#lat').val(lat1);
+                    //$('#lng').val(long1);
+                    // alert("Latitude: " + lat + "\nLongitude: " + long);
+                    initMaps();
+                },
+                function () { // fail cb
+
+
+                }
+            );
+        }
+        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+            debugger;
+
+            var myCenter = new google.maps.LatLng(lat1, long1);
+            directionsService.route({
+                origin: myCenter, // $('#ShopAddress').val(),//document.getElementById('start').value,
+                destination: $('#VenueAddress').text(),//document.getElementById('end').value,
+                travelMode: 'DRIVING'
+            }, function (response, status) {
+                if (status === 'OK') {
+                    directionsDisplay.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+
+        function printDiv() {
+
+            var divToPrint = document.getElementById('tblEmpData');
+
+            var newWin = window.open('', 'Print-Window');
+
+            newWin.document.open();
+
+            newWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+
+            newWin.document.close();
+
+            setTimeout(function () { newWin.close(); }, 10);
+
+        }
+        function DownloadDiv() {
+            var HTML_Width = $("#tblEmpData").width();
+            var HTML_Height = $("#tblEmpData").height();
+            var top_left_margin = 15;
+            var PDF_Width = HTML_Width + (top_left_margin * 2);
+            var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+            var canvas_image_width = HTML_Width;
+            var canvas_image_height = HTML_Height;
+
+            var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+            html2canvas($("#tblEmpData")[0]).then(function (canvas) {
+                var imgData = canvas.toDataURL("image/jpeg", 1.0);
+                var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+                pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+                for (var i = 1; i <= totalPDFPages; i++) {
+                    pdf.addPage(PDF_Width, PDF_Height);
+                    pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
+                }
+                pdf.save("YourTicket.pdf");
+
+            });
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
+

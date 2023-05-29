@@ -1,0 +1,94 @@
+﻿@model  IEnumerable<EventManager1.Models.Failedpaymentmodel>
+
+@{
+    ViewBag.Title = "FailedPayment";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+}
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-contacts menu-icon"></i>
+            </span>
+            Payment Status
+        </h3>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <select class="form-control" id="ddlEventId" name="ddlEventId">
+                        <option value="0">Select Event</option>
+                        @if (ViewBag.Eventlist != null)
+                        {
+                            foreach (var item in ViewBag.Eventlist)
+                            {
+                                <option value="@item.Id">@item.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div id="divload">
+
+                </div>
+               
+            </div>
+        </div>
+    </div>
+   
+</div>
+<div id="divticketcontent">
+
+</div>
+<button type="button" style="display:none" id="btnticketpopup" data-toggle="modal" data-target="#tickets" class="card-link flex-fill bd-highlight">Tickets</button>
+
+@section Scripts
+    {
+    <script>
+        function LoadTicket(Id, paymId, pfor, gateway,EventId) {
+            debugger;
+            $.ajax({
+                //url: '/User/Transaction/ChecktrxStatus?PaymentId=' + Id + '&TrxNo=' + paymId + '&paymentfor=' + pfor,
+                url: '/Organizer/Transaction/ChecktrxStatus?PaymentId=' + Id + '&TrxNo=' + paymId + '&paymentfor=' + pfor + '&PayGateway=' + gateway + '&EventId=' + EventId,
+                contentType: 'application/html; charset=utf-8',
+                type: 'GET',
+                dataType: 'html',
+                success: function (result) {
+                    $('#divticketcontent').html(result);
+                    $("#btnticketpopup").trigger("click");
+                    //$('#tickets').modal('show');
+                },
+                error: function (xhr, status) {
+                    alert(status);
+                }
+            })
+            /**/
+        }
+      
+        $(document).ready(function () {
+            $('#ddlEventId').change(function () {
+                var EventId = $("#ddlEventId").val();
+                //window.location.href = '/Organizer/Transaction/getFailedPayment?eventId=' + EventId;
+                $.ajax({
+                    url: '/Organizer/Transaction/getFailedPayment?eventId=' + EventId,
+                    contentType: 'application/html; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html',
+                    success: function (result) {
+                        $('#divload').html(result);
+                        Loader(false);
+                    },
+                    error: function (xhr, status) {
+                        alert(status);
+                        Loader(false);
+                    }
+                })
+            })
+
+        });
+/**/
+    </script>
+    }

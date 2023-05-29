@@ -1,0 +1,328 @@
+﻿@model IEnumerable<EventManager1.Models.liveevent>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <style>
+                img.card-img-top.imgbox {
+            max-height: 180px;
+        }
+                h4{font-family:'Poppins' !important;}
+                .page-header {
+            margin: 0 0 0 0 !important;
+        }
+               body {
+            font-family: 'Poppins';
+        }
+
+           h5 { font-size: 15px; padding: 5px 0; border-bottom: 1px solid #e0e0e0;font-family: 'Poppins';}
+
+            select.select { width: 100%;height: 35px; font-size:14px;border-bottom: #ccc solid 1px;border-radius: 5px; padding: 5px;}
+
+            .card { height: 450px;margin-bottom: 25px;}
+
+    </style>
+}
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="fa fa-television" aria-hidden="true"></i>
+            </span>
+            Live Stream
+            <p style="padding-left:50px;font-size: 14px; margin-top: -6px;">
+                We Ensure that Events reach your audience in the highest possible quality, no matter where they watch. Here you can setup the live streaming events.
+            </p>
+
+        </h3>
+        <!-- <nav aria-label="breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <span></span>Overview
+              <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+            </li>
+          </ul>
+        </nav> -->
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @*<ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="Tickets-tab" data-toggle="tab" href="#Tickets"
+                           role="tab" aria-controls="Tickets" aria-selected="true">Current Tickets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="Past-tab" data-toggle="tab" href="#Past" role="tab"
+                           aria-controls="Past" aria-selected="false">Past Tickets</a>
+                    </li>
+                </ul>*@
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="Tickets" role="tabpanel" aria-labelledby="Tickets-tab">
+
+
+                    <hr>
+
+                    <div class="row">
+                        @*@{
+                            if (Model != null && Model.Count() >= 0)
+                            {
+                                var enddate = Model.FirstOrDefault(x => Convert.ToDateTime(x.EndDate) >= DateTime.Now);
+                                if (enddate != null)
+                                        {
+                                                        {*@
+
+                        @foreach (var e in Model)
+                        {
+                            if (Convert.ToDateTime(e.date) >= DateTime.Now)
+                            {
+                                <div class="col-md-4" style="padding:0 8px">
+                                    <div class="card" style="height: 610px;">
+                                        <a href="@Url.Action("Index","Stream",new  {area="" })" class="card-link">
+                                            <img src="@e.image" class="card-img-top imgbox" alt="..." />
+                                        </a>
+                                        <br />
+                                        <div style="padding:10px">
+                                            <div class="row">
+                                                <div class="col-sm-3 padding5 text-center text-danger ">
+                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    <p class="noMargin">
+
+                                                        May 30
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-9" style="padding:0">
+
+
+                                                    <h4> @e.eventName</h4>
+                                                    <h4 style="color: #9c9fa6 !important;padding: 0px 0 10px;font-size: 15px;"><i class="fa fa-calendar" aria-hidden="true"></i> @e.date</h4>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    @*<div id="nocam@e.id">
+                                                            <select name="@e.id" class="select">
+                                                                <option value="0">Select Streaming Camera</option>
+                                                                <option value="1">Internal Camera</option>
+                                                                <option value="2">External Camera</option>
+                                                            </select>
+                                                        </div>*@
+                                                    @if (e.streamType == 2)
+                                                    {
+                                                        <div id="@e.id-externalcam1" style=" margin-top 10px;">
+                                                            <h5>
+                                                                <i class="fa fa-cog" aria-hidden="true"></i>
+                                                                Configure Your Live event
+                                                            </h5>
+                                                            @*<h5>Stream Server : rtmp://52.201.145.178:1935/stream233</h5>*@
+                                                        <h5>
+                                                            <b>Stream Server : </b>rtmp://c9d5d44e-fb48-d6f7-b6da-fbcb932e6a7f.dacastmmd.pri.lldns.net/dacastmmd </h5> @*rtmp://22f32bbe-f37d-44ed-50ce-ef94f657faba.dacastmmd.pri.lldns.net/dacastmmd</h5>*@
+                                                        <h5 style="border-bottom:none !important">
+                                                            <br />
+                                                            @*<b>Stream Key : live</b>*@  @*@e.EventKey*@
+                                                            <b>Stream Key : </b>45fbf5035c544ec3b20955dfbef29e42_4500 <br />@*d3b6344fe43b4ac8b581bcdcb8b8c79f_4500*@
+                                                            <b>UserName : </b>1813256046 <br />@*3962634485*@
+                                                            <b>Password : </b>0b208cde8e048cbe <br /> @*1b5e43f06f395ea9*@
+                                                            @if (e.EventKey == null || e.EventKey == "")
+                                                            {
+                                                                @*<a href="@Url.Action("UpdateLiveKey", "LiveEvent", new { area = "Organizer", id = @e.id })" cclass="" style="padding: 7px 10px;
+            border: #9a55ff solid 1px;display: inline; text-align: center;line-height: 25px;    width: 70%;  margin: 0 auto; color:#9a55ff; border-radius: 30px;">
+                                                                        Generate new key
+                                                                    </a>*@
+                                                            }
+                                                        </h5>
+</div>
+                                                    }
+                                                    else if (e.streamType == 1)
+                                                    {
+                                                        //http://rtmpclient.ticketsandinvites.com/Home/Livestream/@e.id  http://localhost:2057/Home/Livestream/@e.id
+                                                        <div id="@e.id-internalcam1" style="margin-top: 20px;">
+                                                            <a href="http://rtmpclient.ticketsandinvites.com/Home/Livestream/@e.id" class="" style="padding: 7px 10px;
+    border: #9a55ff solid 1px;display: block; text-align: center;line-height: 25px;    width: 70%;  margin: 0 auto; color:#9a55ff; border-radius: 30px;">
+                                                                Setup Live Stream
+                                                            </a>
+                                                            @*<a href="@Url.Action("Index", "Stream", new { area = "", id = @e.id })" class="" style="padding: 7px 10px;
+                                                                border: #9a55ff solid 1px;display: block; text-align: center;line-height: 25px;    width: 70%;  margin: 0 auto; color:#9a55ff; border-radius: 30px;">
+                                                                                                                    Setup Live Stream
+                                                                                                                </a>*@
+                                                        </div>
+                                                    }
+                                                    <div id="@e.id-externalcam" style="display:none">
+                                                        <h5>Configure Your Live event with</h5>
+                                                        <h5>Stream Server : rtmp://18.222.135.45/live</h5>
+                                                        <h5>
+                                                            Stream Key :  @e.EventKey
+                                                            @if (e.EventKey == null || e.EventKey == "")
+                                                            {
+                                                                <a href="@Url.Action("UpdateLiveKey", "LiveEvent", new { area = "Organizer", id = @e.id })" class="" style="padding: 7px 10px;
+    border: #9a55ff solid 1px;display: block; text-align: center;line-height: 25px;    width: 70%;  margin: 0 auto; color:#9a55ff; border-radius: 30px;">
+                                                                    Generate new key
+                                                                </a>}
+                                                        </h5>
+                                                    </div>
+                                                    <div id="@e.id-internalcam" style="display:none;margin-top: 20px;">
+                                                        <a href="@Url.Action("Index", "Stream", new { area = "", id = @e.id })" class="" style="padding: 7px 10px;
+    border: #9a55ff solid 1px;display: block; text-align: center;line-height: 25px;    width: 70%;  margin: 0 auto; color:#9a55ff; border-radius: 30px;">
+                                                            setup live stream
+                                                        </a>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                            @if (e.IsStreaming == true)
+                                                            {
+                                                                <input type="button" id="btnStopStreaming" class="btn btn-danger btn-sm StopStreaming" onclick="StopStreaming(@e.id)" value="Stop Streaming" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="button" id="btnStartStreaming" class="btn btn-success btn-sm StartStreaming" onclick="StartStreaming(@e.id)" value="Start Streaming" />
+                                                            }
+
+                                                        </div>
+                                                        <div class="col-md-1">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        @*else
+                                            {
+
+                                            }
+                                            <h4> <input type="button" name="@e.id" class=" changestrem" value="Change Stream Type" />  </h4>*@
+                                    </div>
+
+                                </div>
+                            }
+                        }
+                        @*
+
+                                    else
+                                    {
+                                        <div class="col-12 mx-auto my-auto">
+                                            <div class="text-center">
+                                                <h2 class="ticketIcon">
+                                                    <i class="fa fa-ticket"></i>
+                                                </h2>
+                                                <h4>No Tickets</h4>
+                                                <a href="/" class="btn btn-primary">Search for events</a>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                }
+                            }*@
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts
+{
+    <script src="../../js/alertify.js"></script>
+    <script>
+        //$('.changestrem').click(function () {
+        //    debugger;
+
+        //})
+        $('.select').on('change', function () {
+            debugger;
+            var type = $(this).val();
+            var eventid = $(this).attr('name');
+            var type1 = "#" + $(this).attr('name') + "-internalcam";
+            var type2 = "#" + $(this).attr('name') + "-externalcam";
+            var type3 = "#" + $(this).attr('name') + "-internalcam1";
+            var type4 = "#" + $(this).attr('name') + "-externalcam1";
+            $(type1).css('display', 'none'); $(type2).css('display', 'none'); $(type3).css('display', 'none'); $(type4).css('display', 'none');
+            if (type == 1) {
+                var c = changeCamtype(eventid, type);
+                $(type1).css('display', 'block');
+            }
+            else if (type == 2) {
+                var c = changeCamtype(eventid, type);
+                $(type2).css('display', 'block');
+            }
+        });
+        function StartStreaming(eventid) {
+            debugger
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("StartStreaming", "LiveEvent", new { area = "Organizer" })',
+                data: { eventID: eventid },/* JSON.stringify(Register),*/
+
+                dataType: "json",
+                success: function (resp) {
+                    //return 1;
+                    if (resp != null) {
+                        alert("Streaming start");
+                        window.location.reload();
+                    }
+                },
+                error: function (error) {
+                    return 0;
+                    //Loader(false);
+                    //alertify.alert(error);
+                }
+            });
+
+        }
+        function StopStreaming(eventid) {
+            debugger
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("StopStreaming", "LiveEvent", new { area = "Organizer" })',
+                data: { eventID: eventid },/* JSON.stringify(Register),*/
+
+                dataType: "json",
+                success: function (resp) {
+                    //return 1;
+                    if (resp != null) {
+                        alert("Streaming stop");
+                        window.location.reload();
+                    }
+                },
+                error: function (error) {
+                    return 0;
+                    //Loader(false);
+                    //alertify.alert(error);
+                }
+            });
+
+        }
+
+
+        function changeCamtype(eventid, type) {
+            debugger
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Updatestreamtype", "LiveEvent", new { area = "Organizer" })',
+                data: { eventID: eventid, type: type },/* JSON.stringify(Register),*/
+
+                dataType: "json",
+                success: function (resp) {
+                    return 1;
+                },
+                error: function (error) {
+                    return 0;
+                    //Loader(false);
+                    //alertify.alert(error);
+                }
+            });
+
+        }
+        //function getval(sel)
+        //{
+        //    debugger;
+        //    alert(sel.value);
+        //}
+    </script>}

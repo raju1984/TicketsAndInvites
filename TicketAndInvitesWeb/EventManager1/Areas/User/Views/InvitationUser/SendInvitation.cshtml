@@ -1,0 +1,473 @@
+﻿@model  EventManager1.Areas.Organizer.Models.ExceldataModelView
+    @using EventManager1.Models;
+@{
+    ViewBag.Title = "SendInvitation";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+<style>
+        .form-control {
+            padding: 0.5rem 1.375rem
+        }
+    label.radio-inline {
+        margin: 0 30px 0 0;
+        color: #c9c8c8;
+    }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+    @@media screen and (min-width: 320px) and (max-width: 480px) {
+        input#txttitle {
+            width: 100%;
+        }
+
+        input#txtfirstname {
+            width: 100%;
+        }
+
+        input#txtlastname {
+            width: 100%;
+        }
+
+        input#txtseat {
+            width: 100%;
+        }
+
+        input#txttable {
+            width: 100%;
+        }
+
+        input#txtcolor {
+            width: 100%;
+        }
+    }
+</style>
+}
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-contacts menu-icon"></i>
+            </span>
+            Organizer
+        </h3>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-profile-list"
+                   data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">
+                    Single
+                    Invite
+                </a>
+                <a class="list-group-item list-group-item-action " id="list-home-list"
+                   data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+                    Bulk
+                    Invitation
+                </a>
+
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade  " id="list-home" role="tabpanel"
+                     aria-labelledby="list-home-list">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Send Invite</h3>
+                            @{
+                                if (Model != null)
+                                {
+                                    <h4 class="modal-title" id="exampleModalTitle">
+                                        @Model.EventName <br>
+                                        <small class="text-muted">
+                                            @Convert.ToDateTime(Model.Datetime).ToString("dd/MM/yyyy hh:mmtt"), @Model.Venue
+                                        </small>
+                                    </h4>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    @using (Html.BeginForm("UploadExcel", "InvitationUser", FormMethod.Post, new { @enctype = "multipart/form-data", area = "User", onsubmit = "return validate()" }))
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p>Upload an Excel File to upload send bulk Invitaion</p><br />
+                                <p>Download predefined excel template: <a href="~/Content/ExcelTemplate/BulkInvitation.xlsx" download="">Sample Excel Template</a></p>
+                                <div class="input-group col-xs-12">
+                                    <input type="hidden" value="@Request.QueryString["EventId"]" name="EventId" />
+                                    <input type="file" id="fileUpload" name="FileUpload" class="form-control file-upload-info">
+                                    <span class="input-group-append">
+                                        <button id="fileUploadExcel" class="file-upload-browse btn btn-gradient-primary"
+                                                type="button">
+                                            Upload
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="row mt-4 mb-4 mx-auto">
+                        <div class="col-sm-12">
+                            <h2>OR</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 mt-2 mb-2">
+                            <p>Select the Event to send Invitation to previous users.</p>
+                            <div class="input-group mb-3">
+                                <select class="custom-select" id="ddlevent" onchange="LoadExceldata(1)">
+                                    <option value="Choose">Choose...</option>
+                                    @{
+                                        if (Model != null && Model.Events != null)
+                                        {
+                                            foreach (var item in Model.Events)
+                                            {
+                                                <option value="@item.Id">@item.Text</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="display:none;">
+                            <label for="">Send Invitation  By:</label>
+                            <div class="container" style="padding:0">
+
+                                <form>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="chkred" value="1" name="SendITypeExl" checked>Email
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="chkred" value="2" name="SendITypeExl">Mobile SMS
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="chkred" value="3" name="SendITypeExl">Both
+                                    </label>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col-md-12">
+                            <a href="javascript:" onclick="LoadExceldata(0)"
+                               class="btn btn-gradient-danger btn-rounded btn-fw">Preview</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade show active" id="list-profile" role="tabpanel"
+                     aria-labelledby="list-profile-list">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Send Invite</h3>
+                            @{
+                                if (Model != null)
+                                {
+                                    <h4 class="modal-title" id="exampleModalTitle">
+                                        @Model.EventName <br>
+                                        <small class="text-muted">
+                                            @Convert.ToDateTime(Model.Datetime).ToString("dd/MM/yyyy hh:mmtt"), @Model.Venue
+                                        </small>
+                                    </h4>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+
+                            <label for="">Name</label>
+                            <div class="input-group">
+
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Title</span>
+                                </div>
+                                <input type="text" id="txttitle" aria-label="" placeholder="" value=""
+                                       class="form-control mr-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">First Name</span>
+                                </div>
+                                <input type="text" id="txtfirstname" aria-label="" placeholder="" value=""
+                                       class="form-control mr-2" required>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Last Name</span>
+                                </div>
+                                <input type="text" id="txtlastname" aria-label="" placeholder="" value=""
+                                       class="form-control mr-2" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <label for="">Email</label>
+                            <div class="input-group">
+                                <input type="Email" id="txtemail" aria-label="" placeholder="" class="form-control" onkeypress="checktextbox()">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Mobile</label>
+                            <div class="input-group">
+                                <input type="number" id="txtphone" aria-label="" placeholder="" class="form-control" onkeypress="checktextbox()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <label for="">Section Details</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Seat Number</span>
+                                </div>
+                                <input type="text" id="txtseat" aria-label="" placeholder="Seat "
+                                       class="form-control">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Table Number</span>
+                                </div>
+                                <input type="text" id="txttable" aria-label="" placeholder="Table "
+                                       class="form-control">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Color Code</span>
+                                </div>
+                                <input type="text" id="txtcolor" aria-label="" placeholder="Color Area"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-12" style="display:none;">
+                            <label for="">Send Invitation  By:</label>
+                            <div class="container" style="padding:0">
+                               
+                                <form>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="chkred" value="1" name="SendIType" >Email
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio"  id="chkred" value="2" name="SendIType">Mobile SMS
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="chkred" value="3" name="SendIType" checked>Both
+                                    </label>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 mb-4">
+                        <div class="col-md-12">
+                            <button type="button" id="btnSave" class="btn btn-gradient-danger btn-rounded btn-fw">
+                                Send Invitation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divexceldata">
+
+</div>
+<script>
+    function checktextbox() {
+        $("#txtemail").css("border-color", "#ebedf2");
+        $("#txtphone").css("border-color", "#ebedf2 ");
+    }
+    $('#fileUploadExcel').click(function () {
+        if ($('#fileUpload').val() == "") {
+            alertify.alert("Please choose file to upload!");
+            return false;
+        }
+        // Checking whether FormData is available in browser
+        if (window.FormData !== undefined) {
+
+            var fileUpload = $("#fileUpload").get(0);
+            var files = fileUpload.files;
+            // Create FormData object
+            var fileData = new FormData();
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding one more key to FormData object
+            fileData.append('EventId', '@Request.QueryString["EventId"]');
+            Loader(true);
+            $.ajax({
+                url: '/User/InvitationUser/UploadFiles',
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (result) {
+                    Loader(false);
+                    if (result && result.Code == 200) {
+                        $('#fileUpload').val("");
+                        alertify.alert(result.Msg);
+                    }
+                    else {
+                        $('#fileUpload').val("");
+                        alertify.alert(result.Msg);
+                    }
+                },
+                error: function (err) {
+                    Loader(false);
+                    alert(err.statusText);
+                }
+            });
+        } else {
+            Loader(false);
+            alert("FormData is not supported.");
+        }
+    });
+    function LoadExceldata(type) {
+        var EventUserId = "";
+        if (type == 1)
+        {
+            $('#fileUpload').val("");
+            var value = $("#ddlevent").val();
+            if (value != "Choose")
+            {
+                EventUserId = value;
+            }
+        }
+
+        var Sendertype = $('input[name="SendITypeExl"]:checked').val(); 
+        Loader(true);
+        $.ajax({
+            url: '/User/InvitationUser/BindExceldata?EventId=' + '@Request.QueryString["EventId"]' + "&EventUserId=" + EventUserId + "&SenderType=" +Sendertype ,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                Loader(false);
+                $('#divexceldata').html(result);
+                $('#invitation').modal('show');
+            },
+            error: function (xhr, status) {
+                Loader(false);
+                alert(status);
+            }
+        })
+    }
+
+    function SendInvitation() {
+        Loader(true);
+        var name = '@Model.EventName';
+        var SendInviteType = $('input[name="SendITypeExl"]:checked').val();
+        $.ajax({
+            url: '/User/InvitationUser/SendInvitation?EventId=' + '@Request.QueryString["EventId"]',
+            type: "Post",
+            data: { EventId: '@Request.QueryString["EventId"]', EventName: name, SendType: SendInviteType },
+            success: function (response) {
+                Loader(false);
+                window.location.replace("/User/Transaction/Summery");
+                //alert(response);
+            },
+            async: true,
+            error: function (response) {
+                Loader(false);
+                alert(response);
+            }
+        });
+        $('#invitation').modal('hide');
+    }
+
+    $("#btnSave").click(function () {
+        var reg = /^([A-Za-z0-9_\-\.])+\@@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        //alert("");
+        var name = '@Model.EventName';
+        var Invt = {};
+        Invt.Title = $("#txttitle").val();
+        Invt.FirstName = $("#txtfirstname").val();
+        Invt.LastName = $("#txtlastname").val();
+        Invt.EmailAddress = $("#txtemail").val();
+        Invt.MobileNumber = $("#txtphone").val();
+        Invt.SeatNumber = $("#txtseat").val();
+        Invt.TableNumber = $("#txttable").val();
+        Invt.ColorCode = $("#txtcolor").val();
+        Invt.SendInviteType = $('input[name="SendIType"]:checked').val();
+        if (!Invt.FirstName) {
+            $("#txtfirstname").css("border-color", "#E91E63");
+            return false;
+        }
+        else {
+            $("#txtfirstname").css("border-color", "#ebedf2");
+        }
+        //if (Invt.SendInviteType == 1) {
+        //    if (!Invt.EmailAddress || !IsEmail($("#txtemail").val())) {
+        //        $("#txtemail").css("border-color", "#E91E63");
+        //        $("#txtphone").css("border-color", "transparent ");
+        //        return false;
+        //    }
+            
+        //}
+        //else if (Invt.SendInviteType == 2) {
+        //    if (!Invt.MobileNumber) {
+        //        $("#txtphone").css("border-color", "#E91E63");
+        //        $("#txtemail").css("border-color", "transparent ");
+        //        return false;
+        //    }
+        //}
+        //else if (Invt.SendInviteType == 3) {
+        if (!Invt.EmailAddress && !IsEmail($("#txtemail").val()) || !Invt.MobileNumber) {
+            if (!Invt.EmailAddress && !IsEmail($("#txtemail").val())) {
+                if (!Invt.MobileNumber) {
+                    $("#txtemail").css("border-color", "#E91E63"); return false;
+                }                                
+            }
+                //if (!Invt.EmailAddress && !IsEmail($("#txtemail").val())) {
+                //    $("#txtemail").css("border-color", "#E91E63");
+                //} else { $("#txtemail").css("border-color", "transparent "); }
+                //if (!Invt.MobileNumber) {
+                //    $("#txtphone").css("border-color", "#E91E63");
+                //} else { $("#txtphone").css("border-color", "transparent "); }
+                //return false;
+           // }
+        }
+        else {
+            if (reg.test(Invt.EmailAddress) == false) {
+                $("#txtemail").css("border-color", "#E91E63");
+                return false;
+            }
+            else {
+                $("#txtfirstname").css("border-color", "#ebedf2");
+            }
+        }
+        Loader(true);
+        $.ajax({
+            type: "POST",
+            url: '/User/InvitationUser/SendSinleInvitation',
+            data: '{Invt: ' + JSON.stringify(Invt) + ',EventId:' +@Request.QueryString["EventId"] +',EventName:' + JSON.stringify(name) + '}',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                Loader(false);
+                window.location.replace("/User/Transaction/Summery");
+               // alertify.alert(result.Msg);
+            },
+            error: function () {
+                Loader(false);
+                alert("Error while inserting data");
+            }
+        });
+        return false;
+    });
+    function IsEmail(email) {
+  var regex = /^([a-zA-Z0-9_\.\-\+])+\@@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  if(!regex.test(email)) {
+    return false;
+  }else{
+    return true;
+  }
+}
+</script>
+

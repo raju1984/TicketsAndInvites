@@ -1,0 +1,89 @@
+﻿
+@{ 
+    <style>
+        .LoginMessage {
+            padding: 10px 0px 0px 5px;
+        }
+            .LoginMessage h4 a {
+                color: #007bff;
+            }
+            .LoginMessage h4 {
+                color: #fb0000;
+                font-weight: bold;
+            }
+        .btn-gradient-primary {
+            background: linear-gradient(to right, #da8cff, #9a55ff);
+            border: 0;
+            -webkit-transition: opacity 0.3s ease;
+            -moz-transition: opacity 0.3s ease;
+            -ms-transition: opacity 0.3s ease;
+            -o-transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease;
+        }
+            .btn-gradient-primary:not(.btn-gradient-light) {
+                color: #ffffff;
+            }
+    </style>
+        <div class="modal fade" id="LoginPopups" tabindex="-1" role="dialog" aria-labelledby="bookTicketsLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title w100" id="exampleModalLabel">
+                            Login
+                            
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    
+                        <div class="w-75 mx-auto">
+                            <div class="text-center" style="padding-top: 10px;color: #868080;">
+                                <p><b> Sign In </b></p>
+                            </div>
+                            
+
+                            <input type="hidden" value="@ViewBag.ReturnUrl" name="returnUrl" id="returnUrl" />
+                            <div class="form-group" style="min-height: 90px;padding-top: 20px;">
+                                <input type="email" id="emaill" class="form-control form-control-lg" placeholder = "Email / Mobile No" />
+                                @*<span class="text-danger">Please enter a valid email.</span>*@
+                               @* @Html.TextBoxFor(m => m.login.Email, new { @class = "form-control form-control-lg", placeholder = "Email / Mobile No" })*@
+                               @* @Html.ValidationMessageFor(m => m.login.Email, "", new { @class = "error" })*@
+                                @*<input type="email" class="form-control form-control-lg " id="exampleInputEmail1"
+                                    placeholder="Username">*@
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="passwordl" class="form-control form-control-lg" placeholder="Password" />
+                                @*<span class="">Passsword is required.</span>*@
+                                @*@Html.TextBoxFor(m => m.login.Password, new { @class = "form-control form-control-lg", placeholder = "Password", type = "password" })*@
+                               @* @Html.ValidationMessageFor(m => m.login.Password, "", new { @class = "error" })*@
+                                @*<input type="password" class="form-control form-control-lg" id="exampleInputPassword1"
+                                    placeholder="Password">*@
+                            </div>
+                            @*<div class="mt-2 text-right">
+                                <a href="~/Account/ForgetPassword?f=user" class="auth-link text-black text-primary">Forgot password?</a>
+                            </div>*@
+                        </div>
+                        <div class="row d-flex justify-content-between align-items-center">
+                            <div class="col-md-12 mt-2 text-center">
+                                <button type="button" class="w-75 btn btn-gradient-primary font-weight-medium auth-form-btn" onclick="userlogin()" id="Login">SIGN IN</button>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="text-center " style="margin-bottom:20px">
+                            Forgot Password?  <a href="~/Account/ForgetPassword?f=user" class="auth-link text-black text-primary">Click here to reset your password.</a>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+        @section scripts {
+        <script>
+            debugger;
+            
+            
+        </script>
+    }}
+
+

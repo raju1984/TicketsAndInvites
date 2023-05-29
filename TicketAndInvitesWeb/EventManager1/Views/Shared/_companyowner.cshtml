@@ -1,0 +1,22 @@
+﻿@model EventManager1.Models.CompOwner
+@{ Layout = null; }
+
+<div class="form-group">
+    @Html.HiddenFor(model => model.Id)
+   @* <input type="hidden" id="Interests_@(Model.Id)__Id" class="iHidden" name='Interests[@Model.Id].Id' />*@
+    <div class="input-group">
+        @Html.TextBoxFor(model => model.FirstName)
+        @Html.TextBoxFor(model => model.LastName)
+        @*<input type="text" aria-label="First name" placeholder="First Name" id='CompOwner_@(Model.Id)_FirstName' name='CompOwner[@Model.Id].FirstName'
+                   class="form-control">
+            <input type="text" aria-label="Last name" placeholder="Last Name" id='CompOwner_@(Model.Id)_LastName' name='CompOwner[@Model.Id].LastName'
+                   class="form-control">*@
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.TextBoxFor(model => model.PhoneNo)
+    @*<input type="number" class="form-control form-control-lg" id='CompOwner_@(Model.Id)_PhoneNo' name='CompOwner[@Model.Id].PhoneNo'
+           placeholder="Phone number">*@
+</div>
+

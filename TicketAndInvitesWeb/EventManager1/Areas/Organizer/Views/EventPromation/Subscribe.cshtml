@@ -1,0 +1,213 @@
+﻿@model  IEnumerable<EventManager1.Models.Dropdownlist>
+@using EventManager1.Models;
+@{
+    ViewBag.Title = "Subscribe";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+    <style>
+        .card .card-body {
+            padding: 2.5rem 2.4rem;
+        }
+        h6.card-subtitle.mb-2.text-muted {
+            color: #fff !important;
+        }
+    </style>
+}
+@{ var subs = ViewData["subscost"] as SubscriptionTypes;
+<div class="content-wrapper">
+    
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-animation"></i>
+            </span>
+            Subscribe <br><br>
+            <small class="text-muted">
+                Show your event to the above of all, so that people will notice more.
+            </small>
+        </h3>
+    </div>
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <div class="card bg-gradient-danger card-img-holder text-white">
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        Platinum
+                        <span class="float-right">
+                            <img src="../../images/Platinum-Badge.png" width="50px" alt="">
+                        </span>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Memebership</h6>
+                    <hr>
+                    <h3>Gh₵@subs.Platinum</h3>
+                    <p class="card-text">
+                        Event will show in Attraction Events Section<br>
+                    </p>
+
+                    <hr>
+                    <a href="#" onclick="showpopup('@Convert.ToInt32(SubscriptionType.Platinum)',@subs.Platinum)"
+                       class="btn btn-gradient-primary btn-rounded btn-fw card-link">Subscribe</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-gradient-danger card-img-holder text-white">
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        Gold
+                        <span class="float-right">
+                            <img src="../../images/Gold-Badge.png" width="50px" alt="">
+                        </span>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Memebership</h6>
+                    <hr>
+                    <h3>Gh₵@subs.Gold</h3>
+                    <p class="card-text">
+                        Event will show in Awesome Events Section<br>
+                    </p>
+                    <hr>
+                    <a href="#" onclick="showpopup('@Convert.ToInt32(SubscriptionType.Gold)',@subs.Gold)"
+                       class="btn btn-gradient-primary btn-rounded btn-fw card-link">Subscribe</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-gradient-danger card-img-holder text-white">
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        Silver
+                        <span class="float-right">
+                            <img src="../../images/silver-badge.png" width="50px" alt="">
+                        </span>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Memebership</h6>
+                    <hr>
+                    <h3>Gh₵@subs.Silver</h3>
+                    <p class="card-text">
+                        Event will show in Beautiful Events Section<br>
+
+                    </p>
+                    <hr>
+                    <a href="#" onclick="showpopup('@Convert.ToInt32(SubscriptionType.Silver)',@subs.Silver)"
+                       class="btn btn-gradient-primary btn-rounded btn-fw card-link">Subscribe</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-gradient-danger card-img-holder text-white">
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        Bronze
+                        <span class="float-right">
+                            <img src="../../images/Bronze-Badge.png" width="50px" alt="">
+                        </span>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Membership</h6>
+                    <hr>
+                    <h3>Gh₵@subs.Bronze</h3>
+                    <p class="card-text">
+                        Event will show in Cool Events Section<br>
+                       
+                    </p>
+                    <hr>
+                    <a href="#" onclick="showpopup('@Convert.ToInt32(SubscriptionType.Bronze)',@subs.Bronze)"
+                       class="btn btn-gradient-primary btn-rounded btn-fw card-link">Subscribe</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    }
+<div class="modal fade bd-example-modal-lg" id="plan" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalTitle">
+                    Choose a live event
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form class="pt-3 row" action="~/Organizer/Transaction/SubscriptionSumemry" method="post" onsubmit="Loader(true)">
+                <input type="hidden" id="hdsubtype" name="subtype" />
+                <input type="hidden" id="hftotal" name="total" />
+                <input type="hidden" id="Page" name="Page" value="Subscription" />
+                <div class="modal-body col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Plan</label>
+                                </div>
+                                <select class="custom-select" id="ddlevents" name="eventId">
+                                    <option value="0" selected>Choose...</option>
+                                    @if (Model != null && Model.Count() > 0)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <option value="@item.Id">@item.Text</option>
+                                        }
+
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer col-lg-12 row">
+                    <button type="button" class="btn btn-outline-dark btn-fw" data-dismiss="modal">Close</button>
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        <input type="submit" class="btn btn-outline-primary btn-fw" value="Buy Now" />
+                    }
+                        @*<a href="../../Payment/Summery?EventId=&page=subscribe" class="btn btn-outline-primary btn-fw">Buy Now</a>*@
+                        @*<button type="button" onclick="SubsCribe()" class="btn btn-outline-primary btn-fw">Buy Now</button>*@
+                    </div>
+            </form>
+</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function SubsCribe() {
+        //var op = [];        
+        //var subs = {
+        //    page: $('#tid').val(),
+        //    type: $("#hdsubtype").val(),
+        //    total: $('#hftotal').val(),
+        //    eventId: $("#ddlevents").val()
+        //}
+        //OrganizerPay.push(subs);        
+        //window.location.replace("sumemry" , op);
+        var eventid = $("#ddlevents").val();
+        var subtype = $("#hdsubtype").val();
+        //if (eventid && eventid != 0 && subtype)
+        //{
+        //    $.ajax({
+        //        url: '/Organizer/EventPromation/UpdateEvevntSubscription',
+        //        type: "Post",
+        //        data: { EventId: eventid, SubscriptionType: subtype },
+        //        success: function (response) {
+        //            alertify.alert(response.Msg);
+        //        },
+        //        async: true,
+        //        error: function (response) {
+        //            alert(response);
+        //        }
+        //    });
+        //}
+        //else
+        //{
+        //    alertify.alert("Please choose event!");
+        //}
+    }
+    function showpopup(subtype,total)
+    {
+        $("#hdsubtype").val(subtype);
+        $('#hftotal').val(total);
+        $('#plan').modal('show');
+        
+    }
+</script>

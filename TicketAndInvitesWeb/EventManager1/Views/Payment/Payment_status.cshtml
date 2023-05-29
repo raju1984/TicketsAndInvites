@@ -1,0 +1,276 @@
+﻿@using EventManager1.Models
+
+@{
+    ViewBag.Title = "Payment status";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <style>
+        .card {
+            background: #000;
+            border-color: #313131;
+            border-bottom: 1px solid #313131 !important;
+        }
+
+        p.alertify-message {
+            color: #000;
+        }
+
+        .text-center {
+            text-align: center !important;
+            padding: 0 20px;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: .5rem;
+            color: #f00;
+            font-size: 16px;
+        }
+
+        .card-header {
+            border-bottom-color: #313131;
+            color: #fff;
+        }
+
+        .btn-payment {
+            margin-left: 40px;
+            margin-top: 10px;
+        }
+
+        .smal-btn {
+            border: #fff solid 1px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .smal-btn2 {
+            border: #fff solid 2px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .card-body h4, h6, p {
+            color: #fff;
+        }
+
+        .bold-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff !important;
+        }
+
+        .card a:hover {
+            color: #f48534 !important;
+        }
+        /*.smal-btn:hover {
+            background: #fb0000 !important;
+            color: #fff !important;
+            border: none;
+        }*/
+        .minheight {
+            min-height: 300px;
+        }
+
+        .tab-content > .active {
+            display: block;
+            margin-top: 100px;
+            text-align: center;
+            margin-left: 0px;
+        }
+
+        .form-control {
+            height: 35px;
+            padding-left: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px !important;
+        }
+
+        b {
+            font-weight: bolder;
+            font-size: 21px;
+        }
+
+        .list-group {
+            flex-direction: row;
+        }
+
+        .form-check-label {
+            margin-bottom: 0;
+            font-size: 16px;
+        }
+
+
+        .mt-5, .my-5 {
+            margin-top: 7rem !important;
+        }
+
+        .list-group-item-action {
+            width: auto;
+        }
+    </style>
+}
+@{
+    <div class="container-fluid bgContainer">
+        <div class="row ">
+            <div class="container">
+                <div class="row mt-5 " style="text-align:center">
+
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 bg-white pt-3">
+                        <div class="card borderonTicket">
+                            <input type="hidden" id="offerid" />
+                            <div class="arc top-12 right-12"></div>
+                            <div class="arc top-12 left-12"></div>
+                            <div class="arc bottom-12 right-12"></div>
+                            <div class="arc bottom-12 left-12"></div>
+                            <img src="aa"
+                                 class="card-img-top" alt="...">
+                            <div class="card-body text-center">
+                                @if (ViewData["Paymodel"] != null )
+                                {
+                                    PaymentStatuss pay = new PaymentStatuss();
+                                    if (ViewData["Paymodel"] != null)
+                                    {
+                                        pay = ViewData["Paymodel"] as PaymentStatuss;
+                                        <div class="pc" id="divcheck" style="margin-top: 25px ;">
+                                                <div class="borderOnLight" style="padding: 5px 0;">
+                                                    <h4>Payment Confirmation</h4>
+                                                </div>
+
+                                                <p style="background: #333; color: #fff;  padding: 15px 20px;  min-height: 200px; margin: 20px 0; font-size: 16px;border-radius:10px;} ">
+                                                    Kindly click on the confirm button once you are done with your payment.<br />
+                                                    @*<span class="text-muted paystatus">
+                                                        Payment Status   : <br /><span style="color:red !important;">@ViewBag.msg</span> <br />
+                                                    </span>*@
+                                                </p>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+
+                                                        <button type="button" class="btn btn-danger" style="background: #f48534 !important;padding: 5px 30px; color: #fff !important;" onclick="checkStatus('1')">Confirm</button>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <a href="@Url.Action("Index", "Home", new { area = "" })" class="btn btn-warning" style="padding: 5px 30px;">Cancel</a>
+                                                        @*<button type="button" class="btn btn-warning" style="padding: 5px 30px;">Cancel</button>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="pc" id="divrecheck" style="margin-top: 25px ; display:none">
+                                                <div class="borderOnLight" style="padding: 5px 0;">
+                                                    <h4>Payment Confirmation</h4>
+                                                </div>
+
+                                                <p style="background: #333; color: #fff;  padding: 15px 20px;  min-height: 300px; margin: 20px 0; font-size: 16px;border-radius:10px;} ">
+                                                    <span style="color:#f00;font-weight:600;display:block;margin-bottom: 10px;">Sorry, we were not able to confirm your payment.</span>
+                                                    You don’t have to worry if you have been debited, its perfectly normal to have a delayed response from your Telco or bank.
+                                                    <br />Please wait for 5 minutes and click on confirm. <br />
+                                                    You may click on cancel if you have not been debited and wish to try again or you want to check at a later time.
+                                                    Once we receive confirmation of your payment, it will be made available on your dashboard for viewing.
+                                                    <br /> <h5 class="text-muted paystatus">
+                                                        <b>Payment Status</b>   : <span style="color:red !important;" id="statusmsg">@ViewBag.msg</span> <br />
+                                                    </h5>
+                                                </p>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <button type="button" class="btn btn-danger" style="background: #f48534 !important;padding: 5px 30px; color: #fff !important;" onclick="checkStatus('2')">Confirm</button>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <a href="@Url.Action("Index", "Home", new { area = "" })" class="btn btn-warning" style="padding: 5px 30px;">Cancel</a>
+                                                        @*<button type="button" class="btn btn-warning" style="padding: 5px 30px;">Cancel</button>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="pc" id="divfailed" style="margin-top: 25px ; display:none">
+                                                <div class="borderOnLight" style="padding: 5px 0;">
+                                                    <h4>Payment Confirmation</h4>
+                                                </div>
+
+                                                <p style="background: #333; color: #fff;  padding: 15px 20px;  min-height: 200px; margin: 20px 0; font-size: 16px;border-radius:10px;} ">
+                                                    <span class="pt-2"> <b>Transaction Failed </b></span><br /><br />
+                                                    <span>
+                                                        Transaction Id : <label id="transactionf"></label>
+                                                    </span><br />
+                                                    <span>Total Amount : Gh₵<label id="totalf"></label> </span>  <br />
+
+                                                    <span class="text-muted paystatus">
+                                                        Payment Status   : <span style="color:red !important;" id="msg"></span>
+                                                    </span>
+
+                                                </p>                                                
+                                            </div>
+
+                                    }
+                                }
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+@section Scripts
+{
+        <script>
+            var num = 1;
+        function checkStatus(btn)
+        {
+            Loader(true);
+            setTimeout(function () {               
+            
+            $.ajax({
+                url: '@Url.Action("CheckpayStackStatus", "Payment")',
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: {},
+                        success: function (result) {
+                            debugger;
+                            if (result != null) {
+                                if (result.status == "SUCCESSFUL") {
+                                    pageRedirect();
+                                }
+                                else {
+                                    debugger;
+                                    if (num == 1) {
+                                        $('#divcheck').css("display", "none");
+                                        $('#divrecheck').css("display", "block");
+                                        num = parseInt(num) + 1;
+                                        }
+                                    else {
+                                        $('#divcheck').css("display", "none");
+                                        $('#divrecheck').css("display", "block");
+                                        num = parseInt(num) + 1;
+                                             
+                                        //$('#divcheck').css("display", "none");
+                                        //$('#divrecheck').css("display", "none");
+                                        //$('#divfailed').css("display", "block");
+
+                                        //$('#totalf').text(result.total);
+                                        //$('#transactionf').text(result.TransId);
+                                        //$('#msg').text(result.message);
+                                        }
+                                    
+                                }
+                                Loader(false);
+                            };
+                        },
+                        error: function (err) {
+                            alert(err.statusText);
+                            Loader(false);
+                        }
+                });
+            }, 20000);
+        }
+       function pageRedirect() {
+            window.location.replace("@Url.Action("Dashboard", "User", new { area = "User" })");
+        }
+        </script>
+}
+
+
+

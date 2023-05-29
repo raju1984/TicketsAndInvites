@@ -1,0 +1,105 @@
+﻿@model EventManager1.Models.PaymentSupportModel
+@using EventManager1.Models
+@{
+    ViewBag.Title = "PaymentSupport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.EnableClientValidation(true);
+    <style>
+        div#nav-tabContent {
+            padding-top: 3%;
+        }
+
+        h3 {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #646363;
+            padding-bottom: 15px;
+        }
+
+        .card {
+            min-height: 540px;
+            background: #000;
+        }
+
+        .small-btn {
+            background: #fb0000 !important;
+            color: #fff;
+            border: 1px solid #fb0000 !important;
+            padding: 6px 20px;
+            border-radius: 20px;
+            display: inline;
+        }
+
+        .card-body {
+            color: #fff
+        }
+    </style>
+    <link href="~/css/alertify.core.css" rel="stylesheet" />
+    <link href="~/css/alertify.default.css" rel="stylesheet" />
+}
+
+<div class="content-wrapper">
+    <div class="row" style="padding-top:60px">
+
+        <div class="col-md-12">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-Settings" role="tabpanel"
+                     aria-labelledby="list-Settings-list">
+                    <div class="card">
+                        @using (Html.BeginForm(FormMethod.Post))
+                        {
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h3>Report your failed transaction</h3>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Email address/ Phone No</label>
+                                            @*<input type="email" name="txtemail" class="form-control" id="txtemail" required
+                                                value="">*@
+                                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Name</label>
+                                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Transaction Id</label>
+                                            @Html.TextBoxFor(model => model.TrxId, new { @class = "form-control" })
+                                            @*@Html.ValidationMessageFor(model => model.TrxId, "", new { @class = "text-danger" })*@
+                                        </div>
+                                        <div class="form-group" style="margin:0 auto;text-align:center">
+                                            <button type="submit" class="btn btn-gradient-primary btn-rounded btn-fw small-btn">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/alertify.js"></script>
+<script src="~/js/jquery.js"></script>
+@{
+
+    if (ViewData["Error"] != null)
+    {
+        var error = ViewData["Error"] as ApiResponse;
+        if (error != null)
+        {
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    alertify.alert("@error.Msg");
+                })
+            </script>
+        }
+    }
+}

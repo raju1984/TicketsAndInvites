@@ -1,0 +1,107 @@
+﻿@model  IEnumerable<EventManager1.Models.Failedpaymentmodel>
+@{
+    ViewBag.Title = "FailedPayment";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+
+}
+<style>
+
+</style>
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-contacts menu-icon"></i>
+            </span>
+            Check Failed Transaction Status
+        </h3>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dtBasicExample" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Event name</th>
+                                    <th>Payment For</th>
+                                    <th>Amount</th>
+                                    <th>Transaction Id</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @{
+                                    if (Model != null && Model.Count() > 0)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.Date.ToString("yyyy-MM-dd h:mm")</td>
+                                                <td>
+                                                    <a href="">
+                                                        @item.EventName
+                                                    </a>
+                                                </td>
+                                                <td>@item.PaymentFor </td>
+                                                <td>@item.Amount Gh₵</td>
+                                                <td>@item.TransactionId</td>
+                                                <td><a href="javascript:" onclick="LoadTicket('@item.PaymentId', '@item.TransactionId', '@item.PaymentFor','@item.Gateway')">Get Status</a></td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divticketcontent">
+
+</div>
+<button type="button" style="display:none" id="btnticketpopup" data-toggle="modal" data-target="#tickets" class="card-link flex-fill bd-highlight">Tickets</button>
+
+@section Scripts
+    {
+    <script>
+
+        $('#btn_Close').click(function () {
+            window.location.href='@Url.Action("Dashboard", "User", new { area = "User" })';
+        });
+        function LoadTicket(Id, paymId, pfor,gateway) {
+            debugger;
+            $.ajax({
+                url: '/User/Transaction/ChecktrxStatus?PaymentId=' + Id + '&TrxNo=' + paymId + '&paymentfor=' + pfor + '&PayGateway=' + gateway ,
+                contentType: 'application/html; charset=utf-8',
+                type: 'GET',
+                dataType: 'html',
+                success: function (result) {
+                    $('#divticketcontent').html(result);
+                    $("#btnticketpopup").trigger("click");
+                    //$('#tickets').modal('show');
+                },
+                error: function (xhr, status) {
+                    alert(status);
+                }
+            })
+            /**/
+        }
+
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable({
+                responsive: true,
+                "order": [[0, "desc"]]
+            });
+        });
+/**/
+    </script>
+}

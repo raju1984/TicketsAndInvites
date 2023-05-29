@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "UserDashboardForOrganizer";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+}
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-contacts menu-icon"></i>
+            </span>
+         Access User Dashboard 
+        </h3>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Enter User ID</label>
+                                  <input type="text" id="txtUserId" class="form-control" placeholder="Enter User ID" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" style="top: 20px; position: relative;">
+                                    <div class="form-group">
+                                        <label for=""></label>
+                                        <input type="button" style="padding: 0.575rem 2.5rem;" id="btnSubmit" class="btn btn-success" value="Log In" />
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+    </div>
+   
+</div>
+<script>
+    $(document).ready(function () {
+        $('#btnSubmit').click(function () {
+            var UserId = $('#txtUserId').val();
+            //window.location.href = '/Organizer/Organizer/loginUserDashboardForOrganizer?UserId=' + UserId;
+            $.ajax({
+                url: '/Organizer/Organizer/loginUserDashboardForOrganizer?UserId=' + UserId,
+                contentType: 'application/html; charset=utf-8',
+                type: 'POST',
+                dataType: 'json',
+                success: function (result) {
+                    if (result>0)
+                    {
+                        $('#txtUserId').val(''); 
+                        window.open('/User/User/Dashboard', '_blank');
+                    }
+                },
+                error: function (xhr, status) {
+                    alert(status);
+                }
+            })
+        })
+
+
+    })
+</script>
+

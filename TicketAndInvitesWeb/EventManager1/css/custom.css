@@ -1,0 +1,159 @@
+.list-group-item.active,
+.card-header h5[aria-expanded="true"] {
+    background: linear-gradient(to right, #f1abab, #fb0000);
+    border-color: #000;
+}
+.cardPadding {
+  padding: 0.75rem 1.25rem;
+}
+.noPadding {
+  padding: 0 !important;
+}
+.noMargin {
+  margin: 0 !important;
+}
+.padding15 {
+  padding: 15px !important;
+}
+
+a:hover {
+  text-decoration: none;
+}
+.padding5 {
+  padding: 5px;
+}
+
+.filter1 {
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+}
+
+.createEventMyEvent {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.borderDottedOnLight {
+  border: 1px dotted #ccc;
+}
+
+.tag {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  background: #ffffff;
+  padding: 7px 15px;
+  border-radius: 4px;
+  color: #000;
+  border: 1px solid #fff;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+select.form-control {
+  color: #495057;
+}
+.input-group-prepend .input-group-text,
+.input-group-append .btn {
+  padding: 0.5rem 0.75rem;
+}
+.page-title {
+  text-transform: capitalize;
+}
+.icon-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.borderOnLight {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+hr.borderDashed {
+  border: 1px dashed #ccc;
+}
+.bgDark {
+  background: #313131;
+}
+.padding25 {
+  padding: 25px;
+}
+.borderR10 {
+  border-radius: 10px;
+}
+
+.arc {
+  background: #313131;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  border-radius: 50%;
+}
+.top-12 {
+  top: -12px;
+}
+.left-12 {
+  left: -12px;
+}
+.right-12 {
+  right: -12px;
+}
+.bottom-12 {
+  bottom: -12px;
+}
+
+.sidebar .nav .nav-item .nav-link i {
+  color: #beabc2 !important;
+}
+@media all and (min-width: 320px) and (max-width: 480px) {
+    h2 {
+        font-family: 'Roboto Slab', serif;
+        font-weight: bold;
+        font-size: 38px;
+        line-height: 36px !important;
+    }
+
+    .parallax-mirror {
+        width: -webkit-fill-available !important;
+    }
+
+    .navv {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+        background: #fff;
+        box-shadow: #555 2px 2px 6px;
+        padding: 15px 15px;
+    }
+}
+
+@media all and (min-width: 481px) and (max-width: 767px) {
+    h2 {
+        font-family: 'Roboto Slab', serif;
+        font-weight: bold;
+        font-size: 38px;
+        line-height: 36px !important;
+    }
+
+  
+
+    .parallax-mirror {
+        width: -webkit-fill-available !important;
+    }
+
+    .navv {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+        background: #fff;
+        box-shadow: #555 2px 2px 6px;
+        padding: 15px 15px;
+    }
+}

@@ -1,0 +1,448 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Raleway|Roboto&display=swap");
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Raleway", "Roboto", "Montserrat", "Open Sans", sans-serif;
+  background-color: #000;
+  color: #000;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: #6f7287;
+}
+a:hover {
+  color: #fff !important;
+  text-decoration: none;
+}
+.colorBlack {
+  color: #000 !important;
+}
+
+.paddingL10 {
+  padding-left: 10px;
+}
+.bgLight {
+    background: #383636;
+    color: #fff;
+}
+
+.carousel-cell {
+  margin-right: 20px;
+  overflow: hidden;
+}
+
+.carousel-cell img {
+  display: block;
+  height: 200px;
+}
+
+.flickity-page-dots {
+  bottom: 18px !important;
+  position: absolute;
+  width: 100%;
+  bottom: -25px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+  line-height: 1;
+}
+
+.flickity-page-dots .dot {
+  background: #fff;
+  opacity: 0.6;
+  height: 8px;
+  width: 8px;
+  transition: all 0.4s;
+}
+
+.flickity-page-dots .dot.is-selected {
+  border-radius: 150px;
+  opacity: 1px;
+  width: 15px;
+}
+
+.flickity-prev-next-button {
+  visibility: hidden;
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
+}
+
+.flickity-prev-next-button.previous {
+  left: 50px;
+}
+
+.flickity-prev-next-button.next {
+  right: 50px;
+}
+
+.flickity-prev-next-button .flickity-button-icon {
+  position: absolute;
+  left: 20%;
+  top: 30%;
+  width: 60%;
+  height: 40%;
+  fill: #7d7d7d;
+}
+
+.carousel-text {
+  position: absolute;
+  top: 45%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 2px;
+  background-image: linear-gradient(0deg, #000, transparent);
+  padding: 10px;
+}
+
+.colorWhite {
+  color: #fff;
+}
+
+.carousel-text .carousel-title {
+  font-size: 1.4em;
+  font-weight: 600;
+  text-shadow: 2px 2px 2px #000;
+  padding-bottom: 10px;
+}
+
+.carousel-text .carousel-subtitle {
+  opacity: 0.8;
+}
+
+.carousel-cell {
+  border-radius: 4px;
+}
+
+.card-img-top .carousel-cell {
+  border-radius: 0px;
+}
+
+@media screen and (min-width: 768px) {
+  .carousel-cell img {
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .card-img-top .carousel-cell img {
+    height: 200px;
+  }
+
+  .card-img-top .carousel:hover .flickity-prev-next-button {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .card-img-top .flickity-prev-next-button.previous {
+    left: 0px;
+  }
+
+  .card-img-top .flickity-prev-next-button.next {
+    right: 0px;
+  }
+
+  .carousel:hover .flickity-prev-next-button {
+    visibility: visible;
+  }
+
+  .navbar-expand-lg .navbar-nav .nav-item {
+    padding: 15px 0;
+  }
+
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding: 0 15px;
+    font-size: 0.9em;
+  }
+
+  .navbar-expand-lg .navbar-nav .nav-item:last-child .nav-link {
+    border-right: 0;
+  }
+}
+
+/* Navbar Style*/
+.navbar a {
+  color: #727272 !important;
+}
+
+.navbar a:hover {
+  color: #000 !important;
+}
+
+.EventDaysType {
+  padding: 15px;
+}
+
+.nav-item.active a {
+  color: #727272;
+}
+
+.nav-item.active:hover a.nav-link,
+.nav-item:hover a.nav-link {
+  text-decoration: none;
+  color: #000 !important;
+}
+
+.nav-item.active {
+  border-bottom: 1px solid #000;
+}
+
+.nav-item.active a.nav-link {
+  color: #000 !important;
+  font-weight: 600;
+}
+
+.EventDetail {
+  padding: 10px;
+}
+
+.EventDetail .card-title {
+  margin-bottom: 0.3em;
+}
+
+.EventDetail p {
+  margin-bottom: 5px;
+}
+
+.vertical-bottom {
+  vertical-align: bottom;
+}
+
+.bgContainer {
+  background-color: #d8d7d7;
+}
+
+.bg-normal {
+    background: #000;
+}
+
+.carousel-item img {
+  height: -webkit-fill-available;
+}
+
+.headerEvents {
+  visibility: hidden;
+  position: absolute;
+  z-index: 10;
+  background: #fff;
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.nav-item {
+    transition: all 0.5s ease-in-out;
+}
+.nav-item:hover {
+    background:#ccc;
+}
+
+/*.hoverClass1:hover .headerEvents1 {
+  visibility: visible;
+}
+
+.hoverClass2:hover .headerEvents2 {
+  visibility: visible;
+}
+.hoverClass3:hover .headerEvents3 {
+  visibility: visible;
+}
+.hoverClass4:hover .headerEvents4 {
+  visibility: visible;
+}
+
+.headerEvents .eventList {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.headerEvents .eventList a {
+  width: calc(20% - 10px);
+  margin: 5px;
+  height: 150px;
+  flex: 1;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  font-size: 15px;
+  vertical-align: middle;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.headerEvents a.heading {
+  text-transform: uppercase;
+  padding: 10px;
+}*/
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  padding-top: 20px;
+  top: auto;
+  background: linear-gradient(0deg, #000 0, transparent);
+  color: #fff;
+}
+
+.headerShowMoreImg {
+  display: inline-block;
+}
+
+.headerShowMoreImg .showMore {
+  position: absolute;
+  top: calc(50% - 15px);
+  width: 100%;
+  font-weight: 400;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #fff;
+}
+footer a {
+  color: #000;
+}
+
+footer a i {
+  color: #6f6f6f;
+  font-size: 2em;
+  padding-right: 15px;
+}
+.w100 {
+  width: 100%;
+}
+
+.padding16 {
+  padding: 16px;
+}
+
+.bgDark {
+  background: #e3e3e3;
+}
+.navBookingTicket {
+  background: #fff;
+}
+.navBookingTicket a.nav-link.active {
+  border: none;
+  color: #003e80;
+  font-weight: 600;
+}
+.navBookingTicket a {
+  color: #000;
+}
+.navBookingTicket a.nav-link:hover {
+  color: #003e80 !important;
+}
+
+.navBookingTicket a.nav-link.active:after {
+  content: "";
+  background: #003e80;
+  height: 4px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 100%;
+}
+
+.navBookingTicket li:first-child a.nav-link.active:after {
+  right: 50%;
+}
+.navBookingTicket li:last-child a.nav-link.active:after {
+  right: 0%;
+}
+
+.largeText {
+  font-size: 2.1em;
+}
+.padding8 {
+  padding: 8px;
+}
+.pointer {
+  cursor: pointer;
+}
+.borderROnLight {
+  border-right: 1px solid #ccc;
+}
+.borderOnLight {
+  border: 1px solid #ebebeb;
+}
+.bgWhite {
+  background: #fff;
+  color: #4f4f4f;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.flex2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.card,
+.card a {
+  color: #636363;
+}
+.card a:hover {
+  color: #000 !important;
+}
+.padding5 {
+  padding: 5px;
+}
+.tag {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  background: #ffffff;
+  padding: 7px 15px;
+  border-radius: 4px;
+  color: #000;
+  border: 1px solid #fff;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.card {
+  margin-bottom: 20px;
+}
+
+.modal-open .modal {
+  color: #000;
+}
+.custom-control {
+  margin-bottom: 20px;
+}
+footer a:hover {
+  color: #6f7287 !important;
+}
+
+
+
+
+/*Aditional*/
+. w-100 {
+    width:100%;
+}
+
+.events-box img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+.carousel-item img {
+    object-fit:cover;
+}

@@ -1,0 +1,222 @@
+﻿@model  EventManager1.Areas.Organizer.Models.UsermangeviewModel
+@{
+    ViewBag.Title = "CreateUser";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+}
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-account-plus"></i>
+            </span>
+            Create user <br>
+            <small> Use the create user to grant access rights to other Users.</small>
+        </h3>
+        <!-- <nav aria-label="breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <span></span>Overview
+              <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+            </li>
+          </ul>
+        </nav> -->
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    @using (Html.BeginForm("CreateUserPost", "UserManagement", FormMethod.Post))
+                    {
+                        <h4 class="mt-4">Create user for permission</h4>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-striped mb-2">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email Address</th>
+                                        <th scope="col">Account Type</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                            <input type="text" name="txtname" id="txtname" required class="form-control">
+                                        </th>
+                                        <td>
+                                            <input type="email" name="txtemail" id="txtemail" required class="form-control">
+                                        </td>
+                                        <td>
+                                            <select name="ddlaccount" id="ddlaccount" class="form-control">
+                                                <option value="0">select</option>
+                                                @if (Model!=null && Model.Accounts != null)
+                                                {
+                                                    foreach (var item in Model.Accounts)
+                                                    {
+                                                      <option value="@item.Id">@item.Text</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-gradient-primary btn-rounded btn-fw">Create User</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Current Users</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email Address</th>
+                                    <th scope="col">Account Type</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.UserModel != null && Model.UserModel.Count() > 0)
+                                {
+                                    foreach (var item in Model.UserModel)
+                                    {
+                                        <tr>
+                                            <th scope="row">@item.Name</th>
+                                            <td>@item.Email</td>
+                                            <td>@item.AccountType</td>
+                                            <td>
+                                                <a href="#" onclick="LoadUser('@item.UserId')" class="">Manage Permission</a> |
+                                                <button type="button" class="btn btn-inverse-danger btn-icon" onclick="DeleteUser('@item.UserId')">
+                                                    <i class="mdi mdi-delete"></i>
+                                                </button>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divedituser">
+
+</div>
+@{
+    if (Model != null && Model.Resp != null && !string.IsNullOrEmpty(Model.Resp.Msg))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                alertify.alert("@Model.Resp.Msg");
+            })
+        </script>
+    }
+}
+<script type="text/javascript">
+    function LoadUser(Id) {
+        $.ajax({
+            
+            url: '/Organizer/UserManagement/EditUser?UserId=' + Id,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                $('#divedituser').html(result);
+                $('#Modeldivedituser').modal('show');
+            },
+            error: function (xhr, status) {
+                alert(status);
+            }
+        })
+    }
+    function ReloadPage()
+    {
+        window.location = "/Organizer/UserManagement/CreateUser";
+    }
+    function Update(UserId) {
+        var name = $("#txteditname").val();
+        var email = $("#txteditemail").val();
+        var gpid = $("#ddleditaccount").val();
+        if (!name) {
+            return false;
+        }
+        if (!email) {
+            return false;
+        }
+        if (!gpid) {
+            return false;
+        }
+        if (!UserId)
+        {
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Organizer/UserManagement/UpdaetUser",
+            data: '{UserId: "' + UserId + '",email: "' + email + '",GpId: "' + gpid + '",name: "' + name + '"  }',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                alertify.alert(response.Msg);
+                $('#Modeldivedituser').modal('hide');
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+    function DeleteUser(UserId) {
+
+        alertify.confirm('Are You sure? You want to delete this user.', function (e) {
+            if (e)
+            {
+                $.ajax({
+                    beforeSend: function () {
+                        $('#divloader').show();
+                    },
+                    type: "POST",
+                    url: "/Organizer/UserManagement/DeleteUser",
+                    data: '{UserId: "' + UserId + '"}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        $('#divloader').hide();
+                        alertify.alert(response.Msg, function () {
+                            window.location.href = "/Organizer/UserManagement/CreateUser";
+                        });
+                        
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+            else
+            {
+                alertify.error('Cancel');
+            }
+        });
+        
+    }
+</script>

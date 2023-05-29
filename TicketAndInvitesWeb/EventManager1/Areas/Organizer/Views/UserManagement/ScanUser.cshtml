@@ -1,0 +1,288 @@
+﻿@model  EventManager1.Areas.Organizer.Models.ScanUserManageModel
+@{
+    ViewBag.Title = "ScanUser";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+    <style>
+        .pointr{text-decoration:underline !important; cursor:pointer !important; color:dodgerblue !important}
+            
+    </style>
+}
+
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-account-plus"></i>
+            </span>
+            Scan user <br>
+            <small> Use the Scan user to grant login to Scan Users.</small>
+        </h3>
+        <!-- <nav aria-label="breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <span></span>Overview
+              <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+            </li>
+          </ul>
+        </nav> -->
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    @using (Html.BeginForm("ScannUser", "UserManagement", FormMethod.Post))
+                    {
+                        <h4 class="mt-4">Create user for permission</h4>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-striped mb-2">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email Address</th>
+                                        <th scope="col">Password</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                            <input type="text" name="txtname" id="txtname" required class="form-control">
+                                        </th>
+                                        <td>
+                                            <input type="email" name="txtemail" id="txtemail" required class="form-control">
+                                        </td>
+                                        <td>
+                                            <input type="password" name="txtPassword" id="txtPassword" required class="form-control" maxlength="10" min="6">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-gradient-primary btn-rounded btn-fw">Create User</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Current Users</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email Address</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.UserModel != null && Model.UserModel.Count() > 0)
+                                {
+                                    foreach (var item in Model.UserModel)
+                                    {
+                                        <tr>
+                                            <th scope="row">@item.Name</th>
+                                            <td>@item.Email</td>
+                                            <td>
+                                                @*<a ata-toggle="modal" onclick="SelectedEvent('@item.Id')" class="">Selected Event</a> |*@
+                                                <a ata-toggle="modal" onclick="LoadUser('@item.Id')" class="pointr" >Assign  Event</a> 
+                                                @*<button type="button" class="btn btn-inverse-danger btn-icon">
+                                                    <i class="mdi mdi-delete" onclick="Delete('@item.Id')"></i>
+                                                </button>*@
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal EditScanUserData -->
+<div class="modal fade" id="EditUserData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="myViewoffersBody">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div id="divedituser">
+
+</div>*@
+@{
+    if (Model != null && Model.Resp != null && !string.IsNullOrEmpty(Model.Resp.Msg))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                alertify.alert("@Model.Resp.Msg");
+            })
+        </script>
+    }
+}
+<script type="text/javascript">
+    function LoadUser(Id) {
+        $.ajax({
+            url: '/Organizer/UserManagement/EditScanUser?UserId=' + Id,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                $('#EditUserData').modal('show');
+                document.getElementById("myViewoffersBody").innerHTML = result;
+
+                //$('#divedituser').html(result);
+                //$('#Modeldivedituser').modal('show');
+            },
+            error: function (xhr, status) {
+                alert(status);
+            }
+        })
+    }
+
+    function SelectedEvent(Id) {
+        $.ajax({
+            url: '/Organizer/UserManagement/SelectEvent?UserId=' + Id,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                $('#EditUserData').modal('show');
+                document.getElementById("myViewoffersBody").innerHTML = result;
+
+                //$('#divedituser').html(result);
+                //$('#Modeldivedituser').modal('show');
+            },
+            error: function (xhr, status) {
+                alert(status);
+            }
+        })
+    }
+    function ReloadPage() {
+        window.location = "/Organizer/UserManagement/CreateUser";
+    }
+    function Update(UserId) {
+        var name = $("#txteditname").val();
+        var email = $("#txteditemail").val();
+        var gpid = $("#ddleditaccount").val();
+        if (!name) {
+            return false;
+        }
+        if (!email) {
+            return false;
+        }
+        if (!gpid) {
+            return false;
+        }
+        if (!UserId) {
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Organizer/UserManagement/UpdaetUser",
+            data: '{UserId: "' + UserId + '",email: "' + email + '",GpId: "' + gpid + '",name: "' + name + '"  }',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                alertify.alert(response.Msg);
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+
+    function Savedata(id) {
+       
+        var selectedID = [];
+        $(':checkbox[name="checkMr[]"]:checked').each(function () {
+            selectedID.push(this.id);
+        });
+
+        debugger;
+        if (selectedID != []) {
+            $.ajax({
+                type: "POST",
+                url: "/Organizer/UserManagement/SaveEventPermisionUser",
+                data: '{Id: "' + id + '",SelectedId: "' + selectedID + '"  }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    alertify.alert(response.Msg);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+    }
+
+    function Editdata(id) {
+        var selectedID = [];
+        $(':checkbox[name="checkMr[]"]:checked').each(function () {
+            selectedID.push(this.id);
+        });
+
+
+        if (selectedID != []) {
+            $.ajax({
+                type: "POST",
+                url: "/Organizer/UserManagement/EditEventPermisionUser",
+                data: '{Id: "' + id + '",SelectedId: "' + selectedID + '"  }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    alertify.alert(response.Msg);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+    }
+
+    function Delete(id) {
+        if (id != undefined && id != null) {
+            $.ajax({
+                type: "POST",
+                url: "/Organizer/UserManagement/DeleteScanUser",
+                data: '{Id: "' + id + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    alertify.alert(response.Msg);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+    }
+</script>
+

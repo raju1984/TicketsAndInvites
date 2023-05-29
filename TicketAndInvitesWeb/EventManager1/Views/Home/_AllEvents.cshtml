@@ -1,0 +1,52 @@
+﻿@model  IEnumerable<EventManager1.Models.IndexView>
+
+@{
+    if (Model != null && Model.Count() > 0)
+    {
+        <div class="container">
+            <h2 class="main-heading"><span>All Events</span> </h2>
+            <div class="row">
+                @foreach (var item in Model.OrderByDescending(x=>x.Id))
+                {
+                    if (item.Price != null && item.Price.Count > 0)
+                    {
+                        decimal? price = item.Price.OrderByDescending(a => a.Price).Select(a => a.Price).FirstOrDefault();
+                        string imageurl = "";// item.Images != null && item.Images.Where(a => a.mainpic == true).FirstOrDefault() !=null? item.Images.FirstOrDefault().Url : "/images/img3.jpg";
+                        if(item.Images.FirstOrDefault(x=>x.MulType==1) != null) {
+                            if (item.Images.FirstOrDefault(s => s.mainpic == true) != null)
+                            {
+                                imageurl = item.Images.FirstOrDefault(s => s.mainpic == true ).Url.ToString();
+                                if (imageurl == null) { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+                            }
+                            else { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+                        }
+                        else { imageurl = "/images/img3.jpg";  }
+                        string alt = Path.GetFileName(imageurl);
+
+                         <div class="col-lg-4 col-sm-6 events-box" >
+                            @*<a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})">*@
+                                <div class="">
+                                    <figure style="height:180px"><img src="@imageurl" class="imgheight" alt="@alt"></figure>
+                                    <div class="down-sec">
+                                        <div class="bottom-sec">
+                                            @*<a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})" class="small-btn">Watch </a>*@
+                                            <button class="small-btn" type="button" onclick="Loadpopup('@item.Id','@item.EventName')" data-toggle="modal" data-target="#myModal" >
+                                                Watch
+                                            </button>
+                                            @*<a href="#" class="small-btn" data-toggle="modal" data-target="#myModal">Watch </a>*@
+                                            @*<strong><span>@item.Currency</span>@price</strong>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            @*</a>*@
+                        </div>
+                    }
+                }
+            </div>
+            <div class="bottom-btn text-center"><a href="#" style="margin-bottom:20px" class="benn-btn" value="">See All</a></div>
+            @*<div class="bottom-btn text-center"><a href="@Url.Action("EventsSearchResult", "Home",new { eventtype=6})" style="margin-bottom:20px"  class="benn-btn" value="">See All</a></div>*@
+            @*<div class="bottom-btn text-center"><a href="@Url.Action("Summary", "ev",new { area = "" })" style="margin-bottom:20px" class="benn-btn" value="">See All</a></div>*@
+        </div>
+    }
+}
+

@@ -1,0 +1,193 @@
+﻿@model IEnumerable<TickeCart>
+@using EventManager1.Models
+
+<style>
+    .coupon-box {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        border: 1px dashed #a9a9a9;
+        border-radius: 15px;
+        padding: 10px 40px;
+        margin: 20px auto 30px;
+        width: 50%;
+        max-width: 100%;
+    }
+
+        .coupon-box img {
+            width: 100px;
+            padding: 0 15px;
+        }
+
+        .coupon-box h1 {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #bd247f;
+            margin: 0;
+        }
+
+        .coupon-box p {
+            font-size: 15px;
+            margin-bottom: 0px;
+            font-weight: 600;
+            color: #37365d;
+        }
+
+        .coupon-box h6 {
+            text-transform: uppercase;
+            font-size: 12px;
+            margin-bottom: 0;
+            font-weight: 600;
+            opacity: 0.5;
+        }
+</style>
+<input type="hidden" id="offerid" />
+<input type="hidden" id="eventid" value="@ViewBag.evid" />
+
+<div>
+    @if (Model != null && Model.Count() > 0)
+    {
+        string Currency = "";
+        decimal Total = 0;
+        var sn = 1;
+        foreach (var item in Model)
+        {
+
+            if (item.TicketAdded == true)
+            {
+                if (item.currencyType == (int)PaymentCurrency.Ghanna)
+                {
+                    Currency = "Gh₵";
+                }
+                else if (item.currencyType == (int)PaymentCurrency.Usd)
+                {
+                    Currency = "$";
+                }
+                else if (item.currencyType == (int)PaymentCurrency.Pound)
+                {
+                    Currency = "£";
+                }
+                else if (item.currencyType == (int)PaymentCurrency.Euero)
+                {
+                    Currency = "€";
+
+                }
+                var Quantity = item.Qnty;
+                var Price = item.Price;
+                Total = Math.Round(Convert.ToDecimal(Quantity * Price));
+                <div class="table-ui">
+                    <div class="d-flex">
+                        <button type="submit" onclick="RemoveTicket(@item.TicketId)" class="remove">Remove</button>
+
+                        <h4 class="option" id="@("TicketName_"+ @sn)"><span></span> @item.TicketName</h4>
+                        <div class="ml-auto">
+
+                            <input type="number" class="color-box m10" id="@("TiktName_" + @sn)" maxlength="12" readonly value="@item.Qnty" />
+                            @if (Total == 0)
+                            {<span id="TttlAmount" class="color-box amount">Free</span>}
+                            else
+                            {
+                                <span id="TttlAmount" class="color-box amount"><span class="Currency">@Currency</span>@Total.00</span>}
+                        </div>
+                    </div>
+
+                </div>
+
+                sn++;
+            }
+        }
+
+        if (ViewBag.Couponapplied == null)
+        {
+
+
+            <div class="egift">
+                <label>
+                    Have a Coupon or eGift Code? @if (ViewBag.Couponselected != null)
+                    {<span style="color:red;">Invalid Coupon!</span>}
+                </label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Enter Coupon Code" id="Coupancode">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon2"><input type="button" value="Apply" id="applycoupan"></span>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="coupon-box">
+                <div class="img-box">
+                    <img src="~/images/promo-code.png" />
+                </div>
+                <div class="text">
+                    <h6>Coupon Applied:</h6>
+                    <h1>@ViewBag.Couponapplied</h1>
+                    <p>@ViewBag.Discount OFF</p>
+                </div>
+
+            </div>
+        }
+
+
+        <div class="total">
+            <h1>Total</h1>
+            <span class="line"></span>
+            <!--<span> Total  <lable id="lbltotal"></lable> </span>-->
+            <div class="ml-auto total-amount" id="TotalAmount"><span class="Currency">@Currency</span>@ViewBag.TotalPrice</div>
+        </div>
+    }'
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#hide').hide();
+        $('#ticketadded').val(1);
+        $('.error-box p').text('');
+    });
+</script>
+
+<!--@if (ViewBag.Response != null)
+{
+    <script>
+        $('#ticketadded').val(0);-->
+        @*swal({
+            title: "error!",
+            text: '@ViewBag.Response',
+            icon: "error"
+
+        });*@
+        <!--$('.error-box p').text('@ViewBag.Response');
+    </script>
+}-->
+
+
+@if (Model != null && Model.Count() > 0)
+{
+    <script>
+        $("#fdiscount").css("display", "block");
+    </script>
+
+}
+else
+{
+    <script>
+        $("#fdiscount").css("display", "none");
+    </script>
+}
+
+
+
+
+@if (Model != null && Model.Count() == 0)
+{
+    <script>
+        $('#hide').show();
+    </script>
+}
+
+<style>
+</style>

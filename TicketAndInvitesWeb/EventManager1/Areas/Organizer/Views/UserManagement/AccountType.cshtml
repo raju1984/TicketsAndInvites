@@ -1,0 +1,182 @@
+﻿@model  EventManager1.Areas.Organizer.Models.AcccountTypeViewModel
+@{
+    ViewBag.Title = "AccountType";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+    <style>
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            .content-wrapper {
+                background: #f2edf3;
+                padding: 1.75rem 1.25rem !important;
+            }
+
+            .card .card-body {
+                padding: 20px;
+            }
+
+            .table-bordered {
+                border: 1px solid #ebedf2 !important;
+            }
+        }
+    </style>
+}
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-account-plus"></i>
+            </span>
+            Account Type
+        </h3>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                @using (Html.BeginForm("AccountTypePost", "UserManagement", FormMethod.Post))
+                {
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="mt-4">Add a new account type</h4>
+                            </div>
+                            <div class="col-md-12 mt-2">
+                                <div class="form-group">
+                                    <label for="">Account Type Name</label>
+                                    @Html.TextBoxFor(x => Model.AccountName, new { @class = "form-control", @required = true })
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <h4 class="mt-4">Set Permission</h4>
+                            </div>
+                            <div class="col-md-12 mt-2">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-3 my-auto font-weight-bold">
+                                Section name
+                            </div>
+                            <div class="col-md-3 font-weight-bold">
+                                Watch
+                            </div>
+                            <div class="col-md-3 font-weight-bold">
+                                Edit/Create
+                            </div>
+                            <div class="col-md-3 font-weight-bold">
+                                Delete
+                            </div>
+                        </div>
+                        @if (Model != null && Model.Objects != null && Model.Objects.Count() > 0)
+                        {
+                            for (int i = 0; i < Model.Objects.Count; i++)
+                            {
+                                <div class="row mt-1">
+                                    <div class="col-md-3 my-auto">
+                                        @Model.Objects[i].Name.Replace("_", " ")
+                                        @Html.HiddenFor(x => Model.Objects[i].Id)
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check form-check-inline">
+                                            @Html.CheckBoxFor(x => Model.Objects[i].Watch, new { @class = "form-check-input" })
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check form-check-inline">
+                                            @Html.CheckBoxFor(x => Model.Objects[i].EC, new { @class = "form-check-input" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check form-check-inline">
+                                            @Html.CheckBoxFor(x => Model.Objects[i].Delete, new { @class = "form-check-input" })
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        }
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-gradient-primary btn-rounded btn-fw">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Current Account Type</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Account Type Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Groupname != null && Model.Groupname.Count > 0)
+                                {
+                                    foreach (var gp in Model.Groupname)
+                                    {
+                                        <tr>
+                                            <th scope="row">@gp.Name</th>
+                                            <td>
+                                                <button type="button" onclick="OpenEditor('@gp.Id')" class="btn btn-inverse-danger btn-icon">
+                                                    <i class="mdi mdi-pencil-box"></i>
+                                                </button>
+                                                <button type="button" onclick="DeleteGroup('@gp.Id')" class="btn btn-inverse-danger btn-icon">
+                                                    <i class="mdi mdi-delete"></i>
+                                                </button>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divpermission">
+
+</div>
+@{
+    if (Model != null && Model.Resp != null && !string.IsNullOrEmpty(Model.Resp.Msg))
+    {
+        <script type="text/javascript">
+                $(document).ready(function () {
+                    alertify.alert("@Model.Resp.Msg");
+                })
+        </script>
+    }
+}
+<script type="text/javascript">
+    function OpenEditor(Id) {
+        $.ajax({
+            url: '/Organizer/UserManagement/AccountUserPermission?GpId=' + Id,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                $('#divpermission').html(result);
+                $('#modeldivpermission').modal('show');
+            },
+            error: function (xhr, status) {
+                alert(status);
+            }
+        })
+    }
+    function ReloadPage() {
+        window.location = "/Organizer/UserManagement/AccountType";
+    }
+</script>

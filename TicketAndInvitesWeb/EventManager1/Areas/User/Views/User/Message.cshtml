@@ -1,0 +1,274 @@
+﻿@model  IEnumerable<EventManager1.Models.NotificationModel>
+@using EventManager1.Models
+@{
+    ViewBag.Title = "Message";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+<style>
+    .small-btn {
+        background: #000;
+        color: #fff;
+        padding: 10px 20px;
+        cursor:pointer;
+    }
+
+        .small-btn:hover {
+            background: #fb0000;
+            color: #fff !important;
+            border: none;
+        }
+    @@media all and (min-width: 320px) and (max-width: 480px) {
+        .card .card-body {
+            padding: 2.5rem 1.5rem !important;
+        }
+
+        .user-message {
+            display: block;
+            width: 100% !important;
+            text-align: left;
+            float: left;
+            margin-right: 0% !important;
+        }
+
+        .card {
+            border: 0;
+            margin-top: 20px !important;
+        }
+
+        .btn.btn-fw {
+            min-width: 160px !important;
+        }
+
+        span.page-title-icon.bg-gradient-primary.text-white.mr-2 {
+            margin-bottom: 10px !important;
+        }
+
+        input#txtmessage {
+            width: 100% !important;
+            margin-bottom: 10px !important;
+        }
+
+        button.btn.btn-gradient-primary.btn-rounded.btn-fw {
+            width: 100% !important;
+        }
+    }
+
+    .user-message {
+        display: block;
+        width: 70%;
+        text-align: left;
+        float: left;
+        margin-left: 30%;
+    }
+
+    a#list-Security-list {
+        font-size: 12px;
+    }
+
+    .user-message p {
+        background: #ccc;
+        border-radius: 15px;
+        padding: 10px;
+    }
+
+    .admin-message {
+        display: inline-flex;
+        width: 70%;
+        text-align: left;
+        border-radius: 15px;
+        float: left;
+        padding: 10px;
+        margin-right: 30%;
+    }
+
+        .admin-message p {
+            background: #DAB6FF;
+            border-radius: 15px;
+            float: right;
+            padding: 10px;
+        }
+</style>
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-home"></i>
+            </span>
+            Message
+        </h3>
+        <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw small-btn" id="createmsg" style=" width: 28%;margin-left: 2%;">
+            Create New Message
+        </button>
+        <!-- <nav aria-label="breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <span></span>Overview
+              <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+            </li>
+          </ul>
+        </nav> -->
+    </div>
+    <div class="row">
+        <div class="col-3 borderOnPadding0">
+            <div class="list-group" id="list-tab" role="tablist">
+                @if (Model != null)
+                {
+                    foreach (var msg in Model)
+                    {
+                <a href="~/USer/User/Message?mid=@msg.Id" class="list-group-item list-group-item-action" id="list-Security-list" role="tab">
+                    <h5>
+                        @msg.MsgTitle
+                    </h5>
+                    @Convert.ToDateTime(msg.CreatedDate).ToString("dd/MM/yy hh:mm")
+                </a>
+                        @*<button type="button" class="list-group-item list-group-item-action" id="list-Security-list" data-toggle="list" role="tab" onclick="viewmessage(@msg.Id)"> @msg.CreatedDate</button>*@}
+                }
+
+            </div>
+        </div>
+        <div class="col-9" id="ceeatemessage">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-Settings" role="tabpanel" aria-labelledby="list-Settings-list">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="/User/User/Message" method="post">
+                                <div class="row">
+                                    <h4>Send New Message to Admin</h4>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Message Title</label>
+                                            <input type="text" class="form-control" id="txtmessagetitle" name="txtmessagetitle" value="" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Message </label>
+                                            <input type="text" class="form-control" id="txtmessage" name="txtmessage" value="" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-gradient-primary btn-rounded btn-fw small-btn">Send Message</button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-9" id="bindmessage" style="display:none">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-Settings" role="tabpanel" aria-labelledby="list-Settings-list">
+                    <div class="card">
+
+                        <div class="card-body" id="msgdetails">
+                            @if (ViewBag.msglist != null)
+                            {
+                                var models = ViewBag.msglist as List<NotificationModel>;
+                                using (Html.BeginForm("Message", "User", new { area = "User" }, FormMethod.Post))
+                                {
+                                    if (models != null)
+                                    {
+
+                                        <input type="hidden" value="@models.FirstOrDefault().Id" id="MsgId" name="MsgId" />
+
+
+                                        <div class="row col-md-12" style="padding:0">
+                                            <div class="user-message">
+                                                <h3>  @models.FirstOrDefault(x => x.MsgTitle != null).MsgTitle</h3>
+                                            </div>
+                                            @foreach (var i in ViewBag.msglist)
+                                            {
+                                                if (i.GeneratedBy == 0)
+                                                {
+                                                    <div class="user-message">
+                                                        <p> @i.Text <br /><span> @i.CreatedDate</span></p>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="admin-message">
+                                                        <p> @i.Text <br /><span>@i.CreatedDate</span></p>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+
+                                        <div class="col-md-12" style="padding:0">
+                                            <div class="form-group">
+
+                                                <input type="text" placeholder="Type a Message" class="form-control" id="txtmessage" name="txtmessage" style=" width: 70%;float: left;    border-radius: 50px;
+    height: 43px;" value="" placeholder=""><button type="submit" class="btn btn-gradient-primary btn-rounded btn-fw" style=" width: 28%;
+    margin-left: 2%;">
+                                                    Send Message
+                                                </button>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function viewmessage(id) {
+        debugger;
+        $("#ceeatemessage").css("display", "none");
+        $("#bindmessage").css("display", "block");
+        $.ajax({
+            url: '/User/User/Message?mid=' + id,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                debugger;
+                //$('#msgdetails').html(result);
+            },
+            error: function () {
+                alertify.alert("Server Error!");
+            }
+        });
+    }
+    $('#createmsg').click(function () {
+        //function createmessage() {
+
+        $("#ceeatemessage").css("display", "block");
+        $("#bindmessage").css("display", "none");
+    })
+    $(document).ready(function () {
+        $.noConflict();
+        var id = '@ViewBag.msglist';
+        if (id !='' ) {
+            $("#ceeatemessage").css("display", "none");
+            $("#bindmessage").css("display", "block");
+
+        }
+    })
+
+</script>
+@{
+
+    if (ViewData["Error"] != null)
+    {
+        var error = ViewData["Error"] as ApiResponse;
+        if (error != null && error.Code != (int)ApiResponseCode.ok)
+        {
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    alertify.alert("@error.Msg");
+                })
+            </script>
+        }
+    }
+}
+

@@ -1,0 +1,191 @@
+﻿@model EventManager1.Models.TicketModelPopup
+
+<style>
+    p small {
+        color: #7e0000;
+        font-weight: bold;
+    }
+
+    p a {
+        font-size: 10px;
+        color: #007bff;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+        p a:hover {
+            color: #007bff !important;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+    .bord-height {
+        height: auto;
+        min-height: 80px;
+    }
+</style>
+@{
+    if (Model != null && !string.IsNullOrEmpty(Model.Eventname))
+    {
+        <div class="modal fade" id="bookTickets" tabindex="-1" role="dialog" aria-labelledby="bookTicketsLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title w100" id="exampleModalLabel">
+                            @Model.Eventname
+                            @*<span class="float-right"><span id="spnTotalItem">0</span> Items | Net Amount: <span id="spntotakamountheder">00</span> Gh₵</span>*@
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @using (Html.BeginForm("PostTicket", "Home", FormMethod.Post))
+                    {
+                    <div class="modal-body bgDark noPadding">
+                        @*<ul class="nav nav-tabs navBookingTicket nav-justified" id="myTab" role="tablist">
+            <li class="nav-item">
+
+                <a class="nav-link active" id="Tickets-tab" href="JavaScript:">Tickets</a>
+            </li>
+            <li class="nav-item">
+
+                <a class="nav-link" id="Attendee-tab" href="JavaScript:">Attendee</a>
+
+            </li>
+        </ul>*@
+
+                        <div class="tab-content padding16">
+                            <div class="tab-pane active" id="Tickets" role="tabpanel" aria-labelledby="Tickets-tab">
+                                <h4>Go ahead and pick your tickets...</h4>
+                                <div class="text-right">
+                                    @*Have a
+                    <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                       aria-controls="collapseExample">
+                        Coupon Code?
+                    </a>*@
+                                </div>
+
+
+                                <p>
+                                    <i class="far fa-calendar-alt"></i> @Model.EventDate
+
+                                </p>
+                                <div class="row bgWhite padding8">
+                                    <h4 style="width:90%; margin:20px 5%">Select ticket type : </h4>
+                                    @if (Model.Tickest != null && Model.Tickest.Count() > 0)
+                                    {
+                                        <select class="form-control" id="tickettypee" name="tickettypee" style="width:90%; margin-left:5%">
+                                            @foreach (var ticket in Model.Tickest)
+                                            {
+                                                <option value="@ticket.TicketId">@ticket.TicketName -  @ticket.Price Gh₵</option>
+                                            }
+                                        </select>
+                                        <input type="hidden" id="firstv" value="@Model.Tickest.FirstOrDefault().TicketId" />
+                                        foreach (var i in Model.Tickest)
+                                        {
+                                        <div id="@i.TicketId" name="@i.IsPurchased" class="row col-md-12 largeText qtclass" style="margin:15px  !important ;text-align:center; display : none">
+                                    @if (i.IsPurchased)
+                                    {
+                                        <div class="flex">
+                                            <p> You have already bought a @i.TicketName for this play. DO NOT BUY AGAIN. <a href="/User/User/Dashboard" style="color:red;font-size:16px !important;">Click here to watch </a>. </p>
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="col-sm-12  " id="wttt">
+                                            Quantity : 1 &nbsp; &nbsp; | &nbsp; &nbsp; Total
+                                            <span id="pfootertotal">@i.Price Gh₵ </span>
+                                        </div>
+
+                                    }
+                                    <div class="col-sm-12  " id="msss" style="display:none">
+                                        
+                                        <span id="pfootertotal" style="color:red">Sold Out!</span>
+                                    </div>
+                                </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="Attendee" role="tabpanel" aria-labelledby="Attendee-tab">
+                                <h4>Let's add attendee details...</h4>
+                                <div class="row bgWhite padding16">
+                                    <div class="col-md-4">
+                                        <input type="hidden" id="EventId" name="EventId" value="@Model.EventId" />
+                                        <div class="form-group">
+                                            <label for="">Name</label>
+                                            <input type="text" name="txtname" required class="form-control" id="txtname" aria-describedby="emailHelp"
+                                                   placeholder="" value="@Model.ContactDetail.name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Email address</label>
+                                            <input type="email" class="form-control" required name="txtEmail" id="txtEmail" aria-describedby="emailHelp"
+                                                   value="@Model.ContactDetail.Email" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Mobile</label>
+                                            <input type="number" class="form-control" required name="txtphone" id="txtphone" aria-describedby="emailHelp"
+                                                   value="@Model.ContactDetail.Mobile" placeholder="">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                        <div class="modal-footer">
+                            <button type="button" id="btnprevious" style="display:none" onclick="Previous()" class="btn btn-outline-danger float-left ">Previous</button>
+                            <button type="button" class="btn btn-secondary" style="background:#000 !important;border:none;color:#fff;" data-dismiss="modal">Close</button>
+                            <a href="JavaScript:" id="btnacnhr" onclick="OpentNextTab()" style="display:none" type="button" class="btn btn-success">Next</a>
+                            <button type="submit" id="btnsubmit"   class="btn btn-success btnacnhr">Next</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <script>   
+            $(document).ready(function () {
+                var id = $('#firstv').val(); 
+                $('#' + id).css("display", "block");
+                //$("#tickettypee option[value='274']").remove();
+                //$("#tickettypee option[value='283']").remove();
+                //var val = $("#EventId").val();
+                //if (val == '119') {
+                //    //$("#btnsubmit").css("display", "none");
+                //    //$("#wttt").css("display", "none");
+                //    //$("#msss").css("display", "block");
+                //}
+
+            });
+            $('#btnsubmit').click(function () {
+                debugger;
+                var tickettype = $('#tickettypee').val();
+                if ($('#' + tickettype).attr('name')) {
+                    alertify.alert("You already have a ticket.");
+                    return false;
+                }
+                if (tickettype == '' || tickettype== null) {
+                    
+                    return false;
+                }
+               // AddTickeToCart(tickettype,1);
+            })
+            $(function () {
+                $("#tickettypee").change(function () {
+                    var id = $(this).val();
+                    $('.qtclass').css("display", "none");
+                    $('#'+id).css("display","block")
+                });
+            });
+        </script>
+    }
+}

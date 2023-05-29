@@ -1,0 +1,41 @@
+﻿@using EventManager1.Models
+@model EventManager1.Models.TicketModelPopup
+
+@if (Model.Tickest != null && Model.Tickest.Count > 0)
+{
+    foreach (var item in Model.Tickest)
+    {
+        @*<div class="bottom-box">
+
+
+                @if (item.PaymentType == (int)PaymentCurrency.Ghanna)
+                {<p>Payment Price: <span>@item.Price Gh₵</span></p>
+
+            }
+            else if (item.PaymentType == (int)PaymentCurrency.Usd)
+            {
+                <p>Payment Price: <span>@item.Price $</span></p>
+
+            }
+            else if (item.PaymentType == (int)PaymentCurrency.Pound)
+            {
+                <p>Payment Price: <span>@item.Price £</span></p>
+
+            }
+            else if (item.PaymentType == (int)PaymentCurrency.Euero)
+            {
+                <p>Payment Price: <span>@item.Price €</span></p>
+
+            }
+
+                <p class="ml-auto">Ticket Available: <span id="TicketAvailabel">@item.AvailableQnty</span></p>
+            </div>*@
+
+        <input type="hidden" id="TicketBalance" value="@item.AvailableQnty" />
+        <input type="hidden" id="Price" value="@item.Price" />
+        <input type="hidden" id="Paymentype" value="@item.PaymentType" />
+        <input type="hidden" id="TicketId" value="@item.TicketId" />
+        <input type="hidden" id="TktName" value="@item.TicketName" />
+    }
+
+}

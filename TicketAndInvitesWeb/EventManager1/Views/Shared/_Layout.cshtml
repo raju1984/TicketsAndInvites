@@ -1,0 +1,696 @@
+﻿@using EventManager1.Models
+<!DOCTYPE html>
+<html>
+<head>
+    @*<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="~/images/fav.png" type="image/gif">
+    <title></title>
+
+    <!-- core CSS -->
+    <link href="~/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+    <link href="~/css/all.css" rel="stylesheet">
+    <link href="~/css/custom.css" rel="stylesheet">
+    <link href="~/css/custom2.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
+    <link href="../../css/alertify.core.css" rel="stylesheet" />
+    <link href="../../css/alertify.default.css" rel="stylesheet" />
+    <link href="~/css/HomeStyle.css" rel="stylesheet" />
+    @*<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyC6QSJ9PHH06rwALifkIDfx0xpYB2h7PmQ&ver=3.exp"></script>*@
+    <style>
+        .nav-item .nav-link {
+            font-weight: bold !important;
+        }
+
+        .popular-events {
+            margin: 0 !important;
+            background: #000 !important;
+        }
+
+        h2.main-heading {
+            color: #fff;
+            text-transform: capitalize;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            margin-top: 40px;
+            text-align: left !important;
+        }
+
+        a.dropdown-item {
+            color: #333 !important;
+        }
+
+        .navbar-expand-lg .navbar-nav .nav-link {
+            padding: 0 15px !important;
+            font-size: 0.9em;
+        }
+
+        .navv {
+            position: fixed !important;
+            top: 0 !important;
+            right: 0 !important;
+            left: 0 !important;
+            z-index: 1030 !important;
+            box-shadow: #555 2px 2px 6px !important;
+            padding: 1rem 1rem !important;
+        }
+
+        .navbar > .container-fluid .navbar-brand {
+            margin-left: 0 !important;
+        }
+
+        .container-fluid {
+            width: 100%;
+            margin: 0 !important;
+            padding: 0 !important
+        }
+
+        nav .nav-item {
+            padding: 8px 0 !important;
+        }
+
+        .navbar-brand {
+            padding: 0 15px !important
+        }
+
+        .navbar a {
+            color: #fff !important;
+        }
+
+        .dropdown-menu {
+            background-color: #0c0c0c;
+        }
+
+        .nav-item.active a.nav-link {
+            color: #f48534 !important;
+        }
+
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            h2 {
+                font-family: 'Roboto Slab', serif;
+                font-weight: bold;
+                font-size: 30px !important;
+                line-height: 36px !important;
+            }
+
+            .main-heading {
+                text-transform: capitalize;
+                padding-bottom: 10px;
+                margin-bottom: 20px !important;
+                position: relative;
+                margin-top: 10px !important;
+            }
+
+            .right-form.active {
+                display: block;
+                z-index: 9999;
+            }
+
+            .user {
+                padding: 25px 0 !important;
+            }
+
+            .organiser {
+                padding: 25px 0 !important;
+                margin-top: 20px !important;
+                text-align: center;
+            }
+
+            .parallax-mirror {
+                width: -webkit-fill-available !important;
+            }
+
+            .bottom-btn {
+                margin-top: 0 !important;
+                margin-bottom: 20px;
+            }
+
+            .owl-carousel .owl-nav button.owl-prev {
+                position: absolute;
+                top: 12% !important;
+                left: -15px !important;
+                background: #5f5e5ed1;
+                padding: 0 6px !important;
+                border-radius: 0% !important;
+                opacity: 0.5;
+            }
+
+            .owl-carousel .owl-nav button.owl-next {
+                position: absolute;
+                top: 12% !important;
+                right: -15px !important;
+                background: #5f5e5ed1;
+                padding: 0 6px !important;
+                border-radius: 0% !important;
+                opacity: 0.5;
+            }
+
+            .navv {
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                z-index: 1030;
+                background: #fff;
+                box-shadow: #555 2px 2px 6px;
+                padding: 15px 15px;
+            }
+
+            .bottom-sec strong {
+                display: inline-block !important;
+                font-size: 20px;
+                margin-left: 80px;
+            }
+
+            .small-btn {
+                padding: 6px 13px !important;
+            }
+
+            .benn-btn {
+                padding: 6px 12px !important;
+            }
+
+            .main-heading span {
+                font-family: 'Roboto Slab', serif;
+                font-weight: bold;
+                font-size: 30px !important;
+                line-height: 45px !important;
+                color: #21ab64;
+            }
+        }
+
+        @@media all and (min-width: 481px) and (max-width: 767px) {
+            h2 {
+                font-family: 'Roboto Slab', serif;
+                font-weight: bold;
+                font-size: 30px !important;
+                line-height: 36px !important;
+            }
+
+            .right-form.active {
+                display: block;
+                z-index: 9999;
+            }
+
+            .bottom-btn {
+                margin-top: 0 !important;
+                margin-bottom: 20px;
+            }
+
+            .benn-btn {
+                padding: 6px 12px !important;
+            }
+
+            .owl-carousel .owl-nav button.owl-next {
+                position: absolute;
+                top: 12% !important;
+                right: -15px !important;
+                background: #5f5e5ed1;
+                padding: 0 6px !important;
+                border-radius: 0% !important;
+                opacity: 0.5;
+            }
+
+            .small-btn {
+                padding: 6px 13px !important;
+            }
+
+            .owl-carousel .owl-nav button.owl-prev {
+                position: absolute;
+                top: 12% !important;
+                left: -15px !important;
+                background: #5f5e5ed1;
+                padding: 0 6px !important;
+                border-radius: 0% !important;
+                opacity: 0.5;
+            }
+
+            .bottom-sec strong {
+                display: inline-block !important;
+                font-size: 20px;
+                margin-left: 80px;
+            }
+
+            .main-heading span {
+                font-family: 'Roboto Slab', serif;
+                font-weight: bold;
+                font-size: 30px !important;
+                line-height: 45px !important;
+                color: #21ab64;
+            }
+
+            .main-heading {
+                text-transform: capitalize;
+                padding-bottom: 10px;
+                margin-bottom: 20px !important;
+                position: relative;
+                margin-top: 10px !important;
+            }
+
+            .parallax-mirror {
+                width: -webkit-fill-available !important;
+            }
+
+            .navv {
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                z-index: 1030;
+                background: #fff;
+                box-shadow: #555 2px 2px 6px;
+                padding: 15px 15px;
+            }
+        }
+
+        .navv {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+            background: #fff;
+            box-shadow: #555 2px 2px 6px;
+        }
+
+        li {
+            /*width: 50%;*/
+            text-align: center;
+        }
+
+        .events-box img {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .bottom-sec strong {
+            display: block;
+            font-size: 20px;
+        }
+
+            .bottom-sec strong span {
+                color: #21ab64;
+                font-size: 24px;
+            }
+
+        .bottom-btn {
+            margin-top: 40px;
+        }
+
+        .userl {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+            .userl a {
+                font-size: 36px;
+            }
+
+        .user {
+            padding: 100px 0;
+            text-align: center;
+            background: #21ab64;
+            border-radius: 25px;
+            margin: 0 10px;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+
+        .navbar-toggler {
+            color: #fff;
+        }
+
+        .user:hover {
+            opacity: 1
+        }
+
+        .user a {
+            font-size: 36px;
+            color: #fff;
+        }
+
+            .user a:hover {
+                font-size: 36px;
+                color: #fff !important;
+            }
+
+        .organiser {
+            padding: 100px 0;
+            text-align: center;
+            background: #00275e;
+            border-radius: 25px;
+            margin: 0 10px;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+
+            .organiser:hover {
+                opacity: 1
+            }
+
+            .organiser a {
+                font-size: 36px;
+                color: #fff !important;
+            }
+
+        .card {
+            min-height: 540px
+        }
+
+        .open-nav,
+        .close-nav {
+            display: none;
+        }
+
+        .bgContainer {
+            background: #000 !important;
+            padding-bottom: 40px;
+        }
+
+        .nav-tabs {
+            border-bottom: none;
+        }
+
+        a:hover {
+            color: #333 !important
+        }
+
+        @@media (min-width: 576px) {
+
+            .modal-sm {
+                max-width: 65%;
+            }
+        }
+
+        .card-img-top {
+            display: none !important
+        }
+    </style>
+
+    <script type="text/javascript">
+        function Loader(_value) {
+            if (_value) {
+                document.getElementById("divloader").style.display = "block";
+            }
+            else {
+                document.getElementById("divloader").style.display = "none";
+            }
+            setTimeout(function () { document.getElementById("divloader").style.display = "none"; }, 30000);
+        }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg static-top navv" style="background-color:black">
+            <div class="container-fluid">
+                @if (ManageSession.CompanySession != null)
+                {
+                    if (!string.IsNullOrEmpty(ManageSession.CompanySession.website))
+                    {
+                        var website = ManageSession.CompanySession.website.Contains("https") || ManageSession.CompanySession.website.Contains("http") ? ManageSession.CompanySession.website : "https://" + ManageSession.CompanySession.website;
+                        <a class="navbar-brand" href="@website"> <img src="@ManageSession.CompanySession.FirstName" style="width:110px;height: 35px;" />  </a> <span style="color:#fff"> @ManageSession.CompanySession.CompName</span>
+                    }
+                    else
+                    {
+                        <a class="navbar-brand" href="#"> <img src="@ManageSession.CompanySession.FirstName" style="width:110px;height: 35px;" />  </a> <span style="color:#fff"> @ManageSession.CompanySession.CompName</span>
+                    }
+
+                }
+
+                <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+                        aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="dark-blue-text">
+                        <i class="fas fa-bars fa-1x"></i>
+                    </span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+                    <ul class="navbar-nav mr-auto" id="menu">
+                        @*<li class="nav-item active" id="mhome">
+                    <a class="nav-link" href="/"> Home </a>
+                </li>
+
+                <li class="nav-item hoverClass hoverClass2" id="mStreams">
+                    <a class="nav-link" href="@Url.Action("LiveStream", "Home")"> LiveStream </a>
+
+                </li>
+                <li class="nav-item hoverClass hoverClass3" id="mVideos">
+                    <a class="nav-link" href="@Url.Action("Videos", "Home")"> Videos </a>
+
+                </li>*@
+                        @*<li class="nav-item hoverClass hoverClass3" id="mVideos">
+                    <a class="nav-link" href="@Url.Action("FAQ", "Home")"> FAQ </a>
+
+                </li>*@
+                        @*<li class="nav-item hoverClass hoverClass4">
+                    <a class="nav-link" href="@Url.Action("EventsSearchResult", "Home",new {Eventday="nwek" })"> Next Weekend </a>
+                    <div class="headerEvents headerEvents4 today-events">
+                        <div class="row noMargin">
+                            <div class="col-xs-12">
+                                <a href="/delhi/today?src=hdr" class="heading">
+                                    today events
+                                    in delhi
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row noMargin">
+                            <div class="col-xs-12 eventList">
+                                <a href="" class="lazy" data-original=""
+                                   style="display: inline-block; background-image: url(&quot;https://lh3.googleusercontent.com/ZII9-Wrp2Tx3-mHken6FN8B4teG0_d8NS5DyB-94toUa0lpE2Gu-i27vqklEiT75eHAy002qmik9bIMYV9M3TYQBxg&quot;);">
+                                    <div class="overlay"> LOL Speed Dating Noida July 6 </div>
+                                </a>
+                                <a href="" class="lazy" data-original=""
+                                   style="display: inline-block; background-image: url(&quot;https://lh3.googleusercontent.com/pNDB6Vvfzu_THP-k42oXkV9EPtR3XNuqexejoJ0LWVPBCCIwBVF8IKxRAgrRGFs1bmTh-X4YjHA6Dbt4shDKzrQ&quot;);">
+                                    <div class="overlay"> Book Reading by Shuchi Singh Kalra </div>
+                                </a>
+                                <a href="" class="lazy" data-original=""
+                                   style="display: inline-block; background-image: url(&quot;https://lh3.googleusercontent.com/Ub7-Y0f0uzQ4cpjyyMb3v8cTWZtIHuegVuJgW6uOaYOWRm6BlSkOZy0l7hzqK0vsuxg0KT7lXcLBEfmQGqkWccgcuQ&quot;);">
+                                    <div class="overlay"> Kalsubai Trek - Monsoon Special </div>
+                                </a><a href="" class="lazy" data-original=""
+                                       style="display: inline-block; background-image: url(&quot;https://lh3.googleusercontent.com/eJMgB4na4YoI5KX6LeyPZD2qgCESAev1-fQfyicw3kAIaazSA5uRixpXmCpvTHt3OxlXicflfuP_M8g6OvHYs-vk&quot;);">
+                                    <div class="overlay"> Basketball Pick-up game @@SPADA </div>
+                                </a>
+                                <a href="" class="headerShowMoreImg">
+                                    <div class="showMore"> Show More </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>*@
+                    </ul>
+                    <ul class="navbar-nav ml-auto" style="float: right; display:none">
+                        <li class="nav-item" style="display:none">
+                            <a class="nav-link" id="searchBox" href="JavaScript:;"><i class="fas fa-search"> </i></a>
+                        </li>
+                        @if (ManageSession.CompanySession != null && !string.IsNullOrEmpty(ManageSession.CompanySession.EmailId))
+                        {
+                            <li class="nav-item dropdown" style="display:none">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-user"> </i> @ManageSession.CompanySession.CompName
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="@Url.Action("Dashboard","Organizer",new {area="Organizer" })" style="color:#000">My Profile</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("Logout","Organizer",new {area="Organizer" })" style="color:#000">Logout</a>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item" style="display:none">
+                                <a class="nav-link" href="@Url.Action("OrganizerLogin","Account")">
+                                    <img src="/images/Organization.png" alt="" width="20px">
+                                    Organizer Login
+                                </a>
+                            </li>
+                        }
+                        @*<li class="nav-item" id="" >
+                    <a class="nav-link" href="~/Home/PaymentSupport">
+                        Transaction Support
+                    </a>
+
+                </li>*@
+                        <li class="nav-item" id="crtevent" style="display:none">
+                            <a class="nav-link" href="#signup">
+                                Create Event <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                            </a>
+                            @*<a class="nav-link" href="@Url.Action("Redirect","Account")">Create Event</a>*@
+                        </li>
+                        @if (ManageSession.UserSession != null && (!string.IsNullOrEmpty(ManageSession.UserSession.PhoneNo) || !string.IsNullOrEmpty(ManageSession.UserSession.EmailId)))
+                        {
+                            <li class="nav-item dropdown" style="background-color:#f48534; border-radius:5px">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-user"> </i> @ManageSession.UserSession.FirstName
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" style="color:#000 !important" href="@Url.Action("Dashboard","User",new {area="User"})">My Profile</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" style="color:#000 !important" href="@Url.Action("Logout","User",new {area="User"})">Logout</a>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item" id="userlogin" style="background-color:#f48534;border-radius:5px">
+                                <a class="nav-link " href="@Url.Action("Userlogin","Account")"><i class="fas fa-user"> </i> Sign In</a>
+                            </li>
+                        }
+                        <li class="nav-item dropdown" id="userprofile" style="display:none">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-user"> </i> <label id="username"></label>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="@Url.Action("Dashboard","User",new {area="User"})">My Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("Logout","User")">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="">
+        @RenderBody()
+
+    </div>
+    <div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+         aria-hidden="true">
+
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                @if (ManageSession.UserSession == null && ManageSession.CompanySession == null)
+                {
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalTitle">
+                            <label id="eventname"><h3> create event as </h3></label> <br>
+
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="user">
+
+                                        <h1><i class="fas fa-user" style="font-size: 44px;color: #fff;"> </i>&nbsp;<a href="~/Account/Login"> Private/Personal</a></h1>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="organiser">
+
+                                        <h1><img src="images/Organization2.png" alt="" width="46px">&nbsp;<a href="~/Account/OrganizerLogin">Public</a></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="modal-footer">
+                    <center>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bgLight pt-2 pb-2">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 text-center mb-2">
+                    Powered by <a href="https://www.virtualsolutionsgh.net" style="color:#f48534; font-weight:bold"> Virtual Solutions Limited </a>
+                    @*Copyright © 2020  Roverman Productions. All rights reserved.*@
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="overlay" id="divloader" style="display:none">
+        <div class="a" style="--n: 5;position: absolute;top: 50%;left: 50%;">
+            <div class="dot" style="--i: 0;"></div>
+            <div class="dot" style="--i: 1;"></div>
+            <div class="dot" style="--i: 2;"></div>
+            <div class="dot" style="--i: 3;"></div>
+            <div class="dot" style="--i: 4;"></div>
+        </div>
+    </div>
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+
+    <script src="~/fontawesome/js/fontawesome.js"></script>
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/custom.js"></script>
+    <script src="../../js/alertify.js"></script>
+    <script type="text/javascript">
+
+        $("#crtevent").click(function () {
+            debugger;
+            var comp = '@ManageSession.CompanySession';
+            var user = '@ManageSession.UserSession';
+            if (comp != "") {
+                window.location.replace("/Organizer/Organizer/CreateEvent");
+            }
+            else if (user != "") {
+                window.location.replace("/User/User/CreateEvent");
+            }
+            else { window.location.replace("/Home/CreateEvent");}
+        });
+        $("#cretevent").click(function () {
+            debugger;
+            var comp = '@ManageSession.CompanySession';
+            var user = '@ManageSession.UserSession';
+            if (comp !="") {
+                window.location.replace("/Organizer/Organizer/CreateEvent");
+            }
+            else if (user != "") {
+                window.location.replace("/User/User/CreateEvent");
+            }
+            else { window.location.replace("/Home/CreateEvent"); }
+        });
+         $(".search-li, button").click(function () {
+            $("body").addClass("opensearch");
+        });
+        $("button.s-btn").click(function () {
+            $("body").removeClass("opensearch");
+        });
+        $("#searchBox").click(function () {
+            $("#showBox").toggleClass("active");
+        });
+        function LoadAllData() {
+            $("#sectionallevents").load('@Url.Action("AllEvents", "Home", new { skip = 0, take=0})'.replace("&amp;", "&"));
+        }
+        function SearchEvent() {
+            var issearch = false;
+            var name = $("#txtname").val();
+            var place = $("#txtplace").val();
+            if (name) {
+                issearch = true;
+            }
+            else if (place) {
+                issearch = true;
+            }
+            else if (time) {
+                issearch = true;
+            }
+            if (issearch) {
+                window.location = "/Home/EventsSearchResult?eventname=" + name + "&place=" + place;
+            }
+        }
+    </script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

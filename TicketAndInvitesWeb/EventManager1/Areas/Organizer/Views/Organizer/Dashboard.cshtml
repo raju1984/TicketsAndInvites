@@ -1,0 +1,203 @@
+﻿@model  EventManager1.Areas.Organizer.Models.DashboardOrgModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+    
+}
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-speedometer"></i>
+            </span>
+            Dashboard
+        </h3>
+        <!-- <nav aria-label="breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <span></span>Overview
+              <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+            </li>
+          </ul>
+        </nav> -->
+    </div>
+    <div class="row">
+        <div class="col-md-4 stretch-card grid-margin">
+            <div class="card bg-gradient-danger card-img-holder text-white">
+                <div class="card-body">
+                    <img src="~/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                    <h4 class="font-weight-normal mb-3">
+                        Top Earning Event <br />
+
+                        <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                    </h4>
+                    @if (Model != null && Model.Topsaleevents != null)
+                    {
+                        <h2 class="mb-5">Gh₵ @Model.Topsaleevents.topticketSale</h2>
+                        <h6 class="card-text" style="line-height:1">@Model.Topsaleevents.EventName</h6>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 stretch-card grid-margin">
+            <div class="card bg-gradient-info card-img-holder text-white">
+                <div class="card-body">
+                    <img src="~/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                    <h4 class="font-weight-normal mb-3">
+                        Total Events
+                        <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                    </h4>
+                    @if (Model != null && Model.Topsaleevents != null)
+                    {
+                        <h2 class="mb-5">@Model.Topsaleevents.totalevent</h2>
+                    }
+                    @*<h6 class="card-text">Decreased by 10%</h6>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 stretch-card grid-margin">
+            <div class="card bg-gradient-success card-img-holder text-white">
+                <div class="card-body">
+                    <img src="~/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                    <h4 class="font-weight-normal mb-3">
+                        Top event ticket sold
+                        <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                    </h4>
+                    @if (Model != null && Model.Topsaleevents != null)
+                    {
+                        <h2 class="mb-5">@Model.Topsaleevents.Total</h2>
+                        <h6 class="card-text" style="line-height:1">@Model.Topsaleevents.EventNametotal</h6>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Recent Tickets Overview</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Audience
+                                    </th>
+                                    <th>
+                                        Event Date
+                                    </th>
+                                    <th>
+                                        Event Name
+                                    </th>
+                                    <th>
+                                        Tickets
+                                    </th>
+                                    <th>
+                                        Total Amount
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Recenttickets != null)
+                                {
+                                    foreach (var i in Model.Recenttickets.Take(10))
+                                    {
+                                        <tr>
+                                            <td>
+                                                <img src="/images/faces/face1.png" class="mr-2" alt="image">
+                                                @i.UserName
+                                            </td>
+                                            <td>
+                                                @i.EventDate
+                                            </td>
+                                            <td>
+                                                @i.EventName
+                                            </td>
+                                            <td>
+                                                @i.Bookedticket
+                                            </td>
+                                            <td>
+                                                @i.TotalAmt
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="visitors"></div>
+
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        
+        $(document).ready(function () {
+
+            debugger;
+            var Id = null;
+            LoadUser(Id);
+            function LoadUser(Id) {
+                $.ajax({
+                    url: '/Organizer/Organizer/VisitorOverview?EventId=' + Id,
+                    contentType: 'application/html; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html',
+                    success: function (result) {
+                        debugger;
+                        //$('#EditUserData').modal('show');
+                        //document.getElementById("visitor").innerHTML = result;
+                        $('#visitors').html(result);
+                        //$('#Modeldivedituser').modal('show');
+                    },
+                    error: function (xhr, status) {
+                        alert(status);
+                    }
+                })
+            }
+            $('#datatable').DataTable({
+                responsive: true
+            });
+        });
+        //$(function () {
+        //    $('#ddlCategory').selectpicker();
+        //});
+        function OnEventChange(element) {
+            debugger;
+            var valu = $("#ddlCategory").val();
+
+            LoadUser(element.value, valu);
+        }
+        function LoadUser(Id, valu) {
+            $.ajax({
+                url: '/Organizer/Organizer/VisitorOverview?EventId=' + Id,
+                contentType: 'application/html; charset=utf-8',
+                type: 'GET',
+                dataType: 'html',
+                success: function (result) {
+                    debugger;
+                    //$('#EditUserData').modal('show');
+                    //document.getElementById("visitor").innerHTML = result;
+                    $('#visitors').html(result);
+                    $("#ddlCategory").find('option[value=' + valu + ']').attr('selected', 'selected')
+                    //$("#ddlCategory").text(valu);
+                    //$('#Modeldivedituser').modal('show');
+                },
+                error: function (xhr, status) {
+                    alert(status);
+                }
+            })
+        }
+
+    </script>
+
+}
+

@@ -1,0 +1,346 @@
+﻿@model EventManager1.Models.RegisterUser_
+@using EventManager1.Models;
+@{
+    /**/
+
+    ViewBag.Title = "Sign Up";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <style>
+        .form-control {
+            height: 35px;
+            padding-left: 20px;
+        }
+
+        .input-group > .form-control {
+            margin-bottom: 0;
+        }
+
+        .btn {
+            position: inherit !important;
+        }
+
+        .dropdown-menu.show {
+            right: 0 !important;
+            left: 0 !important;
+            min-width: 350px;
+        }
+
+        .card {
+            background: #000;
+            border-color: #313131;
+            border-bottom: 1px solid #313131 !important;
+        }
+
+        select.form-control:not([size]):not([multiple]) {
+            height: 33px !important;
+        }
+
+        p.alertify-message {
+            color: #000;
+        }
+
+        .text-center {
+            text-align: center !important;
+            padding: 0 20px;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: .5rem;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .caret {
+            display: none !important;
+        }
+
+        .card-header {
+            border-bottom-color: #313131;
+            color: #fff;
+        }
+
+        .btn-payment {
+            margin-left: 40px;
+            margin-top: 10px;
+        }
+
+        .smal-btn {
+            border: #fff solid 1px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .smal-btn2 {
+            border: #fff solid 2px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+
+        .card-body h4, h6, p {
+            color: #fff;
+        }
+
+        .bold-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff !important;
+        }
+
+        .card a:hover {
+            color: #fb0000 !important;
+        }
+        /*.smal-btn:hover {
+                        background: #fb0000 !important;
+                        color: #fff !important;
+                        border: none;
+                    }*/
+        .minheight {
+            min-height: 300px;
+        }
+
+        .tab-content > .active {
+            display: block;
+            margin-top: 100px;
+            text-align: center;
+            margin-left: 0px;
+        }
+
+        .form-control {
+            height: 35px;
+            padding-left: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px !important;
+        }
+
+        b {
+            font-weight: bolder;
+            font-size: 21px;
+        }
+
+        .list-group {
+            flex-direction: row;
+        }
+
+        .form-check-label {
+            margin-bottom: 0;
+            font-size: 16px;
+        }
+
+
+        .mt-5, .my-5 {
+            margin-top: 7rem !important;
+        }
+
+        .list-group-item-action {
+            width: auto;
+        }
+
+        .rbutton {
+            background: #fb0000 !important;
+            text-align: center;
+            padding: 5px 20%;
+            margin: 5px 25% 0;
+            color: #fff !important;
+        }
+
+        p {
+            font-size: 1.3rem !important;
+        }
+
+        .error {
+            color: red;
+        }
+        .container i {
+            cursor: pointer;
+            float: right;
+            position: relative;
+            right: 10px;
+            top: -25px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+    @*<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">*@
+    <link rel="stylesheet" href="~/css/intlInputPhone.min.css">
+    <link href="~/css/alertify.core.css" rel="stylesheet" />
+    <link href="~/css/alertify.default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+}
+@{
+    <div class="container-fluid bgContainer">
+        <div class="row ">
+            <div class="container">
+                <div class="row mt-5 " style="text-align:center">
+
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 bg-white pt-3">
+                        <div class="card borderonTicket">
+                            <input type="hidden" id="offerid" />
+                            <div class="arc top-12 right-12"></div>
+                            <div class="arc top-12 left-12"></div>
+                            <div class="arc bottom-12 right-12"></div>
+                            <div class="arc bottom-12 left-12"></div>
+                            @*<img src="aa"
+                                class="card-img-top" alt="...">*@
+                            <div class="card-body text-justify">
+                                <div class="sign-up">
+                                    <h4 style="text-align:center; font-weight:bold">Sign Up</h4>
+                                    @using (Html.BeginForm("Signup", "Account", FormMethod.Post, new { onsubmit = "" }))
+                                    {@Html.AntiForgeryToken()
+                                    @Html.HiddenFor(x => x.Phone_CountryCode, new { Value = "233" });
+                                    <label for="exampleInput">Name</label>
+                                    @*<div class="form-group">
+                                            <div class="input-group" style=" display: flex !important;">
+                                                <input class="form-control" style=" width: 1% !important;" data-val="true" data-val-required="First Name is required." id="FirstName" name="FirstName" placeholder="First Name" required="required" type="text" value="">
+                                                <input class="form-control" style=" width: 1% !important;" data-val="true" data-val-required="Last Name is required." id="LastName" name="LastName" placeholder="Last Name" required="required" type="text" value="">
+                                            </div>
+                                        </div>*@
+                                    <div class="form-group">
+                                        <div class="input-group" style="display: flex !important;">
+                                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", required = "required", placeholder = "First Name", style = "width: 1% !important;" })
+                                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", required = "required", placeholder = "Last Name", style = "width: 1% !important;" })
+                                        </div>
+                                    </div>
+                                    <div>@Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "error" }) @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "error" })</div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInput">Mobile Number</label>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="input-phone"></div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                @Html.TextBoxFor(m => m.PhoneNo, new { @class = "form-control form-control-lg", placeholder = "Mobile No / Email" })
+                                            </div>
+                                        </div>
+                                        @* @Html.HiddenFor(m => m.PhoneNo, new { @class = "form-control form-control-lg", type = "number", required = "required", placeholder = "Phone number" })*@
+                                        @*@Html.ValidationMessageFor(m => m.PhoneNo, "", new { @class = "error" })*@
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInput">Email Address(Optional)</label>
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-lg", type = "email", placeholder = "Email" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "error" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Select Country</label>
+                                        @Html.DropDownListFor(M => M.CountryId, new SelectList(Model.Country, "Id", "Text"), new { @class = " form-control" })
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInput">Password</label>
+                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-lg", placeholder = "Password", type = "password", required = "required" })
+                                        <i class="far fa-eye" id="togglePassword"></i>
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInput">Confirm Password</label>
+                                        @Html.TextBoxFor(m => m.ConfPassword, new { @class = "form-control form-control-lg", placeholder = "Confirm Password", type = "password", required = "required" })
+                                        <i class="far fa-eye" id="toggleConfirmPassword"></i>
+                                        @Html.ValidationMessageFor(m => m.ConfPassword, "", new { @class = "error" })
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="chkTerm" checked="checked" style="opacity: 1; "> &nbsp; I agree to all <a href="~/Home/Terms" target="_blank"> Terms & Conditions </a>
+
+                                        </div>
+                                    </div>
+                                    <button type="submit" id="registerbtn" class="btn btn-danger rbutton" style="padding:7px 40px">Register</button>
+                                }
+                                    <span style="display: block;  text-align: justify;   color: #fff;    padding: 10px 0;"><strong>Note:</strong> When you click register, we will send a confirmation code to your phone. You will need this code to complete your registration</span>
+                                    <p style="text-align: center;color:#fff;margin: 20px 0;">
+                                        I already have an account. <a href="@Url.Action("Userlogin", "Account")" style="color:#f6d605">Login</a>
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/alertify.js"></script>
+}
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="~/js/intlInputPhone.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('.input-phone').intlInputPhone();
+            //function disablePrev() { window.history.forward() }
+            //window.onload = disablePrev();
+            //window.onpageshow = function (evt) { if (evt.persisted) disableBack() }
+            $('.country').click(function () {
+                debugger
+                var cobt = $(this).text();
+                var res = cobt.split("+");
+                var country = res[0];
+                var v;
+                $("#CountryId option").each(function () {
+                    $(this).removeAttr("selected");
+                });
+                $("#CountryId option:contains(" + country + ")").each(function () {
+                    if ($(this).text() == country) {
+                        v = $(this).val();
+                        $(this).attr("selected", "selected");
+                    }
+                });
+                $('#Phone_CountryCode').val(res[1]);
+                //var cval = $("#CountryId option:contains(" + country + ")").val();
+                $('#CountryId').val(v);
+                //$("#CountryId option[value='" + v + "']").attr('selected', 'selected');
+
+                //$("#CountryId option:contains(" + country + ")").attr('selected', 'selected');
+
+                //$('#CountryId').trigger('change');
+            });
+            $('#phoneNumber').val('0509336844');
+            $('#phoneNumber').css("display", "none");
+            $("#phoneNumber").remove();
+            
+        });
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#Password');
+        togglePassword.addEventListener('click', function (e) {           
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password'; // $('#Password').attr("type");//
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+        const toggleConfirmPassword = document.querySelector('#toggleConfirmPassword');
+        const Confirmpassword = document.querySelector('#ConfPassword');
+        toggleConfirmPassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = Confirmpassword.getAttribute('type') === 'password' ? 'text' : 'password'; // $('#Password').attr("type");//
+            Confirmpassword.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+        $('#registerbtn').click(function () {
+            
+            //var country = $('#btn-country .btn-cc').text().trim();
+            //$('#PhoneNo').val($('#phoneNumber').val());
+
+        })
+
+    </script>
+}
+@{
+    if (Model != null && Model.Error != null && Model.Error.Code != (int)ApiResponseCode.ok)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                alertify.alert("@Model.Error.Msg");
+            })
+        </script>
+    }
+}
+
+
+

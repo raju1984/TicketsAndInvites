@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "About";
+    <style>
+        p{font-size:small !important; text-align:justify}
+       
+        @@media all and (min-width: 320px) and (max-width: 480px) {
+            .about {
+                margin-top: 0px;
+            }
+            .card {
+    min-height: 0px !important;
+}
+        }
+        .card {
+    min-height: 0px !important;
+}
+    </style>
+}
+<div class="container">
+    <div class="row" style="padding: 90px 0 30px">
+        <div class="col-md-6">
+            <div class="about">
+                <img src="~/images/contact.png" class="img-responsive">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="detail">
+                <h2>About Us</h2>
+                <p>
+                    Ticketsandinvites.com is an innovative service developed and managed by Virtual Solutions Limited to provide solutions to the events industry. Our focus is to deliver a simple but yet powerful solution that provides solutions for ticketing and invitations for event managers and individuals hosting private events. We guarantee you a service that will delight your fan base and friends and family who will be patronising your events.
+                </p> <p>
+                    At the heart of it all is cost saving, quicker access to funds, efficiency and enhanced profits for event organisers. For individuals, trust us, your friends, family and guests will be simply delighted by this service.
+                </p> <p>
+                    This service is your go-to service for all your events whether private or public.
+
+                </p>
+            </div>
+        </div>
+    </div>
+    @*<div class="row">
+        <div class="col-md-12">
+            <div class="career">
+                <h2>Carreer</h2>
+                <p>
+                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
+                    classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a
+                    Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure
+                    Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the
+                    word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from
+                    sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and
+                    Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very
+                    popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit
+                    amet..", comes from a line in section 1.10.32.Contrary to popular belief, Lorem Ipsum is not
+                    simply random text. It has roots in a piece of
+                    classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a
+                    Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure
+                    Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the
+                    word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from
+                    sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and
+                    Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very
+                    popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit
+                    amet..", comes from a line in section 1.10.32.
+                </p>
+            </div>
+        </div>
+    </div>*@
+    <section id="contact" >
+        <div class="container ">
+            <h3 class="text-center text-uppercase">contact us</h3>
+            <p class="text-center w-75 m-auto">
+                For more information on our service, feel free to contact us on
+                @*Mobile: +233 244 691019
+                +233 509 336844
+                Email: service@virtualsolutionsgh.net
+                Events Support Office:
+                The Lotte, Stanbic Heights, Icon House, Accra*@
+            </p>
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4 ">
+                    <div class="card border-0">
+                        <div class="card-body text-center">
+                            <i class="fa fa-phone fa-5x " aria-hidden="true"></i>
+                            <h4 class="text-uppercase">Call us</h4>
+                            <p class="text-center">+233 244 691019       +233 509 336844
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4 col-lg-4 ">
+                    <div class="card border-0">
+                        <div class="card-body text-center">
+                            <i class="fa fa-map-marker fa-5x " aria-hidden="true"></i>
+                            <h4 class="text-uppercase">Events Support Office</h4>
+                            <address class="text-center">The Lotte, Stanbic Heights, Icon House, Accra</address>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4 ">
+                    <div class="card border-0">
+                        <div class="card-body text-center">
+                            <i class="fa fa-globe fa-5x " aria-hidden="true"></i>
+                            <h4 class="text-uppercase">Email</h4>
+                            <p class="text-center">service@virtualsolutionsgh.net</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,274 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="~/images/fav1.png" type="image/gif">
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+    <title>MyTickets</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .event-header {
+            background-image: url('../../images/bg.jpg');
+            min-height: 350px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            text-align: center;
+            display: flex;
+            align-items: center;
+        }
+            .event-header .logo {
+                position: absolute;
+                left: 5%;
+                top: 5%;
+            }
+
+            .event-header .logo img {
+                height: 60px;
+            }
+
+        .white-bg {
+            min-height: 250px;
+            background: #FFF;
+            box-shadow: 0px 0px 21px 0px rgb(0 0 0 / 17%);
+            /*width: 450px;*/
+            margin: -100px auto 10px;
+            max-width: 100%;
+            border-radius: 50px;
+            padding: 25px 50px;
+            margin-bottom: 35px;
+        }
+
+        .header-box {
+            padding: 0 25px;
+            margin-bottom: 25px;
+        }
+
+        .white-bg h1 {
+            margin-bottom: 5px;
+            color: #3a3c63;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .white-bg p {
+            color: #3a3c63;
+            text-align: center;
+            margin: 0px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0;
+        }
+
+        .white-bg hr {
+            height: 1px;
+            border: 0;
+            background: rgb(255,255,255);
+            background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(189,36,127,1) 10%, rgba(189,36,127,1) 90%, rgba(255,255,255,1) 100%);
+        }
+
+
+        .btn-pink {
+            font-family: 'Montserrat', sans-serif;
+            background: #bd247f;
+            color: #FFF;
+            text-decoration: none;
+            padding: 10px 35px;
+            display: inline-block;
+            border-radius: 50px;
+            box-shadow: 0px 10px 11px 0px rgb(189 36 127 / 33%);
+            margin-top: 20px;
+            font-weight: 800;
+        }
+
+            .btn-pink:hover {
+                color: #ffa7db;
+            }
+
+        .body-box, .footer-box {
+            text-align: center;
+        }
+
+        p.bootom-text {
+            margin-top: 30px;
+            font-size: 13px;
+            letter-spacing: 0.3px;
+            line-height: 20px;
+        }
+
+        .bootom-text a {
+            color: #bd247f;
+            font-weight: 800;
+        }
+
+        .footer-box img {
+            height: 50px;
+            margin-bottom: 20px;
+        }
+
+        .body-box .form-group label {
+            color: #373857;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .body-box .form-group .input-ui {
+            border: 0;
+            background: #302f51;
+            box-shadow: 0px 10px 11px 0px rgb(48 47 81 / 38%);
+            border-radius: 10px;
+            height: 50px;
+            text-align: center;
+            color: #FFF;
+            letter-spacing: 0.3px;
+            font-weight: 600;
+        }
+
+        .body-box {
+            padding: 20px 40px;
+        }
+
+        @@media (max-width: 470px) {
+            .white-bg {
+                padding: 25px;
+            }
+
+            .body-box {
+                padding: 20px 10px;
+            }
+        }
+
+        .error-box p {
+            color: #F00;
+            margin-bottom: 10px;
+        }
+
+        @@media (max-width: 380px) {
+            .white-bg h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="event-header">
+        <input type="hidden" id="comId" name="comId" value="@ViewBag.comId" />
+        <input type="hidden" id="evId" name="evId" value="@ViewBag.evId" />
+        <div class="logo">
+            @*<img src="~/images/Gold-Badge.png" />*@
+            <img src="@ViewBag.logo" />
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-sm-12">
+                <div class="white-bg">
+                    <div class="error-box">
+                        <p>
+                        </p>
+                    </div>
+                    <div class="header-box">
+                        <h1>MY TICKETS</h1>
+                        <p>Kindly provide the <b>email</b> used in purchasing the ticket.</p>
+                        <hr>
+                    </div>
+
+                    <div class="body-box">
+                        <div class="form-group">
+                            <label>Enter your email below</label>
+                            <input type="email" id="EmailAddress" class="form-control input-ui" required />
+                        </div>
+                        @*<a href="@Url.Action("TicketsLists","Home")" class="btn-pink">Next</a>*@
+                        <button type="submit" id="btn" class="btn-pink" onclick="TicketsLists()">Next</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-box">
+            <a href="@ViewBag.URL"><img src="@ViewBag.logo" /></a>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    function EmailValidation(EmailAddress) {
+        var email = EmailAddress;
+        var regex = /^([a-zA-Z0-9_.+-])+\@@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (regex.test(email)) {
+            return true;
+        } else {
+            $('.error-box p').text('Please Enter Your Email..');
+
+            $("#EmailAddress").val("");
+
+            return false;
+        }
+    }
+    function TicketsLists() {
+        EmailAddress = $("#EmailAddress").val();
+        var comId = $("#comId").val();
+        var evId = $("#evId").val();
+        Result = EmailValidation(EmailAddress);
+        if (Result) {
+            $.ajax({
+                url: "/ev/CheckEmailExists?EmailId=" + EmailAddress,
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    debugger;
+                    //console.log(result.Id);
+                    if (result.Id > 0) {
+                        window.location.href = "/Home/TicketsLists?EmailId=" + EmailAddress + "&comId=" + comId + "&evId=" + evId;
+                    } else {
+                        $('.error-box p').text("Email not register!");
+                    }
+                },
+                error: function (error) {
+                    $('.error-box p').text("Email not register!");
+                    //alert("Email not register!!");
+                }
+            });
+
+        }
+    }
+
+</script>
+
+@if (ViewBag.Error != null)
+{
+    <script>
+    //var text =@ViewBag.Error;
+    $('.error-box p').text("@ViewBag.Error");
+    </script>
+}

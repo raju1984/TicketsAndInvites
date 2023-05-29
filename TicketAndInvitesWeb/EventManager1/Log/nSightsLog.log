@@ -1,0 +1,757 @@
+2022-08-17 10:21:47,117 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- 1152624256firstname: -GautamEmailId :-gautamretansh@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22088TicketId :4256
+2022-08-17 10:21:56,776 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-08-17 10:22:00,785 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 10:23:23,950 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :gautamretansh@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Gautam,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/1152624256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 10:23:53,473 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- 4686604256firstname: -GautamEmailId :-gautamretansh@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22087TicketId :4256
+2022-08-17 10:23:54,217 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-08-17 10:23:54,851 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 10:23:56,691 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :gautamretansh@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Gautam,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/4686604256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 10:45:30,095 ERROR MonitoringLogger - PostTicket page  called3439name Retansh
+2022-08-17 10:45:30,129 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 10:46:06,842 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -RetanshEmailId :-retanshgautam1995@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22093TicketId :4256
+2022-08-17 10:46:10,441 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-17 10:46:11,623 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 10:46:15,607 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam1995@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/6787214256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 10:46:24,520 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -RetanshEmailId :-retanshgautam1995@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22081TicketId :4256
+2022-08-17 10:46:25,991 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-17 10:46:27,078 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 10:46:29,633 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam1995@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/1282464256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 10:46:31,697 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -RetanshEmailId :-retanshgautam1995@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22080TicketId :4256
+2022-08-17 10:46:34,838 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-17 10:46:35,698 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 10:46:38,052 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam1995@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/4577244256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 10:46:39,225 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -RetanshEmailId :-retanshgautam1995@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22079TicketId :4256
+2022-08-17 10:46:39,790 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-17 10:46:40,300 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 10:46:42,145 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam1995@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/6715004256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 10:55:46,374 ERROR MonitoringLogger - PostTicket page  called3439name Abduus
+2022-08-17 10:55:46,404 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 11:02:50,176 ERROR MonitoringLogger - PostTicket page  called3439name Retansh
+2022-08-17 11:02:50,176 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 11:04:59,738 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -RetanshEmailId :-retanshgautam@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22095TicketId :4256
+2022-08-17 11:05:16,901 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-17 11:05:22,438 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 11:05:52,046 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/2642564256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 11:22:27,209 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- 2642564256firstname: -RetanshEmailId :-retanshgautam@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22095TicketId :4256
+2022-08-17 11:22:55,083 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-08-17 11:22:56,892 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 11:23:24,428 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/2642564256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 14:26:08,009 ERROR MonitoringLogger - PostTicket page  called3439name aaa
+2022-08-17 14:26:08,028 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 14:26:53,139 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -aaaEmailId :-sandip.arora1992@gmai.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22096TicketId :4256
+2022-08-17 14:26:56,137 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-17 14:26:56,950 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 14:26:59,678 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :sandip.arora1992@gmai.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello aaa,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/5889574256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 17:00:33,462 ERROR MonitoringLogger - PostTicket page  called3439name Abduus
+2022-08-17 17:00:33,495 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 17:05:22,071 ERROR MonitoringLogger - PostTicket page  called3439name Abduus
+2022-08-17 17:05:22,071 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 17:07:15,446 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -AbduusEmailId :-syedsamad965@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22098TicketId :4256
+2022-08-17 17:07:29,340 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-17 17:07:31,640 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 17:07:56,710 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :syedsamad965@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Abduus,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/3013134256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 17:09:08,416 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -AbduusEmailId :-syedsamad965@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22097TicketId :4256
+2022-08-17 17:09:12,567 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-17 17:09:14,570 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 17:09:15,785 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :syedsamad965@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Abduus,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/7892354256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 17:09:36,919 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -AbduusEmailId :-syedsamad965@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22094TicketId :4256
+2022-08-17 17:09:38,079 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-17 17:09:38,783 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 17:09:40,075 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :syedsamad965@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Abduus,</p>
+        <p>
+            We are excited you are attending New_Event scheduled for 10/08/2022 07:19PM  <span>at B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=B-7, Prashant Garden, Block A, RajatKhora Colony, Sector 62, Ghaziabad, Uttar Pradesh 201309, India, Ghaziabad" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/7012564256.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Kattah/photo-1492684223066-81342ee5ff30.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>9874563210</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 17:47:03,258 ERROR MonitoringLogger - PostTicket page  called3440name Retansh
+2022-08-17 17:47:03,282 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 17:47:16,213 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/vru97c736ur5wju","access_code":"vru97c736ur5wju","reference":"291bc470_f4db_4841_8432_8d20b15b9ddf"}}
+2022-08-17 18:06:06,953 ERROR MonitoringLogger - PostTicket page  called3440name Retansh
+2022-08-17 18:06:06,978 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 18:06:08,921 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/qgxwx5r882gm4w5","access_code":"qgxwx5r882gm4w5","reference":"c3df00eb_15bf_4073_b349_1323733043f9"}}
+2022-08-17 18:08:00,882 ERROR MonitoringLogger - PostTicket page  called3440name Retansh
+2022-08-17 18:08:00,882 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 18:08:01,896 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/2bf3v3vl8z0xkjk","access_code":"2bf3v3vl8z0xkjk","reference":"f5378f2d_6a63_4f21_a40b_3685eb3f2d7a"}}
+2022-08-17 18:11:13,581 ERROR MonitoringLogger - PostTicket page  called3440name Retansh
+2022-08-17 18:11:13,602 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 18:11:15,328 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/y7h2fagv4j9l8n4","access_code":"y7h2fagv4j9l8n4","reference":"3a7f3997_a71d_406c_ba8e_d77e6554614d"}}
+2022-08-17 18:12:40,014 ERROR MonitoringLogger - PostTicket page  called3440name Retansh
+2022-08-17 18:12:40,014 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 18:12:40,556 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/pq3723xp67cqn5h","access_code":"pq3723xp67cqn5h","reference":"f6ecfcae_a39d_4611_a4d2_642d8b909839"}}
+2022-08-17 18:13:53,499 ERROR MonitoringLogger - PostTicket page  called3440name Retansh
+2022-08-17 18:13:53,499 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 18:14:41,085 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/npncb4im47478o1","access_code":"npncb4im47478o1","reference":"5b195056_f993_48b5_baa2_1687583788c4"}}
+2022-08-17 18:15:26,298 ERROR MonitoringLogger - PostTicket page  called3440name Retansh
+2022-08-17 18:15:26,298 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 18:15:27,569 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/sgjg9egr126rp69","access_code":"sgjg9egr126rp69","reference":"62548bfb_3ca0_403e_b1c6_7a17f55f954c"}}
+2022-08-17 18:17:18,870 ERROR MonitoringLogger - PayStack response in Callback reference:  62548bfb-3ca0-403e-b1c6-7a17f55f954c
+2022-08-17 18:17:34,806 ERROR MonitoringLogger - Api response in Callback response :  {"status":true,"message":"Verification successful","data":{"id":2030022825,"domain":"test","status":"success","reference":"62548bfb_3ca0_403e_b1c6_7a17f55f954c","amount":4500,"message":null,"gateway_response":"Successful","paid_at":"2022_08_17T12:45:37.000Z","created_at":"2022_08_17T12:45:28.000Z","channel":"card","currency":"GHS","ip_address":"122.176.47.222","metadata":{"custom_fields":{"display_name":"Cancel","variable_name":"cancel_action","value":"http://localhost:62110/Payment/PayStackPayment?hfevpaystackCancleCallback"}},"log":{"start_time":1660740331,"time_spent":6,"attempts":1,"errors":0,"success":true,"mobile":false,"input":[],"history":[{"type":"action","message":"Attempted to pay with card","time":5},{"type":"success","message":"Successfully paid with card","time":6}]},"fees":88,"fees_split":null,"authorization":{"authorization_code":"AUTH_keihi2ta4m","bin":"408408","last4":"4081","exp_month":"12","exp_year":"2030","channel":"card","card_type":"visa ","bank":"TEST BANK","country_code":"GH","brand":"visa","reusable":true,"signature":"SIG_mFkgYdLPHWaecI0s7bPG","account_name":null,"receiver_bank_account_number":null,"receiver_bank":null},"customer":{"id":89935070,"first_name":null,"last_name":null,"email":"retanshgautam1995@gmail.com","customer_code":"CUS_05ovgmwvkq2tujf","phone":null,"metadata":null,"risk_action":"default","international_format_phone":null},"plan":null,"split":{},"order_id":null,"paidAt":"2022_08_17T12:45:37.000Z","createdAt":"2022_08_17T12:45:28.000Z","requested_amount":4500,"pos_transaction_data":null,"source":null,"fees_breakdown":null,"transaction_date":"2022_08_17T12:45:28.000Z","plan_object":{},"subaccount":{}}}
+2022-08-17 18:17:48,734 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-08-17 18:17:48,734 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ) in E:\Projects\Work\vsProcessor\EventManager1\Models\CommonSMSCallF.cs:line 34
+2022-08-17 18:17:49,974 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 18:22:07,042 ERROR MonitoringLogger - PostTicket page  called3440name aaa
+2022-08-17 18:22:07,051 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 18:22:08,645 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/rz0pfuctbiimokn","access_code":"rz0pfuctbiimokn","reference":"c6fbcd16_ec30_4249_9f00_b80031b259d0"}}
+2022-08-17 18:23:13,148 ERROR MonitoringLogger - PostTicket page  called3440name aaa
+2022-08-17 18:23:13,148 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 18:47:09,908 ERROR MonitoringLogger - PostTicket page  called3440name Retansh
+2022-08-17 18:47:09,932 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 19:00:14,782 ERROR MonitoringLogger - PostTicket page  called3440name aaa
+2022-08-17 19:00:15,228 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 19:00:34,272 ERROR MonitoringLogger - PostTicket page  called3440name aaa
+2022-08-17 19:00:34,272 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 19:02:18,621 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-08-17 19:02:19,276 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 19:02:19,332 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ)
+2022-08-17 19:02:22,874 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :sandip.arora1992@gmai.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello aaa,</p>
+        <p>
+            We are excited you are attending New_ORG_Event scheduled for 17/08/2022 10:00PM  <span>at MSME, UDYOG BHAWAN, Rajpath Area, Central Secretariat, New Delhi, Delhi 110011, India, New Delhi</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=MSME, UDYOG BHAWAN, Rajpath Area, Central Secretariat, New Delhi, Delhi 110011, India, New Delhi" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/9635994258.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Ashish/istockphoto-479977238-612x612.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>8756321049</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 19:02:49,024 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- 9635994258firstname: -aaaEmailId :-sandip.arora1992@gmai.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22110TicketId :4258
+2022-08-17 19:02:51,437 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-08-17 19:02:52,020 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 19:02:53,715 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :sandip.arora1992@gmai.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello aaa,</p>
+        <p>
+            We are excited you are attending New_ORG_Event scheduled for 17/08/2022 10:00PM  <span>at MSME, UDYOG BHAWAN, Rajpath Area, Central Secretariat, New Delhi, Delhi 110011, India, New Delhi</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=MSME, UDYOG BHAWAN, Rajpath Area, Central Secretariat, New Delhi, Delhi 110011, India, New Delhi" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/9635994258.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Ashish/istockphoto-479977238-612x612.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>8756321049</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 19:03:02,714 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- firstname: -aaaEmailId :-sandip.arora1992@gmai.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22109TicketId :4258
+2022-08-17 19:03:04,005 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call line 193
+2022-08-17 19:03:04,845 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 19:03:06,367 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :sandip.arora1992@gmai.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello aaa,</p>
+        <p>
+            We are excited you are attending New_ORG_Event scheduled for 17/08/2022 10:00PM  <span>at MSME, UDYOG BHAWAN, Rajpath Area, Central Secretariat, New Delhi, Delhi 110011, India, New Delhi</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=MSME, UDYOG BHAWAN, Rajpath Area, Central Secretariat, New Delhi, Delhi 110011, India, New Delhi" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/6404534258.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Ashish/istockphoto-479977238-612x612.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>8756321049</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 19:06:13,845 ERROR MonitoringLogger - PostTicket page  called3440name aaa
+2022-08-17 19:06:13,873 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 19:08:03,591 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ) in E:\Projects\Work\vsProcessor\EventManager1\Models\CommonSMSCallF.cs:line 34
+2022-08-17 19:08:22,765 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- 9150584258firstname: -aaaEmailId :-sandip.arora1992@gmai.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22111TicketId :4258
+2022-08-17 19:08:44,783 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-08-17 19:08:45,580 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 19:08:48,243 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :sandip.arora1992@gmai.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello aaa,</p>
+        <p>
+            We are excited you are attending New_ORG_Event scheduled for 17/08/2022 10:00PM  <span>at MSME, UDYOG BHAWAN, Rajpath Area, Central Secretariat, New Delhi, Delhi 110011, India, New Delhi</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=MSME, UDYOG BHAWAN, Rajpath Area, Central Secretariat, New Delhi, Delhi 110011, India, New Delhi" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/9150584258.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Ashish/istockphoto-479977238-612x612.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>8756321049</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 19:08:53,876 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- 6404534258firstname: -aaaEmailId :-sandip.arora1992@gmai.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22109TicketId :4258
+2022-08-17 19:08:54,561 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-08-17 19:09:17,892 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 19:09:19,219 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :sandip.arora1992@gmai.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello aaa,</p>
+        <p>
+            We are excited you are attending New_ORG_Event scheduled for 17/08/2022 10:00PM  <span>at MSME, UDYOG BHAWAN, Rajpath Area, Central Secretariat, New Delhi, Delhi 110011, India, New Delhi</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=MSME, UDYOG BHAWAN, Rajpath Area, Central Secretariat, New Delhi, Delhi 110011, India, New Delhi" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/6404534258.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Ashish/istockphoto-479977238-612x612.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>8756321049</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 19:16:57,449 ERROR MonitoringLogger - PostTicket page  called3440name Retansh
+2022-08-17 19:16:57,473 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 19:19:35,798 ERROR MonitoringLogger - PostTicket page  called3440name Retansh
+2022-08-17 19:19:35,798 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 19:20:49,342 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ) in E:\Projects\Work\vsProcessor\EventManager1\Models\CommonSMSCallF.cs:line 34
+2022-08-17 19:22:27,887 ERROR MonitoringLogger - PostTicket page  called3440name Retansh
+2022-08-17 19:22:27,887 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 19:23:43,820 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ)
+2022-08-17 19:24:12,744 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- 4334684258firstname: -RetanshEmailId :-retanshgautam@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22114TicketId :4258
+2022-08-17 19:24:14,033 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-08-17 19:24:14,874 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 19:24:17,544 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending New_ORG_Event scheduled for 17/08/2022 10:00PM  <span>at MSME, UDYOG BHAWAN, Rajpath Area, Central Secretariat, New Delhi, Delhi 110011, India, New Delhi</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=MSME, UDYOG BHAWAN, Rajpath Area, Central Secretariat, New Delhi, Delhi 110011, India, New Delhi" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/4334684258.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Ashish/istockphoto-479977238-612x612.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            Retansh <br>
+            <span>8756321049</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 20:01:24,393 ERROR MonitoringLogger - PostTicket page  called3441name Retansh
+2022-08-17 20:01:24,410 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 20:01:27,459 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/3t1n4m77z7b7x1r","access_code":"3t1n4m77z7b7x1r","reference":"075679ed_9813_4b82_9dd5_8d5adf461d77"}}
+2022-08-17 20:09:28,784 ERROR MonitoringLogger - PostTicket page  called3441name Retansh
+2022-08-17 20:09:28,805 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 20:09:38,711 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/7js12derlya9dbt","access_code":"7js12derlya9dbt","reference":"beb93d60_ba65_4302_aeb5_000c682154ec"}}
+2022-08-17 20:11:54,364 ERROR MonitoringLogger - PayStack response in Callback reference:  beb93d60-ba65-4302-aeb5-000c682154ec
+2022-08-17 20:12:10,595 ERROR MonitoringLogger - Api response in Callback response :  {"status":true,"message":"Verification successful","data":{"id":2030228448,"domain":"test","status":"success","reference":"beb93d60_ba65_4302_aeb5_000c682154ec","amount":5000,"message":null,"gateway_response":"Successful","paid_at":"2022_08_17T14:40:00.000Z","created_at":"2022_08_17T14:39:39.000Z","channel":"card","currency":"GHS","ip_address":"122.176.47.222","metadata":{"custom_fields":{"display_name":"Cancel","variable_name":"cancel_action","value":"http://localhost:62110/paystackCancleCallback"}},"log":{"start_time":1660747190,"time_spent":10,"attempts":1,"errors":0,"success":true,"mobile":false,"input":[],"history":[{"type":"action","message":"Attempted to pay with card","time":7},{"type":"success","message":"Successfully paid with card","time":10}]},"fees":98,"fees_split":null,"authorization":{"authorization_code":"AUTH_87l5is9haf","bin":"408408","last4":"4081","exp_month":"12","exp_year":"2030","channel":"card","card_type":"visa ","bank":"TEST BANK","country_code":"GH","brand":"visa","reusable":true,"signature":"SIG_mFkgYdLPHWaecI0s7bPG","account_name":null,"receiver_bank_account_number":null,"receiver_bank":null},"customer":{"id":89904194,"first_name":null,"last_name":null,"email":"retanshgautam@gmail.com","customer_code":"CUS_aq3h1a0bl72kq5i","phone":null,"metadata":null,"risk_action":"default","international_format_phone":null},"plan":null,"split":{},"order_id":null,"paidAt":"2022_08_17T14:40:00.000Z","createdAt":"2022_08_17T14:39:39.000Z","requested_amount":5000,"pos_transaction_data":null,"source":null,"fees_breakdown":null,"transaction_date":"2022_08_17T14:39:39.000Z","plan_object":{},"subaccount":{}}}
+2022-08-17 20:12:11,237 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ) in E:\Projects\Work\vsProcessor\EventManager1\Models\CommonSMSCallF.cs:line 34
+2022-08-17 20:19:19,804 ERROR MonitoringLogger - PostTicket page  called3441name Retansh
+2022-08-17 20:19:19,820 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 20:19:22,261 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/fker0c469qkqk8h","access_code":"fker0c469qkqk8h","reference":"1b995883_50cc_426d_a5ff_d89c6195ad27"}}
+2022-08-17 20:21:57,011 ERROR MonitoringLogger - PayStack response in Callback reference:  1b995883-50cc-426d-a5ff-d89c6195ad27
+2022-08-17 20:22:13,141 ERROR MonitoringLogger - Api response in Callback response :  {"status":true,"message":"Verification successful","data":{"id":2030246473,"domain":"test","status":"success","reference":"1b995883_50cc_426d_a5ff_d89c6195ad27","amount":5000,"message":null,"gateway_response":"Successful","paid_at":"2022_08_17T14:49:35.000Z","created_at":"2022_08_17T14:49:23.000Z","channel":"card","currency":"GHS","ip_address":"122.176.47.222","metadata":{"custom_fields":{"display_name":"Cancel","variable_name":"cancel_action","value":"http://localhost:62110/paystackCancleCallback"}},"log":{"start_time":1660747769,"time_spent":6,"attempts":1,"errors":0,"success":true,"mobile":false,"input":[],"history":[{"type":"action","message":"Attempted to pay with card","time":4},{"type":"success","message":"Successfully paid with card","time":6}]},"fees":98,"fees_split":null,"authorization":{"authorization_code":"AUTH_80w8b2neyw","bin":"408408","last4":"4081","exp_month":"12","exp_year":"2030","channel":"card","card_type":"visa ","bank":"TEST BANK","country_code":"GH","brand":"visa","reusable":true,"signature":"SIG_mFkgYdLPHWaecI0s7bPG","account_name":null,"receiver_bank_account_number":null,"receiver_bank":null},"customer":{"id":89904194,"first_name":null,"last_name":null,"email":"retanshgautam@gmail.com","customer_code":"CUS_aq3h1a0bl72kq5i","phone":null,"metadata":null,"risk_action":"default","international_format_phone":null},"plan":null,"split":{},"order_id":null,"paidAt":"2022_08_17T14:49:35.000Z","createdAt":"2022_08_17T14:49:23.000Z","requested_amount":5000,"pos_transaction_data":null,"source":null,"fees_breakdown":null,"transaction_date":"2022_08_17T14:49:23.000Z","plan_object":{},"subaccount":{}}}
+2022-08-17 20:22:17,798 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ)
+2022-08-17 20:26:46,907 ERROR MonitoringLogger - PostTicket page  called3441name Gautam
+2022-08-17 20:26:46,927 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 20:26:50,233 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/ak8bvgcty24q9wv","access_code":"ak8bvgcty24q9wv","reference":"824f1d30_c772_4519_9104_15fe87ec2b6d"}}
+2022-08-17 20:27:03,328 ERROR MonitoringLogger - PayStack response in Callback reference:  824f1d30-c772-4519-9104-15fe87ec2b6d
+2022-08-17 20:27:19,954 ERROR MonitoringLogger - Api response in Callback response :  {"status":true,"message":"Verification successful","data":{"id":2030260763,"domain":"test","status":"success","reference":"824f1d30_c772_4519_9104_15fe87ec2b6d","amount":5000,"message":null,"gateway_response":"Successful","paid_at":"2022_08_17T14:57:01.000Z","created_at":"2022_08_17T14:56:50.000Z","channel":"card","currency":"GHS","ip_address":"122.176.47.222","metadata":{"custom_fields":{"display_name":"Cancel","variable_name":"cancel_action","value":"http://localhost:62110/Payment/paystackCancleCallback"}},"log":{"start_time":1660748216,"time_spent":5,"attempts":1,"errors":0,"success":true,"mobile":false,"input":[],"history":[{"type":"action","message":"Attempted to pay with card","time":3},{"type":"success","message":"Successfully paid with card","time":5}]},"fees":98,"fees_split":null,"authorization":{"authorization_code":"AUTH_ljgnqgdbnv","bin":"408408","last4":"4081","exp_month":"12","exp_year":"2030","channel":"card","card_type":"visa ","bank":"TEST BANK","country_code":"GH","brand":"visa","reusable":true,"signature":"SIG_mFkgYdLPHWaecI0s7bPG","account_name":null,"receiver_bank_account_number":null,"receiver_bank":null},"customer":{"id":89803591,"first_name":null,"last_name":null,"email":"gautamretansh@gmail.com","customer_code":"CUS_n8buyfosjuzxtuh","phone":null,"metadata":null,"risk_action":"default","international_format_phone":null},"plan":null,"split":{},"order_id":null,"paidAt":"2022_08_17T14:57:01.000Z","createdAt":"2022_08_17T14:56:50.000Z","requested_amount":5000,"pos_transaction_data":null,"source":null,"fees_breakdown":null,"transaction_date":"2022_08_17T14:56:50.000Z","plan_object":{},"subaccount":{}}}
+2022-08-17 20:27:20,456 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ) in E:\Projects\Work\vsProcessor\EventManager1\Models\CommonSMSCallF.cs:line 34
+2022-08-17 20:29:51,628 ERROR MonitoringLogger - PostTicket page  called3441name Gautam
+2022-08-17 20:29:51,638 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 20:29:55,216 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/5chuw55do1pobb0","access_code":"5chuw55do1pobb0","reference":"3bb200a2_c3db_4d4b_be17_bcc1a361ccd6"}}
+2022-08-17 20:30:10,184 ERROR MonitoringLogger - PayStack response in Callback reference:  3bb200a2-c3db-4d4b-be17-bcc1a361ccd6
+2022-08-17 20:30:26,443 ERROR MonitoringLogger - Api response in Callback response :  {"status":true,"message":"Verification successful","data":{"id":2030266656,"domain":"test","status":"success","reference":"3bb200a2_c3db_4d4b_be17_bcc1a361ccd6","amount":5000,"message":null,"gateway_response":"Successful","paid_at":"2022_08_17T15:00:07.000Z","created_at":"2022_08_17T14:59:55.000Z","channel":"card","currency":"GHS","ip_address":"122.176.47.222","metadata":{"custom_fields":{"display_name":"Cancel","variable_name":"cancel_action","value":"http://localhost:62110/Payment/paystackCancleCallback"}},"log":{"start_time":1660748401,"time_spent":6,"attempts":1,"errors":0,"success":true,"mobile":false,"input":[],"history":[{"type":"action","message":"Attempted to pay with card","time":4},{"type":"success","message":"Successfully paid with card","time":6}]},"fees":98,"fees_split":null,"authorization":{"authorization_code":"AUTH_gplca85dug","bin":"408408","last4":"4081","exp_month":"12","exp_year":"2030","channel":"card","card_type":"visa ","bank":"TEST BANK","country_code":"GH","brand":"visa","reusable":true,"signature":"SIG_mFkgYdLPHWaecI0s7bPG","account_name":null,"receiver_bank_account_number":null,"receiver_bank":null},"customer":{"id":89803591,"first_name":null,"last_name":null,"email":"gautamretansh@gmail.com","customer_code":"CUS_n8buyfosjuzxtuh","phone":null,"metadata":null,"risk_action":"default","international_format_phone":null},"plan":null,"split":{},"order_id":null,"paidAt":"2022_08_17T15:00:07.000Z","createdAt":"2022_08_17T14:59:55.000Z","requested_amount":5000,"pos_transaction_data":null,"source":null,"fees_breakdown":null,"transaction_date":"2022_08_17T14:59:55.000Z","plan_object":{},"subaccount":{}}}
+2022-08-17 20:30:33,162 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ) in E:\Projects\Work\vsProcessor\EventManager1\Models\CommonSMSCallF.cs:line 34
+2022-08-17 20:41:37,652 ERROR MonitoringLogger - PostTicket page  called3440name Retansh
+2022-08-17 20:41:37,678 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 20:41:45,707 ERROR MonitoringLogger - PostTicket page  called3440name Retansh
+2022-08-17 20:41:45,707 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 20:42:34,459 ERROR MonitoringLogger - PostTicket page  called3441name Retansh
+2022-08-17 20:42:34,476 ERROR MonitoringLogger - PostTicket page  called
+2022-08-17 20:42:36,911 ERROR MonitoringLogger - payStack request :  {"status":true,"message":"Authorization URL created","data":{"authorization_url":"https://checkout.paystack.com/nnrpyt3g3h9i5oo","access_code":"nnrpyt3g3h9i5oo","reference":"8cbcd96e_4ef2_4598_9bb8_e120afd591da"}}
+2022-08-17 20:42:51,449 ERROR MonitoringLogger - PayStack response in Callback reference:  8cbcd96e-4ef2-4598-9bb8-e120afd591da
+2022-08-17 20:43:12,032 ERROR MonitoringLogger - Api response in Callback response :  {"status":true,"message":"Verification successful","data":{"id":2030292326,"domain":"test","status":"success","reference":"8cbcd96e_4ef2_4598_9bb8_e120afd591da","amount":5000,"message":null,"gateway_response":"Successful","paid_at":"2022_08_17T15:12:48.000Z","created_at":"2022_08_17T15:12:37.000Z","channel":"card","currency":"GHS","ip_address":"122.176.47.222","metadata":{"custom_fields":{"display_name":"Cancel","variable_name":"cancel_action","value":"http://localhost:62110/Payment/paystackCancleCallback"}},"log":{"start_time":1660749163,"time_spent":4,"attempts":1,"errors":0,"success":true,"mobile":false,"input":[],"history":[{"type":"action","message":"Attempted to pay with card","time":3},{"type":"success","message":"Successfully paid with card","time":4}]},"fees":98,"fees_split":null,"authorization":{"authorization_code":"AUTH_o088kefej3","bin":"408408","last4":"4081","exp_month":"12","exp_year":"2030","channel":"card","card_type":"visa ","bank":"TEST BANK","country_code":"GH","brand":"visa","reusable":true,"signature":"SIG_mFkgYdLPHWaecI0s7bPG","account_name":null,"receiver_bank_account_number":null,"receiver_bank":null},"customer":{"id":89904194,"first_name":null,"last_name":null,"email":"retanshgautam@gmail.com","customer_code":"CUS_aq3h1a0bl72kq5i","phone":null,"metadata":null,"risk_action":"default","international_format_phone":null},"plan":null,"split":{},"order_id":null,"paidAt":"2022_08_17T15:12:48.000Z","createdAt":"2022_08_17T15:12:37.000Z","requested_amount":5000,"pos_transaction_data":null,"source":null,"fees_breakdown":null,"transaction_date":"2022_08_17T15:12:37.000Z","plan_object":{},"subaccount":{}}}
+2022-08-17 20:43:14,883 DEBUG DebugLogger - Error in LogException Store procedure   at Plivo.Resource.ResourceInterface.ExecuteWithExceptionUnwrap[T](Func`1 func)
+   at Plivo.Resource.Message.MessageInterface.Create(List`1 dst, String text, String src, String type, String url, String method, Nullable`1 log, Nullable`1 trackable, String powerpack_uuid, String[] media_urls)
+   at EventManager1.Models.CommonSMSCallF.sendSMS(CommonSMSModal _SMSRQ) in E:\Projects\Work\vsProcessor\EventManager1\Models\CommonSMSCallF.cs:line 34
+2022-08-17 20:43:46,182 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- 8899324259firstname: -RetanshEmailId :-retanshgautam@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22120TicketId :4259
+2022-08-17 20:43:47,297 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-08-17 20:43:47,948 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 20:43:50,515 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending Dancing scheduled for 17/08/2022 07:54PM  <span>at Volta Palace, Accera</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=Volta Palace, Accera" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/8899324259.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Thapliyal/istockphoto-479977238-612x612.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            zzz <br>
+            <span>797999</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
+2022-08-17 20:49:40,482 ERROR MonitoringLogger - GetSendTicketToUser:BarCodeNumber:- 8899324259firstname: -RetanshEmailId :-retanshgautam@gmail.comrequest: System.Web.HttpRequestWrapperaddress: http://localhost:62110rootpath :E:\Projects\Work\vsProcessor\EventManager1\Views\EmailTemplate\TicketMapId :22120TicketId :4259
+2022-08-17 20:49:41,782 ERROR MonitoringLogger - File.Exists(BarcodePath) :SendTicketToMail Call
+2022-08-17 20:49:42,596 ERROR MonitoringLogger - SendTicketToMail :Funcation Start
+2022-08-17 20:49:45,219 ERROR MonitoringLogger - SendEmail Funcation callEmail addres :retanshgautam@gmail.comBody :-
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="padding:1% 5%; width:400px">
+        <p>Hello Retansh,</p>
+        <p>
+            We are excited you are attending Dancing scheduled for 17/08/2022 07:54PM  <span>at Volta Palace, Accera</span>         </p>
+        <br>
+        <p>Kindly click on <a href="https://www.google.com/maps?saddr=My+Location&daddr=Volta Palace, Accera" target="_blank" style="font-weight:bold"> this link </a> for directions to the venue.
+        </p>
+        <br />
+        <p>Below is your event pass, it is important you come along with it as it will be scanned to validate your entry. </p>
+        <p>Thinking about printing your pass? No need! We can scan directly from your phone.</p>
+        <p> <img src="http://localhost:62110/Content/BarCode/8899324259.jpg" alt="image" style="width:150px;padding-left:30%">  </p><br /><br />         <img src="http://localhost:62113/ImageEvent/Thapliyal/istockphoto-479977238-612x612.jpg" class="card-img-top" alt="image" width="100%">
+              
+        <p>
+            For more information contact on:<br />
+            zzz <br>
+            <span>797999</span>
+        </p>
+        
+        
+        
+        
+    </div>
+</body>
+</html>

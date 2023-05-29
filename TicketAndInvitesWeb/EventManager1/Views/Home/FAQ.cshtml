@@ -1,0 +1,390 @@
+﻿
+@{
+    ViewBag.Title = "FAQ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Template-FAQ/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Template-FAQ/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<style>
+    li {
+    /* width: 50%; */
+    text-align: left;
+    margin-left: 30px;
+}
+    .faqHeader {
+        font-size: 27px;
+        margin: 20px;
+    }
+
+    .panel-heading [data-toggle="collapse"]:after {
+        font-family: 'Glyphicons Halflings';
+        content: "\e072"; /* "play" icon */
+        float: right;
+        color: #F58723;
+        font-size: 18px;
+        line-height: 22px;
+        /* rotate "play" icon from > (right arrow) to down arrow */
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+
+    .panel-heading [data-toggle="collapse"].collapsed:after {
+        /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+        color: #454444;
+    }
+</style>
+
+   
+   
+    <div class="container">
+       
+        <br />
+        <br />
+        <br />
+        @*<div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            This section contains a wealth of information, related to <strong>PrepBootstrap</strong> and its store. If you cannot find an answer to your question,
+            make sure to contact us.
+        </div>*@
+        <br />
+        <div class="panel-group" id="accordion">
+            <div class="faqHeader">Frequently Asked Questions</div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">What can I watch on the website?</a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <strong><u>VIDEO ON DEMAND (VOD)</u></strong><br />
+                        These are Ebo Whyte plays that have been made available for you to watch online at your convenience regardless of time and venue, all you need is an internet connection and your device of choice (Smart phone, tablet, laptop or smart TV).
+                        You will have access to watch the play as many times as you wish for three (3) consecutive days from the moment payment is received.
+                        <br />
+                        <strong><u>LIVE STREAM</u></strong><br />
+                                A live streamed show is a onetime, online event that is available only for a specific date and time. Once a live stream is over, that showing of the play cannot be accessed again.
+                                @*Any registed user, who presents a work, which is genuine and appealing, can post it on <strong>PrepBootstrap</strong>.*@
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Can I watch from outside the country?</a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Yes. This is an online platform that only requires a good internet connection and the device of your choice e.g. Smart phone/TV, laptop, tablet or any other video streaming device.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Can I watch using any browser?</a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Yes, all browsers are compatible. Chrome, Firefox, Microsoft Edge, Opera Mini, Safari, etc.
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">What devices can I watch the plays on?</a>
+                    </h4>
+                </div>
+                <div id="collapseSix" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        You can watch anywhere, anytime, on your smart phone, laptop, smart TV. Any video streaming device is compatible. However you need a very good internet or data speed to achieve the best experience. 
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">I have made payment but the play is not available on my dashboard. </a>
+                    </h4>
+                </div>
+                <div id="collapseEight" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Please refresh your page, logout and login again. If it does not update after 10 minutes, kindly send a WhatsApp message to 0505546030 with your username and a screenshot of the payment made.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwenty">I have made payment and have been debited, but the video is not playing? </a>
+                    </h4>
+                </div>
+                <div id="collapseTwenty" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Please check your data and internet connection, if they do not work please send a screenshot of the successful payment to our WhatsApp line 0505546030.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyOne">I was debited twice for the same play, what do I do? </a>
+                    </h4>
+                </div>
+                <div id="collapseTwentyOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Kindly send an email to info@stream233.com with screenshots of both payments with amount debited, and the username you sign into our website with.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyTwo">I mistakenly paid for the wrong play, what do I do? </a>
+                    </h4>
+                </div>
+                <div id="collapseTwentyTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Tickets are non-refundable and non-transferable, so please ensure that you click on the correct play title. Each play has its synopsis available, this may help you to confirm that you have chosen the right one.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyThree">The video has been buffering for some time, what do I do? </a>
+                    </h4>
+                </div>
+                <div id="collapseTwentyThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Please check your data and internet connection, refresh your screen, if these do not work please send a WhatsApp message to 0505546030.
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">How can I pay for a video?</a>
+                    </h4>
+                </div>
+                <div id="collapseNine" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        All Ghanaian mobile money channels (MTN Momo, Vodafone Cash and AirtelTigo Cash) are available. We also accept Visa and MasterCard debit/credit cards.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">How do I watch a Video on Demand?</a>
+                    </h4>
+                </div>
+                <div id="collapseTen" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        After registering and account you will need to navigate to the Home page by clicking on the <strong>“Stream233”</strong>  logo located on the top left had corner of the screen. Once there, scroll down to <strong>“Videos”</strong>  and click on the picture of the play you wish to watch. Follow the payment process, once payment is approved wait, you will automatically be directed to the page containing the play – this may take up to 1 minute, so do not press back. Once you are redirected, simply click play and enjoy the show! 
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">I have paid for a pass to watch, but it is only allowing me to watch only one play, why?</a>
+                    </h4>
+                </div>
+                <div id="collapseEleven" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Each purchase you make is play specific, thus you can only watch the play you have selected and paid for. If you wish to watch a different play, head to the home page, select the play of choice and follow the payment process for 3 day access. 
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsetwelve">I want to purchase a play as a gift for someone</a>
+                    </h4>
+                </div>
+                <div id="collapsetwelve" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        This option is not yet available.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsethirteen">How do I register on the website?</a>
+                    </h4>
+                </div>
+                <div id="collapsethirteen" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ol>
+                            <li>Click <strong>“Sign In”</strong>  at the top right-hand corner of your screen.
+<ol type="a"><li>On a mobile device, click the 3 dashes on the top right corner, there will be a drop down menu, select and click <strong>“Sign in”</strong></li></ol>  </li>
+                            <li>Scroll down and click <strong>“I don’t have an account. Register me”</strong>     </li>
+                            <li>Enter your name and full phone number starting with zero (0). Entering your email is optional.</li>
+                            <li>Select your country of residence</li>
+                            <li>Create a password</li>
+                            <li>Check T’s &C’s box</li>
+                            <li>Click <strong>“Register”</strong>   </li>
+                            <li>Please wait</li>
+                            <li>You will receive a text message with an OTP (One Time Pin) on your phone. Enter this pin into the field labelled <strong>“Confirmation Code”</strong>   (if you do not receive the confirmation code within 10 minutes, please check the number you entered and amend if necessary.)</li>
+                            <li>Click <strong>“Confirm Registration”</strong>  </li>
+                        </ol> 
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseForteen">How do I change my password?</a>
+                    </h4>
+                </div>
+                <div id="collapseForteen" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ol>
+                            <li>
+                                Click on <strong>Your Name</strong>  located at the top right-hand corner of the home screen
+                                <ol type="a"><li>On a mobile device, click the 3 dashes at the top right-hand corner, there will be a drop down menu, select and click <strong>Your Name</strong>.</li></ol>
+                            </li>
+                            <li>Click on <strong>“My Profile”</strong> </li>
+                            <li>
+                                Click on <strong>“My Account”</strong>, then “Account Settings” and select <strong>“Change Password”</strong> .
+                                <ol type="a"> <li> On a mobile device, click the 3 dashes at the top right-hand corner of your screen, there will be a drop down menu, select and click <strong>“My Account”</strong> </li></ol>
+                            </li>
+                            <li>Enter your old password</li>
+                            <li>Enter your new password and confirm by entering in the new password again.</li>
+                            <li>Click on <strong>“Change Password”</strong> </li>
+                           
+                        </ol> 
+                    </div>
+                </div>
+            </div>
+           
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen">How do I change my name or add my email address?</a>
+                    </h4>
+                </div>
+                <div id="collapseFifteen" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ol>
+                            <li>
+                                Click on <strong>Your Name</strong>  located at the top right-hand corner of your screen
+                                <ol type="a"><li> On a mobile device, click the 3 dashes at the top right-hand corner there will be a drop down menu, select and click <strong>Your Name</strong> . </li></ol>
+                            </li>
+                            <li>Click on <strong>“My Profile”</strong> </li>
+                            <li>
+                                Click on <strong>“My Account”</strong>  and then click <strong>“Account Settings”</strong>
+                                <ol type="a"><li> On a mobile device, click the 3 dashes at the top right-hand corner of your screen, there will be a drop down menu, select and click <strong>“My Account”</strong> </li> </ol>
+                            </li>
+                            <li>Click on <strong>“Personal Settings”</strong> </li>
+                            <li>Change the details you wish to update and click on <strong>“Update Settings”</strong> </li>
+                            
+                        </ol> 
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen">The system says “username or password is invalid”. What do I do?</a>
+                    </h4>
+                </div>
+                <div id="collapseSixteen" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        This means either:
+                        <ol>
+                            <li>You have not registered on the website yet. To resolve, please click the link below to register.
+https://www.stream233.com//Account/Signup</li>
+                            <li>Or your phone number/email address (username) or password are incorrect, if you are already a registered user. To resolve, click the eyeball icon beside the password field to check if you have entered it correctly.</li>
+                            
+                        </ol>  
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen">I have forgotten my password, what do I do?</a>
+                    </h4>
+                </div>
+                <div id="collapseSeventeen" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ol>
+                            <li>Click <strong>“I forgot my password”</strong> </li>
+                            <li>Enter your username – the phone number or email address you registered with. Enter the phone number starting with zero (0). And then click <strong>“Send verification”</strong> .</li>
+                            <li>A new password has been sent to you via text message (if username is a phone number) or via email (if username is an email address).</li>
+                            <li>On the screen, click <strong>“Sign in here”</strong> </li>
+                            <li>Log in by entering your username and the pin you have just received as the password. The pin is your new password until you change it.</li>
+                            <li>To change your password, follow these steps:
+                                <ol type="A">
+                                    <li>Click on <strong>Your Name</strong>  located at the top right-hand corner of the home screen
+                                    <ol type="I"><li>On a mobile device, click the 3 dashes at the top right-hand corner there will be a drop down menu, select and click <strong>Your Name.</strong> </li></ol>
+                                    </li>
+                                    <li>Click on <strong>“My Profile”</strong> </li>
+                                    <li>Click on <strong>“My Account”</strong> , then click <strong>“Account Settings”</strong>  and then select <strong>“Change Password”</strong> .
+                                    <ol type="I"><li>On a mobile device, click the 3 dashes at the top right-hand corner of your screen, there will be a drop down menu, select and click <strong>“My Account”</strong> </li></ol>
+                                    </li>
+                                    <li>Enter your old password</li>
+                                    <li>Enter your new password and confirm by entering in the new password again.</li>
+                                    <li>Click on <strong>“Change Password”</strong> </li>
+                                </ol>
+                            </li>
+                        </ol>  
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen">I have purchased a ticket for a LIVE STREAM, can I still watch if I miss it?</a>
+                    </h4>
+                </div>
+                <div id="collapseEighteen" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Live Stream Videos are one-time events only, if you miss the Live Stream, you cannot watch it again as it will no longer be available. Please do well to watch as tickets to our Live Streams are non-refundable.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNinteen">I have paid for a LIVE STREAM VIDEO but can’t watch. Why?</a>
+                    </h4>
+                </div>
+                <div id="collapseNinteen" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Live Stream Videos are available at a specific date and time which would have been advertised in advance of the event. You are unable to watch, because the event may have not yet commenced or has passed. If it has not commenced, please refer to the email/text communication sent you to confirm the time that the link will be live.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel panel-default">
+               
+                <div>
+                    <div class="panel-body">
+                        <strong>
+                            For all customer service and technical challenges, send a message via WhatsApp to 0505546030 or call 0505546010.
+                            All enquiries will be responded to between 10am and 4pm GMT<br />
+                            For International enquiries please kindly bear time difference in mind, it may take up to 24 hours to acknowledge receipt of your message.
+                        </strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<script src="~/Template-FAQ/bootstrap/js/bootstrap.min.js"></script>

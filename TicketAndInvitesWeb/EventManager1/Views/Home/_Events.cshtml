@@ -1,0 +1,377 @@
+﻿@model  IEnumerable<EventManager1.Models.IndexView>
+@using EventManager1.Models
+@{
+    <link href="~/css/owl.carousel.css" rel="stylesheet" />
+    <link href="~/css/owl.theme.default.css" rel="stylesheet" />
+
+    <style>
+        .owl-carousel .owl-stage {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .owl-carousel .owl-nav button.owl-prev {
+            position: absolute;
+            top: 40%;
+            left: -50px;
+            background: #5f5e5ed1;
+            padding: 0 15px !important;
+            border-radius: 50%;
+        }
+        .small-btn {
+            margin: 0 45px;
+            padding: 6px 40px;
+            background: #f48534;
+            color: #fff !important;
+            border: none;
+            text-align: center;
+        }
+        .down-sec {
+            padding: 22px 15px 0px 15px;
+        }
+        .owl-carousel .owl-nav button.owl-next {
+            position: absolute;
+            top: 40%;
+            right: -50px;
+            background: #5f5e5ed1;
+            padding: 0 15px !important;
+            border-radius: 50%;
+        }
+        .owl-carousel .owl-nav button.owl-prev span,
+        .owl-carousel .owl-nav button.owl-next span,
+        .owl-carousel button.owl-dot span {
+            font-size: 2em;
+            color: #fff;
+        }
+        .item {
+            height: 100%;
+        }
+        .item .events-box {
+            height: 99%;
+        }
+    </style>
+        if (Model != null && Model.Count() > 0)
+        {            
+            var popular = Model.Where(a => a.IsPopupar == true).ToList();
+            var Platinum = Model.Where(a => a.SubCriptionType == (int)SubscriptionType.Platinum ).ToList();
+            var Gold = Model.Where(a => a.SubCriptionType == (int)SubscriptionType.Gold).ToList();
+            var Silver = Model.Where(a => a.SubCriptionType == (int)SubscriptionType.Silver).ToList();
+            var Bronze = Model.Where(a => a.SubCriptionType == (int)SubscriptionType.Bronze).ToList();
+            var eEvent = Model.Where(a => a.EventType == 1).ToList();
+            if (popular != null && popular.Count() > 0)
+            {
+            <section class="popular-events">
+                <div class="container">
+                    <h2 class="main-heading"><span>Popular</span> Events</h2>
+                    <div class="owl-carousel owl-theme">
+                        @foreach (var item in popular)
+    {
+        if (item.Price != null && item.Price.Count > 0)
+        {
+            decimal? price = item.Price.OrderByDescending(a => a.Price).Select(a => a.Price).FirstOrDefault();
+            //string imageurl = item.Images != null && item.Images.Where(a => a.MulType == 1 && a.mainpic==true).FirstOrDefault() != null ? item.Images.Where(a => a.MulType == 1).FirstOrDefault().Url : "/images/img3.jpg";
+            string imageurl = ""; //item.Images != null && item.Images.Where(a => a.MulType == 1 && a.mainpic == true).FirstOrDefault() !=null? item.Images.Where(a => a.MulType == 1).FirstOrDefault().Url : "/images/img3.jpg";
+            if (item.Images.FirstOrDefault(x => x.MulType == 1) != null)
+            {
+                if (item.Images.FirstOrDefault(s => s.mainpic == true) != null)
+                {
+                    imageurl = item.Images.FirstOrDefault(s => s.mainpic == true).Url.ToString();
+                    if (imageurl == null) { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+                }
+                else { imageurl = item.Images.FirstOrDefault().Url.ToString(); }
+            }
+            else { imageurl = "/images/img3.jpg"; }
+            string alt = Path.GetFileName(imageurl);
+                                <div class="item">
+                                    <div class="events-box">
+                                        <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})">
+                                            <div class="">
+                                                <figure><img src="@imageurl" alt="@alt"></figure>
+                                                <div class="down-sec">
+                                                    @*<h4>@item.EventName</h4>*@
+                                                   
+                                                    <div class="bottom-sec">
+                                                        <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})" class="small-btn">Buy Now</a>
+                                                        @*<strong><span>@item.Currency</span>@price</strong>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="bottom-btn text-center" style="display:none;"><a href="@Url.Action("EventsSearchResult","Home",new {area="",eventtype=5 })" class="benn-btn">More Events</a></div>
+                </div>
+            </section>
+        }
+
+        if (Platinum != null && Platinum.Count() > 0)
+        {
+            <section class="popular-events">
+                <div class="container">
+                    <h2 class="main-heading"><span>Attraction</span> Events</h2>
+                    <div class="owl-carousel owl-theme">
+                        @foreach (var item in Platinum.Take(Model.FirstOrDefault().subscripton.Platinum))
+                        {
+                            if (item.Price != null && item.Price.Count > 0)
+                            {
+                                decimal? price = item.Price.OrderByDescending(a => a.Price).Select(a => a.Price).FirstOrDefault();
+                                //string imageurl = item.Images != null && item.Images.Where(a => a.MulType == 1 && a.mainpic == true).FirstOrDefault() != null ? item.Images.Where(a => a.MulType == 1).FirstOrDefault().Url : "/images/img3.jpg";
+                                string imageurl = ""; //item.Images != null && item.Images.Where(a => a.MulType == 1 && a.mainpic == true).FirstOrDefault() !=null? item.Images.Where(a => a.MulType == 1).FirstOrDefault().Url : "/images/img3.jpg";
+                                if (item.Images.FirstOrDefault(s => s.mainpic == true) != null)
+                                {
+                                    imageurl = item.Images.FirstOrDefault(s => s.mainpic == true && s.MulType == 1).Url.ToString();
+                                }
+                                else {
+                                    if(item.Images.FirstOrDefault(s => s.MulType == 1).Url != null)
+                                    {
+                                        imageurl = item.Images.FirstOrDefault(s => s.MulType == 1).Url.ToString();
+                                    }
+                                    else
+                                    {
+                                        imageurl = "~/images/placeholder-image.jpg";
+
+                                    }
+
+                                }
+                                string alt = Path.GetFileName(imageurl);
+                                <div class="item">
+
+                                        <div class="events-box">
+                                            <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})">
+                                                <div class="">
+                                                    <figure><img src="@imageurl" alt="@alt"></figure>
+                                                    <div class="down-sec">
+                                                       
+                                                     
+                                                        <div class="bottom-sec">
+                                                            <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})" class="small-btn">Buy Now</a>
+                                                            @*<strong><span>@item.Currency</span>@price</strong>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                            }
+                        }
+                    </div>
+                    <div class="bottom-btn text-center" style="display:none;"><a href="@Url.Action("EventsSearchResult","Home",new {area="",eventtype=(int)SubscriptionType.Platinum })" class="benn-btn">More Events</a></div>
+                </div>
+            </section>
+        }
+        if (Gold != null && Gold.Count() > 0)
+        {
+            <section class="popular-events">
+                <div class="container">
+                    <h2 class="main-heading"><span>Awesome</span> Events</h2>
+                    <div class="owl-carousel owl-theme">
+                        @foreach (var item in Gold.Take(Model.FirstOrDefault().subscripton.Gold))
+                        {
+                            if (item.Price != null && item.Price.Count > 0)
+                            {
+                                decimal? price = item.Price.OrderByDescending(a => a.Price).Select(a => a.Price).FirstOrDefault();
+                                //string imageurl = item.Images != null && item.Images.Where(a => a.MulType == 1 && a.mainpic == true).FirstOrDefault() != null ? item.Images.Where(a => a.MulType == 1).FirstOrDefault().Url : "/images/img3.jpg";
+                                string imageurl = ""; //item.Images != null && item.Images.Where(a => a.MulType == 1 && a.mainpic == true).FirstOrDefault() !=null? item.Images.Where(a => a.MulType == 1).FirstOrDefault().Url : "/images/img3.jpg";
+                                if (item.Images.FirstOrDefault(s => s.mainpic == true) != null)
+                                {
+                                    imageurl = item.Images.FirstOrDefault(s => s.mainpic == true && s.MulType == 1).Url.ToString();
+                                }
+                                else { imageurl = item.Images.FirstOrDefault(s => s.MulType == 1).Url.ToString(); }
+                                string alt = Path.GetFileName(imageurl);
+                                <div class="item">
+                                    <div class="events-box">
+                                        <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})">
+                                            <div class="">
+                                                <figure><img src="@imageurl" alt="@alt"></figure>
+                                                <div class="down-sec">
+                                                 
+                                                    <div class="bottom-sec">
+                                                        <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})" class="small-btn">Buy Now</a>
+                                                        @*<strong><span>@item.Currency</span>@price</strong>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                            }
+                        }
+                    </div>
+                    <div class="bottom-btn text-center" style="display:none;"><a href="@Url.Action("EventsSearchResult","Home",new {area="",eventtype=(int)SubscriptionType.Gold })" class="benn-btn">More Events</a></div>
+                </div>
+            </section>
+        }
+        if (Silver != null && Silver.Count() > 0)
+        {
+            <section class="popular-events">
+                <div class="container">
+                    <h2 class="main-heading"><span>Beautfiful</span> Events</h2>
+                    <div class="owl-carousel owl-theme">
+                        @foreach (var item in Silver.Take(Model.FirstOrDefault().subscripton.Silver))
+                        {
+                            if (item.Price != null && item.Price.Count > 0)
+                            {
+                                decimal? price = item.Price.OrderByDescending(a => a.Price).Select(a => a.Price).FirstOrDefault();
+                                //string imageurl = item.Images != null && item.Images.Where(a => a.MulType == 1 && a.mainpic == true).FirstOrDefault() != null ? item.Images.Where(a => a.MulType == 1).FirstOrDefault().Url : "/images/img3.jpg";
+                                string imageurl = ""; //item.Images != null && item.Images.Where(a => a.MulType == 1 && a.mainpic == true).FirstOrDefault() !=null? item.Images.Where(a => a.MulType == 1).FirstOrDefault().Url : "/images/img3.jpg";
+                                if (item.Images.FirstOrDefault(s => s.mainpic == true) != null)
+                                {
+                                    imageurl = item.Images.FirstOrDefault(s => s.mainpic == true && s.MulType == 1).Url.ToString();
+                                }
+                                else { imageurl = item.Images.FirstOrDefault(s => s.MulType == 1).Url.ToString(); }
+                                string alt = Path.GetFileName(imageurl);
+                                <div class="item">
+                                    <div class="events-box">
+                                        <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})">
+                                            <div class="">
+                                                <figure><img src="@imageurl" alt="@alt"></figure>
+                                                <div class="down-sec">
+                                                    <h4>@item.EventName</h4>
+                                                    <p class="location-time">
+                                                        <span style="display:none;">
+                                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                            @item.Location
+                                                        </span> <span>
+    <i class="fa fa-calendar" aria-hidden="true"></i>
+    @Convert.ToDateTime(item.EventStartDate).ToString("dd/MM/yyyy hh:mmtt") - @Convert.ToDateTime(item.EventEndDate).ToString("dd/MM/yyyy hh:mmtt")
+</span>
+                                                    </p>
+                                                    <div class="bottom-sec">
+                                                        <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})" class="small-btn">Buy Now</a>
+                                                        @*<strong><span>@item.Currency</span>@price</strong>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="bottom-btn text-center" style="display:none;"><a href="@Url.Action("EventsSearchResult","Home",new {area="",eventtype=(int)SubscriptionType.Silver })" class="benn-btn">More Events</a></div>
+                </div>
+            </section>
+        }
+        if (Bronze != null && Bronze.Count() > 0)
+        {
+            <section class="popular-events">
+                <div class="container">
+                    <h2 class="main-heading"><span>Cool</span> Events</h2>
+                    <div class="owl-carousel owl-theme">
+                        @foreach (var item in Bronze.Take(Model.FirstOrDefault().subscripton.Bronze))
+                        {
+                            if (item.Price != null && item.Price.Count > 0)
+                            {
+                                decimal? price = item.Price.OrderByDescending(a => a.Price).Select(a => a.Price).FirstOrDefault();
+                                //string imageurl = item.Images != null && item.Images.Where(a => a.MulType == 1 && a.mainpic == true).FirstOrDefault() != null ? item.Images.Where(a => a.MulType == 1).FirstOrDefault().Url : "/images/img3.jpg";
+                                string imageurl = ""; 
+                                if (item.Images.FirstOrDefault(s => s.mainpic == true) != null)
+                                {
+                                    imageurl = item.Images.FirstOrDefault(s => s.mainpic == true && s.MulType == 1).Url.ToString();
+                                }
+                                else { imageurl = item.Images.FirstOrDefault(s => s.MulType == 1).Url.ToString(); }
+                                string alt = Path.GetFileName(imageurl);
+                                <div class="item">
+                                    <div class="events-box">
+                                        <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})">
+                                            <div class="">
+                                                <figure><img src="@imageurl" alt="@alt"></figure>
+                                                <div class="down-sec">
+                                                    <h4>@item.EventName</h4>
+                                                    <p class="location-time">
+                                                        <span style="display:none;">
+                                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                            @item.Location
+                                                        </span> <span>
+    <i class="fa fa-calendar" aria-hidden="true"></i>
+    @Convert.ToDateTime(item.EventStartDate).ToString("dd/MM/yyyy hh:mmtt") - @Convert.ToDateTime(item.EventEndDate).ToString("dd/MM/yyyy hh:mmtt")
+</span>
+                                                    </p>
+                                                    <div class="bottom-sec">
+                                                        <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})" class="small-btn">Grab your ticket</a>
+                                                        @*<strong><span>@item.Currency</span>@price</strong>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="bottom-btn text-center" style="display:none;"><a href="@Url.Action("EventsSearchResult","Home",new {area="",eventtype=(int)SubscriptionType.Bronze })" class="benn-btn">More Events</a></div>
+                </div>
+            </section>
+        }
+        if (eEvent != null && eEvent.Count() > 0)
+        {
+            <section class="popular-events">
+                <div class="container">
+                    <h2 class="main-heading"><span>Hosted</span> Events</h2>
+                    <div class="owl-carousel owl-theme">
+                        @foreach (var item in eEvent)
+                        {
+                            if (item.Price != null && item.Price.Count > 0)
+                            {
+                                decimal? price = item.Price.OrderByDescending(a => a.Price).Select(a => a.Price).FirstOrDefault();
+                                //string imageurl = item.Images != null && item.Images.Where(a => a.MulType == 1 && a.mainpic == true).FirstOrDefault() != null ? item.Images.Where(a => a.MulType == 1).FirstOrDefault().Url : "/images/img3.jpg";
+                                string imageurl = "";
+                                if (item.Images.FirstOrDefault(s => s.mainpic == true) != null)
+                                {
+                                    imageurl = item.Images.FirstOrDefault(s => s.mainpic == true && s.MulType == 1).Url.ToString();
+                                }
+                                else { imageurl = item.Images.FirstOrDefault(s => s.MulType == 1).Url.ToString(); }
+                                string alt = Path.GetFileName(imageurl);
+                                <div class="item">
+                                    <div class="events-box">
+                                        <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})">
+                                            <div class="">
+                                                <figure><img src="@imageurl" alt="@alt"></figure>
+                                                <div class="down-sec">
+                                                  
+                                                    <div class="bottom-sec">
+                                                        <a href="@Url.Action("Summary","ev",new {area="",Id= item.Id})" class="small-btn">Watch</a>
+                                                        @*<strong><span>@item.Currency</span>@price</strong>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="bottom-btn text-center" style="display:none;"><a href="@Url.Action("EventsSearchResult","Home",new {area="",eventtype=(int)SubscriptionType.Bronze })" class="benn-btn">More Events</a></div>
+                </div>
+            </section>
+        }
+    }
+
+}
+<script src="~/js/owl.carousel.js"></script>
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        responsive: {
+
+            0: {
+
+                items: 1
+            },
+            600: {
+
+                items: 2
+            },
+            1000: {
+
+                items: 3
+            }
+        }
+    })
+</script>

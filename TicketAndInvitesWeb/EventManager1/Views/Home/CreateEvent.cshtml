@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "CreateEvent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <style>
+        .top_content {
+             position: relative;
+             padding-top: 50px;
+            
+        }
+
+        .top_left_cont h3 {
+             font-size: 26px;
+             color: #f56eab;
+             margin: 0 0 20px 0;
+             text-align: center;
+             font-family: 'Lato';
+             font-weight: 700;
+            
+        }
+
+        .top_left_cont h2 {
+             font-size: 40px;
+             color: #111111;
+             line-height: 52px;
+             margin: 0 0 26px 0;
+             font-family: 'Dosis';
+             text-align: center;
+             font-weight: 700;
+            
+        }
+
+        a.learn_more2 {
+             font-family: 'Dosis';
+             display: block;
+             font-size: 16px;
+             color: #ffffff;
+             background: linear-gradient(to right, #c33764, #1d2671);
+             width: 100%;
+             height: 46px;
+             line-height: 46px;
+             border-radius: 3px;
+             text-align: center;
+             text-transform: uppercase;
+             font-weight: 600;
+             margin: 0 auto;            
+        }
+
+        .top_left_cont p {
+             font-size: 16px;
+             color: #888888;
+             margin: 0 0 30px 0;
+             line-height: 26px;
+             font-family: 'Lato';
+            
+        }
+        .top_left_cont.flipInY.wow.animated.animated {
+            box-shadow: #d8d7d7 5px 5px 10px;
+            background-color: #fff;            
+        }
+    </style>
+}
+
+<div class="top_content" style="padding:50px 0 50px; background: #f7f7f7;">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-6 col-sm-6" style="text-align: center;margin-top:50px">
+                <div class="top_left_cont flipInY wow animated animated"
+                     style="visibility: visible; animation-name: flipInY;text-align: center;">
+                    <h4>
+                        <img src="https://i.ytimg.com/vi/cXFqWuJbRHQ/maxresdefault.jpg" class="img-responsive">
+                    </h4>
+                    <h2>Create Your Private Event</h2>
+                    <h3>Private/Personal</h3>
+                    <p style="padding:0 5% ; text-align:justify;  min-height:190px">
+                        Creating a private/personal event allows you to send classy invitations that come with GPS directions to your friends and guests for your personal events like a wedding, birthday party, BBQ, Baby shower and many more!!
+                    </p>
+                    <a href="~/Account/Login" class="learn_more2">Create Now</a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6" style="margin-top:50px">
+                <div class="top_left_cont flipInY wow animated animated"
+                     style="visibility: visible; animation-name: flipInY;text-align: center;">
+                    <h4>
+                        <img src="https://i1.wp.com/cebunewlifepress.com/wp-content/uploads/2019/07/printing-press-cebu-new-life-products-printing-event-tickets02-700x350.jpg?fit=700%2C350&ssl=1"
+                             class="img-responsive" style="height: 305px;">
+                    </h4>
+                    <h2>Create a Public Event</h2>
+                    <h3>Public</h3>
+                    <p style="padding:0 5%; text-align:justify; min-height:188px ">
+                        Public Events are published on ticketsandinvites.com where you  can reach thousands of buyers and also promote your event and sell tickets.  Event organizers are given a full bouquet of tools to make the setup fun and easy. Whether it’s a large concert or conference or organizing that special wedding for your client, we will be with you all the way !
+                    </p>
+                    <a href="~/Account/OrganizerLogin" class="learn_more2">Create Now</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

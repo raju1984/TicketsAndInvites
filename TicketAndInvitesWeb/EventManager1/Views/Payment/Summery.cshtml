@@ -1,0 +1,756 @@
+﻿@using EventManager1.Models
+@model EventManager1.Models.TicketModelPopup
+@{
+    ViewBag.Title = "Summery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <style>
+        .card {
+            background: #000;
+            border-color: #313131;
+            border-bottom: 1px solid #313131 !important;
+        }
+        p.alertify-message {
+            color: #000;
+        }
+        .card-header {
+            border-bottom-color: #313131;
+            color: #fff;
+        }
+        .btn-payment {
+            margin-left: 40px;
+            margin-top: 10px;
+        }
+        .smal-btn {
+            border: #fff solid 1px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+        .smal-btn2 {
+            border: #fff solid 2px !important;
+            color: #fff !important;
+            border-radius: 10px;
+        }
+        .card-body h4, h6, p {
+            color: #fff;
+        }
+        .bold-text {
+            font-size: 20px;
+            font-weight: 600;
+            color:#fff !important;
+        }
+        .card a:hover {
+            color: #f48534 !important;
+        }
+        /*.smal-btn:hover {
+            background: #fb0000 !important;
+            color: #fff !important;
+            border: none;
+        }*/
+            .minheight {
+                min-height: 300px;
+            }
+
+        .tab-content > .active {
+            display: block;
+            margin-top: 100px;
+            text-align: center;
+            margin-left: 0px;
+        }
+
+        b {
+            font-weight: bolder;
+            font-size: 21px;
+        }
+
+        .list-group {
+            flex-direction: row;
+        }
+
+        .form-check-label {
+            margin-bottom: 0;
+            font-size: 16px;
+        }
+
+
+        .mt-5, .my-5 {
+            margin-top: 7rem !important;
+        }
+        .list-group-item-action {
+            width: auto;
+        }
+    </style>
+}
+@{
+    string paymentclass = ManageSession.UserSession != null && !string.IsNullOrEmpty(ManageSession.UserSession.EmailId) ? "collapse show" : "collapse";
+    <div class="container-fluid bgContainer">
+        <div class="row ">
+            <div class="container">
+                <div class="row mt-5 " style="text-align:center">
+                    <div class="col-md-12" style="display:none">
+
+                        <div class="accordion" id="accordionExample">
+                            @if (ManageSession.UserSession == null || string.IsNullOrEmpty(ManageSession.UserSession.EmailId))
+                            {
+                                <div class="card noMargin ">
+                                    <div class="card-header noPadding text-dark" id="headingOne">
+                                        <h5 class="mb-0 cardPadding" data-toggle="collapse" data-target="#collapseOne"
+                                            aria-expanded="true" aria-controls="collapseOne">
+                                            <small> Login </small>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <section id="socialLoginForm">
+                                                @Html.Partial("~/Views/Account/_ExternalLoginsListPartial.cshtml", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                                            </section>
+                                            <form class="pt-3 row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <input type="email" class="form-control" id="Email"
+                                                               placeholder="E-mail">
+                                                    </div>
+                                                    <div style="display:none; color:red" id="Emailerr">Please Enter a Valid Email</div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <input type="password" class="form-control"
+                                                               id="Password" placeholder="Password">
+                                                    </div>
+                                                    <div style="display:none; color:red" id="Passworderr">Please Enter Your Password</div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="">
+                                                        <input type="button" class="btn btn-block btn-outline-success" value="SIGN IN" id="Login" />
+                                                        @*<a class="btn btn-block btn-outline-success"
+                                                               href="organizer/dashboard.html">
+                                                                SIGN
+                                                                IN
+                                                            </a>*@
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 offset-1 my-auto">
+                                                    <div class="">
+                                                        Don't have an account? <a href="~/Account/Register?EventId=@(Request.QueryString["EventId"])"
+                                                                                  class="text-primary">Create</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                                <div class="card">
+                                    <div class="card-header noPadding text-dark" id="headingTwo">
+                                        <h5 class="mb-0 cardPadding" data-toggle="collapse" data-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                            <small>Payment Details</small>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo" class="@paymentclass " aria-labelledby="headingTwo"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body noPadding" >
+                                            <div class="row noMargin ">
+
+                                                <div class="col-md-6 noPadding">
+                                                    <div class="list-group" id="myList" role="tablist">
+                                                        @*<a class="list-group-item list-group-item-action active" data-toggle="list"
+                            href="#MobileWallets" role="tab">MTN  MoMo</a>*@
+                                                        @*<a class="list-group-item list-group-item-action "
+                               data-toggle="list" href="#cardDetail" role="tab">
+                                Credit/Debit Card
+                            </a>*@
+                                                        @*<a class="list-group-item list-group-item-action "
+                               data-toggle="list" href="#Hubtel" role="tab">
+                                HubTel
+                            </a>*@
+                                                        <a class="list-group-item list-group-item-action active btn-payment"
+                                                           data-toggle="list" href="#Express" role="tab">
+                                                            Payments
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @*<a class="list-group-item list-group-item-action" data-toggle="list"
+                href="#NetBanking" role="tab">Net Banking</a>*@
+
+                                            @*<a class="list-group-item list-group-item-action" data-toggle="list"
+                   href="#UPI" role="tab">UPI</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list"
+                   href="#GiftVoucher" role="tab">Gift Voucher</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list"
+                   href="#RedeemPoints" role="tab">Redeem Points</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list"
+                   href="#CreditVoucher" role="tab">Credit Voucher</a>*@
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane " id="cardDetail" role="tabpanel">
+                                                            <h6 class="mt-3"> <b> Pay using Credit/Debit Card</b> </h6>
+                                                            <form class="pt-3 row" action="CardPay1" method="post" onsubmit="Loader(true)">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-10" style="padding: 0; margin-top: 20px;">
+                                                                        <div class="form-group">
+                                                                            <input type="hidden" style="margin-left: 50px;" id="hfeventId" name="hfeventId" value="@Request.QueryString["eventId"]" />
+
+                                                                            @*<input type="text" name="mob" class="form-control" id="walletnumber" placeholder="Mobile No." style="margin-left:50px"> value="46733123453"*@
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class=" font-weight-light">
+                                                                        <input type="submit" class="btn btn-primary" value="Make Pay" id="walletPay" style="width: 83%; margin-left: -7px;" />
+                                                                    </div>
+                                                                </div>
+                                                                @*<div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control"
+                                                   id="exampleInputEmail1"
+                                                   placeholder="Name on Card">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control"
+                                                   id="exampleInputPassword1"
+                                                   placeholder="Card number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" aria-label="First name"
+                                                   placeholder="Expiry month"
+                                                   class="form-control mr-1">
+                                            <input type="text" aria-label="Last name"
+                                                   placeholder="Expiry year" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 my-auto">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control"
+                                                   id="exampleInputEmail1" placeholder="CVV">
+                                        </div>
+                                    </div>*@
+                                                                <div class="col-md-12">
+                                                                    <div class="mt-4 font-weight-light">
+                                                                        @*<a href="@Url.Action("PlaceOrder","Payment",new {EventId=Request.QueryString["EventId"] })"
+                                               class="btn btn-outline-success">
+                                                Make
+                                                Pay
+                                            </a>*@
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="tab-pane " id="Hubtel" role="tabpanel">
+                                                            <h6 class="mt-3"> <b> Pay using Credit/Debit Card</b> </h6>
+                                                            <form class="pt-3 row" action="PaymentReq" method="post" onsubmit="Loader(true)">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-10" style="padding: 0; margin-top: 20px;">
+                                                                        <div class="form-group">
+                                                                            <input type="hidden" style="margin-left: 50px;" id="hfeventId" name="hfeventid" value="@Request.QueryString["eventId"]" />
+
+                                                                            @*<input type="text" name="mob" class="form-control" id="walletnumber" placeholder="Mobile No." style="margin-left:50px"> value="46733123453"*@
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class=" font-weight-light">
+                                                                        <input type="submit" class="btn btn-primary" value="Make Pay" id="walletPay" style="width: 83%; margin-left: -7px;" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-12">
+                                                                    <div class="mt-4 font-weight-light">
+
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="tab-pane active" id="Express" role="tabpanel">
+                                                            <h6 class="mt-3">  <img src="~/images/paymentmethods.png" />  </h6>
+                                                            <form class="pt-3 row" action="ExpressPay" method="post" onsubmit="Loader(true)">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-10" style="padding: 0; margin-top: 20px;">
+                                                                        <div class="form-group">
+                                                                            <input type="hidden" style="margin-left: 50px;" id="hfeventId" name="hfeventid" value="@Request.QueryString["eventId"]" />
+
+                                                                            @*<input type="text" name="mob" class="form-control" id="walletnumber" placeholder="Mobile No." style="margin-left:50px"> value="46733123453"*@
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class=" font-weight-light">
+                                                                        <input type="submit" class="btn btn-primary smal-btn" value="Initiate Payment" id="expressPay" style="width: 83%; margin-left: -7px;" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-12">
+                                                                    <div class="mt-4 font-weight-light">
+
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="tab-pane" id="NetBanking" role="tabpanel">
+                                                            <h6 class="mt-3"> <b> Pay using Net Banking</b> </h6>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="exampleFormControlSelect1">
+                                                                        Select
+                                                                        Bank
+                                                                    </label>
+                                                                    <select class="form-control"
+                                                                            id="exampleFormControlSelect1">
+                                                                        <option>Bank Name</option>
+                                                                        <option>Bank Name</option>
+                                                                        <option>Bank Name</option>
+                                                                        <option>Bank Name</option>
+                                                                        <option>Bank Name</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="mt-4 font-weight-light">
+                                                                    @*<a href="@Url.Action("Status","Payment")"
+                                           class="btn btn-outline-success">
+                                            Make
+                                            Pay
+                                        </a>*@
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane " id="MobileWallets" role="tabpanel">
+                                                            <h6 class="mt-3"> <b> Pay Using Wallets</b> </h6>
+                                                            <form class="pt-3 row" action="summeryPay" method="post" onsubmit="Loader(true)">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="exampleRadios" id="mtnmomo" checked
+                                                                               value="1">
+                                                                        <label class="form-check-label"
+                                                                               for="exampleRadios1">
+                                                                            MTN MoMo
+                                                                            @*<img src="/images/mobikwik.png"
+                                                width="100px" alt="">*@
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-10" style="padding: 0; margin-top: 20px;">
+                                                                        <div class="form-group">
+                                                                            <input type="hidden" style="margin-left: 50px;" id="hfeventId" name="hfeventId" value="@Request.QueryString["eventId"]" />
+                                                                            @*<input type="text" class="form-control"
+                                                id="UUID" value="" value="46733123453" readonly
+                                                placeholder="UUID V4 i.e. - 329ffb75-6515-4795-92b4-d09de9a6db9f ">*@
+                                                                            <input type="text" name="mob" class="form-control"
+                                                                                   id="walletnumber"
+                                                                                   placeholder="Mobile No." style="margin-left:50px">
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class=" font-weight-light">
+                                                                        <input type="submit" class="btn btn-primary" value="Initiate Payment" id="walletPay" style="width: 83%;
+    margin-left: -7px;" />
+                                                                        @*<a href="@Url.Action("Summery","Payment")"
+                                               class="btn btn-outline-success">
+                                                Make Pay
+                                            </a>*@
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="tab-pane" id="UPI" role="tabpanel">
+                                                            <h6 class="mt-3"> <b> Pay Using UPI</b> </h6>
+                                                            <form class="pt-3 row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="mobwallet" id="mobwallet1"
+                                                                               value="1">
+                                                                        <label class="form-check-label"
+                                                                               for="exampleRadios1">
+                                                                            <img src="/images/amazonpay-.png"
+                                                                                 width="100px" alt="">
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="mobwallet" id="mobwallet2"
+                                                                               value="2">
+                                                                        <label class="form-check-label"
+                                                                               for="exampleRadios1">
+                                                                            <img src="/images/paytm.png"
+                                                                                 width="100px" alt="">
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="mt-4 font-weight-light">
+                                                                        @*<a href="status.html"
+                                               class="btn btn-outline-success">
+                                                Make
+                                                Pay
+                                            </a>*@
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="tab-pane" id="GiftVoucher" role="tabpanel">
+                                                            <h6 class="mt-3"> <b> Pay using Gift Voucher</b> </h6>
+                                                            <form class="pt-3 row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <input type="number" class="form-control"
+                                                                               id="exampleInputEmail1" placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="mt-4 font-weight-light">
+                                                                        @*<a href="@Url.Action("Status","Payment",new { @mob = ""  })"
+                                               class="btn btn-outline-success">
+                                                Make
+                                                Pay
+                                            </a>*@
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="tab-pane" id="RedeemPoints" role="tabpanel">
+                                                            <h6 class="mt-3">
+                                                                <b>
+                                                                    You can pay by redeeming your Reward
+                                                                    Points
+                                                                </b>
+                                                            </h6>
+                                                            <form class="pt-3 row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleFormControlSelect1">
+                                                                            Select
+                                                                            Bank
+                                                                        </label>
+                                                                        <select class="form-control"
+                                                                                id="exampleFormControlSelect1">
+                                                                            <option>Bank Name</option>
+                                                                            <option>Bank Name</option>
+                                                                            <option>Bank Name</option>
+                                                                            <option>Bank Name</option>
+                                                                            <option>Bank Name</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <input type="number" class="form-control"
+                                                                               id="exampleInputEmail1"
+                                                                               placeholder="Enter Card Number">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="mt-4 font-weight-light">
+                                                                        @*<a href="@Url.Action("Status","Payment")"
+                                               class="btn btn-outline-success">
+                                                Make
+                                                Pay
+                                            </a>*@
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="tab-pane" id="CreditVoucher" role="tabpanel">
+                                                            <h6 class="mt-3">
+                                                                <b>
+                                                                    Please enter the Credit Voucher number if
+                                                                    you've
+                                                                    received one due to any bad transaction.
+                                                                </b>
+                                                            </h6>
+                                                            <form class="pt-3 row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <input type="number" class="form-control"
+                                                                               id="exampleInputEmail1" placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="mt-4 font-weight-light">
+                                                                        @*<a href="status.html"
+                                               class="btn btn-outline-success">
+                                                Make
+                                                Pay
+                                            </a>*@
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="@paymentclass " id="tbdiscount" style="display:none; text-align:center; padding:100px 50px 10px;">
+                                        <div class="card-body noPadding" >
+
+                                            <h3 class="mt-3">  Total Amount : 0  </h3>
+                                            <form class="pt-3 row" action="DsPay" method="post" onsubmit="Loader(true)">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-10" style=" margin-top: 20px;">
+                                                        <div class="form-group">
+                                                            <input type="hidden" style="margin-left: 10px;" id="hfeventId" name="hfeventid" value="@Request.QueryString["eventId"]" />
+
+                                                            @*<input type="text" name="mob" class="form-control" id="walletnumber" placeholder="Mobile No." style="margin-left:50px"> value="46733123453"*@
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class=" font-weight-light">
+                                                        <input type="submit" class="btn btn-primary" value="Grab Your Ticket" id="expressPay" style="width: 83%; margin-left: -7px;" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="mt-4 font-weight-light">
+
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                </div>
+                    </div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 bg-white pt-3">
+                            <div class="card borderonTicket">
+                                <input type="hidden" id="offerid" />
+                                <div class="arc top-12 right-12"></div>
+                                <div class="arc top-12 left-12"></div>
+                                <div class="arc bottom-12 right-12"></div>
+                                <div class="arc bottom-12 left-12"></div>
+                                <img src="@Model.CoverImage"
+                                     class="card-img-top" alt="...">
+                                <div class="card-body text-center">
+                                    <h4>@Model.Eventname</h4>
+                                    <p class="mb-0">@Model.EventDate </p>
+                                    <p class="mb-0" style="color: #f48534 !important">Order Summery</p>
+                                    <div class="borderOnLight">
+                                        @foreach (var i in ManageSession.TicketCartSession.TickeCarts)
+                                        {
+                                            if (i.Price > 0)
+                                            {
+                                                <h6 class="text-center pt-2">@i.Qnty x @i.TicketName &nbsp;Gh₵@i.Price</h6>
+                                            }
+                                        }
+                                        @*<h6 class="text-center">Convenience Fee &nbsp; Gh₵0.00</h6>*@
+
+                                        <p class="borderTBdasshed pt-2 pb-2 noMargin text-center">
+
+                                            <a data-toggle="collapse" href="#collapseExample2" role="button"
+                                               aria-expanded="false" aria-controls="collapseExample2" class="bold-text">
+                                                Have a Coupon or eGift Code?
+                                            </a>
+
+                                        </p>
+                                        <div class="collapse" id="collapseExample2" style="max-height:150px">
+                                            <div class="card card-body" style="min-height:150px;margin-bottom: 0px;">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Enter Coupon Code" id="Coupancode"
+                                                           aria-label="Enter Coupon Code" aria-describedby="basic-addon2">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text" id="basic-addon2"><input type="button" value="Apply" id="applycoupan" /></span>
+                                                    </div>
+
+                                                </div>
+                                                <div>Discount : Gh₵<label id="discount">00</label> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="arc right-12"></div>
+                                    <div class="arc left-12"></div>
+
+                                    <hr class="borderDashed">
+                                    <h4 class="text-center pt-2 pb-2 mt-4  mb-4 text-white smal-btn">
+
+                                        Total &nbsp;@if (ManageSession.TicketCartSession.TickeCarts != null)
+                                        {
+                                            {
+                                                decimal? total = 0;
+
+                                                foreach (var p in ManageSession.TicketCartSession.TickeCarts)
+                                                {
+                                                    total = total + (p.Qnty * p.Price);
+                                                }
+
+                                                //var total = @ManageSession.TicketCartSession.TickeCarts.Sum(a => a.Price) * @ManageSession.TicketCartSession.TickeCarts.Sum(a => a.Qnty);
+                                                <span>Gh₵<lable id="lbltotal">@total</lable>  </span>
+                                            }
+                                        }
+                                        else
+                                        {< span > 0 </ span >}
+                                    </h4>
+                                    <form class="row" id="fdiscount" action="DsPay" method="post" onsubmit="Loader(true)" style="display:none">
+                                        <input type="hidden" style="margin-left: 10px;" id="hfeventId" name="hfeventId" value="@Request.QueryString["eventId"]" />
+                                        <input type="hidden" style="margin-left: 10px;" id="mob" name="mob" value="" />
+                                        <div class="col-md-12">
+                                            <div class=" font-weight-light">
+                                                <input type="submit" class="btn btn-primary smal-btn2" value="Grab Your Ticket" id="expressPay" style="width: 83%;background: #f48534 !important;color: #fff !important;width: 100%;padding: 10px 0; margin-left: -7px;" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form class="row" id="fpay" action="ExpressPay" method="post" onsubmit="Loader(true)">
+                                        <input type="hidden" style="margin-left: 50px;" id="hfeventId" name="hfeventid" value="@Request.QueryString["eventId"]" />
+
+                                        <div class="col-md-12">
+                                            <div class=" font-weight-light">
+                                                <input type="submit" class="btn btn-primary smal-btn2" value="Proceed to Pay" id="expressPay" style="width: 83%;background: #f48534 !important;color: #fff !important;width: 100%;padding: 10px 0; margin-left: -7px;" />
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+          
+            </div>
+
+        </div>
+    </div>
+@section Scripts
+{
+        <script>
+
+        $(document).ready(function () {
+            function disablePrev() { window.history.forward() }
+            window.onload = disablePrev();
+            window.onpageshow = function (evt) { if (evt.persisted) disableBack() }
+        });
+
+        $('#Login').click(function () {
+        debugger;
+        var userid = $('#Email').val();
+        var password = $('#Password').val();
+        if (userid == '' || userid == null) { $('#Emailerr').css("display", "block"); return false; }
+        else { $('#Emailerr').css("display", "none");}
+        if (password == '' || userid == null) { $('#Passworderr').css("display", "block"); return false;}
+        else { $('#Passworderr').css("display", "none"); }
+        var loginmodel = [];
+        var data = {
+            Email: userid,
+            Password: password,
+        }
+        loginmodel.push(data);
+            var returnUrl = "@(Request.QueryString["EventId"])";
+            //var logindata = JSON.stringify(loginmodel)
+        $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Login", "Account")',
+            data: '{model: ' + JSON.stringify(data) + ', returnUrl: ' + JSON.stringify(returnUrl) + '}', //{ model: logindata, returnUrl: returnUrl },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resp) {
+                    debugger;
+                    if (resp.result.Code == 200) {
+                        location.reload();
+                    }
+                    else { alertify.alert(resp.result.Msg);}
+
+                },
+                error: function (error) {
+
+                    alertify.alert(error);
+                }
+            });
+            });
+            $('#applycoupan').click(function () {
+            debugger;
+                var coupan = $('#Coupancode').val();
+                var total = $('#lbltotal').text();
+                var offeri = $("#offerid").val();
+                var evID = $("#hfeventid").val();
+                if (offeri == '' || offeri == null) {
+        $.ajax({
+                type: 'POST',
+                url: '@Url.Action("checkOffers", "Payment")',
+                data: '{coupan: ' + JSON.stringify(coupan) + ', eventId=' + JSON.stringify(evID) +'}', //{ model: logindata, returnUrl: returnUrl },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resp) {
+                    debugger;
+                    var discount;
+                    var totalamount;
+                    if (resp != null) {
+                        if (resp[0].Offertype == 1) {
+                            discount = total * resp[0].discount / 100;
+                            totalamount = total - discount;
+                        }
+                        else if (resp[0].Offertype == 2) { discount = resp[0].discount; totalamount = total - resp[0].discount; }
+                        $("#lbltotal").text(totalamount.toFixed(2));
+                        $("#discount").text(discount.toFixed(2));
+                        $("#offerid").val(resp[0].Id);
+                    if (totalamount == 0) {
+                        $("#fpay").css("display", "none");
+                        $("#fdiscount").css("display", "block");                              
+                        }
+                    }
+                    else { alertify.alert("Invalid Coupan");}
+
+                },
+                error: function (error) {
+
+                    alertify.alert("Invalid Coupan");
+                }
+                    });
+                }
+            });
+        $('input:radio[name=sex]:checked').val();
+        function isValidEmailAddress(emailAddress) {
+        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        return pattern.test(emailAddress);
+            };
+
+        $('#walletPayy').click(function () {
+        debugger;
+            var EventId = "@(Request.QueryString["EventId"])";
+            var walletno = $("#walletnumber").val();
+           // var uuid = $("#UUID").val();
+            //var logindata = JSON.stringify(loginmodel)
+        $.ajax({
+                type: 'POST',
+            url: '@Url.Action("summeryPay", "Payment")',
+            data: '{eventId: ' + JSON.stringify(EventId) + ', Mob: ' + JSON.stringify(walletno) +'}', //{ model: logindata, returnUrl: returnUrl },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resp) {
+                    debugger;
+                    if (resp.result.Code == 200) {
+
+                        location.reload();
+                    }
+                    else { alert(resp.result.Msg);}
+
+                },
+                error: function (error) {
+
+                    alert(error);
+                }
+            });
+            });
+        </script>}
+}
+

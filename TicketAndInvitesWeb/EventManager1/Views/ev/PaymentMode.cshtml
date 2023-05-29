@@ -1,0 +1,108 @@
+﻿@using EventManager1.Models;
+
+@{
+    ViewBag.Title = "PaymentMode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    ._paymentgateLogo {
+        BORDER: 1px solid #eee;
+        border-radius: 5px;
+    }
+
+    .card {
+        min-height: auto;
+        border: 0;
+        border-radius: 12px;
+        margin-bottom: 1.875rem;
+        background: #fff;
+        -webkit-box-shadow: 0 10px 30px 0 rgb(24 28 33 / 5%);
+        box-shadow: 0 10px 30px 0 rgb(24 28 33 / 5%);
+    }
+
+    .page-title {
+        margin-top: 100px;
+        padding: 20px 25px;
+        background: #ffbc34;
+        margin-bottom: 20px;
+        border-radius: 0.75rem;
+        text-align: center;
+    }
+
+        .page-title h5 {
+            margin-bottom: 0px;
+            font-weight: 800;
+            font-size: 25px;
+            color: #2e2e2e;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+</style>
+
+<div class="container">
+    <div class="page-title">
+        <h5>Choose Your Payment Mode</h5>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        @if (ViewBag.paymentType == (int)PaymentCurrency.Ghanna)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- <h4 style="color: #13662c;">₦1,000.00 – ₦250,000.00</h4> -->
+                        <form id="PayStackForm"
+                              method="POST"
+                              action="/Payment/PayStackPayment"
+                              class="log-form justify-content-center d-flex">
+                            <input type="hidden" style="margin-left: 50px;" id="hfeventId" name="hfeventid" value="@ViewBag.evId" />
+                            @* <input type="hidden" name="amount" id="amount" value="@ViewBag.Amount">*@
+                            <div class="_paymentgateLogo">
+                                <img src="~/images/logo/PayStack_Logo.png" class="img-fluid img-responsive" />
+                            </div>
+                            <br />
+                            <button type="submit" class="btn btn-sm btn-primary">CLICK TO CONTINUE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            @*@if (ViewBag.Userid.Id == 14603)
+                {*@
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- <h4 style="color: #13662c;">₦1,000.00 – ₦250,000.00</h4> -->
+                        <form id="StripeForm"
+                              method="POST"
+                              action="/Payment/Checkout"
+                              class="log-form justify-content-center d-flex">
+                            <input type="hidden" style="margin-left: 50px;" id="hfeventId" name="hfeventid" value="@ViewBag.evId" />
+                            <div class="_paymentgateLogo">
+                                @*<img src="~/img/logo/opayLogo.png"  />*@
+                                <img src="~/images/logo/Stripe.jpg" class="img-fluid img-responsive" style="max-width: 82% !important;" />
+                            </div>
+                            <br />
+                            @*<script src="//checkout.stripe.com/v2/checkout.js"
+                                        class="stripe-button"
+                                        data-key="@ViewBag.StripePublishKey"
+                                        data-locale="auto"
+                                        data-description="Stripe Payments">
+                                </script>*@
+                            <button type="submit" class="btn btn-sm btn-warning" id="checkout-button">CLICK TO CONTINUE</button>
+                            @*<a href="//checkout.stripe.com/v2/checkout.js" class="btn btn-sm btn-warning">CLICK TO CONTINUE</a>*@
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+        @*}*@
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+
+

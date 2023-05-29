@@ -1,0 +1,198 @@
+﻿@model IEnumerable<EventManager1.Models.AWSStreamPage>
+@{
+    ViewBag.Title = "AWSStreamingPage";
+    Layout = "~/Areas/Organizer/Views/Shared/_organizerLayout.cshtml";
+}
+
+<style>
+    img.card-img-top.imgbox {
+        max-height: 180px;
+    }
+
+    h4 {
+        font-family: 'Poppins' !important;
+    }
+
+    .page-header {
+        margin: 0 0 0 0 !important;
+    }
+
+    body {
+        font-family: 'Poppins';
+    }
+
+    h5 {
+        font-size: 15px;
+        padding: 5px 0;
+        border-bottom: 1px solid #e0e0e0;
+        font-family: 'Poppins';
+    }
+
+    select.select {
+        width: 100%;
+        height: 35px;
+        font-size: 14px;
+        border-bottom: #ccc solid 1px;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    .card {
+        height: 450px;
+        margin-bottom: 25px;
+    }
+</style>
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="fa fa-television" aria-hidden="true"></i>
+            </span>
+            AWS Live Stream
+            <p style=" padding-left 50px;
+               font-size 14px;
+               margin-top -6px;">
+                We Ensure that Events reach your audience in the highest possible quality, no matter where they watch. Here you can setup the live streaming events.
+            </p>
+
+        </h3>
+
+    </div>
+    <div class="row">
+        <div class="col-12">
+
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="Tickets" role="tabpanel" aria-labelledby="Tickets-tab">
+
+
+                    <hr>
+
+                    <div class="row">
+
+
+                        @foreach (var e in Model)
+                        {
+                            <div class="col-md-4" style="padding:0 8px">
+                                <div class="card">
+                                    <a href="@Url.Action("Index","Stream",new  {area="" })" class="card-link">
+                                        <img src="@e.SiteLogo" class="card-img-top imgbox" alt="..." />
+                                    </a>
+                                    <br />
+                                    <div style="padding:10px">
+                                        <div class="row">
+                                            <div class="col-sm-3 padding5 text-center text-danger ">
+                                                @*<i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    <p class="noMargin">
+                                                    </p>*@
+                                            </div>
+                                            <div class="col-md-9" style="padding:0">
+                                                <h4><b> @e.SiteName</b></h4>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="" style="margin-top:10px;">
+                                                    <h5>
+                                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                                        Configure Your AWS Channel
+                                                    </h5>
+                                                    <h5>Channel Id : @e.ChannelId</h5>
+                                                    <h5>Stream Server : @e.ServerUrl</h5>
+                                                    <h5 style="border-bottom:none !important">Stream Key : @e.StreamKey</h5>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                        @if (e.IsStreaming == true)
+                                                        {
+                                                            <input type="button" id="btnStopChannel" class="btn btn-danger btn-sm StopStreaming" onclick="StopChannel(@e.ChannelId)" value="Stop Channel" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="button" id="btnStartChannel" class="btn btn-success btn-sm StartStreaming" onclick="StartChannel(@e.ChannelId)" value="Start Channel" />
+                                                        }
+                                                    </div>
+                                                    <div class="col-md-1">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        }
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+
+        $(document).ready(function () {
+
+        })
+
+
+        function StartChannel(ChannelId) {
+                Loader(true);
+            debugger
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("StartChannel", "Organizer", new { area = "Organizer" })',
+                data: { ChannelId: ChannelId },/* JSON.stringify(Register),*/
+
+                dataType: "json",
+                success: function (resp) {
+                    //return 1;
+                    Loader(false);
+                    alert("Channel start");
+                    window.location.reload();
+                },
+                error: function (error) {
+                    return 0;
+
+                }
+            });
+
+        }
+        function StopChannel(ChannelId) {
+                Loader(true);
+            debugger
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("StopChannel", "Organizer", new { area = "Organizer" })',
+                data: { ChannelId: ChannelId },/* JSON.stringify(Register),*/
+
+                dataType: "json",
+                success: function (resp) {
+                    //return 1;
+                        Loader(false);
+                    alert("Channel stop");
+                    window.location.reload();
+                },
+                error: function (error) {
+                    return 0;
+
+                }
+            });
+
+        }
+
+    </script>}
+

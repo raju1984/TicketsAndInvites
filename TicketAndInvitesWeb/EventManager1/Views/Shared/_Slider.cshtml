@@ -1,0 +1,497 @@
+﻿<div>
+    <link href="~/css/owl.carousel.css" rel="stylesheet" />
+    <link href="~/css/owl.theme.default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        .item.active {
+            width: 100% !important;
+            height: 540px !important;
+        }
+
+        .carousel-inner > .item > img {
+            line-height: 1;
+            height: 540px !important;
+        }
+
+      /*  .carousel-inner {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            height: 650px !important;
+        }
+
+            .carousel-inner > .item > img {
+                line-height: 1;
+                height: 650px !important;
+            }*/
+
+        @@media (min-width: 320px) and (max-width: 480px) {
+            .card-body p {
+                font-size: 12px !important;
+                text-shadow: none;
+            }
+
+            .countdown ul li {
+                width: 25% !important;
+                float: left;
+                text-align: center;
+                padding: 0 3px !important;
+            }
+
+            .item.active {
+                width: 100% !important;
+                height: 150px !important;
+            }
+            .carousel-inner {
+                position: relative;
+                width: 100%;
+                overflow: hidden;
+                height: 220px !important;
+            }
+
+                .carousel-inner > .item > img {
+                    line-height: 1;
+                    height: 220px !important;
+                    max-width: 100% !important;
+                    width: 100% !important;
+                    object-fit: fill !important;
+                }
+
+            .carousel-caption {
+                top: 0% !important;
+            }
+
+            .card-body h3 {
+                font-size: 21px !important;
+            }
+
+            h3#dd_1 {
+                font-size: 21px !important;
+            }
+
+            h3#hh_1 {
+                font-size: 21px !important;
+            }
+
+            .card-body {
+                padding: 0px 0px !important;
+                margin: 0 !important;
+                border-radius: 10px;
+            }
+        }
+
+        @@media (min-width: 481px) and (max-width: 767px) {
+            .item.active {
+                width: 100% !important;
+                height: 150px !important;
+            }
+
+            .countdown ul li {
+                width: 25% !important;
+                float: left;
+                text-align: center;
+                padding: 0 3px !important;
+            }
+
+            .carousel-caption {
+                top: 0% !important;
+            }
+
+            .card-body p {
+                font-size: 12px !important;
+                text-shadow: none;
+            }
+            .carousel-inner {
+                position: relative;
+                width: 100%;
+                overflow: hidden;
+                height: 220px !important;
+            }
+
+                .carousel-inner > .item > img {
+                    line-height: 1;
+                    height: 220px !important;
+                    max-width: 100% !important;
+                    width: 100% !important;
+                    object-fit: fill !important;
+                }
+
+            .card-body h3 {
+                font-family: 21px !important;
+            }
+
+            .card-body {
+                padding: 0px 0px !important;
+                margin: 0 !important;
+                border-radius: 10px;
+            }
+        }
+
+        .carousel-caption {
+            right: 15% !important;
+            left: 15% !important;
+            padding-bottom: 30px;
+        }
+
+        .carousel {
+            position: relative;
+            margin-top: 70px !important;
+        }
+
+        .item.active {
+            width: 100% !important;
+            height: 312px;
+        }
+
+        .card-body {
+            background-color: #fb0000;
+            padding: 20px 0;
+            border-radius: 10px;
+            margin: 40px;
+        }
+
+        .countdown ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .countdown {
+            width: 100% !important;
+            float: left;
+            text-align: center;
+        }
+
+            .countdown ul li {
+                width: 25% !important;
+                opacity: 0.9;
+                float: left;
+                text-align: center;
+                padding: 0 10px;
+            }
+
+        .card-body p {
+            font-size: 18px;
+            text-shadow: none;
+        }
+
+        .card-body h3 {
+            font-size: 42px;
+            text-shadow: none;
+        }
+
+        .carousel-caption {
+            top: 15%;
+        }
+    </style>
+    <section style="" id="secbanner">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+
+                @*@if (ViewBag.BannerList != null)
+                    {
+                        foreach (var item in ViewBag.BannerList)
+                        {
+                            <li data-target="#myCarousel" data-slide-to="@item.Id" class="active"></li>
+                        }
+                    }*@
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                @*<li data-target="#myCarousel" data-slide-to="2"></li>*@
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="row carousel-inner" style="margin:0 !important">
+                @if (ViewBag.BannerList != null)
+                {
+
+                    var sn = 1;
+                    foreach (var item in ViewBag.BannerList)
+                    {
+                        if (ViewBag.BannerList[0].ImagePath == item.ImagePath)
+                        {
+                            <div class="item active">
+                                <img src="@item.ImagePath" alt="." style="width:100%">
+                                <div class="carousel-caption">
+
+                                    @if (item.IsTimeEnable == 0)
+                                    {
+                                        string datej = item.EndDate + " " + item.EndTime;
+                                        DateTime date1 = DateTime.ParseExact(datej, "MM/dd/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                                        var date = date1.ToString("MM dd,yyyy HH:mm:ss");
+
+                                        DateTime now = DateTime.UtcNow;
+                                        var Noww = now.ToString("MM dd,yyyy HH:mm:ss");
+                                        if (date1 >= now)
+                                        {
+                                            <div class="row">
+                                                <div class="countdown">
+                                                    <ul>
+                                                        <li>
+
+
+                                                            <div class="">
+                                                                <div class="card-body" style="background:#fff !important">
+                                                                    <h3 id="dd_@sn" class="Days" style="color:#333 !important"></h3>
+                                                                    <p style="color:#333;">Days</p>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+
+                                                            <div class="">
+                                                                <div class="card-body">
+                                                                    <h3 id="hh_@sn" class="Hours"></h3>
+                                                                    <p>Hours</p>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="">
+                                                                <div class="card-body" style="background:#fff !important">
+                                                                    <h3 id="mm_@sn" class="Minute" style="color:#333 !important"></h3>
+                                                                    <p style="color:#333 !important">Minute</p>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="">
+                                                                <div class="card-body">
+                                                                    <h3 id="ss_@sn" class="second"></h3>
+                                                                    <p>Seconds</p>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <script>
+
+                                                if (@item.IsTimeEnable == 0)
+                                                {
+                                                    var countDownDate_@sn = new Date('@date');
+                                                    var is_safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                                                    var x = setInterval(function () {
+                                                        //var Noww = DateTime.UtcNow.ToString("MM dd,yyyy HH:mm:ss");
+
+                                                        var now_@sn = new Date();
+                                                        if (is_safari) {
+                                                            //countDownDate_@sn = new Date('@date'.replace(/\s/, 'T') + 'Z');
+                                                            var mydate = '@date'
+                                                            //var ddd= '"'+now_@sn+'"'
+                                                            debugger
+                                                            var dateParts = mydate.substring(3, 10).split(',');
+                                                            var timePart = mydate.substr(11);
+                                                            var countDownDate_ = dateParts[1] + '/' + mydate.substring(0, 2) + '/' + dateParts[0] + ' ' + timePart;
+                                                            var timeParth = timePart.substring(0, 8).split(':');
+                                                            var h = timeParth[0]; var m = timeParth[1]; t = timeParth[2]
+                                                            //now_@sn = parseDate(now_@sn);
+                                                            var t = parseDate(countDownDate_, 'yyyy/mm/dd',h,m,h);
+                                                            countDownDate_@sn = t;
+                                                        }
+                                                        var distance_@sn = Math.abs(countDownDate_@sn - now_@sn);
+                                                        //var distance_@sn = countDownDate_@sn - now_@sn;
+                                                        var days_@sn = Math.floor(distance_@sn / (1000 * 60 * 60 * 24));
+                                                        var hours_@sn = Math.floor((distance_@sn % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                        var minutes_@sn = Math.floor((distance_@sn % (1000 * 60 * 60)) / (1000 * 60));
+                                                        var seconds_@sn = Math.floor((distance_@sn % (1000 * 60)) / 1000);
+                                                        document.getElementById('dd_@sn').innerHTML = days_@sn + "d ";
+                                                        document.getElementById('hh_@sn').innerHTML = hours_@sn + "h ";
+                                                        document.getElementById('mm_@sn').innerHTML = minutes_@sn + "m ";
+                                                        document.getElementById('ss_@sn').innerHTML = seconds_@sn + "s ";
+
+                                                    }, 1000);
+
+                                                }
+                                                function ismac() {
+                                                    if (navigator.userAgent.match(/(iPhone|iPod|iPad)/) != null || navigator.userAgent.indexOf('Mac OS X') != -1) {
+                                                        return true;
+                                                    }
+                                                    return false;
+                                                }
+                                                function parseDate(input, format,h,m,t) {
+                                                    format = format || 'yyyy-mm-dd '; // default format
+                                                    var parts = input.match(/(\d+)/g),
+                                                        i = 0, fmt = {};
+                                                    // extract date-part indexes from the format
+                                                    format.replace(/(yyyy|dd|mm)/g, function (part) { fmt[part] = i++; });
+
+                                                    return new Date(parts[fmt['yyyy']], parts[fmt['mm']] - 1, parts[fmt['dd']],h,m,t);
+                                                }
+                                            </script>
+                                        }
+
+
+                                    }
+
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="item ">
+                                <img src="@item.ImagePath" alt="New York" style="width:100%">
+                                <div class="carousel-caption">
+                                    @if (item.IsTimeEnable == 0)
+                                    {
+                                        string datej = item.EndDate + " " + item.EndTime;
+                                        DateTime date1 = DateTime.ParseExact(datej, "MM/dd/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                                        var date = date1.ToString("MM dd,yyyy HH:mm:ss");
+
+                                        DateTime now = DateTime.UtcNow;
+                                        var Noww = now.ToString("MM dd,yyyy HH:mm:ss");
+
+                                        if (date1 >= now)
+                                        {
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="">
+                                                        <div class="card-body" style="background:#fff !important">
+                                                            <h3 id="dd_@sn" class="Days" style="color:#333 !important"></h3>
+                                                            <p style="color:#333;">
+                                                                Days
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="">
+                                                        <div class="card-body">
+                                                            <h3 id="hh_@sn" class="Hours"></h3>
+                                                            <p>Hours</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="">
+                                                        <div class="card-body" style="background:#fff !important">
+                                                            <h3 id="mm_@sn" class="Minute" style="color:#333 !important"></h3>
+                                                            <p style="color:#333;">
+                                                                Minute
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="">
+                                                        <div class="card-body">
+                                                            <h3 id="ss_@sn" class="second"></h3>
+                                                            <p>Seconds</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <script>
+
+                                                if (@item.IsTimeEnable == 0)
+                                                {
+                                                    var countDownDate_@sn = new Date('@date');
+                                                    var is_safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                                                    var x = setInterval(function () {
+                                                        //var Noww = DateTime.UtcNow.ToString("MM dd,yyyy HH:mm:ss");
+
+                                                        var now_@sn = new Date();
+                                                        if (is_safari) {
+                                                            //countDownDate_@sn = new Date('@date'.replace(/\s/, 'T') + 'Z');
+                                                            var mydate = '@date'
+                                                            //var ddd= '"'+now_@sn+'"'
+                                                            debugger
+                                                            var dateParts = mydate.substring(3, 10).split(',');
+                                                            var timePart = mydate.substr(11);
+                                                            var countDownDate_ = dateParts[1] + '/' + mydate.substring(0, 2) + '/' + dateParts[0] + ' ' + timePart;
+                                                            var timeParth = timePart.substring(0, 8).split(':');
+                                                            var h = timeParth[0]; var m = timeParth[1]; t = timeParth[2]
+                                                            //now_@sn = parseDate(now_@sn);
+                                                            var t = parseDate(countDownDate_, 'yyyy/mm/dd',h,m,h);
+                                                            countDownDate_@sn = t;
+                                                        }
+                                                        var distance_@sn = Math.abs(countDownDate_@sn - now_@sn);
+                                                        var distance_@sn = countDownDate_@sn - now_@sn;
+                                                        var days_@sn = Math.floor(distance_@sn / (1000 * 60 * 60 * 24));
+                                                        var hours_@sn = Math.floor((distance_@sn % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                        var minutes_@sn = Math.floor((distance_@sn % (1000 * 60 * 60)) / (1000 * 60));
+                                                        var seconds_@sn = Math.floor((distance_@sn % (1000 * 60)) / 1000);
+                                                        document.getElementById('dd_@sn').innerHTML = days_@sn + "d ";
+                                                        document.getElementById('hh_@sn').innerHTML = hours_@sn + "h ";
+                                                        document.getElementById('mm_@sn').innerHTML = minutes_@sn + "m ";
+                                                        document.getElementById('ss_@sn').innerHTML = seconds_@sn + "s ";
+
+                                                    }, 1000);
+
+                                                }
+                                                function ismac() {
+                                                    if (navigator.userAgent.match(/(iPhone|iPod|iPad)/) != null || navigator.userAgent.indexOf('Mac OS X') != -1) {
+                                                        return true;
+                                                    }
+                                                    return false;
+                                                }
+                                                function parseDate(input, format,h,m,t) {
+                                                    format = format || 'yyyy-mm-dd '; // default format
+                                                    var parts = input.match(/(\d+)/g),
+                                                        i = 0, fmt = {};
+                                                    // extract date-part indexes from the format
+                                                    format.replace(/(yyyy|dd|mm)/g, function (part) { fmt[part] = i++; });
+
+                                                    return new Date(parts[fmt['yyyy']], parts[fmt['mm']] - 1, parts[fmt['dd']],h,m,t);
+                                                }
+                                            </script>
+                                        }
+
+                                    }
+
+                                </div>
+                            </div>
+                        }
+
+                        sn++;
+                    }
+                }
+
+
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+
+
+        @*<div id="parallax-window" data-parallax="scroll" data-image-src="/images/banner.jpg" />*@
+        @*<div class="container">
+                    <div class="left-box">
+                        <h2>MORE INTERESTING EVENTS<br> BUY TICKETS</h2>
+                        <p>in less than a minute with us</p>
+
+                        <div id="crtaevent">
+                            <a class="benn-btn" href="#signup" data-toggle="modal" data-target=".bs-modal-sm">
+                                Create Event Now<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="right-form" id="showBox">
+                        <div class="form-group">
+                            <input type="text" id="txtname" name="looking for" class="form-control" required="" placeholder="Event">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="txtplace" name="looking for" class="form-control" required="" placeholder="Place Name">
+                        </div>
+
+            <img src="~/images/placeholder-image.jpg" />
+                        <a href="javascript:" onclick="SearchEvent()" class="btn btn-default">Search</a>
+                    </div>
+                </div>*@
+
+
+    </section>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</div>
