@@ -1,0 +1,147 @@
+<!-- <ion-header>
+  <ion-navbar class="navbar">
+    <button ion-button menuToggle>
+      <img src="assets/imgs/menu.png" alt="" />
+    </button>
+    <ion-title>Scan Activity</ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+<ion-header class="header back-arrow-header">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="back-icon" (click)="back()">
+      <a>
+        <img src="assets/imgs/back-arrow.png" alt="" />
+      </a>
+    </ion-buttons>
+
+    <ion-title>Scan Activity</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  
+  <ion-toolbar class="sub-header">
+    <ion-title>{{EventName}}</ion-title>
+  </ion-toolbar>
+
+  <div>
+
+    <ion-list lines="full">
+
+     
+
+      <ion-item class="event-list" (click)="scanUserDetails()">
+        <div class="event-box">
+          <div class="chart">
+            <mgx-circular-progress-bar class="color-3" percentage={{getEventDetails.Total_Ticket_Per}}>{{getEventDetails.Total_Ticket_Per+"%"}}</mgx-circular-progress-bar>
+          </div>
+          <div class="content">
+            <h1>My Scan Activity</h1>
+            <span class="ticket">{{getEventDetails.Total_Scanned}}/{{getEventDetails.Total_Ticket}}</span>
+          </div>
+          <div class="img-box">
+            <img src="assets/imgs/icon-2.png" alt="" />
+          </div>
+        </div>
+      </ion-item>
+
+    
+
+
+      <!-- <ion-grid class="currency-list">
+
+        <h4>Total Amount as per Currency</h4>
+        <ion-row class="scroll">
+          <ion-col>
+            <ion-card>
+              <ion-card-content>
+                <ion-row>
+                  <div class="text">
+                    <span>In Dollar</span>
+                    <h5>$1000.00</h5>
+                  </div>
+                  <div class="img-box">
+                    <img src="assets/imgs/icon-3.png" alt="" />
+                  </div>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card>
+              <ion-card-content>
+                <ion-row>
+                  <div class="text">
+                    <span>In Dollar</span>
+                    <h5>$1000.00</h5>
+                  </div>
+                  <div class="img-box">
+                    <img src="assets/imgs/icon-3.png" alt="" />
+                  </div>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card>
+              <ion-card-content>
+                <ion-row>
+                  <div class="text">
+                    <span>In Dollar</span>
+                    <h5>$1000.00</h5>
+                  </div>
+                  <div class="img-box">
+                    <img src="assets/imgs/icon-3.png" alt="" />
+                  </div>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card>
+              <ion-card-content>
+                <ion-row>
+                  <div class="text">
+                    <span>In Dollar</span>
+                    <h5>$1000.00</h5>
+                  </div>
+                  <div class="img-box">
+                    <img src="assets/imgs/icon-3.png" alt="" />
+                  </div>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+    </ion-list>
+
+  </div>
+  
+  <ion-fab class="scan-fab" slot="fixed" (click)="openScanner()">
+    <ion-fab-button class="scan-btn">
+      <img src="assets/imgs/icon-8.png" alt="" /> 
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+
+
+<ion-footer class="footer-ui">
+  <ion-toolbar>
+  <ion-row>
+   <!-- <button class="btn btn-color-1" (click)="alert()"><img src="assets/imgs/icon-4.png" alt="" /> Add Scan User</button> -->
+   <button class="btn btn-color-2"  (click)="viewAllGuest()"><img src="assets/imgs/icon-3.png" alt="" /> View Guest List</button>
+  </ion-row>
+  </ion-toolbar>
+</ion-footer>
+
+

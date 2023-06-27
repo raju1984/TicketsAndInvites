@@ -1,0 +1,220 @@
+page-login {
+  font-family: "Poppins", sans-serif !important;
+
+  .bgImg {
+    background-image: url("../assets/imgs/login-page-bg.jpeg");
+    background-position: bottom;
+    background-size: cover;
+    position: relative;
+    // &::after{
+    //     content: '';
+    //     background-image: url(../assets/imgs/v-icon.png);
+    //     width: 140px;
+    //     height: 150px;
+    //     position: absolute;
+    //     background-repeat: no-repeat;
+    //     background-size: contain;
+    //     bottom: -20px;
+    //     right: -60px;
+    //     z-index: 0;
+    // }
+  }
+
+  .pTB0LR16 .scroll-content {
+    padding: 0 16px !important;
+  }
+
+  .item,
+  .item-md {
+    background: transparent;
+  }
+
+  .userSession {
+    justify-content: safe center;
+    min-height: min-content;
+    height: 100vh;
+    overflow: auto;
+  }
+
+  h2.logo {
+    font-size: 2.4em;
+    font-weight: normal;
+    text-transform: uppercase;
+
+    .primary {
+      color: color($colors, primary);
+    }
+
+    .instagram {
+      color: color($colors, instagram);
+    }
+
+    .danger {
+      color: color($colors, google);
+    }
+  }
+
+  .mb-2 {
+    margin-bottom: 2em;
+  }
+
+  .item-inner {
+    border-bottom: none !important;
+
+    ion-label {
+      margin: 0 !important;
+    }
+  }
+  .input-wrapper {
+    overflow: initial !important;
+  }
+  .item {
+    padding-left: 0 !important;
+  }
+
+  .bgWhite50 {
+    background: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: none !important;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 25px 15px;
+    border-radius: 15px;
+    position: relative;
+    z-index: 3;
+    h2 {
+      margin: 20px 0 10px 0px;
+      color: #fff;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .form-ui {
+      padding: 0px 10px;
+      .item-inner {
+        box-shadow: none !important;
+        padding: 0;
+        ion-label {
+          margin: 0px;
+          color: #fff;
+          font-size: 13px;
+          letter-spacing: 1px;
+          margin-bottom: 5px !important;
+        }
+        ion-input {
+          margin-bottom: 15px !important;
+          input {
+            margin: 0px !important;
+            width: 100%;
+            min-height: 45px;
+            padding: 0 10px;
+            font-family: "Poppins", sans-serif !important;
+            border-radius: 5px 15px 15px 15px;
+            background: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            color: #8c2e84;
+            letter-spacing: 0.3px;
+          }
+        }
+      }
+
+      .warning {
+        margin: -10px 0 10px;
+        font-size: 12px;
+        color: #ffb1fa;
+      }
+
+      .radio-ui {
+        margin: 0 0 20px;
+        ion-label {
+          margin: 0px;
+          color: #fff;
+          font-size: 13px;
+          letter-spacing: 1px;
+        }
+        ion-item {
+          min-height: auto;
+          .item-inner {
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+            .input-wrapper {
+              ion-label {
+                margin: 0 !important;
+                font-size: 12px;
+              }
+            }
+            ion-radio {
+              margin: 0 5px 0 0;
+              .radio-icon {
+                border-color: #fff;
+                .radio-inner {
+                  background: #de1dff;
+                }
+              }
+            }
+          }
+        }
+      }
+      .login-btn {
+        background: #fff;
+        color: #842d82;
+        border-radius: 40px;
+        padding: 20px 30px;
+        text-transform: uppercase !important;
+        font-weight: 600;
+        letter-spacing: 0.5px !important;
+        box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.03);
+      }
+    }
+  }
+
+  .bgWhite50 .inputTag .item-inner {
+    border-bottom: none !important;
+  }
+  .bgWhite50 .pLR-8 {
+    padding: 0 !important ;
+  }
+
+  .last-line {
+    text-align: center;
+    color: #fff;
+    a {
+      color: #fff;
+      margin-left: 3px;
+    }
+  }
+  .f-password {
+    display: flex;
+    justify-content: end;
+    color: #fff;
+    font-size: 12px;
+    margin-top: -5px;
+  }
+}
+
+.myalert1 {
+  .alert-wrapper {
+    // .alert-head {
+    //   display: none;
+    // }
+    .alert-sub-title {
+      height: auto;
+    }
+    .alert-message {
+      padding: 15px;
+      th {
+        font-size: 15px;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+        padding: 10px 0 0;
+      }
+      td {
+        padding-bottom: 10px;
+      }
+      td:last-child {
+        padding-bottom: 0px;
+      }
+    }
+  }
+}

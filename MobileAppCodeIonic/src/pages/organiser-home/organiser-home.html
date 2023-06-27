@@ -1,0 +1,149 @@
+<ion-header>
+  <ion-navbar class="navbar">
+    <button ion-button menuToggle>
+      <img src="assets/imgs/menu.png" alt="" />
+
+    </button>
+    <ion-title>Events</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<!-- <sidebar></sidebar> -->
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-row>
+    <ion-segment [(ngModel)]="segmentSelect" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="t1">
+        <ion-label>Live</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="t2">
+        <ion-label>Past</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-row>
+
+  <div *ngIf="i_tab === 't1'">
+    <ion-item class="search-input">
+      <ion-searchbar animated="true" [(ngModel)]="search" placeholder="Search here..." class="custom" (keyup)="Onsearch()"></ion-searchbar>
+    </ion-item>
+
+    <ion-list lines="full">
+      <!-- <div  style="margin-top:10%;"> -->
+      <!-- <circle-progress [percent]="100"  [space]="-10" [radius]="100" [outerStrokeWidth]="10"
+                [innerStrokeWidth]="10" [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [animation]="true"
+                [animationDuration]="1000"></circle-progress> -->
+
+      <!-- </div> -->
+      <!-- <angular-d3-donut [id]="donutChartId" [data]="donutChartData"></angular-d3-donut> -->
+
+      <ion-item class="event-list"  *ngFor="let list of listData">
+        <div class="event-box" (click)='eventDetails(list)'>
+          <div class="chart">
+            <mgx-circular-progress-bar percentage={{list?.Eventper}}>{{list?.Eventper+"%"}}</mgx-circular-progress-bar>
+          </div>
+          <div class="content">
+
+            <h1>{{list.EventName}}</h1>
+            <span class="location">{{list.Venue}}</span>
+            <span class="date-time">{{list.StartDate}}</span>
+            <span class="ticket">{{list.TotalBoughtTicket}}/{{list.Quantity}}</span>
+
+          </div>
+          <!-- <div *ngIf="loc=='Organizer'" class="price">$50.50</div> -->
+        </div>
+      </ion-item>
+
+      <!-- <ion-item class="event-list">
+        <div class="event-box">
+          <div class="chart">
+            <mgx-circular-progress-bar percentage="20">20%</mgx-circular-progress-bar>
+          </div>
+          <div class="content">
+
+            <h1>THE VALENTINE LAUGHTER SHOW</h1>
+            <span class="location">National Theatre</span>
+            <span class="date-time">2/12/2023 8:00:00 PM</span>
+            <span class="ticket">10/100</span>
+
+          </div>
+          <div  *ngIf="loc=='Organizer'" class="price">$50.50</div>
+        </div>
+      </ion-item>
+
+      <ion-item class="event-list">
+        <div class="event-box">
+          <div class="chart">
+            <mgx-circular-progress-bar percentage="20">20%</mgx-circular-progress-bar>
+          </div>
+          <div class="content">
+
+            <h1>THE VALENTINE LAUGHTER SHOW</h1>
+            <span class="location">National Theatre</span>
+            <span class="date-time">2/12/2023 8:00:00 PM</span>
+            <span class="ticket">10/100</span>
+
+          </div>
+          <div  *ngIf="loc=='Organizer'" class="price">$50.50</div>
+        </div>
+      </ion-item>
+
+      <ion-item class="event-list">
+        <div class="event-box">
+          <div class="chart">
+            <mgx-circular-progress-bar percentage="20">20%</mgx-circular-progress-bar>
+          </div>
+          <div class="content">
+
+            <h1>THE VALENTINE LAUGHTER SHOW</h1>
+            <span class="location">National Theatre</span>
+            <span class="date-time">2/12/2023 8:00:00 PM</span>
+            <span class="ticket">10/100</span>
+
+          </div>
+          <div  *ngIf="loc=='Organizer'" class="price">$50.50</div>
+        </div>
+      </ion-item> -->
+
+    </ion-list>
+    <ion-row class="no-data" *ngIf="checknull==false">
+      <p>No Data Found</p>
+    </ion-row>
+  </div>
+
+
+
+
+  <div *ngIf="i_tab === 't2'">
+    <ion-item class="search-input">
+      <ion-searchbar animated="true" [(ngModel)]="searchPast" placeholder="Search here..." class="custom" (keyup)="OnsearchPast()"></ion-searchbar>
+    </ion-item>
+
+    <ion-list lines="full">
+
+      <ion-item class="event-list"  *ngFor="let list of pastListData">
+        <div class="event-box" (click)='eventDetails(list)'>
+          <div class="chart">
+            <mgx-circular-progress-bar percentage={{list.Eventper}}>{{list.Eventper+"%"}}</mgx-circular-progress-bar>
+          </div>
+          <div class="content">
+
+            <h1>{{list.EventName}}</h1>
+            <span class="location">{{list.Venue}}</span>
+            <span class="date-time">{{list.StartDate}}</span>
+            <span class="ticket">{{list.TotalBoughtTicket}}/{{list.Quantity}}</span>
+
+          </div>
+          <!-- <div *ngIf="loc=='Organizer'" class="price">$50.50</div> -->
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-row class="no-data" *ngIf="pastchecknull==false">
+      <p>No Data Found</p>
+    </ion-row>
+  </div>
+ 
+</ion-content>

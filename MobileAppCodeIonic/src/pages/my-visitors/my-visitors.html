@@ -1,0 +1,83 @@
+<!--
+  Generated template for the ScannedTicketListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+  <ion-navbar>
+    <ion-title>{{Event_Name}}</ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+<ion-header class="header back-arrow-header">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="back-icon" (click)="back()">
+      <a>
+        <img src="assets/imgs/back-arrow.png" alt="" />
+      </a>
+    </ion-buttons>
+
+    <ion-title>{{Event_Name}}</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-row class="bg-line" *ngFor="let list of lsitData ">
+    <ion-col>
+      <ion-item class="check-box">
+        <ion-label>
+          <div class="two-items">
+            <p>
+              <span>Name</span>
+              {{list.Name}} 
+            </p>
+            <p>
+              <span>Ticket Name</span>
+              {{list.TicketName}}
+            </p>
+            <p>
+              <span>Email</span>
+              {{list.TicketbuyerEmail}}
+            </p>
+          </div>
+          <div class="two-items">
+            <p>
+              <span>date & time</span>
+              {{list.Startdate | date: 'M/d/yy  h:mm a'}}
+            </p>
+            <p>
+              <span>Mobile No.</span>
+              {{list.Phone}}
+            </p>
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col class="img-box-ticket">
+      <img src="assets/imgs/icon-5.png" alt="" />
+    </ion-col>
+  </ion-row>
+  
+  <!-- <ion-card *ngIf="lsitData.length>0">
+    <table style="width:100%">
+      <tr>
+        <th>User Name</th>
+        <th>Invitee Name</th>
+        <th>Ticket Name</th>
+        <th>Status</th>
+      </tr>
+      <tr *ngFor="let list of lsitData ">
+        <td>{{list.Name}}</td>
+        <td>{{list.Eventname}}</td>
+        <td>{{list.TicketName}}</td>
+        <td>Scanned</td>
+      </tr>
+    </table>
+</ion-card> -->
+<ion-card *ngIf="lsitData.length==0">
+<p class="pad30"> NO Scanned ticket found</p>
+</ion-card>
+</ion-content>

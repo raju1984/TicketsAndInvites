@@ -1,0 +1,50 @@
+sidebar {
+
+    .alert-md .alert-sub-title {
+        font-size: 16px;
+        overflow-y: scroll;
+        height: 350px;
+      }
+      .myalert{
+        .alert-head{
+          height: 80px !important;
+        }
+      }
+      
+      .noBorder {
+        border: none !important;
+      }
+      
+      .noBorder .item-inner {
+        border-bottom: 0 !important;
+      }
+      
+      .MB8 {
+        margin-bottom: 8px;
+      }
+      .LH2 {
+        line-height: 2 !important;
+      }
+      button {
+        height: 2.2em !important;
+        font-size: 1.4rem !important;
+        height: 2.2em !important;
+        letter-spacing: 1px !important;
+        font-size: 1.5rem !important;
+        font-weight: lighter;
+        text-transform: initial !important;
+      }
+      
+      .fbLogin {
+        background-color: color($colors, facebook);
+      }
+      
+      .gLogin {
+        background-color: color($colors, google);
+      }
+      .instaLogin {
+        background-color: color($colors, instagram);
+      }
+      
+
+}

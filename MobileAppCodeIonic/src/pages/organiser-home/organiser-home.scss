@@ -1,0 +1,182 @@
+organiser-home {
+  font-family: "Poppins", sans-serif !important;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#942d88+0,582b77+100 */
+  background: #942d88; /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    #942d88 0%,
+    #582b77 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #942d88 0%,
+    #582b77 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #942d88 0%,
+    #582b77 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#942d88', endColorstr='#582b77',GradientType=0 ); /* IE6-9 */
+
+  .toolbar-background {
+    background-color: #942d88;
+  }
+  .toolbar-title {
+    text-align: center;
+    color: #fff;
+    font-family: "Poppins", sans-serif !important;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  ion-segment {
+    background: #741e6e;
+
+    .label-md {
+      margin: 0;
+
+      color: #fff;
+    }
+  }
+  .segment-md .segment-button.activated,
+  .segment-md .segment-button.segment-activated {
+    border-color: #fff;
+  }
+
+  .content-md {
+    background-color: transparent;
+  }
+
+  .search-input {
+    padding: 0;
+    background-color: #ab42a4;
+    .item-inner {
+      border-bottom: 0px !important;
+    }
+
+    .label-md {
+      margin: 0;
+      .searchbar-md {
+        padding: 0;
+
+        .searchbar-input {
+          background-color: #ab42a4;
+          color: #fff;
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 1px;
+          padding-left: 45px;
+          &::placeholder {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  .event-list {
+    border-bottom: 1px solid #a661a4;
+    padding: 15px 10px;
+    background: rgba(255, 255, 255, 0.02);
+    position: relative;
+    .item-inner {
+      border-bottom: 0px !important;
+      padding-right: 0px !important;
+    }
+    .label-md {
+      margin: 0;
+    }
+    .event-box {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      .chart {
+        min-width: 60px;
+        .contain {
+          .label {
+            color: #fff !important;
+            font-family: "Poppins", sans-serif !important;
+            font-weight: 600;
+            font-size: 10px;
+            letter-spacing: 0px;
+          }
+          svg {
+            width: 60px !important;
+            height: 60px !important;
+            #base-circle {
+              opacity: 0.4;
+            }
+            #path {
+              stroke: #fff;
+            }
+          }
+        }
+      }
+      .content {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+        width: calc(100% - 70px);
+        h1 {
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+          white-space: pre-wrap;
+        }
+        .location {
+          font-size: 10px;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+          white-space: pre-wrap;
+        }
+        .date-time {
+          font-size: 10px;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+        }
+        .ticket {
+          font-size: 10px;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+        }
+      }
+      .price {
+        position: absolute;
+        right: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #fff;
+      }
+    }
+
+    &:last-child {
+      border-bottom: 0px !important;
+    }
+  }
+  ion-header {
+    .navbar {
+      .bar-button {
+        margin: 0px !important;
+
+        padding: 0px !important;
+        .button-inner {
+          max-width: 40px !important;
+          img {
+            width: 25px;
+          }
+        }
+      }
+      .toolbar-title{
+        padding: 0px 40px 0px 0px !important;
+      }
+    }
+  }
+  .no-data{
+    // height: 100vh;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+    font-size: 20px;
+  }
+}

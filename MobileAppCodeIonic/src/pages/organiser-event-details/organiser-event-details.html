@@ -1,0 +1,183 @@
+<ion-header class="header">
+  <ion-toolbar>
+    <!-- <button class="back-arrow">
+      <img src="assets/imgs/back-arrow.png" alt="" />
+    </button> -->
+    <ion-title>Event Activity</ion-title>
+    <button class="support-icon" (click)="support()">
+      <img src="assets/imgs/support.png" alt="" />
+      <span>Support</span>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-toolbar class="sub-header">
+    <ion-title>{{EventName}}</ion-title>
+  </ion-toolbar>
+
+  <div>
+
+    <ion-list lines="full">
+
+      <ion-item class="event-list" (click)="ticketSales()">
+        <div class="event-box">
+          <div class="chart">
+            <mgx-circular-progress-bar class="color-1" percentage={{getEventDetails.TicketSaleper}}>{{getEventDetails.TicketSaleper+"%"}}</mgx-circular-progress-bar>
+          </div>
+          <div class="content">
+            <h1>Ticket Sales</h1>
+            <span class="ticket">{{getEventDetails?.TotalBoughtTicket}}/{{getEventDetails?.TotalTicket}}</span>
+          </div>
+          <div class="img-box">
+            <img src="assets/imgs/icon-1.png" alt="" />
+          </div>
+        </div>
+      </ion-item>
+
+      <!-- <ion-item class="event-list" (click)="totalTicketAvailableTotalBoughtPage()">
+        <div class="event-box">
+          <div class="chart">
+            <mgx-circular-progress-bar class="color-2" percentage="40">40%</mgx-circular-progress-bar>
+          </div>
+          <div class="content">
+            <h1>total tickets available VS total bought</h1>
+            <span class="ticket">50/100</span>
+          </div>
+          <div class="img-box">
+            <img src="assets/imgs/icon-1.png" alt="" />
+          </div>
+        </div>
+      </ion-item> -->
+
+      <ion-item class="event-list" (click)="EventActivity()">
+        <div class="event-box">
+          <div class="chart">
+            <mgx-circular-progress-bar class="color-3" percentage={{getEventDetails.EventActivityper}}>{{getEventDetails.EventActivityper+"%"}}</mgx-circular-progress-bar>
+          </div>
+          <div class="content">
+            <h1>Event Activity</h1>
+            <span class="ticket">{{getEventDetails?.TotalScannedTicket}}/{{getEventDetails?.TotalBoughtTicket}}</span>
+          </div>
+          <div class="img-box">
+            <img src="assets/imgs/icon-2.png" alt="" />
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="event-list" (click)="scanUserDetails()">
+        <div class="event-box">
+          <div class="chart">
+            <mgx-circular-progress-bar class="color-4" percentage={{getEventDetails.ScanUserper}}>{{getEventDetails.ScanUserper+"%"}}</mgx-circular-progress-bar>
+          </div>
+          <div class="content">
+            <h1>Scan Details</h1>
+            <span class="ticket">{{getEventDetails?.TotalScannedTicket}}</span>
+          </div>
+          <div class="img-box">
+            <img src="assets/imgs/icon-2.png" alt="" />
+          </div>
+        </div>
+      </ion-item>
+
+
+      <ion-grid class="currency-list">
+
+        <h4>Total Amount per Currency</h4>
+        <ion-row class="scroll">
+          <ion-col>
+            <ion-card>
+              <ion-card-content>
+                <ion-row>
+                  <div class="text">
+                    <span>Cedis ₵</span>
+                    <h5 *ngIf="getEventDetails?.TicketpriceGhana!=null && getEventDetails?.TicketpriceGhana!=undefined">{{getEventDetails?.TicketpriceGhana}}</h5>
+                  </div>
+                  <div class="img-box">
+                    <img src="assets/imgs/icon-3.png" alt="" />
+                  </div>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card>
+              <ion-card-content>
+                <ion-row>
+                  <div class="text">
+                    <span>USD $</span>
+                    <h5>{{getEventDetails?.TicketpriceUsd}}</h5>
+                  </div>
+                  <div class="img-box">
+                    <img src="assets/imgs/icon-3.png" alt="" />
+                  </div>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card>
+              <ion-card-content>
+                <ion-row>
+                  <div class="text">
+                    <span>Pound £</span>
+                    <h5>{{getEventDetails?.TicketpricePound}}</h5>
+                  </div>
+                  <div class="img-box">
+                    <img src="assets/imgs/icon-3.png" alt="" />
+                  </div>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card>
+              <ion-card-content>
+                <ion-row>
+                  <div class="text">
+                    <span>Euro €</span>
+                    <h5>{{getEventDetails?.TicketpriceEuero}}</h5>
+                  </div>
+                  <div class="img-box">
+                    <img src="assets/imgs/icon-3.png" alt="" />
+                  </div>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+  </div>
+
+  <!-- <ion-fab class="scan-fab" slot="fixed" (click)="reloadData()"  style="bottom: 60px;">
+    <ion-fab-button class="scan-btn">
+      <img src="assets/imgs/reload.png" alt="" />
+    </ion-fab-button>
+  </ion-fab> -->
+
+  <ion-fab class="scan-fab" slot="fixed" (click)="openScanner()">
+    <ion-fab-button class="scan-btn">
+      <img src="assets/imgs/icon-8.png" alt="" />
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+
+
+<ion-footer class="footer-ui">
+  <ion-toolbar>
+    <ion-row>
+      <button class="btn btn-color-1" (click)="alert()"><img src="assets/imgs/icon-4.png" alt="" /> Add Scan
+        User</button>
+      <button class="btn btn-color-2" (click)="viewAllCustomer()"><img src="assets/imgs/icon-3.png" alt="" /> View Guest
+        List</button>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

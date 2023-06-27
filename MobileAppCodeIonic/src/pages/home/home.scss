@@ -1,0 +1,317 @@
+page-home {
+  font-family: "Poppins", sans-serif !important;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#942d88+0,582b77+100 */
+  background: #942d88; /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    #942d88 0%,
+    #582b77 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #942d88 0%,
+    #582b77 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #942d88 0%,
+    #582b77 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#942d88', endColorstr='#582b77',GradientType=0 ); /* IE6-9 */
+
+  .toolbar-background {
+    background-color: #942d88;
+  }
+  .toolbar-title {
+    text-align: center;
+    color: #fff;
+    font-family: "Poppins", sans-serif !important;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  ion-segment {
+    background: #741e6e;
+
+    .label-md {
+      margin: 0;
+
+      color: #fff;
+    }
+  }
+  .segment-md .segment-button.activated,
+  .segment-md .segment-button.segment-activated {
+    border-color: #fff;
+  }
+
+  .content-md {
+    background-color: transparent;
+  }
+
+  .search-input {
+    padding: 0;
+    background-color: #fff;
+    .item-inner {
+      border-bottom: 0px !important;
+    }
+
+    ion-label {
+      margin: 0;
+      ion-searchbar {
+        padding: 0;
+        min-height: 50px;
+        .searchbar-input {
+          background-color: transparent;
+          color: #470f41;
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 1px;
+          padding-left: 45px;
+          box-shadow: none !important;
+          min-height: 45px;
+          &::placeholder {
+            color: #470f41;
+          }
+        }
+      }
+    }
+  }
+
+  ion-header {
+    .navbar {
+      .bar-button {
+        margin: 0px !important;
+
+        padding: 0px !important;
+        .button-inner {
+          max-width: 40px !important;
+          img {
+            width: 25px;
+          }
+        }
+      }
+      .toolbar-title {
+        padding: 0px 40px 0px 0px !important;
+      }
+    }
+  }
+
+  .ticket-scan {
+    margin-top: 20px;
+    background: url(../../assets/imgs/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.17);
+    -moz-box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.17);
+    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.17);
+    &::after {
+      content: "";
+      position: absolute;
+      background-color: rgba(94, 43, 121, 0.5);
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0;
+    }
+
+    ion-card-content {
+      position: relative;
+      z-index: 2;
+      h2 {
+        color: #fff;
+        text-align: left;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      ion-input {
+        background: #fff;
+        margin: 10px 0 5px;
+        border-radius: 2px !important;
+        input {
+          background: transparent !important;
+          border: 0px;
+          padding: 0 10px;
+          font-weight: 500;
+          letter-spacing: 1px;
+          margin: 0px;
+          min-height: 45px;
+          width: 100%;
+        }
+      }
+      button{
+        padding: 20px 18px;
+        background: #9a3ac7;
+        box-shadow: none;
+        border-radius: 2px;
+        text-transform: capitalize !important;
+        letter-spacing: 1px !important;
+        font-size: 13px !important;
+      }
+    }
+  }
+  .event-tickets {
+    margin: 0px;
+    padding: 10px;
+    .card-background-page {
+      border-radius: 10px;
+      -webkit-box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.17);
+      -moz-box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.17);
+      box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.17);
+      .item-inner {
+        padding: 0px;
+        .input-wrapper {
+          ion-label {
+            margin: 0px;
+            ion-card {
+              margin: 0px;
+              width: 100%;
+              box-shadow: none;
+              background-color: #000;
+              border-radius: 0px;
+              .tickets-ui {
+                position: relative;
+                .overlay {
+                  position: absolute;
+                  z-index: 99;
+                  bottom: 0;
+                  width: 100%;
+                  height: 100%;
+                  display: flex;
+                  align-items: end;
+                  left: 0;
+                  background: rgb(0, 0, 0);
+                  background: -moz-linear-gradient(
+                    180deg,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 1) 100%
+                  );
+                  background: -webkit-linear-gradient(
+                    180deg,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 1) 100%
+                  );
+                  background: linear-gradient(
+                    180deg,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 1) 100%
+                  );
+                  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1);
+
+                  .btn-box {
+                    width: 90%;
+                    margin: 0 auto 15px;
+                    text-align: center;
+                    button {
+                      width: 35%;
+                      margin: 0px 2px;
+                      padding: 20px;
+                      font-size: 13px !important;
+                      text-transform: capitalize !important;
+                      letter-spacing: 1px !important;
+                      background: #942d88;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+
+  // ion-item {
+  //   .item-inner {
+  //     border: none !important;
+  //   }
+  // }
+
+  // .card-background-page {
+  //   ion-card {
+  //     position: relative;
+  //     text-align: center;
+  //   }
+  //   .overlay {
+  //     display: flex;
+  //     position: absolute;
+  //     height: 100%;
+  //     top: 0;
+  //     width: 100%;
+  //     align-items: center;
+  //     justify-content: center;
+  //     background: rgba(0, 0, 0, 0.7);
+  //   }
+  //   .ss {
+  //     background: #fff;
+  //     padding: 10px 14px;
+  //     width: 42vh;
+  //     background: rgba(0, 0, 0, 0.5);
+  //     margin: 0 auto;
+  //   }
+  //   ion-label {
+  //     white-space: normal;
+  //   }
+  //   .button{padding: 0 10px;}
+  //   h1 {
+  //     font-family: Helvetica, Arial, sans-serif;
+  //     font-weight: normal;
+  //     font-size: 16px;
+  //   }
+
+  //   p {
+  //     font-size: 20px;
+  //   }
+  //   .card-title {
+  //     position: absolute;
+  //     font-size: 2em;
+  //     font-weight: bold;
+  //     color: #fff;
+  //     background: rgba(0, 0, 0, 0.5);
+  //     padding: 10px;
+  //     width: auto;
+
+  //     .card-subtitle {
+  //       position: relative;
+  //       font-weight: normal;
+  //       font-size: 1.4rem;
+  //     }
+  //   }
+
+  //   .noMargin {
+  //     ion-label.label {
+  //       margin: 0 !important;
+  //     }
+  //   }
+
+  //   .card-subtitle {
+  //     font-size: 1em;
+
+  //     color: #fff;
+  //   }
+  // }
+}
+.alert-message{
+  
+  padding-bottom: 0;
+
+.table-ui{
+  width: 100%;
+  text-align: left;
+
+  th{
+    font-weight: 500;
+    color: #000;
+    padding: 5px 0;
+  }
+  td{
+    color: #942d88;
+    font-weight: 600;
+  }
+}
+}

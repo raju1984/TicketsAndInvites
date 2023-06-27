@@ -1,0 +1,288 @@
+page-assign-existing-user {
+  font-family: "Poppins", sans-serif !important;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#942d88+0,582b77+100 */
+  background: #942d88; /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    #942d88 0%,
+    #582b77 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #942d88 0%,
+    #582b77 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #942d88 0%,
+    #582b77 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#942d88', endColorstr='#582b77',GradientType=0 ); /* IE6-9 */
+
+  .toolbar-background {
+    background-color: #942d88;
+  }
+  .toolbar-title {
+    text-align: center;
+    color: #fff;
+    font-family: "Poppins", sans-serif !important;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  ion-segment {
+    background: #741e6e;
+
+    .label-md {
+      margin: 0;
+
+      color: #fff;
+    }
+  }
+  .segment-md .segment-button.activated,
+  .segment-md .segment-button.segment-activated {
+    border-color: #fff;
+  }
+
+  .content-md {
+    background-color: transparent;
+  }
+
+  .search-input {
+    padding: 0;
+    background-color: #ab42a4;
+    .item-inner {
+      border-bottom: 0px !important;
+    }
+
+    .label-md {
+      margin: 0;
+      .searchbar-md {
+        padding: 0;
+
+        .searchbar-input {
+          background-color: #ab42a4;
+          color: #fff;
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 1px;
+          padding-left: 45px;
+          &::placeholder {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  .event-list {
+    border-bottom: 1px solid #a661a4;
+    padding: 15px 10px;
+    background: rgba(255, 255, 255, 0.02);
+    position: relative;
+    .item-inner {
+      border-bottom: 0px !important;
+      padding-right: 0px !important;
+    }
+    .label-md {
+      margin: 0;
+    }
+    .event-box {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      .chart {
+        min-width: 60px;
+        .contain {
+          .label {
+            color: #fff !important;
+            font-family: "Poppins", sans-serif !important;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+          }
+          svg {
+            width: 60px !important;
+            height: 60px !important;
+            #base-circle {
+              opacity: 0.4;
+            }
+            #path {
+              stroke: #fff;
+            }
+          }
+        }
+      }
+      .content {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+        h1 {
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+        }
+        .location {
+          font-size: 10px;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+        }
+        .date-time {
+          font-size: 10px;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+        }
+        .ticket {
+          font-size: 10px;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+        }
+      }
+      .price {
+        position: absolute;
+        right: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #fff;
+      }
+    }
+
+    &:last-child {
+      border-bottom: 0px !important;
+    }
+  }
+
+  .check-box {
+    border-bottom: 1px solid #a661a4;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    position: relative;
+
+    .checkbox {
+      margin: 9px 15px 9px 4px !important;
+    }
+
+    .item-inner {
+      border-bottom: 0 !important;
+      .input-wrapper {
+        flex-direction: column;
+        align-items: self-start;
+        .label {
+          margin: 0px;
+          color: #fff;
+          font-size: 15px;
+        }
+        .sub-label {
+          font-size: 13px;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  .footer {
+    .toolbar {
+      padding: 0;
+      min-height: 50px !important;
+      margin-bottom: -4px;
+      .select-with-btn {
+        display: flex;
+        align-items: center;
+        .item {
+          background: transparent;
+          .item-inner {
+            border-bottom: 0px !important;
+            .input-wrapper {
+              flex-direction: column;
+              align-items: self-start;
+              width: 100%;
+              ion-select {
+                padding: 10px 10px 10px 0 !important;
+                width: 100%;
+                max-width: initial;
+                .select-placeholder {
+                  color: #fff;
+                  letter-spacing: 1px;
+                }
+                .select-icon {
+                  .select-icon-inner {
+                    color: #fff;
+                    top: 80%;
+                  }
+                }
+                .select-text {
+                  color: #FFF;
+              }
+              }
+            }
+          }
+        }
+        .btn-submit {
+          padding: 0px 20px;
+          color: #942d88;
+          background: #ffffff;
+          border-radius: 0px;
+          font-weight: 600;
+          text-transform: uppercase !important;
+          min-height: 50px;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .navbar {
+    .bar-button {
+      margin: 0px !important;
+
+      padding: 0px !important;
+      .button-inner {
+        max-width: 40px !important;
+        img {
+          width: 25px;
+        }
+      }
+    }
+    .toolbar-title{
+      padding: 0px 40px 0px 0px !important;
+    }
+  }
+}
+
+.action-sheet-group {
+  background: #942d88 !important;
+
+  .button-inner {
+    color: #fff;
+    font-weight: 600;
+  }
+  &:last-child{
+    background: #7a1e6f !important;
+  }
+}
+.myalert1 {
+  .alert-wrapper {
+    // .alert-head {
+    //   display: none;
+    // }
+    .alert-sub-title{
+      height: auto;
+    }
+    .alert-message{
+      padding:  15px;
+      th{
+        font-size: 15px;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+        padding: 10px 0 0;
+      }
+      td{
+        padding-bottom: 10px;
+      }
+      td:last-child{
+        padding-bottom: 0px;
+      }
+    }
+  }
+}

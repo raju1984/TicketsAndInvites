@@ -1,0 +1,85 @@
+<!-- <ion-header>
+  <ion-navbar class="navbar">
+    <button ion-button menuToggle>
+      <img src="assets/imgs/menu.png" alt="" />
+    </button>
+    <ion-title>Assign Existing User</ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+<ion-header class="header back-arrow-header">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="back-icon" (click)="back()">
+      <a>
+        <img src="assets/imgs/back-arrow.png" alt="" />
+      </a>
+    </ion-buttons>
+
+    <ion-title>Assign Existing User</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <div>
+
+    <ion-list lines="full">
+      <!-- <div  style="margin-top:10%;"> -->
+      <!-- <circle-progress [percent]="100"  [space]="-10" [radius]="100" [outerStrokeWidth]="10"
+                [innerStrokeWidth]="10" [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [animation]="true"
+                [animationDuration]="1000"></circle-progress> -->
+
+      <!-- </div> -->
+      <!-- <angular-d3-donut [id]="donutChartId" [data]="donutChartData"></angular-d3-donut> -->
+
+      <ion-item class="check-box" *ngFor="let list of listData">
+        <ion-checkbox slot="start" [(ngModel)]="list.IsActive"  (ionChange)="addCheckbox($event,list)"></ion-checkbox>
+        <ion-label>{{list.Name}}</ion-label>
+        <ion-label class="sub-label">{{list.Email}}</ion-label>
+      </ion-item>
+
+      <!-- <ion-item class="check-box">
+        <ion-checkbox slot="start"></ion-checkbox>
+        <ion-label>Alex Hales</ion-label>
+        <ion-label class="sub-label">abc@gmail.com</ion-label>
+      </ion-item>
+
+      <ion-item class="check-box">
+        <ion-checkbox slot="start"></ion-checkbox>
+        <ion-label>Themed checkbox</ion-label>
+        <ion-label class="sub-label">abc@gmail.com</ion-label>
+      </ion-item> -->
+
+
+    </ion-list>
+  </div>
+  <ion-row class="no-data" *ngIf="checknull==false">
+    <p>No Data Found</p>
+  </ion-row>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="select-with-btn">
+      <!-- <ion-item>
+        <ion-select interface="action-sheet" placeholder="Select" [(ngModel)]="pvalue" (ionChange)="EventOption(list)">
+          <ion-option *ngFor="let list of listData" value={{list.ScannerId}}>{{list.Name}}</ion-option>
+        </ion-select>
+      </ion-item> -->
+      <!-- <ion-item>
+      <ion-label>Descending</ion-label>
+      <ion-select interface="popover">
+          <ion-option value="10">10</ion-option>
+          <ion-option value="20">20</ion-option>
+      </ion-select>
+  </ion-item> -->
+      <button class="btn-submit" (click)="getCheckedBoxes()">Submit</button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

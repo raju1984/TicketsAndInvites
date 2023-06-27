@@ -1,0 +1,68 @@
+<!-- <ion-header>
+    <ion-navbar class="navbar">
+        <button ion-button menuToggle>
+            <img src="assets/imgs/menu.png" alt="" />
+          
+        </button>
+        <ion-title>Tickets & Invites</ion-title>
+    </ion-navbar>
+</ion-header> -->
+
+<ion-header class="header back-arrow-header">
+    <ion-toolbar>
+      <ion-buttons slot="start" class="back-icon" (click)="back()">
+        <a>
+          <img src="assets/imgs/back-arrow.png" alt="" />
+        </a>
+      </ion-buttons>
+  
+      <ion-title>Veetickets</ion-title>
+  
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-item class="search-input">
+        <ion-searchbar (ionChange)="getItems($event)"></ion-searchbar>
+    </ion-item>
+
+    <ion-card class="ticket-scan">
+        <ion-card-content text-right>
+            <h2>Scan using USSID</h2>
+            <ion-input placeholder="Enter Code" [(ngModel)]="CustomCode"></ion-input>
+            <button (click)="checkCode()" ion-button>Validate</button>
+        </ion-card-content>
+    </ion-card>
+
+    <p *ngIf="EventList==[]"> Sorry! no event found. </p>
+
+    <ion-list class="event-tickets">
+        <ion-item class="card-background-page noMargin" no-padding *ngIf="EventList!=[]">
+            <ion-card *ngFor="let Event of EventList">
+                <div class="tickets-ui">
+                    <img [src]="Event.imagePath" onError="this.src = 'assets/imgs/dummy.jpg'" />
+                    <div class="overlay">
+                            <!-- <h1>{{Event.eventName}}</h1>
+                            <div class="card-subtitle">{{Event.cityName}}</div> -->
+                        <div class="btn-box">
+                           <button ion-button (click)="ticket(Event)">Scan</button>
+                           <!-- <button ion-button (click)="listdata(Event)">Visitors</button> -->
+                        </div>
+                    </div>
+                </div>
+            </ion-card>
+
+        </ion-item>
+        <ion-item class="card-background-page noMargin" no-padding *ngIf="EventList==[]">
+            <div class="card-title">
+                No current event present
+            </div>
+        </ion-item>
+    </ion-list>
+
+
+</ion-content>

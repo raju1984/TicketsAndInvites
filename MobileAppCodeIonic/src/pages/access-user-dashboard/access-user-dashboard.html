@@ -1,0 +1,186 @@
+<!-- <ion-header>
+  <ion-navbar class="navbar">
+    <button ion-button menuToggle>
+      <img src="assets/imgs/menu.png" alt="" />
+    </button>
+    <ion-title>Guest Support</ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+<ion-header class="header back-arrow-header">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="back-icon" (click)="back()">
+      <a>
+        <img src="assets/imgs/back-arrow.png" alt="" />
+      </a>
+    </ion-buttons>
+
+    <ion-title>Guest Support</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-row>
+    <ion-segment [(ngModel)]="segmentSelect" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="t1">
+        <ion-label>Web Channel</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="t2">
+        <ion-label>USSD Channel</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-row>
+
+  <div *ngIf="i_tab === 't1'">
+    <ion-item class="search-input-custom">
+      <input placeholder="Search here..." class="custom" [(ngModel)]="search" (keyup)="Onsearch()" />
+      <!-- <button class="btn-search">Search</button> -->
+    </ion-item>
+
+    <!-- <ion-row class="no-data">
+      <img src="assets/imgs/img-01.png" alt="" />
+      <p>For access user dashboard<br/>
+        please enter user id above input box!</p>
+    </ion-row> -->
+
+    <ion-row class="bg-line"  *ngFor="let list of ListData">
+      <ion-col>
+        <ion-item class="check-box">
+          <ion-checkbox slot="start"  (ionChange)="addCheckbox($event,list)"></ion-checkbox>
+          <ion-label>
+            <div class="two-items">
+              <p>
+                <span>Name</span>
+                {{list.Name}}
+              </p>
+              <p>
+                <span>Email</span>
+                {{list.Email}}
+              </p>
+            </div>
+            <div class="two-items">
+              <!-- <p>
+                <span>ticket name</span>
+                {{list.TicketName}}
+              </p> -->
+              <p>
+                <span>date & time</span>
+                {{list.EventDate | date: 'M/d/yy  h:mm a'}}
+              </p>
+              <p>
+                <span>Quantity</span>
+                {{list?.Qty || 'Na'}}
+              </p>
+            </div>
+            <div class="two-items">
+              <p>
+                <span>status</span>
+                {{list.Status}}
+              </p>
+            </div>
+            <div class="two-items full-with">
+              <p>
+                <span>address</span>
+                {{list?.Address || 'Na'}}
+              </p>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col class="img-box-ticket">
+        <a (click)="ticketPage(list)"><img src="assets/imgs/icon-5.png" alt="" /></a>
+      </ion-col>
+    </ion-row>
+    <ion-row class="no-data" *ngIf="checknullWeb==false">
+      <p>No Data Found</p>
+    </ion-row>
+
+  </div>
+
+
+
+
+  <div *ngIf="i_tab === 't2'">
+    <ion-item class="search-input-custom">
+      <input placeholder="Search here..." class="custom" [(ngModel)]="Ussdsearch" (keyup)="OnsearchUssd()" />
+      <!-- <button class="btn-search">Search</button> -->
+    </ion-item>
+
+    <!-- <ion-row class="no-data">
+      <img src="assets/imgs/img-01.png" alt="" />
+      <p>For access user dashboard<br/>
+        please enter user id above input box!</p>
+    </ion-row> -->
+
+    <ion-row class="bg-line" *ngFor="let list of UssdListData">
+      <ion-col>
+        <ion-item class="check-box">
+          <ion-checkbox slot="start" (ionChange)="UssdaddCheckbox($event,list)"></ion-checkbox>
+          <ion-label>
+
+            <div class="two-items">
+              <p>
+                <span>Mobile No.</span>
+                {{list.Mobile}}
+              </p>
+              <p>
+                <span>Status</span>
+                {{list.Status}}
+              </p>
+            </div>
+            <div class="two-items">
+              <p>
+                <span>Ticket Code</span>
+                {{list.TicketCode}}
+              </p>
+              <p>
+                <span>date & time</span>
+                {{list.Date}}
+              </p>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col class="img-box-ticket">
+        <!-- <a (click)="ussdDetailPage(list)"><img src="assets/imgs/icon-5.png" alt="" /></a> -->
+        <a href="{{list.Barcode_link}}"><img src="assets/imgs/icon-5.png" alt="" /></a>
+      </ion-col>
+    </ion-row>
+    <ion-row class="no-data" *ngIf="checknullUssd==false">
+      <p>No Data Found</p>
+    </ion-row>
+    
+  </div>
+</ion-content>
+
+<ion-footer class="footer-btn" *ngIf="i_tab === 't1'">
+  <ion-toolbar>
+    <button class="status-btn" (click)="onStatusGet()">
+      <img src="assets/imgs/status.png" alt="" />
+      <span>Get Status</span>
+    </button>
+    <button (click)="resendT1()">
+      <img src="assets/imgs/resend.png" alt="" />
+      <span>Resend</span>
+    </button>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-footer class="footer-btn" *ngIf="i_tab === 't2'">
+  <ion-toolbar>
+    <!-- <button class="status-btn" >
+      <img src="assets/imgs/status.png" alt="" />
+      <span>Get Status</span>
+    </button> -->
+    <button (click)="t2()" style="width: 100%;">
+      <img src="assets/imgs/resend.png" alt="" />
+      <span>Resend</span>
+    </button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,107 @@
+<ion-header class="header">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="back-icon" (click)="back()">
+      <a>
+        <img src="assets/imgs/back-arrow.png" alt="" />
+      </a>
+    </ion-buttons>
+
+    <ion-title>{{UserName}}</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let details of ListData">
+  <!-- <ion-row>
+    <h1 style="color: white; size: 50px;">{{details.address_}}</h1></ion-row> -->
+  <ion-toolbar class="sub-header">
+    <ion-title>{{details.EventName}}</ion-title>
+
+  </ion-toolbar>
+
+  <ion-row class="scroll">
+    <ion-col *ngFor="let ticket of details.Tickets">
+    <div class="ticket">
+      
+      <div class="ticket-body">
+        <div class="main-img">
+          <img src={{details.Imageurl}} />
+        </div>
+        <div class="content">
+          <h1  style="text-align: center;">{{ticket.TicketName}}</h1>
+          <div class="line"></div>
+          <div class="text">
+            <!-- <span>Address</span>
+            <p>{{details.address_}} </p> -->
+            <span>Email</span>
+              <p>{{ticket.Email}}</p>
+          </div>
+
+          <ion-row>
+            <div class="text" style="width: 48%; margin-right: 2%;">
+              <span>Address</span>
+            <p>{{details.address_}} </p>
+            </div>
+            <div class="text" style="width: 48%; margin-left: 2%;">
+              <span>Venue</span>
+              <p>{{ticket.Venue}} </p>
+            </div>
+          </ion-row>
+
+          <ion-row>
+            <div class="text">
+              <span>Table No.</span>
+              <p>{{ticket.table}} </p>
+            </div>
+            <div class="text">
+              <span>Date & Time</span>
+              <p>{{ticket.ticket_date}} </p>
+            </div>
+          </ion-row>
+
+          <ion-row>
+            <div class="text">
+              <span>Gate No.</span>
+              <p>{{ticket.GateNo}}</p>
+            </div>
+            <div class="text" *ngIf="ticket.IscheckIn==true">
+              <span>Scan Date & Time</span>
+              <p>{{ticket.ticketscan}}</p>
+            </div>
+          </ion-row>
+          <div class="line"></div>
+          
+        <!-- <div *ngIf="LocalData=='Organizer'" class="qr-code">
+          <img src="assets/imgs/qr-code.png" />
+        </div> -->
+        <div class="qr-code">
+          <img src={{ticket.BarcodePath}} />
+        </div>
+        </div>
+      </div>
+      <div class="ticket-footer">
+        <button (click)="checkIn(ticket)" *ngIf="ticket.IscheckIn==false || ticket.IscheckIn==null ">
+          <img src="assets/imgs/checked.png" alt="" />
+          <span>Check In</span>
+        </button>
+        <button *ngIf="ticket.IscheckIn==true">
+          <span>Already Checked In</span>
+        </button>
+      </div>
+    </div>
+  </ion-col>
+
+  </ion-row>
+ 
+
+  <!-- <ion-fab class="scan-fab" slot="fixed">
+    <ion-fab-button class="scan-btn">
+      <img src="assets/imgs/icon-8.png" alt="" />
+    </ion-fab-button>
+  </ion-fab> -->
+</div>
+<ion-row class="no-data" *ngIf="checknull==false">
+  <p>No Data</p>
+</ion-row>
+</ion-content>
